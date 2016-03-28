@@ -1,15 +1,12 @@
 package com.example.sebastian.tindertp;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,19 +23,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-    }
-
-    private boolean isConnected() {
-        String message = mText.getText().toString();
-        return (!message.contains("Unable to retrieve web page.") && !message.contains("New Text") );
-    }
-
-    private void ifConnectThenNextActivity() {
-        if ( isConnected() ) {
-            Intent registry = new Intent(this,Registry.class); //only if exist network
-            startActivity(registry);
-        }
     }
 
     public void sendRequest(View view) {
@@ -49,12 +33,7 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            new DownloadWebpageTask(mText).execute(mEdit.getText().toString());
-
-            Log.i("connn",mText.getText().toString());
-
-            ifConnectThenNextActivity();
-
+            new DownloadWebpageTask(mText,this).execute(mEdit.getText().toString());
         } else {
             mText.setText("No network connection available.");
         }

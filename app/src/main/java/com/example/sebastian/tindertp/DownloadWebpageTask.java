@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -16,17 +17,18 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by sebastian on 27/03/16.
- */
 public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
 
     private TextView text;
+    private Context context;
+    private boolean isConnected;
 
     private static final String CONNECTION = "Connection";
 
-    public DownloadWebpageTask(TextView text){
+    public DownloadWebpageTask(TextView text, Context context) {
         this.text = text;
+        this.context = context.getApplicationContext();
+        isConnected = true;
     }
 
     public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
@@ -54,7 +56,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         return url;
     }
 
-    private String downloadUrl(String myurl) throws IOException {
+    public String downloadUrl(String myurl) throws IOException {
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
@@ -99,6 +101,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         try {
             return downloadUrl(urls[0]);
         } catch (IOException e) {
+            isConnected = false;
             Log.e(CONNECTION,"Unable to retrieve web page. " + urls[0] + " may be invalid." );
             return "Unable to retrieve web page. " + urls[0] + " may be invalid.";
         }
@@ -108,5 +111,10 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         this.text.setText(result);
         Log.i(CONNECTION, text.getText().toString());
+        if ( isConnected ) {
+            Intent registry = new Intent(context, Registry.class);
+            registry.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(registry);
+        }
     }
 }
