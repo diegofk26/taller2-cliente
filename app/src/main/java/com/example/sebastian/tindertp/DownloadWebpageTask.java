@@ -57,6 +57,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
     }
 
     public String downloadUrl(String myurl) throws IOException {
+
         InputStream is = null;
         // Only display the first 500 characters of the retrieved
         // web page content.
@@ -68,6 +69,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
 
             URL url = new URL(URLCorrect);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
             conn.setRequestMethod("GET");
