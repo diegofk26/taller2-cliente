@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
     }
 
     public void sendRequest(View view) {
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mText.setText("No network connection available.");
         }
+    }
+
+    public void salir(View view) {
+        this.finish();
+        System.exit(0);
     }
 
     @Override

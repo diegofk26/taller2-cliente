@@ -27,7 +27,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
 
     public DownloadWebpageTask(TextView text, Context context) {
         this.text = text;
-        this.context = context.getApplicationContext();
+        this.context = context;
         isConnected = true;
     }
 
@@ -115,6 +115,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
             Intent registry = new Intent(context, Registry.class);
             registry.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(registry);
+            ((MainActivity)context).finish();
         }
     }
 }
