@@ -12,14 +12,9 @@ import android.widget.EditText;
 
 import java.net.PasswordAuthentication;
 
-public class Registro extends AppCompatActivity {
-    private EditText nameText;
-    private boolean editingName;
-    private EditText emailText;
-    private boolean editingEmail;
-    private EditText passText;
-    private boolean editingPassword;
+public class Registry extends AppCompatActivity {
 
+    private EditText passText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +23,6 @@ public class Registro extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         passText = (EditText) findViewById(R.id.password_text);
         passText.setOnClickListener(new View.OnClickListener() {

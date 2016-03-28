@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
@@ -98,6 +99,7 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         try {
             return downloadUrl(urls[0]);
         } catch (IOException e) {
+            Log.e(CONNECTION,"Unable to retrieve web page. " + urls[0] + " may be invalid." );
             return "Unable to retrieve web page. " + urls[0] + " may be invalid.";
         }
     }
@@ -105,5 +107,6 @@ public class DownloadWebpageTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         this.text.setText(result);
+        Log.i(CONNECTION, text.getText().toString());
     }
 }
