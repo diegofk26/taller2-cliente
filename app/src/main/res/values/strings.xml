@@ -2,4 +2,6 @@
     <string name="app_name">TinderTP</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_registro">Registro</string>
+    <string name="title_activity_matching">MatchingActivity</string>
+    <string name="title_activity_full_screen_view">FullScreenViewActivity</string>
 </resources>

@@ -1,0 +1,119 @@
+package com.example.sebastian.tindertp;
+
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.sebastian.tindertp.internetTools.ImageDownloaderClient;
+import com.example.sebastian.tindertp.gestureTools.OnSwipeTapTouchListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MatchingActivity extends AppCompatActivity {
+    private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
+    private List<Bitmap> bitmaps;
+    private ImageView imgView;
+    private boolean firstTime;
+    private List<String> imgFiles;
+    private int imgPosition;
+
+    private void initalize(){
+        bitmaps = new ArrayList<Bitmap>();
+        imgFiles = new ArrayList<String>();
+        firstTime = true;
+        imgView = (ImageView)findViewById(R.id.imageView);
+        imgView.setImageResource(RES_PLACEHOLDER);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_matching);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        TextView mText = (TextView)findViewById(R.id.textView2);
+
+        ImageDownloaderClient imageDownloader =  new ImageDownloaderClient(this,mText);
+        initalize();
+        imageDownloader.runInBackground();
+
+        //listen gesture fling or tap
+        imgView.setOnTouchListener(new OnSwipeTapTouchListener(this));
+
+
+    }
+
+
+    public ImageView getImgView(){
+        return imgView;
+    }
+
+    public List<String> getImgFiles(){
+        return imgFiles;
+    }
+
+    public List<Bitmap> getBitmaps(){
+        return bitmaps;
+    }
+
+    public void onBackgroundTaskDataObtained(Bitmap bitmap,String file) {
+        this.imgFiles.add(file);
+        this.bitmaps.add(bitmap);
+        if(firstTime) {
+            firstTime = false;
+            imgView.setImageBitmap(this.bitmaps.get(0));
+            Log.i("Bitmap saved", "success");
+            imgView.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+        }
+
+        Log.i("Animation", "success");
+    }
+
+    public void setImagePosition(int newPosition){
+        imgPosition = newPosition;
+    }
+
+    public int getImagePosition(){
+        return imgPosition ;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //settings (URL for now) is started
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent urlAct = new Intent(this, UrlActivity.class);
+            urlAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            this.startActivity(urlAct);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+}

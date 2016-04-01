@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
-    android:layout_gravity="center_horizontal" >
+    android:layout_gravity="center_horizontal"
+    android:fillViewport="false">
     <RelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -14,7 +15,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.example.sebastian.tindertp.MainActivity"
+        tools:context=".UrlActivity"
         tools:showIn="@layout/activity_main">
 
         <LinearLayout
