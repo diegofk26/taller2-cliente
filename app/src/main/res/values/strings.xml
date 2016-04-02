@@ -4,4 +4,5 @@
     <string name="title_activity_registro">Registro</string>
     <string name="title_activity_matching">MatchingActivity</string>
     <string name="title_activity_full_screen_view">FullScreenViewActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 </resources>

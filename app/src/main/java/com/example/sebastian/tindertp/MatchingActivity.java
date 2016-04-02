@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +42,8 @@ public class MatchingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_matching);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         TextView mText = (TextView)findViewById(R.id.textView2);
 
@@ -51,7 +54,15 @@ public class MatchingActivity extends AppCompatActivity {
         //listen gesture fling or tap
         imgView.setOnTouchListener(new OnSwipeTapTouchListener(this));
 
+    }
 
+    public void goToProfile(View v) {
+        if (imgFiles.size()!= 0){
+            Intent profileAct = new Intent(this, ProfileActivity.class);
+            profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            profileAct.putExtra("profileFile", imgFiles.get(0));
+            this.startActivity(profileAct);
+        }
     }
 
 
@@ -76,8 +87,6 @@ public class MatchingActivity extends AppCompatActivity {
             Log.i("Bitmap saved", "success");
             imgView.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
         }
-
-        Log.i("Animation", "success");
     }
 
     public void setImagePosition(int newPosition){
