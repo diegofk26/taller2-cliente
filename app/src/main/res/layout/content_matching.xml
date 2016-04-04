@@ -25,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView"
-            android:background="@drawable/placeholder_grey"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -37,20 +36,21 @@
 
     </LinearLayout>
 
-    <ImageButton
+    <ImageView
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:id="@+id/dislikeButton"
         android:src="@drawable/dislike_button"
         android:background="@drawable/placeholder_like"
-        android:layout_marginRight="300dp"
-        android:layout_marginEnd="300dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginEnd="0dp"
         android:layout_below="@+id/linearLayout"
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
+        android:scaleType="fitStart"
         android:layout_gravity="start|bottom" />
 
-    <ImageButton
+    <ImageView
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:id="@+id/likeButton"
@@ -61,21 +61,23 @@
         android:layout_below="@+id/linearLayout"
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
+        android:scaleType="fitEnd"
         android:layout_gravity="end|bottom" />
 
-    <ImageButton
+    <ImageView
         android:layout_width="87dp"
         android:layout_height="81dp"
         android:id="@+id/infoButton"
         android:src="@drawable/info_button"
         android:background="@drawable/placeholder_like"
-        android:layout_marginRight="9dp"
-        android:layout_marginEnd="9dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginEnd="0dp"
         android:layout_below="@+id/linearLayout"
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
         android:onClick="goToProfile"
-        android:layout_gravity="center|bottom" />
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal|bottom" />
 
 </FrameLayout>
 
