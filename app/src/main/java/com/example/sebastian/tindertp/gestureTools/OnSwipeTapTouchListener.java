@@ -42,17 +42,20 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            Intent fullScreen = new Intent(context, FullScreenViewActivity.class);
-            fullScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            List<String> imgFiles = context.getImgFiles();
-            String[] b = imgFiles.toArray(new String[imgFiles.size()]);
+            if ( context.getImgFiles().size() != 0 ) {
+                Intent fullScreen = new Intent(context, FullScreenViewActivity.class);
+                fullScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            int imgPosition = context.getImagePosition();
+                List<String> imgFiles = context.getImgFiles();
+                String[] b = imgFiles.toArray(new String[imgFiles.size()]);
 
-            fullScreen.putExtra("images", b);
-            fullScreen.putExtra("position",imgPosition);
-            context.startActivity(fullScreen);
+                int imgPosition = context.getImagePosition();
+
+                fullScreen.putExtra("images", b);
+                fullScreen.putExtra("position", imgPosition);
+                context.startActivity(fullScreen);
+            }
             return false;
         }
 

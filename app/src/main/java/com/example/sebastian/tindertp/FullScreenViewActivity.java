@@ -40,13 +40,14 @@ public class FullScreenViewActivity extends Activity{
 
         //Set the page and the animator depthPageTransformer
         viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setPageTransformer(true,new DepthPageTransformer());
+        //viewPager.setPageTransformer(true,new DepthPageTransformer());
 
         getDataFromMatchingActivity();
 
         adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,imgFiles);
 
         viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
 
         // displaying selected image first
         viewPager.setCurrentItem(position);

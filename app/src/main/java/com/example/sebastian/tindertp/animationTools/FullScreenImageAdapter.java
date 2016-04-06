@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
 
     private Activity fullScreenAct;
     private String[] imgFiles;
+    TouchImageView imgDisplay;
     private LayoutInflater inflater;
 
     // constructor
@@ -38,8 +40,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
     }
 
     private void setImgViewPager(View viewLayout,int position){
-        ImageView imgDisplay;
-        imgDisplay = (ImageView) viewLayout.findViewById(R.id.imgDisplay);
+        imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.imgDisplay);
 
         final File myImageFile = new File(imgFiles[position]);
         Bitmap myBitmap = BitmapFactory.decodeFile(myImageFile.getAbsolutePath());
@@ -49,7 +50,6 @@ public class FullScreenImageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        ImageView imgDisplay;
 
         inflater = (LayoutInflater) fullScreenAct
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

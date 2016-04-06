@@ -48,7 +48,7 @@ public class TouchImageView extends ImageView {
 		sharedConstructing(context);
 	}
 
-	private void sharedConstructing(Context context) {
+	private void sharedConstructing(final Context context) {
 		super.setClickable(true);
 		this.context = context;
 		mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
