@@ -1,29 +1,44 @@
 package com.example.sebastian.tindertp.internetTools;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
+import android.util.Pair;
+import android.widget.TextView;
 
-import com.example.sebastian.tindertp.UrlActivity;
-import com.example.sebastian.tindertp.RegistryActivity;
 import com.example.sebastian.tindertp.MainActivity;
+import com.example.sebastian.tindertp.R;
+import com.example.sebastian.tindertp.SelectLoginOrRegistryActivity;
+import com.example.sebastian.tindertp.TinderTP;
+import com.example.sebastian.tindertp.UrlActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestConnectionClient extends MediaDownloader {
+
+    public static final String PREF_FILE_NAME = "mypreferences";
+    public static final String NO_NAME = "NO_NAME";
+    public static final String NO_PASS = "NO_PASS";
 
     private Context context;
     private String url;
     private String contentAsString;
     public static final int LEN = 25;
 
-    public TestConnectionClient( Context context, String url) {
+    public TestConnectionClient( Context context, String url, String path) {
         this.url= url;
+        this.path = path;
         this.context = context;
         contentAsString = "";
         isConnected = true;
@@ -55,10 +70,9 @@ public class TestConnectionClient extends MediaDownloader {
         // Starts the query
         connection.connect();
         int response = connection.getResponseCode();
-
-        is = connection.getInputStream();
-        // Convert the InputStream into a string
-        contentAsString = readIt(is, LEN);
+        if (response == 200) {
+            contentAsString = "Conexión exitosa.";
+        }
     }
 
     @Override
@@ -68,18 +82,54 @@ public class TestConnectionClient extends MediaDownloader {
         }
     }
 
+    private void login(String user, String password){
+
+        Map<String,String> values = new HashMap<String,String>();
+
+        values.put("Usuario", user);
+        values.put("Password", password);
+
+        MainActivity main = ((MainActivity)context);
+
+        String url = ((TinderTP) main.getApplication()).getUrl();
+
+        TextView text = (TextView) main.findViewById(R.id.textView8);
+
+        InfoDownloaderClient info = new InfoDownloaderClient(text,context,url,"/login",values);
+
+        info.runInBackground();
+    }
+
+    private void startActivity(Class<?> newActivity){
+        Intent activity = new Intent(context, newActivity);
+        activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(activity);
+    }
+
     @Override
     void onPostExec() {
 
         if ( !contentAsString.equals("") && isConnected) {
-            Intent registry = new Intent(context, RegistryActivity.class);
-            registry.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(registry);
-            ((MainActivity) context).finish();
+
+            MainActivity main = (MainActivity) context;
+            Log.i("test", "esta conectado " + contentAsString);
+
+            String urlSaved = verifyHTTPFormat(url);
+            ((TinderTP) main.getApplication()).setUrl(urlSaved);
+
+            SharedPreferences preferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+            String user = preferences.getString("Usuario", NO_NAME);
+            String pass = preferences.getString("Password", NO_PASS);
+
+            if ( user.equals(NO_NAME) || pass.equals(NO_PASS) ) {
+                startActivity(SelectLoginOrRegistryActivity.class);
+                ((Activity) context).finish();
+            } else {
+                login(user,pass);
+            }
         } else {
-            Intent main = new Intent(context, UrlActivity.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(main);
+            Log.i("test", "no esta conectado " + contentAsString);
+            startActivity(UrlActivity.class);
             ((MainActivity) context).finish();
         }
     }
@@ -90,11 +140,9 @@ public class TestConnectionClient extends MediaDownloader {
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            new DownloadInBackground(this).execute(url);
+            new DownloadInBackground(this).execute(url+path);
         }else {
-            Intent main = new Intent(context, UrlActivity.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(main);
+            startActivity(UrlActivity.class);
             ((MainActivity)context).finish();
         }
     }

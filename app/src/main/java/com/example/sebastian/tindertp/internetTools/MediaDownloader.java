@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp.internetTools;
 
+import android.content.Intent;
 import android.util.Log;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ public abstract class MediaDownloader {
     protected InputStream is;
     protected HttpURLConnection connection;
     protected String nURL;
+    protected String path;
     protected boolean isConnected;
 
     public static final String CONNECTION = "Connection";
@@ -28,7 +30,7 @@ public abstract class MediaDownloader {
         return matcher.matches();
     }
 
-    private String verifyHTTPFormat(String url) {
+    protected String verifyHTTPFormat(String url) {
         if( !isHTTPFormat(url) ) {
             Log.d(CONNECTION, "Without http://");
             StringBuilder correctURL = new StringBuilder();
@@ -55,6 +57,7 @@ public abstract class MediaDownloader {
         is = null;
         connection = null;
         initSpecificVar();
+        Log.i(CONNECTION,"" + url);
         nURL = verifyHTTPFormat(url);
         try {
             Log.i(CONNECTION,"Starting url connection");

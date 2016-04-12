@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp;
 
+
 import com.example.sebastian.tindertp.animationTools.DepthPageTransformer;
 import com.example.sebastian.tindertp.animationTools.FullScreenImageAdapter;
 import android.app.Activity;

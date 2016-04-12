@@ -1,6 +1,8 @@
 package com.example.sebastian.tindertp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -21,7 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatchingActivity extends AppCompatActivity {
+
     private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
+    public static final String PREF_FILE_NAME = "mypreferences";
+
     private List<Bitmap> bitmaps;
     private ImageView imgView;
     private boolean firstTime;
@@ -109,17 +114,31 @@ public class MatchingActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
+    private void starActivity(Class<?> newActivity) {
+        Intent activity = new Intent(this, newActivity);
+        activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(activity);
+    }
+
+    private void clearLoginSaved(){
+        SharedPreferences preferences = getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+        preferences.edit().remove("Usuario").apply();
+        preferences.edit().remove("Password").apply();
+        Log.i("Clear","Delete login preferences.");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         //settings (URL for now) is started
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent urlAct = new Intent(this, UrlActivity.class);
-            urlAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            this.startActivity(urlAct);
+           starActivity(UrlActivity.class);
             return true;
+        } else if (id == R.id.action_logout ) {
+            clearLoginSaved();
+            starActivity(LoginActivity.class);
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);
