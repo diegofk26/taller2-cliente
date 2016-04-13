@@ -2,14 +2,10 @@ package com.example.sebastian.tindertp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,12 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

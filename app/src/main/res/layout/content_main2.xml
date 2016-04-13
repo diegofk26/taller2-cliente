@@ -10,13 +10,30 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sebastian.tindertp.MainActivity"
-    tools:showIn="@layout/activity_main2">
+    tools:showIn="@layout/activity_main2"
+    android:background="#FFFFFFFF">
+
+    <WebView
+        android:layout_width="234dp"
+        android:layout_height="450dp"
+        android:id="@+id/webView"
+        android:layout_above="@+id/textView8"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Por favor, espere mientras se conecta a la red."
         android:id="@+id/textView8"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="115dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <WebView
+        android:layout_width="140dp"
+        android:layout_height="170dp"
+        android:id="@+id/webView2"
+        android:layout_alignTop="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-15dp" />
 </RelativeLayout>

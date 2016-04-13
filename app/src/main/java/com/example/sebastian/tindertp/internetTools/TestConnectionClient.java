@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
-import android.util.Pair;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.MainActivity;
@@ -17,11 +15,6 @@ import com.example.sebastian.tindertp.TinderTP;
 import com.example.sebastian.tindertp.UrlActivity;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +27,6 @@ public class TestConnectionClient extends MediaDownloader {
     private Context context;
     private String url;
     private String contentAsString;
-    public static final int LEN = 25;
 
     public TestConnectionClient( Context context, String url, String path) {
         this.url= url;
@@ -42,14 +34,6 @@ public class TestConnectionClient extends MediaDownloader {
         this.context = context;
         contentAsString = "";
         isConnected = true;
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
     }
 
     public void showText(String message) {
@@ -112,7 +96,6 @@ public class TestConnectionClient extends MediaDownloader {
         if ( !contentAsString.equals("") && isConnected) {
 
             MainActivity main = (MainActivity) context;
-            Log.i("test", "esta conectado " + contentAsString);
 
             String urlSaved = verifyHTTPFormat(url);
             ((TinderTP) main.getApplication()).setUrl(urlSaved);
@@ -128,7 +111,6 @@ public class TestConnectionClient extends MediaDownloader {
                 login(user,pass);
             }
         } else {
-            Log.i("test", "no esta conectado " + contentAsString);
             startActivity(UrlActivity.class);
             ((MainActivity) context).finish();
         }
