@@ -23,14 +23,12 @@ public class SelectLoginOrRegistryActivity extends AppCompatActivity {
         Intent login = new Intent(this, LoginActivity.class);
         login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(login);
-        this.finish();
     }
 
     public void goToRegistry(View v) {
         Intent registry = new Intent(this, RegistryActivity.class);
         registry.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(registry);
-        this.finish();
     }
 
     @Override

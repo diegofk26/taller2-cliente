@@ -24,8 +24,6 @@ public class UrlActivity extends AppCompatActivity {
         Intent logRegAct = new Intent(this, SelectLoginOrRegistryActivity.class);
         logRegAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(logRegAct);
-        this.finish();
-
     }
 
     public void salir(View view) {

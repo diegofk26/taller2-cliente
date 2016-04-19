@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.sebastian.tindertp.LoginActivity;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
+import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.UrlActivity;
 
 import java.io.IOException;
@@ -129,11 +130,15 @@ public class InfoDownloaderClient extends MediaDownloader {
         }
 
         if(!loginFail) {
-            if (isConnected)
-                startActivity(MatchingActivity.class);
-            else
+            if (isConnected) {
+                Intent activity = new Intent(context, MatchingActivity.class);
+                activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(activity);
+            }
+            else {
                 startActivity(UrlActivity.class);
-            ((Activity) context).finish();
+                ((Activity) context).finish();
+            }
 
         } else if (isExecutedByMainActivity()) {
             startActivity(LoginActivity.class);

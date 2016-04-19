@@ -93,9 +93,9 @@ public class TestConnectionClient extends MediaDownloader {
     @Override
     void onPostExec() {
 
-        if ( !contentAsString.equals("") && isConnected) {
+        MainActivity main = (MainActivity) context;
 
-            MainActivity main = (MainActivity) context;
+        if ( !contentAsString.equals("") && isConnected) {
 
             String urlSaved = verifyHTTPFormat(url);
             ((TinderTP) main.getApplication()).setUrl(urlSaved);
