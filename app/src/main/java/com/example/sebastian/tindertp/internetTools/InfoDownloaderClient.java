@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.Common;
 import com.example.sebastian.tindertp.LoginActivity;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
@@ -20,18 +21,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLConnection;
 import java.util.Map;
 
 public class InfoDownloaderClient extends MediaDownloader {
 
-    public static final String PREF_FILE_NAME = "mypreferences";
+    private static final int timeOUT_R = 1000;
+    private static final int timeOUT_C = 1500;
 
     public TextView text;
     private Context context;
     private String contentAsString;
     private String url;
     private Map<String,String> values;
-    public static final int LEN = 500;
     private boolean loginFail;
     SharedPreferences.Editor editor;
 
@@ -44,7 +46,7 @@ public class InfoDownloaderClient extends MediaDownloader {
         contentAsString = "";
         isConnected = true;
         loginFail = false;
-        SharedPreferences preferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         editor = preferences.edit();
 
     }
@@ -58,8 +60,8 @@ public class InfoDownloaderClient extends MediaDownloader {
 
     @Override
     void connect() throws IOException {
-        connection.setReadTimeout(10000 /* milliseconds */);
-        connection.setConnectTimeout(15000 /* milliseconds */);
+        connection.setReadTimeout(timeOUT_R /* milliseconds */);
+        connection.setConnectTimeout(timeOUT_C /* milliseconds */);
         connection.setRequestMethod("GET");
         Log.i(CONNECTION, "Set request method");
 
@@ -90,16 +92,15 @@ public class InfoDownloaderClient extends MediaDownloader {
 
     @Override
     void closeConnection() throws IOException {
-        Log.i(CONNECTION, "Closing connection");
-        if (is != null) {
-            is.close();
-            Log.i(CONNECTION,"Connection closed");
+        if (connection != null) {
+            connection.disconnect();
+            Log.i(CONNECTION,"Disconected");
         }
     }
 
     private void savePreferencesLogin(){
-        editor.putString("Usuario",values.get("Usuario"));
-        editor.putString("Password",values.get("Password"));
+        editor.putString(Common.USER_KEY,values.get(Common.USER_KEY));
+        editor.putString(Common.PASS_KEY,values.get(Common.PASS_KEY));
         editor.apply();
     }
 
@@ -107,7 +108,7 @@ public class InfoDownloaderClient extends MediaDownloader {
         Log.i("SAVE", "Saving preferences.");
 
         String urlSaved = verifyHTTPFormat(url);
-        editor.putString("url", urlSaved); // value to store
+        editor.putString(Common.URL_KEY, urlSaved); // value to store
         editor.apply();
         Log.i("SAVE", "Preferences saved.");
     }

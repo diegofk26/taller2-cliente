@@ -48,10 +48,30 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean userOrPassAreEmpty( EditText user, EditText password) {
-        String userText = user.getText().toString();
-        String passText = password.getText().toString();
-        return userText.isEmpty() || passText.isEmpty();
+    private boolean userOrPassAreEmpty( String user, String password,TextView message ) {
+        if ( user.isEmpty() || password.isEmpty()) {
+            message.setText("Algunos campos estan vacios.");
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean userOrPassTooLong(String user, String pass,TextView message){
+        if (user.length() > Common.MAX_CHARS || pass.length() > Common.MAX_CHARS) {
+            message.setText("Algunos campos superan los " + Common.MAX_CHARS + " caracteres.");
+            return true;
+        } else if(user.length() < Common.MIN_CHARS || pass.length() < Common.MIN_CHARS) {
+            message.setText("Algunos campos no superan los " + Common.MIN_CHARS + " caracteres.");
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean userAndPass_OK(EditText user, EditText password){
+        String us = user.getText().toString();
+        String pass = password.getText().toString();
+        TextView text = (TextView) findViewById(R.id.textView7);
+        return ( !userOrPassAreEmpty(us,pass,text) && !userOrPassTooLong(us,pass,text) );
     }
 
     public void loginL(View v) {
@@ -59,27 +79,25 @@ public class LoginActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.editText3);
         TextView text = (TextView) findViewById(R.id.textView7);
 
-        if ( !userOrPassAreEmpty(user,password) ) {
+        if ( userAndPass_OK(user,password) ) {
 
             Map<String, String> values = new HashMap<String, String>();
-            values.put("Usuario", user.getText().toString());
-            values.put("Password", password.getText().toString());
+            values.put(Common.USER_KEY, user.getText().toString());
+            values.put(Common.PASS_KEY, password.getText().toString());
 
             String url = ((TinderTP) this.getApplication()).getUrl();
 
             if (!url.isEmpty()) {
 
-                InfoDownloaderClient info = new InfoDownloaderClient(text, this, url, "/login", values);
-
+                InfoDownloaderClient info = new InfoDownloaderClient(text, this, url, Common.LOGIN, values);
                 info.runInBackground();
+
             } else {
                 Intent main = new Intent(this, UrlActivity.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 this.startActivity(main);
                 this.finish();
             }
-        } else {
-            text.setText("Campos vacios.");
         }
     }
 

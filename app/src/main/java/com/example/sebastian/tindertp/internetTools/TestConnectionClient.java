@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.Common;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.SelectLoginOrRegistryActivity;
@@ -20,7 +22,6 @@ import java.util.Map;
 
 public class TestConnectionClient extends MediaDownloader {
 
-    public static final String PREF_FILE_NAME = "mypreferences";
     public static final String NO_NAME = "NO_NAME";
     public static final String NO_PASS = "NO_PASS";
 
@@ -61,8 +62,8 @@ public class TestConnectionClient extends MediaDownloader {
 
     @Override
     void closeConnection() throws IOException {
-        if (is != null) {
-            is.close();
+        if (connection != null) {
+            connection.disconnect();
         }
     }
 
@@ -100,9 +101,9 @@ public class TestConnectionClient extends MediaDownloader {
             String urlSaved = verifyHTTPFormat(url);
             ((TinderTP) main.getApplication()).setUrl(urlSaved);
 
-            SharedPreferences preferences = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-            String user = preferences.getString("Usuario", NO_NAME);
-            String pass = preferences.getString("Password", NO_PASS);
+            SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            String user = preferences.getString(Common.USER_KEY, NO_NAME);
+            String pass = preferences.getString(Common.PASS_KEY, NO_PASS);
 
             if ( user.equals(NO_NAME) || pass.equals(NO_PASS) ) {
                 startActivity(SelectLoginOrRegistryActivity.class);

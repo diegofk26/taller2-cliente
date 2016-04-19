@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.Common;
 import com.example.sebastian.tindertp.MatchingActivity;
 import com.example.sebastian.tindertp.diskTools.SaveFileInBackground;
 
@@ -52,10 +53,10 @@ public class ImageDownloaderClient extends MediaDownloader{
             Log.e(CONNECTION, "Invalid content length. The URL is probably not pointing to a file");
             throw new IOException();
         }
-        is = new BufferedInputStream(connection.getInputStream(), 8192);
+        is = new BufferedInputStream(connection.getInputStream(), Common.BUFF_SIZE);
         out = new ByteArrayOutputStream();
         Log.i(CONNECTION,"is-out created.");
-        byte bytes[] = new byte[8192];
+        byte bytes[] = new byte[Common.BUFF_SIZE];
         int count;
         long read = 0;
         while ((count = is.read(bytes)) != -1) {

@@ -27,8 +27,8 @@ public class FullScreenViewActivity extends Activity{
     private void getDataFromMatchingActivity(){
         //Get the variables of MatchingActivity
         Intent i = getIntent();
-        position = i.getIntExtra("position", 0);
-        imgFiles = i.getStringArrayExtra("images");
+        position = i.getIntExtra(Common.IMG_POS_KEY, 0);
+        imgFiles = i.getStringArrayExtra(Common.IMG_KEY);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.animation.AnimationUtils;
 
+import com.example.sebastian.tindertp.Common;
 import com.example.sebastian.tindertp.FullScreenViewActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
 
@@ -52,8 +53,8 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
 
                 int imgPosition = context.getImagePosition();
 
-                fullScreen.putExtra("images", b);
-                fullScreen.putExtra("position", imgPosition);
+                fullScreen.putExtra(Common.IMG_KEY, b);
+                fullScreen.putExtra(Common.IMG_POS_KEY, imgPosition);
                 context.startActivity(fullScreen);
             }
             return false;

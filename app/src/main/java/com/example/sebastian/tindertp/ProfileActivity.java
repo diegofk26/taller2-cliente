@@ -24,8 +24,8 @@ public class ProfileActivity extends AppCompatActivity {
         imgView.setImageBitmap(myBitmap);
     }
     private void getProfileImageIntoView(){
-        if( getIntent().hasExtra("profileFile") ) {
-            String profileImage = (String) getIntent().getStringExtra("profileFile");
+        if( getIntent().hasExtra(Common.PROFILE_IMG_KEY) ) {
+            String profileImage = (String) getIntent().getStringExtra(Common.PROFILE_IMG_KEY);
             setImg(profileImage);
         } else{
             txtView.setText("Error al cargar la imagen de perfil");

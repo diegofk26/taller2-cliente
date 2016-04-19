@@ -25,7 +25,6 @@ import java.util.List;
 public class MatchingActivity extends AppCompatActivity {
 
     private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
-    public static final String PREF_FILE_NAME = "mypreferences";
 
     private List<Bitmap> bitmaps;
     private ImageView imgView;
@@ -121,9 +120,9 @@ public class MatchingActivity extends AppCompatActivity {
     }
 
     private void clearLoginSaved(){
-        SharedPreferences preferences = getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-        preferences.edit().remove("Usuario").apply();
-        preferences.edit().remove("Password").apply();
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        preferences.edit().remove(Common.USER_KEY).apply();
+        preferences.edit().remove(Common.PASS_KEY).apply();
         Log.i("Clear","Delete login preferences.");
     }
 

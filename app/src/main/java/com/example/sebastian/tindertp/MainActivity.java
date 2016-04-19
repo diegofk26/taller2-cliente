@@ -13,8 +13,6 @@ import com.example.sebastian.tindertp.internetTools.TestConnectionClient;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String PREF_FILE_NAME = "mypreferences";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,19 +24,19 @@ public class MainActivity extends AppCompatActivity {
         WebView dots = (WebView) findViewById(R.id.webView2);
         gifV.setBackgroundColor(Color.WHITE);
         dots.setBackgroundColor(Color.TRANSPARENT);
-        gifV.loadUrl("file:///android_asset/IA.gif");
+        gifV.loadUrl(Common.IA);
         gifV.reload();
-        dots.loadUrl("file:///android_asset/dots.gif");
+        dots.loadUrl(Common.DOTS);
         dots.reload();
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                SharedPreferences preferences = getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
-                String url = preferences.getString("url", "fail");
-                if (!url.equals("fail")) {
-                    Log.i("test","hay url "+url);
-                    TestConnectionClient testConn = new TestConnectionClient(MainActivity.this,url,"/test");
+                SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                String url = preferences.getString("url", Common.FAIL);
+                if (!url.equals(Common.FAIL)) {
+                    Log.i("test","hay url " + url);
+                    TestConnectionClient testConn = new TestConnectionClient(MainActivity.this,url, Common.TEST);
                     testConn.runInBackground();
                 }
                 else {
