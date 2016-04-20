@@ -5,30 +5,14 @@ import java.util.List;
 
 public class UrlArrayAdapter {
 
-    private List<String> urls;
-    private int begin;
     private int end;
     private Iterator<String>it;
     private int i;
 
     public UrlArrayAdapter(List<String> urls) {
-        this.urls = urls;
         it = urls.iterator();
         i = 0; //to iterate
-        begin = 0;
         end = 3;
-    }
-
-    public int size(){
-        return end;
-    }
-
-    public String getUrl(int i){
-        return urls.get(i);
-    }
-
-    public int begin(){
-        return begin;
     }
 
     public boolean hasNext() {
