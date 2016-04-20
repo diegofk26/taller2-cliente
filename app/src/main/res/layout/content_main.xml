@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollView"
     android:layout_gravity="center_horizontal"
+    android:background="@drawable/gradient_background"
     android:fillViewport="false">
     <RelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"

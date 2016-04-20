@@ -13,6 +13,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.Conn_struct;
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,38 +51,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean userOrPassAreEmpty( String user, String password,TextView message ) {
-        if ( user.isEmpty() || password.isEmpty()) {
-            message.setText("Algunos campos estan vacios.");
-            return true;
-        } else
-            return false;
-    }
-
-    private boolean userOrPassTooLong(String user, String pass,TextView message){
-        if (user.length() > Common.MAX_CHARS || pass.length() > Common.MAX_CHARS) {
-            message.setText("Algunos campos superan los " + Common.MAX_CHARS + " caracteres.");
-            return true;
-        } else if(user.length() < Common.MIN_CHARS || pass.length() < Common.MIN_CHARS) {
-            message.setText("Algunos campos no superan los " + Common.MIN_CHARS + " caracteres.");
-            return true;
-        } else
-            return false;
-    }
-
-    private boolean userAndPass_OK(EditText user, EditText password){
-        String us = user.getText().toString();
-        String pass = password.getText().toString();
-        TextView text = (TextView) findViewById(R.id.textView7);
-        return ( !userOrPassAreEmpty(us,pass,text) && !userOrPassTooLong(us,pass,text) );
-    }
-
     public void loginL(View v) {
         EditText user = (EditText)findViewById(R.id.editText2);
         EditText password = (EditText) findViewById(R.id.editText3);
         TextView text = (TextView) findViewById(R.id.textView7);
 
-        if ( userAndPass_OK(user,password) ) {
+        if ( Common.userAndPass_OK(user, password, text) ) {
 
             Map<String, String> values = new HashMap<String, String>();
             values.put(Common.USER_KEY, user.getText().toString());
@@ -88,8 +65,8 @@ public class LoginActivity extends AppCompatActivity {
             String url = ((TinderTP) this.getApplication()).getUrl();
 
             if (!url.isEmpty()) {
-
-                InfoDownloaderClient info = new InfoDownloaderClient(text, this, url, Common.LOGIN, values);
+                Conn_struct conn = new Conn_struct(Common.LOGIN,Common.GET,url);
+                InfoDownloaderClient info = new InfoDownloaderClient(text, this, values,conn);
                 info.runInBackground();
 
             } else {

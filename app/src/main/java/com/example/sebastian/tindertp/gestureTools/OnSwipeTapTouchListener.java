@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.animation.AnimationUtils;
 
-import com.example.sebastian.tindertp.Common;
+import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.FullScreenViewActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
 

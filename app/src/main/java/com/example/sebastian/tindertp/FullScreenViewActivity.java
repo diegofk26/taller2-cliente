@@ -3,6 +3,8 @@ package com.example.sebastian.tindertp;
 
 import com.example.sebastian.tindertp.animationTools.DepthPageTransformer;
 import com.example.sebastian.tindertp.animationTools.FullScreenImageAdapter;
+import com.example.sebastian.tindertp.commonTools.Common;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

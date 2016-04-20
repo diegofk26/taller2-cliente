@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.internetTools.ImageDownloaderClient;
 import com.example.sebastian.tindertp.gestureTools.OnSwipeTapTouchListener;
 

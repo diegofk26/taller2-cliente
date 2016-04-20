@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
+
+import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.internetTools.TestConnectionClient;
 
 public class MainActivity extends AppCompatActivity {

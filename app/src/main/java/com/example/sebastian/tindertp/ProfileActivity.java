@@ -10,6 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.sebastian.tindertp.commonTools.Common;
+
 import java.io.File;
 
 public class ProfileActivity extends AppCompatActivity {

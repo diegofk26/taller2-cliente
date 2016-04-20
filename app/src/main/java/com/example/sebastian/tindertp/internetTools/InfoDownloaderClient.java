@@ -9,40 +9,40 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.Common;
+import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.LoginActivity;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
-import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.UrlActivity;
+import com.example.sebastian.tindertp.commonTools.Conn_struct;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.URLConnection;
 import java.util.Map;
 
 public class InfoDownloaderClient extends MediaDownloader {
 
-    private static final int timeOUT_R = 1000;
-    private static final int timeOUT_C = 1500;
+    private static final int timeOUT_R = 10000;
+    private static final int timeOUT_C = 15000;
 
     public TextView text;
     private Context context;
     private String contentAsString;
     private String url;
+    private String requestMethod;
     private Map<String,String> values;
     private boolean loginFail;
     SharedPreferences.Editor editor;
 
-    public InfoDownloaderClient(TextView text, Context context, String url,String path, Map<String,String> values) {
-        this.url = url;
-        this.path = path;
+    public InfoDownloaderClient(TextView text, Context context, Map<String,String> values, Conn_struct conn) {
+       //Connection vars
+        this.url = conn.URL;
+        this.path = conn.path;
+        this.requestMethod = conn.requestMethod;
+        //
         this.text = text;
         this.context = context;
         this.values = values;
+        //initialize
         contentAsString = "";
         isConnected = true;
         loginFail = false;
@@ -60,9 +60,10 @@ public class InfoDownloaderClient extends MediaDownloader {
 
     @Override
     void connect() throws IOException {
+        Log.i(CONNECTION,"Connection with " + url + path );
         connection.setReadTimeout(timeOUT_R /* milliseconds */);
         connection.setConnectTimeout(timeOUT_C /* milliseconds */);
-        connection.setRequestMethod("GET");
+        connection.setRequestMethod(requestMethod);
         Log.i(CONNECTION, "Set request method");
 
         for (Map.Entry<String, String> entry : values.entrySet()) {

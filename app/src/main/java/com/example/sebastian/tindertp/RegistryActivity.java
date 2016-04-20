@@ -6,12 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegistryActivity extends AppCompatActivity {
 
@@ -48,11 +57,32 @@ public class RegistryActivity extends AppCompatActivity {
         System.exit(0);
     }
 
-    public void login(View view) {
-        Intent matching = new Intent(this, MatchingActivity.class);
-        matching.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(matching);
-        this.finish();
+    public void toRegister(View v) {
+
+        EditText user = (EditText) findViewById(R.id.email_text);
+        TextView text = (TextView) findViewById(R.id.textView9);
+
+        if( Common.userAndPass_OK(user, passText, text) ) {
+
+            Map<String, String> values = new HashMap<String, String>();
+
+            values.put(Common.USER_KEY, user.getText().toString());
+            values.put(Common.PASS_KEY, passText.getText().toString());
+
+            String url = ((TinderTP) this.getApplication()).getUrl();
+
+            if (!url.isEmpty()) {
+                Conn_struct conn = new Conn_struct(Common.REGISTER,Common.PUT,url);
+                InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn);
+                info.runInBackground();
+
+            } else {
+                Intent main = new Intent(this, UrlActivity.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                this.startActivity(main);
+                this.finish();
+            }
+        }
     }
 
     @Override
