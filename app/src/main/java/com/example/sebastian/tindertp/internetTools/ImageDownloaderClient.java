@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.UrlArrayAdapter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.MatchingActivity;
 import com.example.sebastian.tindertp.diskTools.SaveFileInBackground;
@@ -17,6 +18,8 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageDownloaderClient extends MediaDownloader{
 
@@ -28,11 +31,29 @@ public class ImageDownloaderClient extends MediaDownloader{
     private ByteArrayOutputStream out;
     private MatchingActivity matchingActivity;
 
+    private UrlArrayAdapter urlAdapter;
+
     TextView mText;
 
     public ImageDownloaderClient(MatchingActivity matchingA,TextView mtext) {
         bitmap = null;
         id = 0;
+
+        //TODO: urlS y urlP doesn't work, seems not be coded as bitmap
+        String urlS = "http://alquimistasdelapalabra.com/descripcion/12_paisajes_fantasticos/Paisaje_nieve.jpg";
+        String urlP = "http://pmmv.com.es/sites/default/files/PAISAJE_0.jpg";
+        //urlC, urlB y urlN  works
+        String urlC = "http://concepto.de/wp-content/uploads/2015/03/Paisaje.jpg";
+        String urlB = "http://live-wallpaper.net/iphone/img/app/t/h/the_dark_knight_rises_wallpaper_47_1ba030b4b76b3c07c13c4e6514328202_raw.jpg";
+        String urlN = "http://k32.kn3.net/taringa/3/2/B/9/F/C/WashingtongPower/C98.jpg";
+        String urlZ = "http://www.biglittlegeek.com/wp-content/uploads/2015/11/star-wars-wallpaper-for-iphone-6-plus-6.jpg";
+        String urlI = "http://www.topdesignmag.com/wp-content/uploads/2011/01/iphone_4_wallpaper_hd_pack-570x8551.jpg";
+        String urlq = "http://www.iphonefansite.com/wp-content/gallery/star-wars-iphone-wallpapers/01681.jpg";
+        String urlr = "http://b1.img.mobypicture.com/b9a40d622601c28babf5ef9b6134174e_view.jpg";
+        List<String> urls = new ArrayList<String>();
+        urls.add(urlB); urls.add(urlN); urls.add(urlC); urls.add(urlI); urls.add(urlZ);urls.add(urlq);urls.add(urlr);
+
+        urlAdapter = new UrlArrayAdapter(urls);
         matchingActivity = matchingA;
         this.mText = mtext;
     }
@@ -122,22 +143,8 @@ public class ImageDownloaderClient extends MediaDownloader{
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            //TODO: urlS y urlP doesn't work, seems not be coded as bitmap
-            String urlS = "http://alquimistasdelapalabra.com/descripcion/12_paisajes_fantasticos/Paisaje_nieve.jpg";
-            String urlP = "http://pmmv.com.es/sites/default/files/PAISAJE_0.jpg";
-            //urlC, urlB y urlN  works
-            String urlC = "http://concepto.de/wp-content/uploads/2015/03/Paisaje.jpg";
-            String urlB = "http://live-wallpaper.net/iphone/img/app/t/h/the_dark_knight_rises_wallpaper_47_1ba030b4b76b3c07c13c4e6514328202_raw.jpg";
-            String urlN = "http://k32.kn3.net/taringa/3/2/B/9/F/C/WashingtongPower/C98.jpg";
-            String urlZ = "http://www.biglittlegeek.com/wp-content/uploads/2015/11/star-wars-wallpaper-for-iphone-6-plus-6.jpg";
-            String urlI = "http://www.topdesignmag.com/wp-content/uploads/2011/01/iphone_4_wallpaper_hd_pack-570x8551.jpg";
-            String urlq = "http://www.iphonefansite.com/wp-content/gallery/star-wars-iphone-wallpapers/01681.jpg";
-            String urlr = "http://b1.img.mobypicture.com/b9a40d622601c28babf5ef9b6134174e_view.jpg";
-            String[] urls = new String[7];
-            urls[0] = urlB; urls[1]=urlN; urls[2]=urlC; urls[3] = urlI;urls[4]= urlZ;urls[5]=urlq;urls[6]=urlr;
-
-            for (int i  = 0; i < urls.length; i++)
-                new DownloadInBackground(this).execute(urls[i]);
+            while (urlAdapter.hasNext())
+                new DownloadInBackground(this).execute(urlAdapter.next());
 
         } else {
             mText.setText("No network connection available.");
@@ -147,5 +154,10 @@ public class ImageDownloaderClient extends MediaDownloader{
     @Override
     void showText(String message) {
 
+    }
+
+
+    public boolean downloadComplete() {
+        return urlAdapter.downloadComplete();
     }
 }

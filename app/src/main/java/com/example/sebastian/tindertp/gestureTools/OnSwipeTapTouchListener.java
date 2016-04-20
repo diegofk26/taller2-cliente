@@ -101,6 +101,8 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
     private void onSwipeLeft() {
         if (i < (context.getBitmaps().size() - 1)) {
             i++;
+            if (!context.downloadComplete())
+                context.downloadNextImg();
             setImgViewAndAnimation();
         }
     }

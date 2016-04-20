@@ -32,6 +32,7 @@ public class MatchingActivity extends AppCompatActivity {
     private boolean firstTime;
     private List<String> imgFiles;
     private int imgPosition;
+    private ImageDownloaderClient imageDownloader;
 
     private void initalize(){
         bitmaps = new ArrayList<Bitmap>();
@@ -52,8 +53,9 @@ public class MatchingActivity extends AppCompatActivity {
 
         TextView mText = (TextView)findViewById(R.id.textView2);
 
-        ImageDownloaderClient imageDownloader =  new ImageDownloaderClient(this,mText);
         initalize();
+
+        imageDownloader =  new ImageDownloaderClient(this,mText);
         imageDownloader.runInBackground();
 
         //listen gesture fling or tap
@@ -92,6 +94,14 @@ public class MatchingActivity extends AppCompatActivity {
             Log.i("Bitmap saved", "success");
             imgView.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
         }
+    }
+
+    public void downloadNextImg(){
+        imageDownloader.runInBackground();
+    }
+
+    public boolean downloadComplete() {
+        return imageDownloader.downloadComplete();
     }
 
     public void setImagePosition(int newPosition){
