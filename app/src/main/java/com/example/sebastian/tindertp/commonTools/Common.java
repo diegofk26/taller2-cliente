@@ -26,6 +26,7 @@ public class Common {
     public static final String PASS_KEY = "Password";
     public static final String IMG_POS_KEY = "position";
     public static final String IMG_KEY = "images";
+    public static final String NEW_IMG_POS_KEY = "newImagePosition";
 
     public static final int BUFF_SIZE = 8192;
 

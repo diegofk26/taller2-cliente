@@ -84,6 +84,11 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
         }
     }
 
+    public void setPosition(int newImgPos){
+        i = newImgPos;
+
+    }
+
     protected void setImgViewAndAnimation(){
         context.setImagePosition(i);
         context.getImgView().startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out));
@@ -100,9 +105,9 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
 
     private void onSwipeLeft() {
         if (i < (context.getBitmaps().size() - 1)) {
-            i++;
-            if (!context.downloadComplete())
+            if (!context.downloadComplete() && i == context.getBitmaps().size() - 2)
                 context.downloadNextImg();
+            i++;
             setImgViewAndAnimation();
         }
     }

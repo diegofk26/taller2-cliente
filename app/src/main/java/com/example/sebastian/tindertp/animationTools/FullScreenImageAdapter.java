@@ -20,7 +20,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
 
     private Activity fullScreenAct;
     private String[] imgFiles;
-    TouchImageView imgDisplay;
+    ImageView imgDisplay;
     private LayoutInflater inflater;
 
     // constructor
@@ -40,7 +40,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
     }
 
     private void setImgViewPager(View viewLayout,int position){
-        imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.imgDisplay);
+        imgDisplay = (ImageView) viewLayout.findViewById(R.id.imageView3);
 
         final File myImageFile = new File(imgFiles[position]);
         Bitmap myBitmap = BitmapFactory.decodeFile(myImageFile.getAbsolutePath());

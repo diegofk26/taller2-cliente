@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.ImagesPosition;
 import com.example.sebastian.tindertp.internetTools.ImageDownloaderClient;
 import com.example.sebastian.tindertp.gestureTools.OnSwipeTapTouchListener;
 
@@ -33,6 +34,7 @@ public class MatchingActivity extends AppCompatActivity {
     private List<String> imgFiles;
     private int imgPosition;
     private ImageDownloaderClient imageDownloader;
+    private OnSwipeTapTouchListener customListener;
 
     private void initalize(){
         bitmaps = new ArrayList<Bitmap>();
@@ -54,12 +56,13 @@ public class MatchingActivity extends AppCompatActivity {
         TextView mText = (TextView)findViewById(R.id.textView2);
 
         initalize();
-
+        Log.i("INI", "inicia");
         imageDownloader =  new ImageDownloaderClient(this,mText);
         imageDownloader.runInBackground();
 
+        customListener = new OnSwipeTapTouchListener(this);
         //listen gesture fling or tap
-        imgView.setOnTouchListener(new OnSwipeTapTouchListener(this));
+        imgView.setOnTouchListener(customListener);
 
     }
 
@@ -70,6 +73,20 @@ public class MatchingActivity extends AppCompatActivity {
             profileAct.putExtra("profileFile", imgFiles.get(0));
             this.startActivity(profileAct);
         }
+    }
+    public void onResume() {
+        super.onResume();
+        if (bitmaps.size() != 0 ) {
+            int newImgPos = ImagesPosition.getInstance(imgPosition).getPosition();
+            setImagePosition(newImgPos);
+            if (newImgPos + 1 == getBitmaps().size()) {
+                if (!downloadComplete())
+                    downloadNextImg();
+            }
+            customListener.setPosition(newImgPos);
+            imgView.setImageBitmap(this.bitmaps.get(newImgPos));
+        }
+
     }
 
 
@@ -134,7 +151,7 @@ public class MatchingActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         preferences.edit().remove(Common.USER_KEY).apply();
         preferences.edit().remove(Common.PASS_KEY).apply();
-        Log.i("Clear","Delete login preferences.");
+        Log.i("Clear", "Delete login preferences.");
     }
 
     @Override

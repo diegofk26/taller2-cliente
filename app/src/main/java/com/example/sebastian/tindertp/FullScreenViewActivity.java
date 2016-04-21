@@ -4,11 +4,13 @@ package com.example.sebastian.tindertp;
 import com.example.sebastian.tindertp.animationTools.DepthPageTransformer;
 import com.example.sebastian.tindertp.animationTools.FullScreenImageAdapter;
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.ImagesPosition;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 public class FullScreenViewActivity extends Activity{
@@ -58,6 +60,8 @@ public class FullScreenViewActivity extends Activity{
 
     @Override
     public void onBackPressed() {
+        ImagesPosition.getInstance().setPosition(viewPager.getCurrentItem());
+        super.onBackPressed();
         finish();
     }
 }
