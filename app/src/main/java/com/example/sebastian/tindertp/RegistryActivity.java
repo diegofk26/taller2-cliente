@@ -62,11 +62,27 @@ public class RegistryActivity extends AppCompatActivity {
         EditText user = (EditText) findViewById(R.id.email_text);
         TextView text = (TextView) findViewById(R.id.textView9);
 
-        Intent main = new Intent(this, MatchingActivity.class);
-        main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(main);
+        if( Common.userAndPass_OK(user, passText, text) ) {
 
+            Map<String, String> values = new HashMap<String, String>();
 
+            values.put(Common.USER_KEY, user.getText().toString());
+            values.put(Common.PASS_KEY, passText.getText().toString());
+
+            String url = ((TinderTP) this.getApplication()).getUrl();
+
+            if (!url.isEmpty()) {
+                Conn_struct conn = new Conn_struct(Common.REGISTER,Common.PUT,url);
+                InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn);
+                info.runInBackground();
+
+            } else {
+                Intent main = new Intent(this, UrlActivity.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                this.startActivity(main);
+                this.finish();
+            }
+        }
     }
 
     @Override
