@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 
 public class FullScreenViewActivity extends Activity{
@@ -18,7 +17,7 @@ public class FullScreenViewActivity extends Activity{
     private FullScreenImageAdapter adapter;
     private ViewPager viewPager;
 
-    private int position;
+    private int firtPosition;
     private String[] imgFiles;
 
     private void hideClockBateryBar(){
@@ -31,7 +30,7 @@ public class FullScreenViewActivity extends Activity{
     private void getDataFromMatchingActivity(){
         //Get the variables of MatchingActivity
         Intent i = getIntent();
-        position = i.getIntExtra(Common.IMG_POS_KEY, 0);
+        firtPosition = i.getIntExtra(Common.IMG_POS_KEY, 0);
         imgFiles = i.getStringArrayExtra(Common.IMG_KEY);
     }
 
@@ -55,12 +54,17 @@ public class FullScreenViewActivity extends Activity{
         viewPager.setPageTransformer(true, new DepthPageTransformer());
 
         // displaying selected image first
-        viewPager.setCurrentItem(position);
+        viewPager.setCurrentItem(firtPosition);
+
     }
 
+    /**Al volver a la activitidad a la llamo, setea la nueva posicion de la imagen si esta cambió.*/
     @Override
     public void onBackPressed() {
-        ImagesPosition.getInstance().setPosition(viewPager.getCurrentItem());
+        if (firtPosition != viewPager.getCurrentItem()) {
+            ImagesPosition.getInstance().setPosition(viewPager.getCurrentItem());
+            ImagesPosition.getInstance().setPositionChanged(true);
+        }
         super.onBackPressed();
         finish();
     }

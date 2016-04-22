@@ -41,12 +41,12 @@ public class Common {
             return false;
     }
 
-    private static boolean userOrPassTooLong(String user, String pass,TextView message){
+    private static boolean userOrPassLong (String user, String pass, TextView message){
         if (user.length() > Common.MAX_CHARS || pass.length() > Common.MAX_CHARS) {
             message.setText("Algunos campos superan los " + Common.MAX_CHARS + " caracteres.");
             return true;
-        } else if(user.length() < Common.MIN_CHARS || pass.length() < Common.MIN_CHARS) {
-            message.setText("Algunos campos no superan los " + Common.MIN_CHARS + " caracteres.");
+        } else if(pass.length() < Common.MIN_CHARS) {
+            message.setText("La contraseña no supera los " + Common.MIN_CHARS + " caracteres.");
             return true;
         } else
             return false;
@@ -55,7 +55,7 @@ public class Common {
     public static boolean userAndPass_OK(EditText user, EditText password,TextView text){
         String us = user.getText().toString();
         String pass = password.getText().toString();
-        return ( !userOrPassAreEmpty(us,pass,text) && !userOrPassTooLong(us,pass,text) );
+        return ( !userOrPassAreEmpty(us,pass,text) && !userOrPassLong(us, pass, text) );
     }
 
 }

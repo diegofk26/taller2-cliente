@@ -19,7 +19,8 @@ import com.example.sebastian.tindertp.commonTools.Conn_struct;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+/**Conexion rapida sin Loguear para verificar que el server este activo y asi poder
+ * saltar algunas activities.*/
 public class TestConnectionClient extends MediaDownloader {
 
     public static final String NO_NAME = "NO_NAME";

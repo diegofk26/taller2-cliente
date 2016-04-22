@@ -9,13 +9,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**Medio de descarga de informacion.*/
 public abstract class MediaDownloader {
 
     protected InputStream is;
     protected HttpURLConnection connection;
     protected String nURL;
-    protected String path;
+    protected String path;/**< /test, /login /registro */
     protected boolean isConnected;
 
     public static final String CONNECTION = "Connection";
@@ -24,6 +24,7 @@ public abstract class MediaDownloader {
         isConnected = state;
     }
 
+    /**Si tiene http://*/
     private boolean isHTTPFormat(String url) {
         Pattern pattern = Pattern.compile("^http://.*$");
         Matcher matcher = pattern.matcher(url);
@@ -32,7 +33,6 @@ public abstract class MediaDownloader {
 
     protected String verifyHTTPFormat(String url) {
         if( !isHTTPFormat(url) ) {
-            Log.d(CONNECTION, "Without http://");
             StringBuilder correctURL = new StringBuilder();
             correctURL.append( "http://" );
             correctURL.append( url );
@@ -47,8 +47,10 @@ public abstract class MediaDownloader {
 
     abstract void closeConnection() throws IOException;
 
+    /**Cuando termina el thread de descarga, se ejecuta onPostExec.*/
     abstract void onPostExec();
 
+    /**Se fija la conexion de red y internet.*/
     public abstract void runInBackground();
 
     abstract void showText(String message);

@@ -3,6 +3,7 @@ package com.example.sebastian.tindertp.commonTools;
 public class ImagesPosition {
     private static ImagesPosition Singleton = null;
     private int imgPosition;
+    private boolean positionChanged;
 
     public static ImagesPosition getInstance() {
         if(Singleton == null)
@@ -28,8 +29,17 @@ public class ImagesPosition {
         imgPosition = newPos;
     }
 
+    public boolean positionChanged() {
+        return positionChanged;
+    }
+
+    public void setPositionChanged(boolean change) {
+        positionChanged = change;
+    }
+
     private ImagesPosition() {
         imgPosition = 0;
+        positionChanged = false;
     }
 
     private ImagesPosition(int pos) {

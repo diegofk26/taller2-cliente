@@ -12,12 +12,12 @@ import android.webkit.WebView;
 
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.internetTools.TestConnectionClient;
-
+/**Actividad Launcher. Splash Screen. Salta las actividades que puede esquivar, como UrlActivity,
+ * SelectLoginOrRegisterAcivity, LoginActivity o RegistryActivity*/
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);

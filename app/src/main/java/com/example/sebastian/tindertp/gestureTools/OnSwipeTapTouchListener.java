@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.FullScreenViewActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
+import com.example.sebastian.tindertp.commonTools.ImagesPosition;
 
 import java.util.List;
 
@@ -41,19 +42,21 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
             return true;
         }
 
+        /**Inicia fullscreenActivity y le pasa los  directorios de las imagenes
+         * y la posicion actual de las imagenes. */
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
 
             if ( context.getImgFiles().size() != 0 ) {
                 Intent fullScreen = new Intent(context, FullScreenViewActivity.class);
                 fullScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
+                ImagesPosition.getInstance().setPositionChanged(false);
                 List<String> imgFiles = context.getImgFiles();
-                String[] b = imgFiles.toArray(new String[imgFiles.size()]);
+                String[] imgArray = imgFiles.toArray(new String[imgFiles.size()]);
 
                 int imgPosition = context.getImagePosition();
 
-                fullScreen.putExtra(Common.IMG_KEY, b);
+                fullScreen.putExtra(Common.IMG_KEY, imgArray);
                 fullScreen.putExtra(Common.IMG_POS_KEY, imgPosition);
                 context.startActivity(fullScreen);
             }
@@ -102,7 +105,8 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
             setImgViewAndAnimation();
         }
     }
-
+    /**Cambia la imagen a la siguiente a la izquierda y si no esta completa la descarga
+     * y esta en la anteultima posicion, descarga la siguiente imagen.*/
     private void onSwipeLeft() {
         if (i < (context.getBitmaps().size() - 1)) {
             if (!context.downloadComplete() && i == context.getBitmaps().size() - 2)

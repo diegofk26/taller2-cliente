@@ -2,12 +2,15 @@ package com.example.sebastian.tindertp;
 
 import java.util.Iterator;
 import java.util.List;
-
+//!Adaptador del array de urls.
+/**Cambia la funcionalidad del recorrido del array, para que primero descarga las primeras 3 urls
+ * y depues descargue la siguiente solo si la imagen actual apunta a la
+ * a la anteultima posicion del array.*/
 public class UrlArrayAdapter {
 
-    private int end;
+    private int end;/**< Numero para descargar las primeras imagenes.*/
     private Iterator<String>it;
-    private int i;
+    private int i;/**< posicion actual de imagenes descargas en el array.*/
 
     public UrlArrayAdapter(List<String> urls) {
         it = urls.iterator();

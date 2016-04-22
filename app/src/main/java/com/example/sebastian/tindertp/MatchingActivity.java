@@ -23,7 +23,7 @@ import com.example.sebastian.tindertp.gestureTools.OnSwipeTapTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//!Activity donde se matchean las personas.
 public class MatchingActivity extends AppCompatActivity {
 
     private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
@@ -34,7 +34,7 @@ public class MatchingActivity extends AppCompatActivity {
     private List<String> imgFiles;
     private int imgPosition;
     private ImageDownloaderClient imageDownloader;
-    private OnSwipeTapTouchListener customListener;
+    private OnSwipeTapTouchListener customListener;/**< Listener para fling y tap.*/
 
     private void initalize(){
         bitmaps = new ArrayList<Bitmap>();
@@ -45,6 +45,7 @@ public class MatchingActivity extends AppCompatActivity {
     }
 
     @Override
+    /**En la creacion se empiezan a descargas las 3 primeras imagenes o menos.*/
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching);
@@ -56,7 +57,6 @@ public class MatchingActivity extends AppCompatActivity {
         TextView mText = (TextView)findViewById(R.id.textView2);
 
         initalize();
-        Log.i("INI", "inicia");
         imageDownloader =  new ImageDownloaderClient(this,mText);
         imageDownloader.runInBackground();
 
@@ -66,6 +66,8 @@ public class MatchingActivity extends AppCompatActivity {
 
     }
 
+    /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer
+     * imagen descargada, que es la del perfil.*/
     public void goToProfile(View v) {
         if (imgFiles.size()!= 0){
             Intent profileAct = new Intent(this, ProfileActivity.class);
@@ -74,10 +76,17 @@ public class MatchingActivity extends AppCompatActivity {
             this.startActivity(profileAct);
         }
     }
+    //!Actualiza la posicion de la imagen al retornar a la actividad.
+    /**Cuando se retorna a la actividad si tiene imagenes en bitmaps, se llama al
+     * singleton ImagesPosition, que de no estar seteado devuelve la posicion actual de las imagenes
+     * y si esta seteado es porque se ingreso en FullscreenActivity y se cambio el foco de la imagen.
+     * Setea la nueva imagen y si esta en la anteultima posicion de las imagenes ya descargadas
+     * se descarga la siguiente.*/
     public void onResume() {
         super.onResume();
-        if (bitmaps.size() != 0 ) {
+        if (bitmaps.size() != 0 && ImagesPosition.getInstance().positionChanged() ) {
             int newImgPos = ImagesPosition.getInstance(imgPosition).getPosition();
+            Log.i("SEEEEE","cambioooo");
             setImagePosition(newImgPos);
             if (newImgPos + 1 == getBitmaps().size()) {
                 if (!downloadComplete())
@@ -86,7 +95,6 @@ public class MatchingActivity extends AppCompatActivity {
             customListener.setPosition(newImgPos);
             imgView.setImageBitmap(this.bitmaps.get(newImgPos));
         }
-
     }
 
 
@@ -102,6 +110,7 @@ public class MatchingActivity extends AppCompatActivity {
         return bitmaps;
     }
 
+    /**Cuando la descarga de una imagen se completo se obtiene los datos y setea la imagen. */
     public void onBackgroundTaskDataObtained(Bitmap bitmap,String file) {
         this.imgFiles.add(file);
         this.bitmaps.add(bitmap);
@@ -141,7 +150,7 @@ public class MatchingActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    private void starActivity(Class<?> newActivity) {
+    private void startActivity(Class<?> newActivity) {
         Intent activity = new Intent(this, newActivity);
         activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(activity);
@@ -160,11 +169,11 @@ public class MatchingActivity extends AppCompatActivity {
         //settings (URL for now) is started
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-           starActivity(UrlActivity.class);
+           startActivity(UrlActivity.class);
             return true;
         } else if (id == R.id.action_logout ) {
             clearLoginSaved();
-            starActivity(LoginActivity.class);
+            startActivity(LoginActivity.class);
             this.finish();
         }
 

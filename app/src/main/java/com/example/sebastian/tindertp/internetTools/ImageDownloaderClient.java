@@ -82,7 +82,7 @@ public class ImageDownloaderClient extends MediaDownloader{
         long read = 0;
         while ((count = is.read(bytes)) != -1) {
             read += count;
-            Log.i(CONNECTION,"Progress... " +  ((read * 100) / length) );
+            //Log.i(CONNECTION,"Progress... " +  ((read * 100) / length) );
             out.write(bytes, 0, count);
         }
         bitmap = BitmapFactory.decodeByteArray(out.toByteArray(), 0, out.size());

@@ -17,19 +17,20 @@ import java.io.File;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private ImageView imgView;
-    private TextView txtView;
+    private ImageView imgProfile;
+    private TextView txtView;/**< En caso de error.*/
 
-    private void setImg(String imgFile){
+    private void setImgProfile(String imgFile){
 
         final File myImageFile = new File(imgFile);
         Bitmap myBitmap = BitmapFactory.decodeFile(myImageFile.getAbsolutePath());
-        imgView.setImageBitmap(myBitmap);
+        imgProfile.setImageBitmap(myBitmap);
     }
+
     private void getProfileImageIntoView(){
         if( getIntent().hasExtra(Common.PROFILE_IMG_KEY) ) {
             String profileImage = (String) getIntent().getStringExtra(Common.PROFILE_IMG_KEY);
-            setImg(profileImage);
+            setImgProfile(profileImage);
         } else{
             txtView.setText("Error al cargar la imagen de perfil");
         }
@@ -44,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        imgView = (ImageView)findViewById(R.id.imageView2);
+        imgProfile = (ImageView)findViewById(R.id.imageView2);
         txtView = (TextView)findViewById(R.id.textView3);
 
         getProfileImageIntoView();

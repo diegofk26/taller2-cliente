@@ -24,7 +24,7 @@ public class InfoDownloaderClient extends MediaDownloader {
     private static final int timeOUT_R = 10000;
     private static final int timeOUT_C = 15000;
 
-    public TextView text;
+    public TextView text; /**< Se pasan los errores por UI.*/
     private Context context;
     private String contentAsString;
     private String url;

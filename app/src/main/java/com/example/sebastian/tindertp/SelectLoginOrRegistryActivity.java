@@ -19,12 +19,13 @@ public class SelectLoginOrRegistryActivity extends AppCompatActivity {
 
     }
 
+    /**Listener de boton que va a LoginActivity.*/
     public void goToLogin(View v) {
         Intent login = new Intent(this, LoginActivity.class);
         login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(login);
     }
-
+    /**Listener de boton que va a RegistryActivity.*/
     public void goToRegistry(View v) {
         Intent registry = new Intent(this, RegistryActivity.class);
         registry.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

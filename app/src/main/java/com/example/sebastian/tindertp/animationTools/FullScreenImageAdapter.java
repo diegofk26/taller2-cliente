@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.sebastian.tindertp.R;
-
+/**Adaptador entre PageView y ImageView*/
 public class FullScreenImageAdapter extends PagerAdapter {
 
     private Activity fullScreenAct;

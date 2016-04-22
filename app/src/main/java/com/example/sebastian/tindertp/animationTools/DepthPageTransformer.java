@@ -2,43 +2,45 @@ package com.example.sebastian.tindertp.animationTools;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;
-
+//! Implementa la animacion de solapado de imagenes.
+/** La pagina de atras con un grado de transparencia y escalada
+*  y la de adelante normal.*/
 public class DepthPageTransformer implements ViewPager.PageTransformer {
     private static final float MIN_SCALE = 0.75f;
 
-    /*Position of page relative to the current front-and-center
-      position of the pager. 0 is front and center. 1 is one full
-      page position to the right, and -1 is one page position to the left.
-    */
+     //!Posición de la página relativa a la posición actual frente-y-centro del ViewPager.
+    /** 0 = frente y centro. 1 la paigna se va a la derecha, y
+     * -1 la pagina se va a la izquierda.
+     */
     public void transformPage(View view, float position) {
         int pageWidth = view.getWidth();
 
         if (position < -1) { // [-Infinity,-1)
-            // This page is way off-screen to the left.
+            // Se va a la izquierda.
             view.setAlpha(0);
 
         } else if (position <= 0) { // [-1,0]
-            // Use the default slide transition when moving to the left page
+            // Utiliza la transición de imagen por defecto cuando se mueve a la página de la izquierda
             view.setAlpha(1);
             view.setTranslationX(0);
             view.setScaleX(1);
             view.setScaleY(1);
 
         } else if (position <= 1) { // (0,1]
-            // Fade the page out.
+            // fade out.
             view.setAlpha(1 - position);
 
-            // Counteract the default slide transition
+            // Contrarrestar la transición de imagen predeterminada
             view.setTranslationX(pageWidth * -position);
 
-            // Scale the page down (between MIN_SCALE and 1)
+            // Escalar la página de abajo (entre MIN_SCALE y 1)
             float scaleFactor = MIN_SCALE
                     + (1 - MIN_SCALE) * (1 - Math.abs(position));
             view.setScaleX(scaleFactor);
             view.setScaleY(scaleFactor);
 
         } else { // (1,+Infinity]
-            // This page is way off-screen to the right.
+            // Se va a la derecha.
             view.setAlpha(0);
         }
     }

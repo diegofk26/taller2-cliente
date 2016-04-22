@@ -19,11 +19,11 @@ import com.example.sebastian.tindertp.commonTools.Conn_struct;
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import java.util.HashMap;
 import java.util.Map;
-
+/**Actividad de logeo en el sistema.*/
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText passText;
-    private CheckBox checkBox;
+    private EditText passText;/*!< Campo de Password. */
+    private CheckBox checkBox;/**< Chech box para mostrar o enmascarar la contraseña.*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**Listener del boton Login. Si los campos de entrada son validos se procede hacer el logeo.
+     * Si no hay URL seteada se llama a UrlActivity, terminando la actual.*/
     public void loginL(View v) {
         EditText user = (EditText)findViewById(R.id.editText2);
         EditText password = (EditText) findViewById(R.id.editText3);
