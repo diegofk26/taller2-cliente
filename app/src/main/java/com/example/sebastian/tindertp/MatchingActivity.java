@@ -169,7 +169,9 @@ public class MatchingActivity extends AppCompatActivity {
         //settings (URL for now) is started
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-           startActivity(UrlActivity.class);
+            Intent activity = new Intent(this, UrlActivity.class);
+            activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            this.startActivity(activity);
             return true;
         } else if (id == R.id.action_logout ) {
             clearLoginSaved();

@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
             } else {
                 Intent main = new Intent(this, UrlActivity.class);
-                main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
                 this.startActivity(main);
                 this.finish();
             }
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent main = new Intent(this, UrlActivity.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
             this.startActivity(main);
             return true;
         }

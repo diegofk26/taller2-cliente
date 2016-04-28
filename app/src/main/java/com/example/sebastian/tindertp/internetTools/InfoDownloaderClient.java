@@ -124,6 +124,12 @@ public class InfoDownloaderClient extends MediaDownloader {
         context.startActivity(activity);
     }
 
+    private void startClearTask(Class<?> newAct) {
+        Intent activity = new Intent(context, newAct);
+        activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(activity);
+    }
+
     @Override
     void onPostExec() {
         if (!contentAsString.equals("")) {
@@ -138,8 +144,8 @@ public class InfoDownloaderClient extends MediaDownloader {
                 context.startActivity(activity);
             }
             else {
-                startActivity(UrlActivity.class);
-                ((Activity) context).finish();
+                startClearTask(UrlActivity.class);
+                //((Activity) context).finish();
             }
 
         } else if (isExecutedByMainActivity()) {
