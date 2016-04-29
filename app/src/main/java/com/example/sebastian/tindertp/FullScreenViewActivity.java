@@ -58,7 +58,7 @@ public class FullScreenViewActivity extends Activity{
 
     }
 
-    /**Al volver a la activitidad a la llamo, setea la nueva posicion de la imagen si esta cambió.*/
+    /**Al volver a la activitidad que la llamo, setea la nueva posicion de la imagen si esta cambió.*/
     @Override
     public void onBackPressed() {
         if (firtPosition != viewPager.getCurrentItem()) {

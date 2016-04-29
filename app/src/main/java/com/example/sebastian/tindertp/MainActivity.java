@@ -36,16 +36,15 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
                 String url = preferences.getString("url", Common.FAIL);
+
                 if (!url.equals(Common.FAIL)) {
                     Log.i("test","hay url " + url);
-                    TestConnectionClient testConn = new TestConnectionClient(MainActivity.this,url, Common.TEST);
+                    TestConnectionClient testConn = new TestConnectionClient(MainActivity.this, url, Common.TEST);
                     testConn.runInBackground();
                 }
                 else {
                     Log.i("test", "no hay url");
-                    Intent main = new Intent(MainActivity.this, UrlActivity.class);
-                    main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MainActivity.this.startActivity(main);
+                    Common.startActivity(MainActivity.this, UrlActivity.class);
                     MainActivity.this.finish();
                 }
             }

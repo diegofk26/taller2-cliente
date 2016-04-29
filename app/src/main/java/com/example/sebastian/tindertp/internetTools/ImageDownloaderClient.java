@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.UrlArrayAdapter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.MatchingActivity;
 import com.example.sebastian.tindertp.diskTools.SaveFileInBackground;

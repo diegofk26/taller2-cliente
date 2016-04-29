@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.sebastian.tindertp.commonTools.Common;
+
 
 public class UrlActivity extends AppCompatActivity {
 
@@ -21,13 +23,10 @@ public class UrlActivity extends AppCompatActivity {
     public void sendRequest(View view) {
         EditText mEdit = (EditText)findViewById(R.id.editText);
         ((TinderTP)this.getApplication()).setUrl(mEdit.getText().toString());
-        Intent logRegAct = new Intent(this, SelectLoginOrRegistryActivity.class);
-        logRegAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(logRegAct);
+        Common.startActivity(this, SelectLoginOrRegistryActivity.class);
     }
 
     public void salir(View view) {
-        this.finish();
-        System.exit(0);
+        moveTaskToBack(true);
     }
 }

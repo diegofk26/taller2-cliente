@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         if ( Common.userAndPass_OK(user, password, text) ) {
 
             Map<String, String> values = new HashMap<String, String>();
+
             values.put(Common.USER_KEY, user.getText().toString());
             values.put(Common.PASS_KEY, password.getText().toString());
 
@@ -72,9 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 info.runInBackground();
 
             } else {
-                Intent main = new Intent(this, UrlActivity.class);
-                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
-                this.startActivity(main);
+                Common.startClearTask(this, UrlActivity.class);
                 this.finish();
             }
         }
@@ -96,9 +95,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent main = new Intent(this, UrlActivity.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
-            this.startActivity(main);
+            Common.startClearTask(this, UrlActivity.class);
             return true;
         }
 

@@ -57,6 +57,7 @@ public class MatchingActivity extends AppCompatActivity {
         TextView mText = (TextView)findViewById(R.id.textView2);
 
         initalize();
+
         imageDownloader =  new ImageDownloaderClient(this,mText);
         imageDownloader.runInBackground();
 
@@ -150,36 +151,13 @@ public class MatchingActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    private void startActivity(Class<?> newActivity) {
-        Intent activity = new Intent(this, newActivity);
-        activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(activity);
-    }
-
-    private void clearLoginSaved(){
-        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        preferences.edit().remove(Common.USER_KEY).apply();
-        preferences.edit().remove(Common.PASS_KEY).apply();
-        Log.i("Clear", "Delete login preferences.");
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return Common.optionSelectedItem(item, this) || super.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        //settings (URL for now) is started
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent activity = new Intent(this, UrlActivity.class);
-            activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            this.startActivity(activity);
-            return true;
-        } else if (id == R.id.action_logout ) {
-            clearLoginSaved();
-            startActivity(LoginActivity.class);
-            this.finish();
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
-
 }

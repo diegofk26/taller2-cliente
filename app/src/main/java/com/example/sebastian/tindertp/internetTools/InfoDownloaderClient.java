@@ -2,7 +2,6 @@ package com.example.sebastian.tindertp.internetTools;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -79,7 +78,7 @@ public class InfoDownloaderClient extends MediaDownloader {
 
         int response = connection.getResponseCode();
         Log.i(CONNECTION, "" + response);
-        if ( response == 200 ){
+        if ( response < 300 && response >= 200 ){
             contentAsString = "Operación exitosa.";
             savePreferencesLogin();
             isConnected = true;
@@ -118,18 +117,6 @@ public class InfoDownloaderClient extends MediaDownloader {
         return context.getClass().getSimpleName().equals(MainActivity.class.getSimpleName());
     }
 
-    private void startActivity(Class<?> newActivity){
-        Intent activity = new Intent(context, newActivity);
-        activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(activity);
-    }
-
-    private void startClearTask(Class<?> newAct) {
-        Intent activity = new Intent(context, newAct);
-        activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(activity);
-    }
-
     @Override
     void onPostExec() {
         if (!contentAsString.equals("")) {
@@ -139,17 +126,14 @@ public class InfoDownloaderClient extends MediaDownloader {
 
         if(!loginFail) {
             if (isConnected) {
-                Intent activity = new Intent(context, MatchingActivity.class);
-                activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(activity);
+                Common.startClearTask(context, MatchingActivity.class);
             }
             else {
-                startClearTask(UrlActivity.class);
-                //((Activity) context).finish();
+                Common.startClearTask(context, UrlActivity.class);
             }
 
         } else if (isExecutedByMainActivity()) {
-            startActivity(LoginActivity.class);
+            Common.startActivity(context, LoginActivity.class);
             ((Activity) context).finish();
         }
     }

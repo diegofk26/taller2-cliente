@@ -50,7 +50,9 @@ public class OnSwipeTapTouchListener implements OnTouchListener {
             if ( context.getImgFiles().size() != 0 ) {
                 Intent fullScreen = new Intent(context, FullScreenViewActivity.class);
                 fullScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 ImagesPosition.getInstance().setPositionChanged(false);
+
                 List<String> imgFiles = context.getImgFiles();
                 String[] imgArray = imgFiles.toArray(new String[imgFiles.size()]);
 

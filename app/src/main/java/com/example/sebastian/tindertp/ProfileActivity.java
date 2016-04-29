@@ -60,19 +60,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        //settings (URL for now) is started
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent urlAct = new Intent(this, UrlActivity.class);
-            urlAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            this.startActivity(urlAct);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return Common.optionSelectedItem(item, this) || super.onOptionsItemSelected(item);
     }
-
-
 }

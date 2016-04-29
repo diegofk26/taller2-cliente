@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.sebastian.tindertp.commonTools.Common;
+
 public class SelectLoginOrRegistryActivity extends AppCompatActivity {
 
     @Override
@@ -21,15 +23,11 @@ public class SelectLoginOrRegistryActivity extends AppCompatActivity {
 
     /**Listener de boton que va a LoginActivity.*/
     public void goToLogin(View v) {
-        Intent login = new Intent(this, LoginActivity.class);
-        login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(login);
+        Common.startActivity(this, LoginActivity.class);
     }
     /**Listener de boton que va a RegistryActivity.*/
     public void goToRegistry(View v) {
-        Intent registry = new Intent(this, RegistryActivity.class);
-        registry.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(registry);
+        Common.startActivity(this, RegistryActivity.class);
     }
 
     @Override
@@ -48,9 +46,7 @@ public class SelectLoginOrRegistryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent main = new Intent(this, UrlActivity.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            this.startActivity(main);
+            Common.startClearTask(this, UrlActivity.class);
             return true;
         }
 

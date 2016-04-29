@@ -88,12 +88,6 @@ public class TestConnectionClient extends MediaDownloader {
         info.runInBackground();
     }
 
-    private void startActivity(Class<?> newActivity){
-        Intent activity = new Intent(context, newActivity);
-        activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(activity);
-    }
-
     @Override
     void onPostExec() {
 
@@ -109,13 +103,13 @@ public class TestConnectionClient extends MediaDownloader {
             String pass = preferences.getString(Common.PASS_KEY, NO_PASS);
 
             if ( user.equals(NO_NAME) || pass.equals(NO_PASS) ) {
-                startActivity(SelectLoginOrRegistryActivity.class);
+                Common.startActivity(context, SelectLoginOrRegistryActivity.class);
                 ((Activity) context).finish();
             } else {
                 login(user,pass);
             }
         } else {
-            startActivity(UrlActivity.class);
+            Common.startActivity(context, UrlActivity.class);
             ((MainActivity) context).finish();
         }
     }
@@ -128,7 +122,7 @@ public class TestConnectionClient extends MediaDownloader {
 
             new DownloadInBackground(this).execute(url+path);
         }else {
-            startActivity(UrlActivity.class);
+            Common.startActivity(context, UrlActivity.class);
             ((MainActivity)context).finish();
         }
     }

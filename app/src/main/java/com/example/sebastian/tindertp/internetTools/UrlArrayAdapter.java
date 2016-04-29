@@ -1,4 +1,4 @@
-package com.example.sebastian.tindertp;
+package com.example.sebastian.tindertp.internetTools;
 
 import java.util.Iterator;
 import java.util.List;

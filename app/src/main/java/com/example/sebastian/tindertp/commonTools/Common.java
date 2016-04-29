@@ -1,7 +1,17 @@
 package com.example.sebastian.tindertp.commonTools;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.sebastian.tindertp.LoginActivity;
+import com.example.sebastian.tindertp.R;
+import com.example.sebastian.tindertp.UrlActivity;
 
 public class Common {
 
@@ -56,6 +66,42 @@ public class Common {
         String us = user.getText().toString();
         String pass = password.getText().toString();
         return ( !userOrPassAreEmpty(us,pass,text) && !userOrPassLong(us, pass, text) );
+    }
+
+    public static void startActivity(Context context, Class<?> newActivity){
+        Intent activity = new Intent(context, newActivity);
+        activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(activity);
+    }
+
+    public static void startClearTask(Context context, Class<?> newAct) {
+        Intent activity = new Intent(context, newAct);
+        activity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(activity);
+    }
+
+    public static void clearLoginSaved(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        preferences.edit().remove(Common.USER_KEY).apply();
+        preferences.edit().remove(Common.PASS_KEY).apply();
+        Log.i("Clear", "Delete login preferences.");
+    }
+
+    public static boolean optionSelectedItem(MenuItem item, Context context) {
+
+        //settings (URL for now) is started
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Common.startActivity(context, UrlActivity.class);
+            return true;
+        } else if (id == R.id.action_logout ) {
+            Common.clearLoginSaved(context);
+            Common.startClearTask(context, LoginActivity.class);
+            ((Activity) context).finish();
+            return true;
+        }
+
+        return false;
     }
 
 }
