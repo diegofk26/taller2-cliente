@@ -2,11 +2,11 @@
     <string name="app_name">TinderTP</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
-    <string name="title_activity_registro">Registro</string>
-    <string name="title_activity_matching">MatchingActivity</string>
-    <string name="title_activity_full_screen_view">FullScreenViewActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_select_login_or_registry">SelectLoginOrRegistryActivity</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_registro">TinderTP</string>
+    <string name="title_activity_matching">TinderTP</string>
+    <string name="title_activity_full_screen_view">TinderTP</string>
+    <string name="title_activity_profile">TinderTP</string>
+    <string name="title_activity_login">TinderTP</string>
+    <string name="title_activity_select_login_or_registry">TinderTP</string>
+    <string name="title_activity_main">TinderTP</string>
 </resources>
