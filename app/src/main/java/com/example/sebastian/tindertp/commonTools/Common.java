@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.sebastian.tindertp.LoginActivity;
 import com.example.sebastian.tindertp.R;
+import com.example.sebastian.tindertp.SelectLoginOrRegistryActivity;
 import com.example.sebastian.tindertp.UrlActivity;
 
 public class Common {
@@ -96,7 +97,7 @@ public class Common {
             return true;
         } else if (id == R.id.action_logout ) {
             Common.clearLoginSaved(context);
-            Common.startClearTask(context, LoginActivity.class);
+            Common.startClearTask(context, SelectLoginOrRegistryActivity.class);
             ((Activity) context).finish();
             return true;
         }

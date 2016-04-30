@@ -6,7 +6,9 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.Common;
@@ -49,7 +52,7 @@ public class MatchingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarM);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -87,7 +90,6 @@ public class MatchingActivity extends AppCompatActivity {
         super.onResume();
         if (bitmaps.size() != 0 && ImagesPosition.getInstance().positionChanged() ) {
             int newImgPos = ImagesPosition.getInstance(imgPosition).getPosition();
-            Log.i("SEEEEE","cambioooo");
             setImagePosition(newImgPos);
             if (newImgPos + 1 == getBitmaps().size()) {
                 if (!downloadComplete())
@@ -142,7 +144,16 @@ public class MatchingActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_matching, menu);
+
+        MenuItem item = menu.findItem(R.id.badge);
+
+        MenuItemCompat.setActionView(item, R.layout.match_bar);
+        /*RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
+
+        TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
+        tv.setText("12");*/
+
         return true;
     }
 
