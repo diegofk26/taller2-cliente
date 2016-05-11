@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.LoginActivity;
+import com.example.sebastian.tindertp.ChatListActivity;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.SelectLoginOrRegistryActivity;
 import com.example.sebastian.tindertp.UrlActivity;
@@ -99,6 +99,9 @@ public class Common {
             Common.clearLoginSaved(context);
             Common.startClearTask(context, SelectLoginOrRegistryActivity.class);
             ((Activity) context).finish();
+            return true;
+        }else if (id == R.id.badge) {
+            Common.startActivity(context, ChatListActivity.class);
             return true;
         }
 

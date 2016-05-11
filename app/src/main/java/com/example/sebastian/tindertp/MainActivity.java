@@ -12,6 +12,8 @@ import android.webkit.WebView;
 
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.internetTools.TestConnectionClient;
+import com.example.sebastian.tindertp.services.RegistrationIntentService;
+
 /**Actividad Launcher. Splash Screen. Salta las actividades que puede esquivar, como UrlActivity,
  * SelectLoginOrRegisterAcivity, LoginActivity o RegistryActivity*/
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         gifV.reload();
         dots.loadUrl(Common.DOTS);
         dots.reload();
+
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "249555995894",
+    "project_id": "tindertp-6ddeb"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249555995894:android:aee45dc9f14956ef",
+        "android_client_info": {
+          "package_name": "com.example.sebastian.tindertp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSGmnr2ZQ-FRUUogtm0fcqq_hOsXFRHeo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
