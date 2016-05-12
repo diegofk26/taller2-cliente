@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:clickable="true"
+        android:onClick="goToMesseges"
         android:src="@drawable/msj_sin" />
 
     <!-- Badge Count -->
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textSize="10sp"
-        android:text="+51"
+        android:text=""
         android:textColor="#d3000000"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"

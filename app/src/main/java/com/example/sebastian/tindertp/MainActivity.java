@@ -11,8 +11,11 @@ import android.util.Log;
 import android.webkit.WebView;
 
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.internetTools.TestConnectionClient;
 import com.example.sebastian.tindertp.services.RegistrationIntentService;
+
+import java.util.ArrayList;
 
 /**Actividad Launcher. Splash Screen. Salta las actividades que puede esquivar, como UrlActivity,
  * SelectLoginOrRegisterAcivity, LoginActivity o RegistryActivity*/
@@ -33,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
         dots.loadUrl(Common.DOTS);
         dots.reload();
 
+
+        if (getIntent().hasExtra(Common.MSSG_KEY)){
+            Log.i("asd","Obtengo los EXTRAS del serive, pendingIntent");
+            ArrayList<String> messages = getIntent().getStringArrayListExtra(Common.MSSG_KEY);
+            ArrayList<String> users = getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
+            Log.i("asd","size in MAIN" + messages.size());
+            DataThroughActivities.getInstance().setMessages(users,messages);
+        }
+
         Intent intent = new Intent(this, RegistrationIntentService.class);
         startService(intent);
 
@@ -43,20 +55,16 @@ public class MainActivity extends AppCompatActivity {
                 String url = preferences.getString("url", Common.FAIL);
 
                 if (!url.equals(Common.FAIL)) {
-                    Log.i("test","hay url " + url);
+                    Log.i("test", "hay url " + url);
                     TestConnectionClient testConn = new TestConnectionClient(MainActivity.this, url, Common.TEST);
                     testConn.runInBackground();
-                }
-                else {
+                } else {
                     Log.i("test", "no hay url");
                     Common.startActivity(MainActivity.this, UrlActivity.class);
                     MainActivity.this.finish();
                 }
             }
         }, 500);
-
-
-
 
     }
 

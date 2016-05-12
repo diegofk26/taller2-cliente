@@ -12,4 +12,10 @@
     tools:context=".ChatListActivity"
     tools:showIn="@layout/activity_chat_list">
 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
 </RelativeLayout>

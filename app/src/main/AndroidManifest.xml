@@ -49,7 +49,7 @@
         </service>
         <service
             android:name=".services.RegistrationIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name=".UrlActivity"
@@ -96,7 +96,7 @@
         <activity
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

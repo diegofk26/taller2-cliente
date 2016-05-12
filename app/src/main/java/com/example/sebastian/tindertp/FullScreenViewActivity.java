@@ -58,6 +58,18 @@ public class FullScreenViewActivity extends Activity{
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TinderTP.fullScreenResumed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        TinderTP.fullScreenPaused();
+    }
+
     /**Al volver a la activitidad que la llamo, setea la nueva posicion de la imagen si esta cambió.*/
     @Override
     public void onBackPressed() {

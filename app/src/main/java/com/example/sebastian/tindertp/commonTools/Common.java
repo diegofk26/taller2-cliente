@@ -38,6 +38,8 @@ public class Common {
     public static final String IMG_POS_KEY = "position";
     public static final String IMG_KEY = "images";
     public static final String NEW_IMG_POS_KEY = "newImagePosition";
+    public static final String MSSG_KEY = "MSSG";
+    public static final String USER_MSG_KEY = "USER_MSG";
 
     public static final int BUFF_SIZE = 8192;
 
@@ -92,6 +94,7 @@ public class Common {
 
         //settings (URL for now) is started
         int id = item.getItemId();
+        Log.i("acca","item seleccionado: "+ id +" <-> " + R.id.badge);
         if (id == R.id.action_settings) {
             Common.startActivity(context, UrlActivity.class);
             return true;
@@ -101,6 +104,7 @@ public class Common {
             ((Activity) context).finish();
             return true;
         }else if (id == R.id.badge) {
+            Log.i("acccaa","mensajes");
             Common.startActivity(context, ChatListActivity.class);
             return true;
         }
