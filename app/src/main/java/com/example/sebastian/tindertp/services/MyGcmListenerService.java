@@ -35,7 +35,7 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
-        String fromUser = "FromUser";
+        String fromUser = "Aldana";
 
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
@@ -46,10 +46,10 @@ public class MyGcmListenerService extends GcmListenerService {
             // normal downstream message.
         }
 
-        update(this, from,message, "MATCH");
-        update2(this, from, message, "PROFILE");
-        update2(this, from, message, "CHAT_LIST");
-        update2(this, from, message, "CHAT");
+        update(this, fromUser,message, "MATCH");
+        update2(this, fromUser, message, "PROFILE");
+        update2(this, fromUser, message, "CHAT_LIST");
+        update2(this, fromUser, message, "CHAT");
 
         if(!TinderTP.isTheSameChat(fromUser)) {
             sendNotification(fromUser, message);

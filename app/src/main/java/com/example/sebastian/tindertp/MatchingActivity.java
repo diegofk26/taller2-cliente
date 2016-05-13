@@ -59,13 +59,7 @@ public class MatchingActivity extends AppCompatActivity {
         initalize();
 
         if (DataThroughActivities.getInstance().hasMessages() ){
-            if (DataThroughActivities.getInstance().areTwoDifferntUsers()) {
-                Log.i("PRUEBA","1111");
-                Common.startActivity(this,ChatListActivity.class);
-            } else {
-                Log.i("PRUEBA","22222");
-                Common.startActivity(this, ChatActivity.class);
-            }
+            Common.startActivity(this,ChatListActivity.class);
         }
 
         imageDownloader =  new ImageDownloaderClient(this,mText);

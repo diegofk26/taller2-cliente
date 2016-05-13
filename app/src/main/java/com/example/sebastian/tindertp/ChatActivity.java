@@ -21,7 +21,6 @@ public class ChatActivity extends AppCompatActivity {
         chatName = "FromUser";
         TinderTP.updateChatName(chatName);
 
-
     }
 
     @Override

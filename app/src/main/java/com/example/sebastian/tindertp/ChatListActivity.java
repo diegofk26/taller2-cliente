@@ -1,19 +1,22 @@
 package com.example.sebastian.tindertp;
 
-import android.content.res.TypedArray;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.sebastian.tindertp.chatListTools.CustomAdapter;
 import com.example.sebastian.tindertp.chatListTools.RowItem;
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +24,12 @@ import java.util.List;
 public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private List<RowItem> rowItems;
-    private String[] userNames;
+    private List<String> userNames;
     private List<Integer> profilePics;
-    private String[] lastMessages;
+    private List<String> lastMessages;
     private ListView mylistview;
+
+    private CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,25 +41,46 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         rowItems = new ArrayList<>();
         userNames = getUserNames();
         profilePics = getProfilePics();
-        lastMessages = getLastMessages();
+        getLastMessages();
+        Log.i("asd", "asccaaa");
 
-        for (int i = 0; i < userNames.length; i++) {
-            RowItem item = new RowItem(userNames[i],
-                    profilePics.get(i), lastMessages[i]);
-            rowItems.add(item);
+        buildRowItems();
+        adapter = new CustomAdapter(this, rowItems);
+
+        if (DataThroughActivities.getInstance().hasMessages() ){
+            ArrayList<String> recentUsers = DataThroughActivities.getInstance().getUsers();
+            ArrayList<String> recentMessages= DataThroughActivities.getInstance().getMessages();
+
+            for(int i = 0; i < recentUsers.size(); i++) {
+                int index = updateUserLastMessage(recentUsers.get(i),recentMessages.get(i));
+                adapter.update(rowItems,index);
+
+            }
+            if(!DataThroughActivities.getInstance().areTwoDifferntUsers()) {
+                Common.startActivity(this, ChatActivity.class);
+            }
         }
 
         mylistview = (ListView) findViewById(R.id.list);
-        CustomAdapter adapter = new CustomAdapter(this, rowItems);
         mylistview.setAdapter(adapter);
 
         mylistview.setOnItemClickListener(this);
 
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("CHAT_LIST"));
+
     }
 
-    private String[] getUserNames() {
-        String[] users = new String[3];
-        users[0]="Aldana";users[1]="Rocio";users[2]="asd";
+    private void buildRowItems() {
+        for (int i = 0; i < userNames.size(); i++) {
+            RowItem item = new RowItem(userNames.get(i),
+                    profilePics.get(i), lastMessages.get(i));
+            rowItems.add(item);
+        }
+    }
+
+    private List<String > getUserNames() {
+        List<String> users = new ArrayList<>();
+        users.add("Aldana");users.add("Rocio");users.add("asddd");
         return users;
     }
 
@@ -67,11 +93,11 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
-    private String[] getLastMessages() {
-        String[] msg = new String[3];
-        msg[0]="Hola sdads  skakkjj asdadsasd";msg[1]="sdasdd asdasdas";msg[2]=" asdad asd";
-        return msg;
-
+    private void getLastMessages() {
+        lastMessages = new ArrayList<>();
+        lastMessages.add("Hola sdads  skakkjj asdadsasd");
+        lastMessages.add("sdasdd asdasdas");
+        lastMessages.add("");
     }
 
     @Override
@@ -79,8 +105,43 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
                             long id) {
 
         String userName = rowItems.get(position).getUserName();
-        Common.startActivity(this,ChatActivity.class);
+        Common.startActivity(this, ChatActivity.class);
 
+    }
+
+    private BroadcastReceiver onNotice = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String message = intent.getStringExtra("message");
+            String user = intent.getStringExtra("user");
+
+            if(message!=null && user != null) {
+
+                final int index = updateUserLastMessage(user,message);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.update(rowItems,index);
+                        adapter.notifyDataSetInvalidated();
+                        mylistview.setAdapter(adapter);
+                    }
+                });
+
+            }
+        }
+    };
+
+
+    private int updateUserLastMessage(String user, String message) {
+        int index = userNames.indexOf(user);
+        Log.i("asd", "" + index + "  " + user);
+        lastMessages.set(index, message);
+        rowItems.clear();
+        buildRowItems();
+        return index;
     }
 
     @Override

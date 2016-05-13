@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/userName"
         android:layout_below="@+id/userName"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:text="txt"
         android:textSize="16sp" />
 
