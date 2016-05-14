@@ -30,11 +30,17 @@ public class CustomAdapter extends BaseAdapter {
         updated = false;
     }
 
-    public void update(List<RowItem> newRows, int index) {
+    public void update(List<RowItem> newRows, int index ) {
         List<RowItem> aux = new ArrayList<>( newRows);
+        this.index = index;
         rowItems.clear();
         rowItems.addAll(aux);
         updated = true;
+        notifyDataSetChanged();
+    }
+
+    public void restore() {
+        updated = false;
         notifyDataSetChanged();
     }
 
@@ -80,11 +86,14 @@ public class CustomAdapter extends BaseAdapter {
             holder.lastmessage = (TextView) convertView.findViewById(R.id.message);
 
             if (updated && index == position) {
+                Log.i("BOLDDDD", rowItems.get(position).getUserName());
                 holder.lastmessage.setTypeface(null, Typeface.BOLD_ITALIC);
+            } else {
+                Log.i("NORMAALLL", rowItems.get(position).getUserName());
+                holder.lastmessage.setTypeface(null, Typeface.NORMAL);
             }
 
             RowItem rowPos = rowItems.get(position);
-
             holder.profilePic.setImageResource(rowPos.getProfilePic());
             holder.userName.setText(rowPos.getUserName());
             holder.lastmessage.setText(rowPos.getLastMessage());

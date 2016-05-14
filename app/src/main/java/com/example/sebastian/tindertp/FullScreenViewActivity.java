@@ -3,6 +3,7 @@ package com.example.sebastian.tindertp;
 
 import com.example.sebastian.tindertp.animationTools.DepthPageTransformer;
 import com.example.sebastian.tindertp.animationTools.FullScreenImageAdapter;
+import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ImagesPosition;
 
@@ -61,13 +62,11 @@ public class FullScreenViewActivity extends Activity{
     @Override
     protected void onResume() {
         super.onResume();
-        TinderTP.fullScreenResumed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        TinderTP.fullScreenPaused();
     }
 
     /**Al volver a la activitidad que la llamo, setea la nueva posicion de la imagen si esta cambió.*/

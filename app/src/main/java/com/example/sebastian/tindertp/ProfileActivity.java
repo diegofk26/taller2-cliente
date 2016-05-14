@@ -114,20 +114,13 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        TinderTP.profileResumed();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        TinderTP.profilePaused();
-    }
-
     public void goToMesseges(View v) {
-        Common.startActivity(this, ChatListActivity.class);
+        Intent chatAct = new Intent(this, ChatListActivity.class);
+        chatAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
+        chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+
+        this.startActivity(chatAct);
 
     }
 

@@ -2,7 +2,6 @@ package com.example.sebastian.tindertp.internetTools;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -12,7 +11,7 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.SelectLoginOrRegistryActivity;
-import com.example.sebastian.tindertp.TinderTP;
+import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.UrlActivity;
 import com.example.sebastian.tindertp.commonTools.Conn_struct;
 

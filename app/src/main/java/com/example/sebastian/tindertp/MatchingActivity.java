@@ -95,6 +95,19 @@ public class MatchingActivity extends AppCompatActivity {
         imgView.setImageResource(RES_PLACEHOLDER);
     }
 
+    private BroadcastReceiver onPriorCall = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String user = intent.getStringExtra("user");
+
+            if(user != null) {
+                //search all user mensaje
+            }
+        }
+    };
+
     //This is the handler that will manager to process the broadcast intent
     private BroadcastReceiver onNotice = new BroadcastReceiver() {
 
@@ -130,13 +143,17 @@ public class MatchingActivity extends AppCompatActivity {
     }
 
     public void goToMesseges(View v) {
-        Common.startActivity(this, ChatListActivity.class);
+        Intent chatAct = new Intent(this, ChatListActivity.class);
+        chatAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
+        chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+
+        this.startActivity(chatAct);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        TinderTP.matchPaused();
     }
 
     //!Actualiza la posicion de la imagen al retornar a la actividad.
@@ -147,7 +164,6 @@ public class MatchingActivity extends AppCompatActivity {
      * se descarga la siguiente.*/
     public void onResume() {
         super.onResume();
-        TinderTP.matchResumed();
 
         if (bitmaps.size() != 0 && ImagesPosition.getInstance().positionChanged() ) {
             int newImgPos = ImagesPosition.getInstance(imgPosition).getPosition();
@@ -212,6 +228,8 @@ public class MatchingActivity extends AppCompatActivity {
         MenuItemCompat.setActionView(item, R.layout.match_bar);
         if(notificationCount!=0) {
             RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
+            ImageView icon = (ImageView)notifCount.findViewById(R.id.img);
+            icon.setImageResource(R.drawable.new_msgg);
             TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
             tv.setText("+" + notificationCount);
         }

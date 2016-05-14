@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.R;
-import com.example.sebastian.tindertp.TinderTP;
+import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.Messages;
 import com.google.android.gms.gcm.GcmListenerService;
@@ -35,7 +35,7 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
-        String fromUser = "Aldana";
+        String fromUser = "Rocio";
 
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
