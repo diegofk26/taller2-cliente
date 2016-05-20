@@ -18,6 +18,21 @@ public class DataThroughActivities {
         this.users = users;
     }
 
+    public void deleteMssg() {
+        messages = null;
+        users = null;
+    }
+
+    public void deleteMssg(String userName) {
+        for (int i = users.size() - 1; i >= 0; i--) {
+            if (users.get(i).equals(userName)){
+                users.remove(i);
+                messages.remove(i);
+            }
+        }
+    }
+
+
     public ArrayList<String> getMessages() {
         return messages;
     }

@@ -22,7 +22,7 @@
             android:paddingTop="15dip"
             android:paddingBottom="15dip"
             android:paddingStart="15dip"
-            android:text="hasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdadsasdasdasdasdasd "
+            android:text="hola mundo  "
             android:textColor="@android:color/primary_text_light"/>
 
 

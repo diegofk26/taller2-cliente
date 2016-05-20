@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -57,13 +58,19 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             ArrayList<String> recentUsers = DataThroughActivities.getInstance().getUsers();
             ArrayList<String> recentMessages= DataThroughActivities.getInstance().getMessages();
 
+            int indexLastUser=0;
             for(int i = 0; i < recentUsers.size(); i++) {
-                int index = updateUserLastMessage(recentUsers.get(i),recentMessages.get(i));
-                updated[index] = true;
-                adapter.update(rowItems,index);
+                indexLastUser = updateUserLastMessage(recentUsers.get(i),recentMessages.get(i));
+                updated[indexLastUser] = true;
+                adapter.update(rowItems,indexLastUser);
 
             }
             if(!DataThroughActivities.getInstance().areTwoDifferntUsers()) {
+                adapter.restore();
+                adapter.notifyDataSetInvalidated();
+                updatePriorActivities(userNames.get(indexLastUser));
+                DataThroughActivities.getInstance().deleteMssg();
+                Common.deleteStringFromArray(this, userNames.get(indexLastUser));
                 Common.startActivity(this, ChatActivity.class);
             }
         }
@@ -127,18 +134,28 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         lastMessages.add("");
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
-
+    private void restoreFonts(int position) {
         if( updated[position]) {
             adapter.restore();
             adapter.notifyDataSetInvalidated();
             mylistview.setAdapter(adapter);
             updatePriorActivities(userNames.get(position));
         }
+    }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+
+        restoreFonts(position);
         String userName = rowItems.get(position).getUserName();
+        if (DataThroughActivities.getInstance().hasMessages()) {
+            DataThroughActivities.getInstance().deleteMssg(userName);
+        } else if (Common.hasPersistMssg(this)) {
+            Log.i("asd","Borro mesanjes de usuario");
+            Common.deleteStringFromArray(this,userName);
+        }
+
         Common.startActivity(this, ChatActivity.class);
 
     }

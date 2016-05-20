@@ -20,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
+import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +32,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView txtView;/**< En caso de error.*/
     private ArrayList<String> messages;
     private ArrayList<String> users;
-    private int notificationCount;
+    private MyBroadCastReceiver onNotice;
+    private PriorActivitiesUpdater onPriorCall;
 
     private void setImgProfile(String imgFile){
 
@@ -52,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(getIntent().hasExtra(Common.MSSG_KEY)) {
             messages = getIntent().getStringArrayListExtra(Common.MSSG_KEY);
             users = getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
-            notificationCount= messages.size();
+            onNotice.setNotificationCount(messages.size());
             invalidateOptionsMenu();
         }
     }
@@ -66,36 +69,23 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        notificationCount=0;
         messages = new ArrayList<>();
+        users = new ArrayList<>();
 
         imgProfile = (ImageView)findViewById(R.id.imageView2);
         txtView = (TextView)findViewById(R.id.textView3);
 
+        onNotice = new MyBroadCastReceiver(this);
+        onPriorCall = new PriorActivitiesUpdater(this, onNotice);
+
         getNotificationCount();
         getProfileImageIntoView();
+        onNotice.setUsersAndMessages(users, messages);
+        onPriorCall.setUsersAndMessage(users, messages);
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("PROFILE"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onPriorCall, new IntentFilter("PRIOR"));
 
     }
-
-    private BroadcastReceiver onNotice = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String message = intent.getStringExtra("message");
-            String user = intent.getStringExtra("user");
-
-            if(message!=null && user != null) {
-                Log.i("asd", "actulizacon PROFILE desde app abierta");
-                messages.add(message);
-                users.add(user);
-                notificationCount++;
-            }
-
-            invalidateOptionsMenu();
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,10 +95,19 @@ public class ProfileActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.badge);
 
         MenuItemCompat.setActionView(item, R.layout.match_bar);
-        if(notificationCount!=0) {
-            RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
-            TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
-            tv.setText("+" + notificationCount);
+
+        RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
+        ImageView icon = (ImageView)notifCount.findViewById(R.id.img);
+        TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
+
+        if(onNotice.getNotificationCount() != 0) {
+            icon.setImageResource(R.drawable.new_msgg);
+            tv.setText("+" + onNotice.getNotificationCount());
+        } else {
+            if (onPriorCall.areMessagesReaded()) {
+                icon.setImageResource(R.drawable.empty_msg);
+                tv.setText("");
+            }
         }
 
         return true;
@@ -117,8 +116,10 @@ public class ProfileActivity extends AppCompatActivity {
     public void goToMesseges(View v) {
         Intent chatAct = new Intent(this, ChatListActivity.class);
         chatAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
-        chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+        if (onNotice.getNotificationCount() != 0) {
+            chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
+            chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+        }
 
         this.startActivity(chatAct);
 

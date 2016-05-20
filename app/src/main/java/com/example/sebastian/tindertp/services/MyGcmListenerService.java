@@ -63,14 +63,13 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param message GCM message received.
      */
     private void sendNotification(String fromUser, String message) {
-        Log.i("NOTI", "send");
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         Messages.getInstance().addMessage(fromUser, message);
 
-        Log.i("ads"," tam" + Messages.getInstance().getMessages().size());
+        Common.persistUserAndMssg(this,fromUser, message);
 
         intent.putStringArrayListExtra(Common.MSSG_KEY, Messages.getInstance().getMessages());
         intent.putStringArrayListExtra(Common.USER_MSG_KEY, Messages.getInstance().getUsers());
@@ -100,7 +99,6 @@ public class MyGcmListenerService extends GcmListenerService {
         activityMsg.putExtra("message", message);
         activityMsg.putExtra("user", from);
 
-        Log.i("actualiza", "updateMatch");
         LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
     }
     private static void update2(Context context, String from, String message, String type) {
@@ -109,7 +107,6 @@ public class MyGcmListenerService extends GcmListenerService {
         activityMsg.putExtra("message", message);
         activityMsg.putExtra("user", from);
 
-        Log.i("actualiza", "update");
         LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
     }
 }

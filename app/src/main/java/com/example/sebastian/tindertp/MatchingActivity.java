@@ -24,17 +24,21 @@ import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.ImagesPosition;
 import com.example.sebastian.tindertp.internetTools.ImageDownloaderClient;
 import com.example.sebastian.tindertp.gestureTools.OnSwipeTapTouchListener;
+import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
+import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 //!Activity donde se matchean las personas.
 public class MatchingActivity extends AppCompatActivity {
 
     private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
 
-    private int notificationCount;
     private ArrayList<String> messages;
     private ArrayList<String> users;
+    private MyBroadCastReceiver onNotice;
+    private PriorActivitiesUpdater onPriorCall;
 
     private List<Bitmap> bitmaps;
     private ImageView imgView;
@@ -69,17 +73,26 @@ public class MatchingActivity extends AppCompatActivity {
         //listen gesture fling or tap
         imgView.setOnTouchListener(customListener);
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("MATCH"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(onPriorCall, new IntentFilter("PRIOR"));
     }
 
     private void initalize(){
-        notificationCount = 0;
+
+        onNotice = new MyBroadCastReceiver(this);
+        onPriorCall = new PriorActivitiesUpdater(this, onNotice);
 
         if(DataThroughActivities.getInstance().hasMessages()) {
             Log.i("as","estoy actuzalizando match desde la aplicacion cerrada");
             messages = DataThroughActivities.getInstance().getMessages();
             users = DataThroughActivities.getInstance().getUsers();
-            notificationCount = messages.size();
-            Log.i("asd","size en MATCH" + notificationCount);
+            onNotice.setNotificationCount(messages.size());
+            Log.i("asd","size en MATCH" + onNotice.getNotificationCount());
+            invalidateOptionsMenu();
+        } else if (Common.hasPersistMssg(this)) {
+            Log.i("asddd","tiene mensajes persistidos TRUE");
+            messages = Common.getStringArrayPref(this,"MSSG");
+            users = Common.getStringArrayPref(this, "USER");
+            onNotice.setNotificationCount(messages.size());
             invalidateOptionsMenu();
         }
 
@@ -88,45 +101,15 @@ public class MatchingActivity extends AppCompatActivity {
             users = new ArrayList<>();
         }
 
+        onNotice.setUsersAndMessages(users, messages);
+        onPriorCall.setUsersAndMessage(users, messages);
+
         bitmaps = new ArrayList<>();
         imgFiles = new ArrayList<>();
         firstTime = true;
         imgView = (ImageView)findViewById(R.id.imageView);
         imgView.setImageResource(RES_PLACEHOLDER);
     }
-
-    private BroadcastReceiver onPriorCall = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String user = intent.getStringExtra("user");
-
-            if(user != null) {
-                //search all user mensaje
-            }
-        }
-    };
-
-    //This is the handler that will manager to process the broadcast intent
-    private BroadcastReceiver onNotice = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String message = intent.getStringExtra("message");
-            String user = intent.getStringExtra("user");
-
-            if(message!=null && user != null) {
-                Log.i("asd","estoy actualizando el match from app abierta");
-                messages.add(message);
-                users.add(user);
-                notificationCount++;
-            }
-
-            invalidateOptionsMenu();
-        }
-    };
 
     /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer
      * imagen descargada, que es la del perfil.*/
@@ -135,8 +118,10 @@ public class MatchingActivity extends AppCompatActivity {
             Intent profileAct = new Intent(this, ProfileActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             profileAct.putExtra(Common.PROFILE_IMG_KEY, imgFiles.get(0));
-            profileAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
-            profileAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+            if (onNotice.getNotificationCount() != 0) {
+                profileAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
+                profileAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+            }
 
             this.startActivity(profileAct);
         }
@@ -145,8 +130,10 @@ public class MatchingActivity extends AppCompatActivity {
     public void goToMesseges(View v) {
         Intent chatAct = new Intent(this, ChatListActivity.class);
         chatAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
-        chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+        if (onNotice.getNotificationCount() != 0) {
+            chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
+            chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+        }
 
         this.startActivity(chatAct);
     }
@@ -226,12 +213,18 @@ public class MatchingActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.badge);
 
         MenuItemCompat.setActionView(item, R.layout.match_bar);
-        if(notificationCount!=0) {
-            RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
-            ImageView icon = (ImageView)notifCount.findViewById(R.id.img);
+        RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
+        ImageView icon = (ImageView)notifCount.findViewById(R.id.img);
+        TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
+
+        if(onNotice.getNotificationCount() != 0) {
             icon.setImageResource(R.drawable.new_msgg);
-            TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
-            tv.setText("+" + notificationCount);
+            tv.setText("+" + onNotice.getNotificationCount());
+        } else {
+            if (onPriorCall.areMessagesReaded()) {
+                icon.setImageResource(R.drawable.empty_msg);
+                tv.setText("");
+            }
         }
 
         return true;
