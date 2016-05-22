@@ -9,10 +9,26 @@ import android.content.Context;
 public class TinderTP extends Application {
 
     private String url;
+    private String token;
+    private String user;
     private static boolean chatVisible;
     private static String chatName;
 
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String tk) {
+        token = tk;
+    }
 
     public static void chatResumed() {
         chatVisible=true;
@@ -20,8 +36,6 @@ public class TinderTP extends Application {
     public static void chatPaused() {
         chatVisible=false;
     }
-
-
 
     public static void updateChatName(String chName) {
         chatName = chName;

@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.LoginActivity;
 import com.example.sebastian.tindertp.MainActivity;
@@ -20,11 +21,8 @@ import java.util.Map;
 
 public class InfoDownloaderClient extends MediaDownloader {
 
-    private static final int timeOUT_R = 10000;
-    private static final int timeOUT_C = 15000;
-
     public TextView text; /**< Se pasan los errores por UI.*/
-    private Context context;
+    private Activity activity;
     private String contentAsString;
     private String url;
     private String requestMethod;
@@ -32,14 +30,17 @@ public class InfoDownloaderClient extends MediaDownloader {
     private boolean loginFail;
     SharedPreferences.Editor editor;
 
-    public InfoDownloaderClient(TextView text, Context context, Map<String,String> values, Conn_struct conn) {
+    private String user;
+    private String token;
+
+    public InfoDownloaderClient(TextView text, Activity context, Map<String,String> values, Conn_struct conn) {
        //Connection vars
         this.url = conn.URL;
         this.path = conn.path;
         this.requestMethod = conn.requestMethod;
         //
         this.text = text;
-        this.context = context;
+        this.activity = context;
         this.values = values;
         //initialize
         contentAsString = "";
@@ -59,7 +60,7 @@ public class InfoDownloaderClient extends MediaDownloader {
 
     @Override
     void connect() throws IOException {
-        Log.i(CONNECTION,"Connection with " + url + path );
+        Log.i(CONNECTION, "Connection with " + url + path);
         connection.setReadTimeout(timeOUT_R /* milliseconds */);
         connection.setConnectTimeout(timeOUT_C /* milliseconds */);
         connection.setRequestMethod(requestMethod);
@@ -79,6 +80,10 @@ public class InfoDownloaderClient extends MediaDownloader {
         int response = connection.getResponseCode();
         Log.i(CONNECTION, "" + response);
         if ( response < 300 && response >= 200 ){
+            token = connection.getHeaderField(Common.TOKEN);
+            if (values.containsKey(Common.USER_KEY)) {
+                user = values.get(Common.USER_KEY);
+            }
             contentAsString = "Operación exitosa.";
             savePreferencesLogin();
             isConnected = true;
@@ -114,7 +119,7 @@ public class InfoDownloaderClient extends MediaDownloader {
     }
 
     private boolean isExecutedByMainActivity(){
-        return context.getClass().getSimpleName().equals(MainActivity.class.getSimpleName());
+        return activity.getClass().getSimpleName().equals(MainActivity.class.getSimpleName());
     }
 
     @Override
@@ -126,21 +131,23 @@ public class InfoDownloaderClient extends MediaDownloader {
 
         if(!loginFail) {
             if (isConnected) {
-                Common.startClearTask(context, MatchingActivity.class);
+                ((TinderTP) activity.getApplication()).setToken(token);
+                ((TinderTP) activity.getApplication()).setToken(user);
+                Common.startClearTask(activity, MatchingActivity.class);
             }
             else {
-                Common.startClearTask(context, UrlActivity.class);
+                Common.startClearTask(activity, UrlActivity.class);
             }
 
         } else if (isExecutedByMainActivity()) {
-            Common.startActivity(context, LoginActivity.class);
-            ((Activity) context).finish();
+            Common.startActivity(activity, LoginActivity.class);
+            ((Activity) activity).finish();
         }
     }
 
     @Override
     public void runInBackground() {
-        ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(url+path);

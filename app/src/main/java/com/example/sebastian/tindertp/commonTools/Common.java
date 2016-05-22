@@ -33,14 +33,25 @@ public class Common {
     public static final String TEST = "/test";
     public static final String LOGIN = "/login";
     public static final String REGISTER = "/registro";
+    public static final String MESSAGES = "/mensajes";
+
+    public static final String RESPONSE = "RESPONSE";
+    public static final String JSON = "JSON";
 
     public static final String IA = "file:///android_asset/IA.gif";
     public static final String DOTS = "file:///android_asset/dots.gif";
 
     public static final String PROFILE_IMG_KEY = "profileFile";
     public static final String URL_KEY = "url";
+    //headers
     public static final String USER_KEY = "Usuario";
     public static final String PASS_KEY = "Password";
+    public static final String USER1 = "Usuario1";
+    public static final String USER2 = "Usuario2";
+    public static final String DESDE = "Desde";
+    public static final String CANT = "Cantidad";
+    public static final String TOKEN = "Token";
+
     public static final String IMG_POS_KEY = "position";
     public static final String IMG_KEY = "images";
     public static final String NEW_IMG_POS_KEY = "newImagePosition";
@@ -49,6 +60,7 @@ public class Common {
 
     public static final int BUFF_SIZE = 8192;
 
+    public static final int MAX_MESSAGES= 10;
     public static final int MAX_CHARS = 30;
     public static final int MIN_CHARS = 5;
 

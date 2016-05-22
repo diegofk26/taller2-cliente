@@ -156,7 +156,10 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             Common.deleteStringFromArray(this,userName);
         }
 
-        Common.startActivity(this, ChatActivity.class);
+        Intent chat = new Intent(this, ChatActivity.class);
+        chat.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        chat.putExtra("from",userName);
+        this.startActivity(chat);
 
     }
 
