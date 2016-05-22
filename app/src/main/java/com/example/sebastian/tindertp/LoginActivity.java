@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,10 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if ( Common.userAndPass_OK(user, password, text) ) {
 
-            Map<String, String> values = new HashMap<String, String>();
-
-            values.put(Common.USER_KEY, user.getText().toString());
-            values.put(Common.PASS_KEY, password.getText().toString());
+            Map<String, String> values = HeaderBuilder.forRegister(
+                    user.getText().toString(), passText.getText().toString());
 
             String url = ((TinderTP) this.getApplication()).getUrl();
 

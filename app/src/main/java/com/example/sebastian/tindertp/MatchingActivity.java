@@ -70,7 +70,7 @@ public class MatchingActivity extends AppCompatActivity {
         imageDownloader.runInBackground();
 
         customListener = new OnSwipeTapTouchListener(this);
-        //listen gesture fling or tap
+        //escucha por fling o tap
         imgView.setOnTouchListener(customListener);
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("MATCH"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onPriorCall, new IntentFilter("PRIOR"));
@@ -207,7 +207,7 @@ public class MatchingActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //muestra el menu.
         getMenuInflater().inflate(R.menu.menu_matching, menu);
 
         MenuItem item = menu.findItem(R.id.badge);

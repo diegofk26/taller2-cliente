@@ -20,16 +20,16 @@ public class FullScreenViewActivity extends Activity{
 
     private int firtPosition;
     private String[] imgFiles;
-
+    /**Oculta la barra de estados en fullscreen.*/
     private void hideClockBateryBar(){
         View decorView = getWindow().getDecorView();
-        // Hide the status bar.
+        // oculta la barra de estado.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
     }
 
+    /**Obtiene datos pasados por Intent.*/
     private void getDataFromMatchingActivity(){
-        //Get the variables of MatchingActivity
         Intent i = getIntent();
         firtPosition = i.getIntExtra(Common.IMG_POS_KEY, 0);
         imgFiles = i.getStringArrayExtra(Common.IMG_KEY);
@@ -43,18 +43,18 @@ public class FullScreenViewActivity extends Activity{
 
         hideClockBateryBar();
 
-        //Set the page and the animator depthPageTransformer
+
         viewPager = (ViewPager) findViewById(R.id.pager);
-        //viewPager.setPageTransformer(true,new DepthPageTransformer());
 
         getDataFromMatchingActivity();
 
         adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,imgFiles);
 
         viewPager.setAdapter(adapter);
+        //setea el animador de pagina.
         viewPager.setPageTransformer(true, new DepthPageTransformer());
 
-        // displaying selected image first
+        // muestra la imagen seleccionada
         viewPager.setCurrentItem(firtPosition);
 
     }

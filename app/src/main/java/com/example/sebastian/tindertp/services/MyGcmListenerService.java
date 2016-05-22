@@ -53,7 +53,6 @@ public class MyGcmListenerService extends GcmListenerService {
         }
     }
 
-
     /**
      * Create and show a simple notification containing the received GCM message.
      *
@@ -95,7 +94,6 @@ public class MyGcmListenerService extends GcmListenerService {
         Intent activityMsg = new Intent(type);
         activityMsg.putExtra("message", message);
         activityMsg.putExtra("user", from);
-
         LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
     }
 }

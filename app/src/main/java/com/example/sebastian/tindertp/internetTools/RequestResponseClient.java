@@ -16,7 +16,7 @@ import java.util.Map;
 
 public abstract class RequestResponseClient extends MediaDownloader {
 
-    private Activity ctx;
+    protected Activity ctx;
     private Conn_struct conn;
     private Map<String, String> values;
     protected boolean badResponse;

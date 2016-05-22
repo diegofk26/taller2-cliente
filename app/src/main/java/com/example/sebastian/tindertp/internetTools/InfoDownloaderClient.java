@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.LoginActivity;
@@ -152,7 +153,7 @@ public class InfoDownloaderClient extends MediaDownloader {
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(url+path);
         } else {
-            text.setText("No network connection available.");
+            text.setText(R.string.no_network);
         }
 
     }

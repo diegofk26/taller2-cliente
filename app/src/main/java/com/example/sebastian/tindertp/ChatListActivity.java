@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,9 +17,7 @@ import com.example.sebastian.tindertp.chatListTools.CustomAdapter;
 import com.example.sebastian.tindertp.chatListTools.RowItem;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -114,7 +111,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     private List<String > getUserNames() {
         List<String> users = new ArrayList<>();
-        users.add("Aldana");users.add("addd");users.add("sebastian");
+        users.add("Aldana");users.add("Rocio");users.add("asdd");
         return users;
     }
 
@@ -144,8 +141,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position,
-                            long id) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         restoreFonts(position);
         String userName = rowItems.get(position).getUserName();
@@ -166,7 +162,6 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private void updatePriorActivities(String user) {
         Intent activityMsg = new Intent("PRIOR");
         activityMsg.putExtra("user", user);
-
         LocalBroadcastManager.getInstance(this).sendBroadcast(activityMsg);
     }
 

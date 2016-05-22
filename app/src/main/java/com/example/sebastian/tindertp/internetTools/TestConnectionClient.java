@@ -14,6 +14,7 @@ import com.example.sebastian.tindertp.SelectLoginOrRegistryActivity;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.UrlActivity;
 import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -69,10 +70,7 @@ public class TestConnectionClient extends MediaDownloader {
 
     private void login(String user, String password){
 
-        Map<String,String> values = new HashMap<String,String>();
-
-        values.put(Common.USER_KEY, user);
-        values.put(Common.PASS_KEY, password);
+        Map<String,String> values = HeaderBuilder.forRegister(user, password);
 
         MainActivity main = ((MainActivity)context);
 

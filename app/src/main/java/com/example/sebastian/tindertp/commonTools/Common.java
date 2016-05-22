@@ -26,34 +26,34 @@ public class Common {
 
     public static final String FAIL = "fail";
 
-    public static final String GET = "GET";
-    public static final String PUT = "PUT";
-    public static final String POST = "POST";
+    public static final String GET = "GET";             /**< Vars para la conexion url */
+    public static final String PUT = "PUT";             /**< Vars para la conexion url */
+    public static final String POST = "POST";           /**< Vars para la conexion url */
 
-
-    public static final String TEST = "/test";
-    public static final String LOGIN = "/login";
-    public static final String REGISTER = "/registro";
-    public static final String MESSAGES = "/mensajes";
-    public static final String CHAT = "/chat";
+    public static final String TEST = "/test";          /**< Vars para la conexion url */
+    public static final String LOGIN = "/login";        /**< Vars para la conexion url */
+    public static final String REGISTER = "/registro";  /**< Vars para la conexion url */
+    public static final String MESSAGES = "/mensajes";  /**< Vars para la conexion url */
+    public static final String CHAT = "/chat";          /**< Vars para la conexion url */
 
     public static final String RESPONSE = "RESPONSE";
     public static final String JSON = "JSON";
 
-    public static final String IA = "file:///android_asset/IA.gif";
-    public static final String DOTS = "file:///android_asset/dots.gif";
+    public static final String IA = "file:///android_asset/IA.gif";     /**< Vars para la ScreenSplash */
+    public static final String DOTS = "file:///android_asset/dots.gif"; /**< Vars para la ScreenSplash */
 
     public static final String PROFILE_IMG_KEY = "profileFile";
     public static final String URL_KEY = "url";
-    //headers
-    public static final String USER_KEY = "Usuario";
-    public static final String PASS_KEY = "Password";
-    public static final String USER1 = "Usuario1";
-    public static final String USER2 = "Usuario2";
-    public static final String DESDE = "Desde";
-    public static final String CANT = "Cantidad";
-    public static final String TOKEN = "Token";
-    public static final String RECEPTOR = "Receptor";
+    //Headers
+    public static final String USER_KEY = "Usuario";    /**< Vars para la conexion url */
+    public static final String PASS_KEY = "Password";   /**< Vars para la conexion url */
+    public static final String USER1 = "Usuario1";      /**< Vars para la conexion url */
+    public static final String USER2 = "Usuario2";      /**< Vars para la conexion url */
+    public static final String DESDE = "Desde";         /**< Vars para la conexion url */
+    public static final String CANT = "Cantidad";       /**< Vars para la conexion url */
+    public static final String MAX_MESSAGES= "10";      /**< Vars para la conexion url */
+    public static final String TOKEN = "Token";         /**< Vars para la conexion url */
+    public static final String RECEPTOR = "Receptor";   /**< Vars para la conexion url */
 
     public static final String IMG_POS_KEY = "position";
     public static final String IMG_KEY = "images";
@@ -63,13 +63,12 @@ public class Common {
 
     public static final int BUFF_SIZE = 8192;
 
-    public static final int MAX_MESSAGES= 10;
     public static final int MAX_CHARS = 30;
     public static final int MIN_CHARS = 5;
 
     private static boolean userOrPassAreEmpty( String user, String password,TextView message ) {
         if ( user.isEmpty() || password.isEmpty()) {
-            message.setText("Algunos campos estan vacios.");
+            message.setText(R.string.empty_spaces);
             return true;
         } else
             return false;
