@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +16,7 @@ import com.example.sebastian.tindertp.R;
 
 public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
     private TextView chatText;
-    private List<ChatMessage> MessageList = new ArrayList<ChatMessage>();
+    private List<ChatMessage> messageList = new ArrayList<ChatMessage>();
     private LinearLayout layout;
     private Context context;
 
@@ -32,18 +26,24 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
         this.context = context;
     }
 
+    public void push(List<ChatMessage> newMessages){
+        messageList.addAll(0, newMessages);
+        for(int i = 0; i < newMessages.size(); i++) {
+            super.insert(newMessages.get(i),0);
+        }
+    }
 
     public void add(ChatMessage object) {
-        MessageList.add(object);
+        messageList.add(object);
         super.add(object);
     }
 
     public int getCount() {
-        return this.MessageList.size();
+        return this.messageList.size();
     }
 
     public ChatMessage getItem(int index) {
-        return this.MessageList.get(index);
+        return this.messageList.get(index);
     }
 
     public View getView(int position,View ConvertView, ViewGroup parent) {

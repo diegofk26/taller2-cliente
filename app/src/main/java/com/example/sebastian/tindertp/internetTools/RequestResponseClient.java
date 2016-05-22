@@ -2,43 +2,44 @@ package com.example.sebastian.tindertp.internetTools;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.Conn_struct;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.Map;
 
-/**
- * Created by sebastian on 21/05/16.
- */
-public class RequestResponseClient extends MediaDownloader {
+public abstract class RequestResponseClient extends MediaDownloader {
 
     private Activity ctx;
     private Conn_struct conn;
     private Map<String, String> values;
-    private boolean badResponse;
-    private String jsonString;
+    protected boolean badResponse;
+    protected String jsonString;
+    private String body;
+    private boolean hasBody;
 
     public RequestResponseClient(Activity ctx, Conn_struct conn, Map<String, String> values) {
         jsonString = "";
         this.ctx = ctx;
         this.conn = conn;
+        path = conn.path;
         this.values = values;
         badResponse = false;
+        hasBody = false;
     }
 
+    public void addBody(String body) {
+        hasBody = true;
+        this.body = body;
+
+
+    }
 
 
     @Override
@@ -59,17 +60,26 @@ public class RequestResponseClient extends MediaDownloader {
             connection.addRequestProperty(entry.getKey(), entry.getValue());
         }
 
-        connection.setDoOutput(false);
+        if (hasBody){
+            Log.i("asd","TIENE BODY");
+            connection.setDoOutput(true);
+            byte[] outputInBytes = body.getBytes("UTF-8");
+            OutputStream os = connection.getOutputStream();
+            os.write( outputInBytes );
+            os.close();
+        } else {
+            connection.setDoOutput(false);
+        }
 
         Log.i(CONNECTION, "connecting...");
-        // Starts the query
         connection.connect();
-        Log.i(CONNECTION, "Conect ");
+        Log.i(CONNECTION, "Conected ");
 
         int response = connection.getResponseCode();
         Log.i(CONNECTION, "" + response);
         if ( response < 300 && response >= 200 ){
-            jsonString = readIt();
+            getJson();
+            Log.i("devuelve",jsonString);
             //contentAsString = "Operación exitosa.";
             isConnected = true;
         }else {
@@ -77,7 +87,10 @@ public class RequestResponseClient extends MediaDownloader {
             badResponse = true;
         }
     }
-    private String readIt() throws IOException {
+
+    protected abstract void getJson() throws IOException;
+
+    protected String readIt() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String line;
@@ -96,17 +109,7 @@ public class RequestResponseClient extends MediaDownloader {
         }
     }
 
-    @Override
-    void onPostExec() {
-        if (!badResponse) {
-            if (isConnected) {
-                Intent activityMsg = new Intent(Common.RESPONSE);
-                activityMsg.putExtra(Common.JSON, jsonString);
-                LocalBroadcastManager.getInstance(ctx).sendBroadcast(activityMsg);
-            }
-        }
-
-    }
+    protected abstract void onPostExec();
 
     @Override
     public void runInBackground() {
@@ -115,12 +118,8 @@ public class RequestResponseClient extends MediaDownloader {
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(conn.URL+path);
         } else {
-           // text.setText("No network connection available.");
+            showText("No hay ninguna conexion de red.");
         }
     }
-
-    @Override
-    void showText(String message) {
-
-    }
+    protected abstract void showText(String message);
 }

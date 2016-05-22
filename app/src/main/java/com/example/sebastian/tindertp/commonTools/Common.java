@@ -28,12 +28,14 @@ public class Common {
 
     public static final String GET = "GET";
     public static final String PUT = "PUT";
+    public static final String POST = "POST";
 
 
     public static final String TEST = "/test";
     public static final String LOGIN = "/login";
     public static final String REGISTER = "/registro";
     public static final String MESSAGES = "/mensajes";
+    public static final String CHAT = "/chat";
 
     public static final String RESPONSE = "RESPONSE";
     public static final String JSON = "JSON";
@@ -51,6 +53,7 @@ public class Common {
     public static final String DESDE = "Desde";
     public static final String CANT = "Cantidad";
     public static final String TOKEN = "Token";
+    public static final String RECEPTOR = "Receptor";
 
     public static final String IMG_POS_KEY = "position";
     public static final String IMG_KEY = "images";

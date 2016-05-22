@@ -22,7 +22,7 @@ import java.util.Map;
 public class InfoDownloaderClient extends MediaDownloader {
 
     public TextView text; /**< Se pasan los errores por UI.*/
-    private Activity activity;
+    private Context context;
     private String contentAsString;
     private String url;
     private String requestMethod;
@@ -33,14 +33,14 @@ public class InfoDownloaderClient extends MediaDownloader {
     private String user;
     private String token;
 
-    public InfoDownloaderClient(TextView text, Activity context, Map<String,String> values, Conn_struct conn) {
+    public InfoDownloaderClient(TextView text, Context context, Map<String,String> values, Conn_struct conn) {
        //Connection vars
         this.url = conn.URL;
         this.path = conn.path;
         this.requestMethod = conn.requestMethod;
         //
         this.text = text;
-        this.activity = context;
+        this.context = context;
         this.values = values;
         //initialize
         contentAsString = "";
@@ -119,7 +119,7 @@ public class InfoDownloaderClient extends MediaDownloader {
     }
 
     private boolean isExecutedByMainActivity(){
-        return activity.getClass().getSimpleName().equals(MainActivity.class.getSimpleName());
+        return context.getClass().getSimpleName().equals(MainActivity.class.getSimpleName());
     }
 
     @Override
@@ -131,23 +131,23 @@ public class InfoDownloaderClient extends MediaDownloader {
 
         if(!loginFail) {
             if (isConnected) {
-                ((TinderTP) activity.getApplication()).setToken(token);
-                ((TinderTP) activity.getApplication()).setToken(user);
-                Common.startClearTask(activity, MatchingActivity.class);
+                ((TinderTP)((Activity) context).getApplication()).setToken(token);
+                ((TinderTP) ((Activity) context).getApplication()).setUser(user);
+                Common.startClearTask(context, MatchingActivity.class);
             }
             else {
-                Common.startClearTask(activity, UrlActivity.class);
+                Common.startClearTask(context, UrlActivity.class);
             }
 
         } else if (isExecutedByMainActivity()) {
-            Common.startActivity(activity, LoginActivity.class);
-            ((Activity) activity).finish();
+            Common.startActivity(context, LoginActivity.class);
+            ((Activity) context).finish();
         }
     }
 
     @Override
     public void runInBackground() {
-        ConnectivityManager connMgr = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(url+path);

@@ -114,7 +114,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     private List<String > getUserNames() {
         List<String> users = new ArrayList<>();
-        users.add("Aldana");users.add("Rocio");users.add("asddd");
+        users.add("Aldana");users.add("addd");users.add("sebastian");
         return users;
     }
 

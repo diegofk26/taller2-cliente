@@ -71,8 +71,8 @@ public class TestConnectionClient extends MediaDownloader {
 
         Map<String,String> values = new HashMap<String,String>();
 
-        values.put("Usuario", user);
-        values.put("Password", password);
+        values.put(Common.USER_KEY, user);
+        values.put(Common.PASS_KEY, password);
 
         MainActivity main = ((MainActivity)context);
 

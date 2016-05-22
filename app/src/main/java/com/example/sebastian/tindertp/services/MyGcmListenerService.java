@@ -34,25 +34,22 @@ public class MyGcmListenerService extends GcmListenerService {
      */
     @Override
     public void onMessageReceived(String from, Bundle data) {
+
         String message = data.getString("message");
+        Log.i(TAG, data.getString("message") + "  " + data.getString("json_info") + "   " + data.getString("data"));
         String fromUser = "Rocio";
 
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
-        if (from.startsWith("/topics/")) {
-            // message received from some topic.
-        } else {
-            // normal downstream message.
-        }
-
-        update(this, fromUser,message, "MATCH");
-        update2(this, fromUser, message, "PROFILE");
-        update2(this, fromUser, message, "CHAT_LIST");
-        update2(this, fromUser, message, "CHAT");
+        update(this, fromUser, message, "MATCH");
+        update(this, fromUser, message, "PROFILE");
+        update(this, fromUser, message, "CHAT_LIST");
 
         if(!TinderTP.isTheSameChat(fromUser)) {
             sendNotification(fromUser, message);
+        }else {
+            update(this, fromUser, message, "CHAT");
         }
     }
 
@@ -94,14 +91,6 @@ public class MyGcmListenerService extends GcmListenerService {
 
 
     private static void update(Context context, String from, String message, String type) {
-
-        Intent activityMsg = new Intent(type);
-        activityMsg.putExtra("message", message);
-        activityMsg.putExtra("user", from);
-
-        LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
-    }
-    private static void update2(Context context, String from, String message, String type) {
 
         Intent activityMsg = new Intent(type);
         activityMsg.putExtra("message", message);
