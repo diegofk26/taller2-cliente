@@ -1,12 +1,11 @@
 package com.example.sebastian.tindertp;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,17 +18,27 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.sebastian.tindertp.application.TinderTP;
+import com.example.sebastian.tindertp.chatTools.ChatMessage;
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
+import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
+import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.ImagesPosition;
 import com.example.sebastian.tindertp.internetTools.ImageDownloaderClient;
 import com.example.sebastian.tindertp.gestureTools.OnSwipeTapTouchListener;
+import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
 import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
 //!Activity donde se matchean las personas.
 public class MatchingActivity extends AppCompatActivity {
 
@@ -63,7 +72,7 @@ public class MatchingActivity extends AppCompatActivity {
         initalize();
 
         if (DataThroughActivities.getInstance().hasMessages() ){
-            Common.startActivity(this,ChatListActivity.class);
+            ActivityStarter.start(this, ChatListActivity.class);
         }
 
         imageDownloader =  new ImageDownloaderClient(this,mText);
@@ -88,10 +97,10 @@ public class MatchingActivity extends AppCompatActivity {
             onNotice.setNotificationCount(messages.size());
             Log.i("asd","size en MATCH" + onNotice.getNotificationCount());
             invalidateOptionsMenu();
-        } else if (Common.hasPersistMssg(this)) {
+        } else if (ArraySerialization.hasPersistedMssg(this)) {
             Log.i("asddd","tiene mensajes persistidos TRUE");
-            messages = Common.getStringArrayPref(this,"MSSG");
-            users = Common.getStringArrayPref(this, "USER");
+            messages = ArraySerialization.getPersistedArray(this, "MSSG");
+            users = ArraySerialization.getPersistedArray(this, "USER");
             onNotice.setNotificationCount(messages.size());
             invalidateOptionsMenu();
         }
@@ -109,6 +118,45 @@ public class MatchingActivity extends AppCompatActivity {
         firstTime = true;
         imgView = (ImageView)findViewById(R.id.imageView);
         imgView.setImageResource(RES_PLACEHOLDER);
+    }
+
+    public void sendLike(View v) {
+        String url = ((TinderTP) this.getApplication()).getUrl();
+        String token = ((TinderTP) this.getApplication()).getToken();
+        ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
+        Map<String, String> headers = HeaderBuilder.forSendMessage(token, "", "");
+
+        RequestResponseClient client = new RequestResponseClient(this, conn,headers) {
+            @Override
+            protected void getJson() throws IOException {
+
+            }
+
+            @Override
+            protected void onPostExec() {
+                if(!badResponse && isConnected) {
+
+                } else {
+                    showText("No se pudo enviar el Like.");
+                }
+            }
+
+            @Override
+            protected void showText(String message) {
+                Snackbar.make(findViewById(R.id.listview), message, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        };
+
+    }
+
+    public void sendDislike(View v) {
+        String url = ((TinderTP) this.getApplication()).getUrl();
+        String token = ((TinderTP) this.getApplication()).getToken();
+        ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
+        Map<String,String> headers = HeaderBuilder.forSendMessage(token, "", "");
+
+
     }
 
     /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer

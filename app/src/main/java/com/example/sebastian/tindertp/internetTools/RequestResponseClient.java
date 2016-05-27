@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,14 +17,14 @@ import java.util.Map;
 public abstract class RequestResponseClient extends MediaDownloader {
 
     protected Activity ctx;
-    private Conn_struct conn;
+    private ConnectionStruct conn;
     private Map<String, String> values;
     protected boolean badResponse;
     protected String jsonString;
     private String body;
     private boolean hasBody;
 
-    public RequestResponseClient(Activity ctx, Conn_struct conn, Map<String, String> values) {
+    public RequestResponseClient(Activity ctx, ConnectionStruct conn, Map<String, String> values) {
         jsonString = "";
         this.ctx = ctx;
         this.conn = conn;
@@ -37,8 +37,6 @@ public abstract class RequestResponseClient extends MediaDownloader {
     public void addBody(String body) {
         hasBody = true;
         this.body = body;
-
-
     }
 
 

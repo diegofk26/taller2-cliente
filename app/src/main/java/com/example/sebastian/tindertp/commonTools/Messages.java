@@ -25,6 +25,19 @@ public class Messages {
         users.add(user);
     }
 
+    public void clear() {
+        users.clear();
+        messages.clear();
+    }
+
+    public int size() {
+        return users.size();
+    }
+
+    public String get(int i) {
+        return users.get(i) + ": " + messages.get(i);
+    }
+
     public ArrayList<String> getMessages() {
         return messages;
     }

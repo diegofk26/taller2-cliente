@@ -14,8 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.application.TinderTP;
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
-import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 
@@ -69,12 +70,12 @@ public class RegistryActivity extends AppCompatActivity {
             String url = ((TinderTP) this.getApplication()).getUrl();
 
             if (!url.isEmpty()) {
-                Conn_struct conn = new Conn_struct(Common.REGISTER,Common.PUT,url);
+                ConnectionStruct conn = new ConnectionStruct(Common.REGISTER,Common.PUT,url);
                 InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn);
                 info.runInBackground();
 
             } else {
-                Common.startClearTask(this, UrlActivity.class);
+                ActivityStarter.startClear(this, UrlActivity.class);
                 this.finish();
             }
         }
@@ -96,7 +97,7 @@ public class RegistryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Common.startClearTask(this, UrlActivity.class);
+            ActivityStarter.startClear(this, UrlActivity.class);
             return true;
         }
 

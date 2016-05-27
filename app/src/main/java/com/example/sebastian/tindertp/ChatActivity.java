@@ -21,7 +21,7 @@ import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatTools.ChatArrayAdapter;
 import com.example.sebastian.tindertp.chatTools.ChatMessage;
 import com.example.sebastian.tindertp.commonTools.Common;
-import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 
@@ -103,7 +103,7 @@ public class ChatActivity extends AppCompatActivity {
 
         String url = ((TinderTP) this.getApplication()).getUrl();
         String token = ((TinderTP) this.getApplication()).getToken();
-        Conn_struct conn = new Conn_struct(Common.MESSAGES, Common.GET, url);
+        ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
         Map<String, String> headers = HeaderBuilder.forLoadMessages(token,user,chatName,1);
         RequestResponseClient client = new RequestResponseClient(this,conn,headers){
 
@@ -122,9 +122,9 @@ public class ChatActivity extends AppCompatActivity {
                             boolean side = !jsonO.getString("emisor").equals(user);
                             adp.add(new ChatMessage(side, jsonO.getString("mensaje")));
                         }
-                    }catch (JSONException e) {showText("No se pudo enviar el mensaje.");}
+                    }catch (JSONException e) {showText("Problemas con los mensajes guardados.");}
                 }else {
-                    showText("No se pudo enviar el mensaje.");
+                    showText("No se pudo conectar con el server.");
                 }
             }
 
@@ -140,7 +140,7 @@ public class ChatActivity extends AppCompatActivity {
     private boolean sendChatMessage(){
         String url = ((TinderTP) this.getApplication()).getUrl();
         String token = ((TinderTP) this.getApplication()).getToken();
-        Conn_struct conn = new Conn_struct(Common.CHAT, Common.POST, url);
+        ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
         Map<String,String> headers = HeaderBuilder.forSendMessage(token,user,chatName);
 
         RequestResponseClient client = new RequestResponseClient(this,conn,headers){

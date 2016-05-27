@@ -10,9 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
-import com.example.sebastian.tindertp.internetTools.TestConnectionClient;
+import com.example.sebastian.tindertp.internetTools.ConnectionTester;
 import com.example.sebastian.tindertp.services.RegistrationIntentService;
 
 import java.util.ArrayList;
@@ -56,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!url.equals(Common.FAIL)) {
                     Log.i("test", "hay url " + url);
-                    TestConnectionClient testConn = new TestConnectionClient(MainActivity.this, url, Common.TEST);
+                    ConnectionTester testConn = new ConnectionTester(MainActivity.this, url, Common.TEST);
                     testConn.runInBackground();
                 } else {
                     Log.i("test", "no hay url");
-                    Common.startActivity(MainActivity.this, UrlActivity.class);
+                    ActivityStarter.start(MainActivity.this, UrlActivity.class);
                     MainActivity.this.finish();
                 }
             }

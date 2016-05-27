@@ -10,12 +10,13 @@ import android.widget.TextView;
 
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.application.TinderTP;
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.LoginActivity;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
 import com.example.sebastian.tindertp.UrlActivity;
-import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 
 import java.io.IOException;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class InfoDownloaderClient extends MediaDownloader {
     private String user;
     private String token;
 
-    public InfoDownloaderClient(TextView text, Context context, Map<String,String> values, Conn_struct conn) {
+    public InfoDownloaderClient(TextView text, Context context, Map<String,String> values, ConnectionStruct conn) {
        //Connection vars
         this.url = conn.URL;
         this.path = conn.path;
@@ -134,14 +135,14 @@ public class InfoDownloaderClient extends MediaDownloader {
             if (isConnected) {
                 ((TinderTP)((Activity) context).getApplication()).setToken(token);
                 ((TinderTP) ((Activity) context).getApplication()).setUser(user);
-                Common.startClearTask(context, MatchingActivity.class);
+                ActivityStarter.startClear(context, MatchingActivity.class);
             }
             else {
-                Common.startClearTask(context, UrlActivity.class);
+                ActivityStarter.startClear(context, UrlActivity.class);
             }
 
         } else if (isExecutedByMainActivity()) {
-            Common.startActivity(context, LoginActivity.class);
+            ActivityStarter.start(context, LoginActivity.class);
             ((Activity) context).finish();
         }
     }

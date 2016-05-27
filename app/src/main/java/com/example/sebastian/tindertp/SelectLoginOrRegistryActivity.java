@@ -1,6 +1,5 @@
 package com.example.sebastian.tindertp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 
 public class SelectLoginOrRegistryActivity extends AppCompatActivity {
 
@@ -23,11 +22,11 @@ public class SelectLoginOrRegistryActivity extends AppCompatActivity {
 
     /**Listener de boton que va a LoginActivity.*/
     public void goToLogin(View v) {
-        Common.startActivity(this, LoginActivity.class);
+        ActivityStarter.start(this, LoginActivity.class);
     }
     /**Listener de boton que va a RegistryActivity.*/
     public void goToRegistry(View v) {
-        Common.startActivity(this, RegistryActivity.class);
+        ActivityStarter.start(this, RegistryActivity.class);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class SelectLoginOrRegistryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Common.startClearTask(this, UrlActivity.class);
+            ActivityStarter.startClear(this, UrlActivity.class);
             return true;
         }
 

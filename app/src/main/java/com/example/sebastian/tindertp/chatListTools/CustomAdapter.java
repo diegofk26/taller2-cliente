@@ -30,14 +30,16 @@ public class CustomAdapter extends BaseAdapter {
         updated = false;
     }
 
-    public void update(List<RowItem> newRows, int index ) {
+    public void updateBold(List<RowItem> newRows, int index, boolean isBold) {
         List<RowItem> aux = new ArrayList<>( newRows);
         this.index = index;
         rowItems.clear();
         rowItems.addAll(aux);
-        updated = true;
+        updated = isBold;
         notifyDataSetChanged();
     }
+
+
 
     public void restore() {
         updated = false;

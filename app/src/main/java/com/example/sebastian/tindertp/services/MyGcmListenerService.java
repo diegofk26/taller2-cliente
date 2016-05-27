@@ -14,9 +14,12 @@ import android.util.Log;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.application.TinderTP;
+import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.Messages;
 import com.google.android.gms.gcm.GcmListenerService;
+
+import org.json.JSONObject;
 
 public class MyGcmListenerService extends GcmListenerService {
 
@@ -35,18 +38,16 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
 
-        String message = data.getString("message");
-        Log.i(TAG, data.getString("message") + "  " + data.getString("json_info") + "   " + data.getString("data"));
-        String fromUser = "Rocio";
+        String message = data.getString("Mensaje");
+        String fromUser = data.getString("Emisor");
 
-        Log.d(TAG, "From: " + from);
+        Log.d(TAG, "From: " + fromUser);
         Log.d(TAG, "Message: " + message);
 
-        update(this, fromUser, message, "MATCH");
-        update(this, fromUser, message, "PROFILE");
-        update(this, fromUser, message, "CHAT_LIST");
-
         if(!TinderTP.isTheSameChat(fromUser)) {
+            update(this, fromUser, message, "MATCH");
+            update(this, fromUser, message, "PROFILE");
+            update(this, fromUser, message, "CHAT_LIST");
             sendNotification(fromUser, message);
         }else {
             update(this, fromUser, message, "CHAT");
@@ -65,7 +66,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
         Messages.getInstance().addMessage(fromUser, message);
 
-        Common.persistUserAndMssg(this,fromUser, message);
+        ArraySerialization.persistUserAndMssg(this, fromUser, message);
 
         intent.putStringArrayListExtra(Common.MSSG_KEY, Messages.getInstance().getMessages());
         intent.putStringArrayListExtra(Common.USER_MSG_KEY, Messages.getInstance().getUsers());
@@ -81,6 +82,16 @@ public class MyGcmListenerService extends GcmListenerService {
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
+
+        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+        int i = 0;
+        while (i < Messages.getInstance().size() && i <= 6) {
+            inboxStyle.addLine(Messages.getInstance().get(i));
+            i++;
+        }
+
+        notificationBuilder.setStyle(inboxStyle);
+
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

@@ -23,11 +23,22 @@ public class HeaderBuilder {
         return headers;
     }
 
+    public static Map<String, String> forLoadOneMessage(String token, String user,
+                                                      String chatName, int desde) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put(Common.USER1, user);
+        headers.put(Common.USER2, chatName);
+        headers.put(Common.TOKEN, token);
+        headers.put(Common.DESDE, String.valueOf(desde));
+        headers.put(Common.CANT, "1");
+        return headers;
+    }
+
     public static Map<String, String> forSendMessage(String token, String user, String chatName) {
         Map<String, String> headers = new HashMap<>();
         headers.put(Common.USER_KEY, user);
         headers.put(Common.RECEPTOR, chatName);
-        headers.put("ReceptorToken","c96JSny5LI8:APA91bFIT9AQIYHqu39wEDM60LRdBpXWxXVYax6FsNFLEOmgnG5opyIbLU2hoXMYmy36XZJbDNTw_ebSSWAvaBkg3MP-BsmkuzaxiDJ70DbsDwDoGmmybq2r1Pl0sFHU6GdlRbcYaqyf");
+        headers.put("ReceptorToken","esHbWAEzZA0:APA91bHOWceFnP8pmJN6q7FOVkaynFIrs5yENpDwrlx1BkTyXWB95pLONHu2uvF9iT0t_x0O0ajYpNpU5kCyh2CQVjHtcwlh-J6Zbf3L1gpeTbtLf_rENBZ2r-9hyQ8WTtGTK3OZxhLS");
         headers.put(Common.TOKEN, token);
         return headers;
     }

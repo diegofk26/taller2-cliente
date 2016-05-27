@@ -7,21 +7,21 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.SelectLoginOrRegistryActivity;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.UrlActivity;
-import com.example.sebastian.tindertp.commonTools.Conn_struct;
+import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 /**Conexion rapida sin Loguear para verificar que el server este activo y asi poder
  * saltar algunas activities.*/
-public class TestConnectionClient extends MediaDownloader {
+public class ConnectionTester extends MediaDownloader {
 
     public static final String NO_NAME = "NO_NAME";
     public static final String NO_PASS = "NO_PASS";
@@ -30,7 +30,7 @@ public class TestConnectionClient extends MediaDownloader {
     private String url;
     private String contentAsString;
 
-    public TestConnectionClient( Context context, String url, String path) {
+    public ConnectionTester(Context context, String url, String path) {
         this.url= url;
         this.path = path;
         this.context = context;
@@ -78,7 +78,7 @@ public class TestConnectionClient extends MediaDownloader {
 
         TextView text = (TextView) main.findViewById(R.id.textView8);
 
-        Conn_struct conn = new Conn_struct(Common.LOGIN,Common.GET,url);
+        ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
 
         InfoDownloaderClient info = new InfoDownloaderClient(text,context,values,conn);
 
@@ -100,13 +100,13 @@ public class TestConnectionClient extends MediaDownloader {
             String pass = preferences.getString(Common.PASS_KEY, NO_PASS);
 
             if ( user.equals(NO_NAME) || pass.equals(NO_PASS) ) {
-                Common.startActivity(context, SelectLoginOrRegistryActivity.class);
+                ActivityStarter.start(context, SelectLoginOrRegistryActivity.class);
                 ((Activity) context).finish();
             } else {
                 login(user,pass);
             }
         } else {
-            Common.startActivity(context, UrlActivity.class);
+            ActivityStarter.start(context, UrlActivity.class);
             ((MainActivity) context).finish();
         }
     }
@@ -119,7 +119,7 @@ public class TestConnectionClient extends MediaDownloader {
 
             new DownloadInBackground(this).execute(url+path);
         }else {
-            Common.startActivity(context, UrlActivity.class);
+            ActivityStarter.start(context, UrlActivity.class);
             ((MainActivity)context).finish();
         }
     }
