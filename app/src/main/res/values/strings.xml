@@ -13,4 +13,20 @@
     <string name="empty_spaces">Algunos campos estan vacios.</string>
     <string name="error_image_profile">Error al cargar la imagen de perfil.</string>
     <string name="no_network">No hay conexión de red disponible.</string>
+    <string name="comidas">Comidas favoritas</string>
+    <string name="comidas_text">Comidas:</string>
+    <string name="sexo">Sexo</string>
+    <string name="sexo_text">Sexo:</string>
+    <string name="musica">Estilo de músca favorito</string>
+    <string name="musica_text">Música:</string>
+    <string name="bandas">Bandas favoritas</string>
+    <string name="bandas_text">Bandas:</string>
+    <string name="deportes">Deporte favorito</string>
+    <string name="deportes_text">Deportes:</string>
+    <string name="actividades">Al aire libre</string>
+    <string name="actividades_text">Actividades:</string>
+    <string name="viajes">Viajes</string>
+    <string name="viajes_text">Viajes:</string>
+    <string name="agregar_item">Agregar otro</string>
+    <string name="title_activity_interests">InterestsActivity</string>
 </resources>

@@ -26,11 +26,13 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
         this.context = context;
     }
 
-    public void push(List<ChatMessage> newMessages){
-        messageList.addAll(0, newMessages);
-        for(int i = 0; i < newMessages.size(); i++) {
-            super.insert(newMessages.get(i),0);
-        }
+    public int size() {
+        return messageList.size();
+    }
+
+    public void add(int index, ChatMessage object) {
+        messageList.add(index, object);
+        super.insert(object,index);
     }
 
     public void add(ChatMessage object) {

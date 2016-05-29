@@ -39,8 +39,6 @@ public class CustomAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-
-
     public void restore() {
         updated = false;
         notifyDataSetChanged();

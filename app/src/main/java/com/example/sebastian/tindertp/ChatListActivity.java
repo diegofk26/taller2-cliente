@@ -39,7 +39,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private List<String> userNames;
     private List<Integer> profilePics;
     private List<String> lastMessages;
-    private ListView mylistview;
+    private ListView chatList;
     private boolean[] haveToUpdate;
     private int lastItemSelected;
     private boolean paused;
@@ -96,10 +96,10 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             }
         }
 
-        mylistview = (ListView) findViewById(R.id.list);
-        mylistview.setAdapter(adapter);
+        chatList = (ListView) findViewById(R.id.list);
+        chatList.setAdapter(adapter);
 
-        mylistview.setOnItemClickListener(this);
+        chatList.setOnItemClickListener(this);
 
         getLastMessages();
         getNewMsg();
@@ -165,14 +165,14 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void restoreFonts(int position) {
-        if( haveToUpdate[position]) {
+        if( haveToUpdate[position] ) {
             NotificationManager notificationManager = (NotificationManager)getSystemService
                     (Context.NOTIFICATION_SERVICE);
             notificationManager.cancel(0);
             Messages.getInstance().clear();
             adapter.restore();
             adapter.notifyDataSetInvalidated();
-            mylistview.setAdapter(adapter);
+            chatList.setAdapter(adapter);
             updatePriorActivities(userNames.get(position));
         }
     }
@@ -230,7 +230,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             public void run() {
                 adapter.updateBold(rowItems, index, isBold);
                 adapter.notifyDataSetInvalidated();
-                mylistview.setAdapter(adapter);
+                chatList.setAdapter(adapter);
             }
         });
     }

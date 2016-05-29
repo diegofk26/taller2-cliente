@@ -20,7 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.application.TinderTP;
-import com.example.sebastian.tindertp.chatTools.ChatMessage;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
@@ -256,11 +255,11 @@ public class MatchingActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //muestra el menu.
-        getMenuInflater().inflate(R.menu.menu_matching, menu);
+        getMenuInflater().inflate(R.menu.matching, menu);
 
         MenuItem item = menu.findItem(R.id.badge);
 
-        MenuItemCompat.setActionView(item, R.layout.match_bar);
+        MenuItemCompat.setActionView(item, R.layout.match_icon);
         RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
         ImageView icon = (ImageView)notifCount.findViewById(R.id.img);
         TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);

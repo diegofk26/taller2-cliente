@@ -5,7 +5,7 @@
     tools:context=".MatchingActivity">
     <item
         android:id="@+id/badge"
-        android:actionLayout="@layout/match_bar"
+        android:actionLayout="@layout/match_icon"
         android:title="msj"
         android:orderInCategory="100"
         app:showAsAction="always"/>

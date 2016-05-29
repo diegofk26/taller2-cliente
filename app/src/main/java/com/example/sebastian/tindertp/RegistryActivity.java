@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -57,27 +58,18 @@ public class RegistryActivity extends AppCompatActivity {
         System.exit(0);
     }
 
-    public void toRegister(View v) {
+    public void goToInterests(View v) {
 
         EditText user = (EditText) findViewById(R.id.email_text);
         TextView text = (TextView) findViewById(R.id.textView9);
 
         if( Common.userAndPass_OK(user, passText, text) ) {
 
-            Map<String,String> values = HeaderBuilder.forRegister(
-                    user.getText().toString(), passText.getText().toString());
-
-            String url = ((TinderTP) this.getApplication()).getUrl();
-
-            if (!url.isEmpty()) {
-                ConnectionStruct conn = new ConnectionStruct(Common.REGISTER,Common.PUT,url);
-                InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn);
-                info.runInBackground();
-
-            } else {
-                ActivityStarter.startClear(this, UrlActivity.class);
-                this.finish();
-            }
+            Intent interestsAct = new Intent(this, InterestsActivity.class);
+            interestsAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            interestsAct.putExtra(Common.USER_KEY, user.getText().toString());
+            interestsAct.putExtra(Common.PASS_KEY, passText.getText().toString());
+            startActivity(interestsAct);
         }
     }
 
@@ -103,7 +95,4 @@ public class RegistryActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

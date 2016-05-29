@@ -87,11 +87,11 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_matching, menu);
+        getMenuInflater().inflate(R.menu.matching, menu);
 
         MenuItem item = menu.findItem(R.id.badge);
 
-        MenuItemCompat.setActionView(item, R.layout.match_bar);
+        MenuItemCompat.setActionView(item, R.layout.match_icon);
 
         RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
         ImageView icon = (ImageView)notifCount.findViewById(R.id.img);

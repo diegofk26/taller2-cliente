@@ -6,41 +6,43 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
-
+import android.widget.RelativeLayout;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatTools.ChatArrayAdapter;
 import com.example.sebastian.tindertp.chatTools.ChatMessage;
-import com.example.sebastian.tindertp.commonTools.Common;
-import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
-import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
+import com.example.sebastian.tindertp.chatTools.ChatTextBuilder;
+import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
 
     private String chatName;
-    private String user;
+    private String user;/**< Nombre de usuario de la aplicacion.*/
+    private String url;
+    private String token;
 
     private ChatArrayAdapter adp;
-    private ListView list;
+    private ListView mssgList;
     private EditText chatText;
     private Button send;
+    private Animation rotate;
+    private Animation rotateInverse;
 
     private BroadcastReceiver onNewMessage = new BroadcastReceiver() {
 
@@ -64,15 +66,23 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         chatName = this.getIntent().getStringExtra("from");
+
         TinderTP.updateChatName(chatName);
         user = ((TinderTP) this.getApplication()).getUser();
+        url = ((TinderTP) this.getApplication()).getUrl();
+        token = ((TinderTP) this.getApplication()).getToken();
 
         send = (Button) findViewById(R.id.btn);
-        list = (ListView) findViewById(R.id.listview);
+        mssgList = (ListView) findViewById(R.id.listview);
+
+        rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotateInverse = AnimationUtils.loadAnimation(this, R.anim.rotate_inverse);
+
         chatText = (EditText) findViewById(R.id.chat_text);
+        ChatTextBuilder.chatEditor(chatText,this);
 
         adp = new ChatArrayAdapter(getApplicationContext(), R.layout.chat);
-        list.setAdapter(adp);
+        mssgList.setAdapter(adp);
 
         chatText.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -87,93 +97,57 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        list.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-        list.setAdapter(adp);
+        mssgList.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        mssgList.setAdapter(adp);
 
         adp.registerDataSetObserver(new DataSetObserver() {
 
             public void OnChanged() {
                 super.onChanged();
-                list.setSelection(adp.getCount() - 1);
+                mssgList.setSelection(adp.getCount() - 1);
             }
         });
 
         LocalBroadcastManager.getInstance(this).registerReceiver(onNewMessage,
                 new IntentFilter("CHAT"));
 
-        String url = ((TinderTP) this.getApplication()).getUrl();
-        String token = ((TinderTP) this.getApplication()).getToken();
-        ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
-        Map<String, String> headers = HeaderBuilder.forLoadMessages(token,user,chatName,1);
-        RequestResponseClient client = new RequestResponseClient(this,conn,headers){
-
-            @Override
-            protected void getJson() throws IOException {
-                jsonString = readIt();
-            }
-
-            @Override
-            protected void onPostExec() {
-                if(!badResponse && isConnected) {
-                    try {
-                        JSONArray jsonA = new JSONArray(jsonString);
-                        for (int i = jsonA.length() - 1; i >= 0; i--) {
-                            JSONObject jsonO = jsonA.getJSONObject(i);
-                            boolean side = !jsonO.getString("emisor").equals(user);
-                            adp.add(new ChatMessage(side, jsonO.getString("mensaje")));
-                        }
-                    }catch (JSONException e) {showText("Problemas con los mensajes guardados.");}
-                }else {
-                    showText("No se pudo conectar con el server.");
-                }
-            }
-
-            @Override
-            protected void showText(String message) {
-                Snackbar.make(findViewById(R.id.listview), message, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        };
-        client.runInBackground();
+        RequestResponseClient getHistory = ClientBuilder.build(this,adp);
+        getHistory.runInBackground();
     }
 
     private boolean sendChatMessage(){
-        String url = ((TinderTP) this.getApplication()).getUrl();
-        String token = ((TinderTP) this.getApplication()).getToken();
-        ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
-        Map<String,String> headers = HeaderBuilder.forSendMessage(token,user,chatName);
+        final String text =  chatText.getText().toString();
+        if ( !text.isEmpty()) {
+            RequestResponseClient sendMessage = ClientBuilder.build(this,adp,chatText);
+            sendMessage.addBody(text);
+            sendMessage.runInBackground();
+        }
+        return true;
+    }
 
-        RequestResponseClient client = new RequestResponseClient(this,conn,headers){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.chat, menu);
+        MenuItem item = menu.findItem(R.id.reload);
+        MenuItemCompat.setActionView(item, R.layout.reload_icon);
+        RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
+        ImageView icon = (ImageView)notifCount.findViewById(R.id.row);
+        ImageView icon2 = (ImageView)notifCount.findViewById(R.id.center);
+        return true;
+    }
 
-            @Override
-            protected void getJson() throws IOException {}
+    public void moreMssg(View v) {
+        RequestResponseClient getMoreHistory = ClientBuilder.build(this,adp,mssgList);
+        getMoreHistory.runInBackground();
+    }
 
-            private void updatePriorActivities(String user, String message) {
-                Intent activityMsg = new Intent("CHAT_LIST");
-                activityMsg.putExtra("user", user);
-                activityMsg.putExtra("message", message);
-                LocalBroadcastManager.getInstance(ctx).sendBroadcast(activityMsg);
-            }
-
-            @Override
-            protected void onPostExec() {
-                if(!badResponse && isConnected) {
-                    adp.add(new ChatMessage(false, chatText.getText().toString()));
-                    updatePriorActivities(chatName, chatText.getText().toString());
-                    chatText.setText("");
-                } else {
-                    showText("No se pudo enviar el mensaje.");
-                }
-            }
-
-            @Override
-            protected void showText(String message) {
-                Snackbar.make(findViewById(R.id.listview), message, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        };
-        client.addBody(chatText.getText().toString());
-        client.runInBackground();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.reload) {
+            Log.i("acccaa", "reload");
+            return true;
+        }
         return true;
     }
 
