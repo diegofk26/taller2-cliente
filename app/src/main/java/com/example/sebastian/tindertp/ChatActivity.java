@@ -4,7 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.DataSetObserver;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
@@ -23,6 +26,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatTools.ChatArrayAdapter;
 import com.example.sebastian.tindertp.chatTools.ChatMessage;
@@ -71,6 +76,10 @@ public class ChatActivity extends AppCompatActivity {
         user = ((TinderTP) this.getApplication()).getUser();
         url = ((TinderTP) this.getApplication()).getUrl();
         token = ((TinderTP) this.getApplication()).getToken();
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        setBackgroundOnOrientation(orientation);
 
         send = (Button) findViewById(R.id.btn);
         mssgList = (ListView) findViewById(R.id.listview);
@@ -149,6 +158,21 @@ public class ChatActivity extends AppCompatActivity {
             return true;
         }
         return true;
+    }
+
+    private void setBackgroundOnOrientation(int orientation){
+        RelativeLayout rLayout = (RelativeLayout) findViewById (R.id.relative_chat);
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            rLayout.setBackgroundResource(R.drawable.landscape);
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
+            rLayout.setBackgroundResource(R.drawable.land);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setBackgroundOnOrientation(newConfig.orientation);
     }
 
     @Override
