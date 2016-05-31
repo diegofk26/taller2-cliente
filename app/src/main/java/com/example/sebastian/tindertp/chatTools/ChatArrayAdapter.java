@@ -18,12 +18,10 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
     private TextView chatText;
     private List<ChatMessage> messageList = new ArrayList<ChatMessage>();
     private LinearLayout layout;
-    private Context context;
 
 
     public ChatArrayAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
-        this.context = context;
     }
 
     public int size() {

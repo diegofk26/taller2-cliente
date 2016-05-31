@@ -26,13 +26,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-
+/** Construye el cliente para la descarga de Mensajes. */
 public class ClientBuilder {
 
-    private static String user;
-    private static String url;
-    private static String token;
-    private static String chatName;
+    private static String user; /**< Usuario al que pertenece la app */
+    private static String url;  /**< Url del server*/
+    private static String token;/**< Token que devuelve el server.*/
+    private static String chatName; /**< Usuario de la persona con la que se esta chateando*/
 
     private static void init(Activity context) {
         user = ((TinderTP) context.getApplication()).getUser();
@@ -41,6 +41,9 @@ public class ClientBuilder {
         chatName = context.getIntent().getStringExtra("from");
     }
 
+    /**Builder de un cliente para ChatListActivity, y luego ChatList se encarga de
+     * recargar su vista.
+     * */
     public static RequestResponseClient build(final ChatListActivity act, final List<String> userNames,
                                               final String userFrom ) {
 
@@ -103,6 +106,8 @@ public class ClientBuilder {
 
     }
 
+    /** Builder de un cliente para chat, en este caso el adapter se encarga de
+     * actualizar la vista de ChatActivity. */
     public static RequestResponseClient build(Activity context, final ChatArrayAdapter adp) {
 
         init(context);
@@ -131,6 +136,8 @@ public class ClientBuilder {
         return client;
     }
 
+    /**Builder de un cliente que descarga y luego avisa a las vistas de las actividades anteriores
+     * se actualicen.*/
     public static RequestResponseClient build(Activity context, final ChatArrayAdapter adp, final EditText chatText) {
 
         init(context);
@@ -173,7 +180,10 @@ public class ClientBuilder {
 
         return client;
     }
-
+    /**Builder de un cliente que luego de la descarga,
+     *      - si no tiene mas mensajes actualiza la vista de ChatActivity, que como resultado
+     *        cambie el icono de barra.
+     *      - si tiene mensajes genera una animacion con el icono de barra.*/
     public static RequestResponseClient build(Activity context, final ChatArrayAdapter adp, final ListView mssgList) {
 
         init(context);

@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp.chatTools;
 
+/**Clase chat de un mensaje.*/
 public class ChatMessage {
 
     public boolean left;

@@ -35,7 +35,6 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private int lastItemSelected;
     private boolean paused;
 
-
     private String user;
 
     private CustomAdapter adapter;

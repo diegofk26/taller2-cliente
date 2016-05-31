@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.EditText;
 import android.widget.Scroller;
-
+/**Builder que prepara un ChatText programaticamente.*/
 public class ChatTextBuilder {
 
     public static void chatEditor(EditText chatText, Context ctx) {
