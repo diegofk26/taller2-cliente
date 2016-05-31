@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Por favor, espere mientras se conecta a la red."
+            android:text="@string/espere"
             android:id="@+id/textView8"
             android:layout_marginBottom="115dp"
             android:layout_alignParentBottom="true"

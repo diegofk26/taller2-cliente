@@ -19,7 +19,7 @@
         android:id="@+id/editText2"
         android:layout_marginTop="62dp"
         android:text=""
-        android:hint="Usuario"
+        android:hint="@string/usuario"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/editText3"
         android:layout_alignStart="@+id/editText3"
@@ -34,12 +34,12 @@
         android:id="@+id/editText3"
         android:layout_below="@+id/editText2"
         android:layout_centerHorizontal="true"
-        android:hint="Contraseña" />
+        android:hint="@string/contraseña" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mostrar contraseña."
+        android:text="@string/mostrar_pass"
         android:id="@+id/checkBox2"
         android:layout_below="@+id/editText3"
         android:layout_alignLeft="@+id/editText3"
@@ -48,7 +48,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:id="@+id/button5"
         android:onClick="loginL"
         android:layout_below="@+id/checkBox2"

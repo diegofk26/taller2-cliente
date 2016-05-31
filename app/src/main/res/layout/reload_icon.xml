@@ -12,6 +12,7 @@
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:id="@+id/row"
+        android:contentDescription="@string/get_more"
         android:onClick="moreMssg"
         android:src="@drawable/rows_white"
         />
@@ -29,6 +30,7 @@
         android:layout_alignRight="@+id/row"
         android:layout_alignEnd="@+id/row"
         android:onClick="moreMssg"
+        android:contentDescription="@string/get_more"
         android:src="@drawable/mssg_blue_small"
         android:paddingRight="20dp"
         android:paddingTop="10dp"

@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.DataSetObserver;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
@@ -18,15 +16,12 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatTools.ChatArrayAdapter;
@@ -37,17 +32,9 @@ import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private String chatName;
-    private String user;/**< Nombre de usuario de la aplicacion.*/
-    private String url;
-    private String token;
-
     private ChatArrayAdapter adp;
     private ListView mssgList;
     private EditText chatText;
-    private Button send;
-    private Animation rotate;
-    private Animation rotateInverse;
 
     private BroadcastReceiver onNewMessage = new BroadcastReceiver() {
 
@@ -70,22 +57,18 @@ public class ChatActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        chatName = this.getIntent().getStringExtra("from");
+        String chatName = this.getIntent().getStringExtra("from");
+
+        setTitle(chatName);
 
         TinderTP.updateChatName(chatName);
-        user = ((TinderTP) this.getApplication()).getUser();
-        url = ((TinderTP) this.getApplication()).getUrl();
-        token = ((TinderTP) this.getApplication()).getToken();
 
         int orientation = getResources().getConfiguration().orientation;
 
         setBackgroundOnOrientation(orientation);
 
-        send = (Button) findViewById(R.id.btn);
+        Button send = (Button) findViewById(R.id.btn);
         mssgList = (ListView) findViewById(R.id.listview);
-
-        rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        rotateInverse = AnimationUtils.loadAnimation(this, R.anim.rotate_inverse);
 
         chatText = (EditText) findViewById(R.id.chat_text);
         ChatTextBuilder.chatEditor(chatText,this);

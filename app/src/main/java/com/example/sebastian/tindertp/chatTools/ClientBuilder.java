@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.sebastian.tindertp.ChatListActivity;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
@@ -22,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 
@@ -37,6 +39,68 @@ public class ClientBuilder {
         url = ((TinderTP) context.getApplication()).getUrl();
         token = ((TinderTP) context.getApplication()).getToken();
         chatName = context.getIntent().getStringExtra("from");
+    }
+
+    public static RequestResponseClient build(final ChatListActivity act, final List<String> userNames,
+                                              final String userFrom ) {
+
+        init(act);
+
+        ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
+        Map<String, String> headers = HeaderBuilder.forLoadOneMessage(token, user, userFrom, 1);
+
+        List<String> users = null;
+        final boolean hasExtra = act.getIntent().hasExtra(Common.MSSG_KEY);
+
+        if(hasExtra) {
+            users = act.getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
+            act.getIntent().removeExtra(Common.USER_MSG_KEY);
+            act.getIntent().removeExtra(Common.MSSG_KEY);
+        }
+
+        final List<String> finalUsers = users;
+        RequestResponseClient client = new RequestResponseClient(act, conn, headers) {
+
+            @Override
+            protected void getJson() throws IOException {
+                jsonString = readIt();
+            }
+
+            @Override
+            protected void onPostExec() {
+                if (!badResponse && isConnected) {
+                    try {
+                        JSONArray jsonA = new JSONArray(jsonString);
+                        if(jsonA.length() != 0) {
+                            int index = userNames.indexOf(userFrom);
+                            JSONObject jsonO = jsonA.getJSONObject(0);
+                            String transmitter = jsonO.getString("emisor");
+                            act.addTransmitterToMssg(index, transmitter, jsonO.getString("mensaje"));
+                            act.clearRows();
+                            act.buildRowItems();
+                            act.haveToUpdate(index);
+                            if (hasExtra && finalUsers.contains(userFrom))
+                                act.updateListView(index, true);
+                            else
+                                act.updateListView(index, false);
+                        }
+                    } catch (JSONException e) {
+                        showText("Problemas con los mensajes guardados.");
+                    }
+                } else {
+                    showText("No se pudo conectar con el server.");
+                }
+            }
+
+            @Override
+            protected void showText(String message) {
+                Snackbar.make(ctx.findViewById(R.id.list), message, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        };
+
+        return client;
+
     }
 
     public static RequestResponseClient build(Activity context, final ChatArrayAdapter adp) {
@@ -176,6 +240,4 @@ public class ClientBuilder {
                     .setAction("Action", null).show();
         }
     }
-
-
 }

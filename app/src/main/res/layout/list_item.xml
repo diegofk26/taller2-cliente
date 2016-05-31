@@ -19,7 +19,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/profilePic"
         android:paddingBottom="10dp"
-        android:text="txt"
+        android:text="@string/txt"
         android:textSize="20sp" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_below="@+id/userName"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="txt"
+        android:text="@string/txt"
         android:textSize="16sp" />
 
 </RelativeLayout>

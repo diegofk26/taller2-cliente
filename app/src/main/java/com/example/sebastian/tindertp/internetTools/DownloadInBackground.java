@@ -28,7 +28,7 @@ public class DownloadInBackground extends AsyncTask<String, Void, Integer> {
 
         return 1;
     }
-    // onPostExecute displays the results of the AsyncTask.
+
     @Override
     protected void onPostExecute(Integer result) {
         mediaDownloader.onPostExec();

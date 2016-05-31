@@ -1,13 +1,11 @@
 package com.example.sebastian.tindertp;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,20 +16,13 @@ import android.widget.ListView;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatListTools.CustomAdapter;
 import com.example.sebastian.tindertp.chatListTools.RowItem;
+import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
-import com.example.sebastian.tindertp.commonTools.Common;
-import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
-import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.Messages;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -44,9 +35,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private int lastItemSelected;
     private boolean paused;
 
-    private String url;
+
     private String user;
-    private String token;
 
     private CustomAdapter adapter;
 
@@ -57,9 +47,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        url = ((TinderTP) this.getApplication()).getUrl();
         user = ((TinderTP) this.getApplication()).getUser();
-        token = ((TinderTP) this.getApplication()).getToken();
 
         rowItems = new ArrayList<>();
         paused = false;
@@ -102,7 +90,6 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         chatList.setOnItemClickListener(this);
 
         getLastMessages();
-        getNewMsg();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("CHAT_LIST"));
     }
@@ -114,25 +101,16 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    private void getNewMsg() {
-        if(getIntent().hasExtra(Common.MSSG_KEY)) {
-            List<String> messages = getIntent().getStringArrayListExtra(Common.MSSG_KEY);
-            List<String> users = getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
+    private void getLastMessages() {
 
-            for (int i = 0; i < userNames.size(); i++) {
-                int index = users.lastIndexOf(userNames.get(i));
-                if(index >= 0) {
-                    addTransmitterToMssg(i, userNames.get(i),messages.get(index));
-                    rowItems.clear();
-                    buildRowItems();
-                    haveToUpdate[i]=true;
-                    updateListView(i, true);
-                }
-            }
+        for(int i = 0; i < userNames.size(); i++) {
+            Log.i("GetMSSG", "obtengo mensajes de " + userNames.get(i));
+            RequestResponseClient getOneMessage = ClientBuilder.build(this,userNames,userNames.get(i));
+            getOneMessage.runInBackground();
         }
     }
 
-    private void buildRowItems() {
+    public void buildRowItems() {
         for (int i = 0; i < userNames.size(); i++) {
             RowItem item = new RowItem(userNames.get(i),
                     profilePics.get(i), lastMessages.get(i));
@@ -151,17 +129,6 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         profilePics.add(R.drawable.aldana);
         return profilePics;
 
-    }
-
-    private void getLastMessages() {
-        ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
-
-        for(int i = 0; i < userNames.size(); i++) {
-            Log.i("GetMSSG", "obtengo mensajes de " + userNames.get(i));
-            Map<String, String> headers = HeaderBuilder.forLoadOneMessage(token, user, userNames.get(i), 1);
-            GetOneMessage getOneMessage = new GetOneMessage(this, conn, headers,userNames.get(i));
-            getOneMessage.runInBackground();
-        }
     }
 
     private void restoreFonts(int position) {
@@ -189,9 +156,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         if (paused) {
             Log.i("GetMSSG", "Resumee de chat");
             paused = false;
-            ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
-            Map<String, String> headers = HeaderBuilder.forLoadOneMessage(token, user, userNames.get(lastItemSelected), 1);
-            GetOneMessage getOneMessage = new GetOneMessage(this, conn, headers, userNames.get(lastItemSelected));
+            RequestResponseClient getOneMessage = ClientBuilder.build(this, userNames, userNames.get(lastItemSelected));
             getOneMessage.runInBackground();
         }
     }
@@ -224,7 +189,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         LocalBroadcastManager.getInstance(this).sendBroadcast(activityMsg);
     }
 
-    private void updateListView(final int index, final boolean isBold) {
+    public void updateListView(final int index, final boolean isBold) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -260,7 +225,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         return index;
     }
 
-    private void addTransmitterToMssg(int index, String transmitter, String message) {
+    public void addTransmitterToMssg(int index, String transmitter, String message) {
         if (transmitter.equals(user)) {
             lastMessages.set(index, "Tú: " + message);
         } else {
@@ -268,47 +233,11 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    private class GetOneMessage extends RequestResponseClient {
+    public void clearRows() {
+        rowItems.clear();
+    }
 
-        private String userFrom;
-
-        public GetOneMessage(Activity ctx, ConnectionStruct conn, Map<String, String> values, String userFrom) {
-            super(ctx, conn, values);
-            this.userFrom = userFrom;
-        }
-
-        @Override
-        protected void getJson() throws IOException {
-            jsonString = readIt();
-        }
-
-        @Override
-        protected void onPostExec() {
-            if (!badResponse && isConnected) {
-                try {
-                    JSONArray jsonA = new JSONArray(jsonString);
-                   if(jsonA.length() != 0) {
-                       int index = userNames.indexOf(userFrom);
-                       JSONObject jsonO = jsonA.getJSONObject(0);
-                       String transmitter = jsonO.getString("emisor");
-                       addTransmitterToMssg(index,transmitter,jsonO.getString("mensaje"));
-                       rowItems.clear();
-                       buildRowItems();
-                       haveToUpdate[index]=true;
-                       updateListView(index, false);
-                    }
-                } catch (JSONException e) {
-                    showText("Problemas con los mensajes guardados.");
-                }
-            } else {
-                showText("No se pudo conectar con el server.");
-            }
-        }
-
-        @Override
-        protected void showText(String message) {
-            Snackbar.make(findViewById(R.id.list), message, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
+    public void haveToUpdate(int index) {
+        haveToUpdate[index]=true;
     }
 }

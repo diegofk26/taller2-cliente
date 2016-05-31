@@ -12,21 +12,18 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
-import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
-import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
-import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
-
-import java.util.Map;
 
 public class RegistryActivity extends AppCompatActivity {
 
     private EditText passText;
     private CheckBox checkBox;
+    private RadioButton menrButton;
+    private RadioButton womanrButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +38,40 @@ public class RegistryActivity extends AppCompatActivity {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // checkbox status is changed from uncheck to checked.
+                // En cambios realizados
                 if (!isChecked) {
-                    // show password
+                    // muestra password
                     passText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 } else {
-                    // hide password
+                    // oculta password
                     passText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
+            }
+        });
+
+        menrButton = (RadioButton) findViewById(R.id.radioButton);
+        womanrButton = (RadioButton) findViewById(R.id.radioButton2);
+
+        setOnCheckedChangeListener(menrButton);
+        setOnCheckedChangeListener(womanrButton);
+
+    }
+
+    private RadioButton opposite(RadioButton rButton) {
+        if (rButton.equals(menrButton)) {
+            return womanrButton;
+        } else {
+            return menrButton;
+        }
+    }
+
+    private void setOnCheckedChangeListener(final RadioButton rButton) {
+        rButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    RadioButton oposite = opposite(rButton);
+                    oposite.setChecked(false);
                 }
             }
         });
@@ -75,19 +99,14 @@ public class RegistryActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             ActivityStarter.startClear(this, UrlActivity.class);
             return true;

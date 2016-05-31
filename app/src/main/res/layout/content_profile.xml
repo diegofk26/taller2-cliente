@@ -43,36 +43,29 @@
                 android:layout_alignStart="@+id/imageView2"
                 android:layout_alignRight="@+id/imageView2"
                 android:layout_alignEnd="@+id/imageView2" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView4"
-                android:text="Nombre: "
+                android:text="@string/nombre_"
                 android:layout_below="@+id/textView3"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_alignRight="@+id/textView3"
                 android:layout_alignEnd="@+id/textView3" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView5"
-                android:text="Intereces:"
+                android:text="@string/intereces"
                 android:layout_below="@+id/textView4"
                 android:layout_alignLeft="@+id/textView4"
                 android:layout_alignStart="@+id/textView4"
                 android:layout_alignRight="@+id/textView4"
                 android:layout_alignEnd="@+id/textView4" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView6"
-                android:text="Conexiones:"
-                android:layout_below="@+id/textView5"
-                android:layout_alignLeft="@+id/textView5"
-                android:layout_alignStart="@+id/textView5"
-                android:layout_alignRight="@+id/textView5"
-                android:layout_alignEnd="@+id/textView5" />
+
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

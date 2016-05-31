@@ -29,4 +29,24 @@
     <string name="viajes_text">Viajes:</string>
     <string name="agregar_item">Agregar otro</string>
     <string name="title_activity_interests">InterestsActivity</string>
+    <string name="reload">reload</string>
+    <string name="get_more">Carga mensajes anteriores.</string>
+    <string name="mssg">msj</string>
+    <string name="txt">txt</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="login">Login</string>
+    <string name="nombre">Nombre</string>
+    <string name="url">URL</string>
+    <string name="enviar">Enviar</string>
+    <string name="email">Email</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="ok">OK</string>
+    <string name="exit">Exit</string>
+    <string name="hombre">Hombre</string>
+    <string name="mujer">Mujer</string>
+    <string name="usuario">Usuario</string>
+    <string name="mostrar_pass">Mostrar contraseña.</string>
+    <string name="nombre_">Nombre: </string>
+    <string name="intereces">Intereces: </string>
+    <string name="espere">Por favor, espere mientras se conecta a la red.</string>
 </resources>

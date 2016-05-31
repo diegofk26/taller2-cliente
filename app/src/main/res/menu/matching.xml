@@ -6,7 +6,7 @@
     <item
         android:id="@+id/badge"
         android:actionLayout="@layout/match_icon"
-        android:title="msj"
+        android:title="@string/mssg"
         android:orderInCategory="100"
         app:showAsAction="always"/>
     <item

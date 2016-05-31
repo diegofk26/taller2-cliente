@@ -16,8 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            android:layout_alignRight="@+id/imageView"
-            android:layout_alignEnd="@+id/imageView"
+
             android:text="" />
 
         <ImageView
@@ -25,12 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+
             android:clickable="false"
             android:focusable="false" />
 
@@ -45,9 +39,7 @@
         android:background="@drawable/placeholder_like"
         android:layout_marginRight="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
+
         android:scaleType="fitStart"
         android:layout_gravity="start|bottom" />
 
@@ -60,9 +52,7 @@
         android:background="@drawable/placeholder_like"
         android:layout_marginRight="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
+
         android:scaleType="fitEnd"
         android:layout_gravity="end|bottom" />
 
@@ -74,9 +64,7 @@
         android:background="@drawable/placeholder_like"
         android:layout_marginRight="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
+
         android:onClick="goToProfile"
         android:scaleType="fitCenter"
         android:layout_gravity="center_horizontal|bottom" />
