@@ -14,8 +14,9 @@ import android.widget.TextView;
 
 import com.example.sebastian.tindertp.R;
 
+/** Adaptador para los mensajes del Chat*/
 public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
-    private TextView chatText;
+    private TextView chatText;      /**< Texto del mensaje*/
     private List<ChatMessage> messageList = new ArrayList<ChatMessage>();
     private LinearLayout layout;
 

@@ -15,30 +15,32 @@ import com.example.sebastian.tindertp.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/** Adaptador para ChatList, se encarga de preparar las Views para el ChatList*/
 public class CustomAdapter extends BaseAdapter {
 
     Context context;
-    List<RowItem> rowItems;
-    private int index;
+    List<RowItem> rowItems;     /**< Lista de todos los items del ChatList*/
+    private int updatedIndex;   /**< Indece de uina posicion actualizada*/
     private boolean updated;
 
     public CustomAdapter(Context context, List<RowItem> rowItems) {
         this.context = context;
-        index = 0;
+        updatedIndex = 0;
         this.rowItems = rowItems;
         updated = false;
     }
 
+    /**Actualiza a Negrita el nuevo mensaje.*/
     public void updateBold(List<RowItem> newRows, int index, boolean isBold) {
         List<RowItem> aux = new ArrayList<>( newRows);
-        this.index = index;
+        this.updatedIndex = index;
         rowItems.clear();
         rowItems.addAll(aux);
         updated = isBold;
         notifyDataSetChanged();
     }
 
+    /** Restaura la negrita a modo normal*/
     public void restore() {
         updated = false;
         notifyDataSetChanged();
@@ -85,7 +87,7 @@ public class CustomAdapter extends BaseAdapter {
 
             holder.lastmessage = (TextView) convertView.findViewById(R.id.message);
 
-            if (updated && index == position) {
+            if (updated && updatedIndex == position) {
                 Log.i("BOLDDDD", rowItems.get(position).getUserName());
                 holder.lastmessage.setTypeface(null, Typeface.BOLD_ITALIC);
             } else {
@@ -106,12 +108,5 @@ public class CustomAdapter extends BaseAdapter {
 
         return convertView;
     }
-
-    public void show() {
-        for (int i =0; i<rowItems.size(); i++) {
-            Log.i("asd", rowItems.get(i).getLastMessage());
-        }
-    }
-
 }
 
