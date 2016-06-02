@@ -1,6 +1,8 @@
 package com.example.sebastian.tindertp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
@@ -62,8 +64,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if ( Common.userAndPass_OK(user, password, text) ) {
 
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
             Map<String, String> values = HeaderBuilder.forRegister(
-                    user.getText().toString(), passText.getText().toString());
+                    user.getText().toString(), passText.getText().toString(),tokenGCM);
 
             String url = ((TinderTP) this.getApplication()).getUrl();
 

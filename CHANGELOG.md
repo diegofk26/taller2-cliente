@@ -2,6 +2,25 @@
 
 ## [Unreleased](https://github.com/diegofk26/taller2-cliente/tree/HEAD)
 
+[Full Changelog](https://github.com/diegofk26/taller2-cliente/compare/v1.0.0...HEAD)
+
+**Fixed bugs:**
+
+- No actualiza ListView en ChatListActivity. [\#11](https://github.com/diegofk26/taller2-cliente/issues/11)
+
+**Closed issues:**
+
+- Agregar ultimos mensajes a las notificaciones y cantidad de mensajes. [\#23](https://github.com/diegofk26/taller2-cliente/issues/23)
+- darle el nombre del chat con la persona que estas chateando [\#22](https://github.com/diegofk26/taller2-cliente/issues/22)
+- agregar una sola seleccion para hombre mujer radioButton [\#21](https://github.com/diegofk26/taller2-cliente/issues/21)
+- actualizar chatlist al salir de ChatActivity [\#13](https://github.com/diegofk26/taller2-cliente/issues/13)
+- Avisar al server sobre los mensajes vistos. [\#12](https://github.com/diegofk26/taller2-cliente/issues/12)
+- Borrar notificaciones al ingresar a la app [\#10](https://github.com/diegofk26/taller2-cliente/issues/10)
+- sincronizar singleton [\#9](https://github.com/diegofk26/taller2-cliente/issues/9)
+- Correcciones Checkpoint 1 [\#8](https://github.com/diegofk26/taller2-cliente/issues/8)
+- Chat con GCM [\#6](https://github.com/diegofk26/taller2-cliente/issues/6)
+
+## [v1.0.0](https://github.com/diegofk26/taller2-cliente/tree/v1.0.0) (2016-04-28)
 **Closed issues:**
 
 - Descarga de imagenes por http [\#5](https://github.com/diegofk26/taller2-cliente/issues/5)

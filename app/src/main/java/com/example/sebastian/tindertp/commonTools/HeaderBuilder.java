@@ -5,10 +5,11 @@ import java.util.Map;
 
 public class HeaderBuilder {
 
-    public static Map<String, String> forRegister(String user, String pass) {
+    public static Map<String, String> forRegister(String user, String pass, String tokenGCM) {
         Map<String, String> headers = new HashMap<>();
         headers.put(Common.USER_KEY, user);
         headers.put(Common.PASS_KEY, pass);
+        headers.put(Common.TOKEN_GCM, tokenGCM);
         return headers;
     }
 
@@ -38,7 +39,6 @@ public class HeaderBuilder {
         Map<String, String> headers = new HashMap<>();
         headers.put(Common.USER_KEY, user);
         headers.put(Common.RECEPTOR, chatName);
-        headers.put("ReceptorToken","esHbWAEzZA0:APA91bHOWceFnP8pmJN6q7FOVkaynFIrs5yENpDwrlx1BkTyXWB95pLONHu2uvF9iT0t_x0O0ajYpNpU5kCyh2CQVjHtcwlh-J6Zbf3L1gpeTbtLf_rENBZ2r-9hyQ8WTtGTK3OZxhLS");
         headers.put(Common.TOKEN, token);
         return headers;
     }

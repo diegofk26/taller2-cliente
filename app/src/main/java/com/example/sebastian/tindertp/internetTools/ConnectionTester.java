@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
@@ -70,7 +71,10 @@ public class ConnectionTester extends MediaDownloader {
 
     private void login(String user, String password){
 
-        Map<String,String> values = HeaderBuilder.forRegister(user, password);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
+
+        Map<String,String> values = HeaderBuilder.forRegister(user, password, tokenGCM);
 
         MainActivity main = ((MainActivity)context);
 

@@ -14,6 +14,7 @@ import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.internetTools.ConnectionTester;
+import com.example.sebastian.tindertp.services.MyInstanceIDListenerService;
 import com.example.sebastian.tindertp.services.RegistrationIntentService;
 
 import java.util.ArrayList;

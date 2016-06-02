@@ -83,13 +83,13 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         int i =  Messages.getInstance().size() - 1;
         int count = 0;
-        while (i >=0 && count <= 6) {
+        while (i >= 0 && count < Common.MAX_MSSG_NOTIF) {
             inboxStyle.addLine(Messages.getInstance().get(i));
             i--;
             count ++;
         }
 
-        if (count == 6) {
+        if (count == Common.MAX_MSSG_NOTIF ) {
             inboxStyle.addLine("Tienes " + Messages.getInstance().size() + " nuevos mensajes...");
         }
 

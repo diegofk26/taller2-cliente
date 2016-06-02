@@ -1,7 +1,9 @@
 package com.example.sebastian.tindertp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -54,7 +56,9 @@ public class InterestsActivity extends AppCompatActivity {
 
     public void goToRegister(View v) {
 
-        Map<String,String> values = HeaderBuilder.forRegister(user, pass);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
+        Map<String,String> values = HeaderBuilder.forRegister(user, pass, tokenGCM);
         TextView text = (TextView)findViewById(R.id.textView17);
         String url = ((TinderTP) this.getApplication()).getUrl();
 

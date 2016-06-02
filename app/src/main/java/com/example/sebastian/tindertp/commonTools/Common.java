@@ -32,9 +32,6 @@ public class Common {
     public static final String MESSAGES = "/mensajes";  /**< Vars para la conexion url */
     public static final String CHAT = "/chat";          /**< Vars para la conexion url */
 
-    public static final String RESPONSE = "RESPONSE";
-    public static final String JSON = "JSON";
-
     public static final String IA = "file:///android_asset/IA.gif";     /**< Vars para la ScreenSplash */
     public static final String DOTS = "file:///android_asset/dots.gif"; /**< Vars para la ScreenSplash */
 
@@ -50,10 +47,11 @@ public class Common {
     public static final String MAX_MESSAGES= "10";      /**< Vars para la conexion url */
     public static final String TOKEN = "Token";         /**< Vars para la conexion url */
     public static final String RECEPTOR = "Receptor";   /**< Vars para la conexion url */
+    public static final String TOKEN_GCM = "TokenGCM";   /**< Vars para la conexion url */
+
 
     public static final String IMG_POS_KEY = "position";
     public static final String IMG_KEY = "images";
-    public static final String NEW_IMG_POS_KEY = "newImagePosition";
     public static final String MSSG_KEY = "MSSG";
     public static final String USER_MSG_KEY = "USER_MSG";
 
@@ -61,6 +59,8 @@ public class Common {
 
     public static final int MAX_CHARS = 30;
     public static final int MIN_CHARS = 5;
+
+    public static final int MAX_MSSG_NOTIF = 6;
 
     private static boolean userOrPassAreEmpty( String user, String password,TextView message ) {
         if ( user.isEmpty() || password.isEmpty()) {
