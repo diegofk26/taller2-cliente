@@ -14,6 +14,11 @@ Aplicación de Android que al registrarse permite encontrar personas dependiendo
 ##Instrucciones para compilar:
 		
 - Posicionarse en la carpeta del proyecto, ejecutar ./gradlew build
+
+##Instrucciones para ver la documentacion extraida por Doxygen:
+
+- Para ver el html, ir a la carpeta html del proyecto y buscar el archivo index.html y abrirlo con algun Navegador e ir a la pestaña Classes.
+- Para ver el Latex generado, ir a la carpeta latex y buscar el archivo refman.pdf .
 	
 ##Funcionalidad incluida:
 	

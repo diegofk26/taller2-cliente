@@ -1,0 +1,77 @@
+\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService}{}\section{com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service Class Reference}
+\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService}\index{com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service@{com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service}}
+
+
+Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ad65050d5130f62f8aa062f21fe49f35a}{on\+Message\+Received} (String from, Bundle data)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ae7a722e3ab78f165da8183b952188fa0}{send\+Notification} (String from\+User, String message)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bfseries update} (Context context, String from, String message, String type)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a7a0f68b8970db0fe0d8e2a895eac4389}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a7a0f68b8970db0fe0d8e2a895eac4389}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final String {\bfseries T\+AG} = \char`\"{}My\+Gcm\+Listener\+Service\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ad0b98b2dc4aaa5c9faf63cba7f154370}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ad0b98b2dc4aaa5c9faf63cba7f154370}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service@{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service}!on\+Message\+Received@{on\+Message\+Received}}
+\index{on\+Message\+Received@{on\+Message\+Received}!com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service@{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service}}
+\subsubsection[{\texorpdfstring{on\+Message\+Received(\+String from, Bundle data)}{onMessageReceived(String from, Bundle data)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service.\+on\+Message\+Received (
+\begin{DoxyParamCaption}
+\item[{String}]{from, }
+\item[{Bundle}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ad65050d5130f62f8aa062f21fe49f35a}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ad65050d5130f62f8aa062f21fe49f35a}
+Es llamado cuando un mensaje es recibido.
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & Sender\+ID of the sender. \\
+\hline
+{\em data} & Data bundle containing message data as key/value pairs. For Set of keys use data.\+key\+Set(). \\
+\hline
+\end{DoxyParams}
+\index{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service@{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service}!send\+Notification@{send\+Notification}}
+\index{send\+Notification@{send\+Notification}!com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service@{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service}}
+\subsubsection[{\texorpdfstring{send\+Notification(\+String from\+User, String message)}{sendNotification(String fromUser, String message)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service.\+send\+Notification (
+\begin{DoxyParamCaption}
+\item[{String}]{from\+User, }
+\item[{String}]{message}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ae7a722e3ab78f165da8183b952188fa0}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ae7a722e3ab78f165da8183b952188fa0}
+Crea notificaciones y hace un pending\+Intent que se usa si la notificacion es clickeada. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/sebastian/tindertp/services/My\+Gcm\+Listener\+Service.\+java\end{DoxyCompactItemize}

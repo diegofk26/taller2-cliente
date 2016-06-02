@@ -8,5 +8,4 @@ local.properties
 .idea/libraries/*
 .DS_Store	
 build/*
-latex/*
-html/*
+

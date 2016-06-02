@@ -1,0 +1,8 @@
+<map id="com.example.sebastian.tindertp.internetTools.ImageDownloaderClient" name="com.example.sebastian.tindertp.internetTools.ImageDownloaderClient">
+<area shape="rect" id="node8" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1MatchingActivity.html" title="Activity donde se matchean las personas. " alt="" coords="1067,333,1277,374"/>
+<area shape="rect" id="node2" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1MediaDownloader.html" title="com.example.sebastian.tindertp.internet\lTools.MediaDownloader" alt="" coords="274,107,529,149"/>
+<area shape="rect" id="node6" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1UrlArrayAdapter.html" title="Adaptador del array de urls. " alt="" coords="274,225,529,266"/>
+<area shape="rect" id="node11" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1gestureTools_1_1OnSwipeTapTouchListener.html" title="com.example.sebastian.tindertp.gesture\lTools.OnSwipeTapTouchListener" alt="" coords="1425,385,1679,426"/>
+<area shape="rect" id="node16" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyBroadCastReceiver.html" title="com.example.sebastian.tindertp.services.\lMyBroadCastReceiver" alt="" coords="269,419,533,461"/>
+<area shape="rect" id="node20" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1PriorActivitiesUpdater.html" title="com.example.sebastian.tindertp.services.\lPriorActivitiesUpdater" alt="" coords="645,283,909,325"/>
+</map>

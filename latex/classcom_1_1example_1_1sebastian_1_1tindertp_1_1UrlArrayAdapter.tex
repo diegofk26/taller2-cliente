@@ -1,0 +1,60 @@
+\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter}{}\section{com.\+example.\+sebastian.\+tindertp.\+Url\+Array\+Adapter Class Reference}
+\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter}\index{com.\+example.\+sebastian.\+tindertp.\+Url\+Array\+Adapter@{com.\+example.\+sebastian.\+tindertp.\+Url\+Array\+Adapter}}
+
+
+Adaptador del array de urls.  
+
+
+
+
+Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+Url\+Array\+Adapter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Url\+Array\+Adapter} (List$<$ String $>$ urls)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a6632b82dc47c257f7beaa50778b1d3dd}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a6632b82dc47c257f7beaa50778b1d3dd}
+
+\item 
+boolean {\bfseries has\+Next} ()\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a2efbf2b83d0af47cf66470c4472c2b7f}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a2efbf2b83d0af47cf66470c4472c2b7f}
+
+\item 
+String {\bfseries next} ()\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a8d2ae5e2905a5bdac61d1032698171bc}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a8d2ae5e2905a5bdac61d1032698171bc}
+
+\item 
+boolean {\bfseries download\+Complete} ()\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a6f33b18b9d01436be6f318ea12f08825}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a6f33b18b9d01436be6f318ea12f08825}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a8417684fea5fdac9a0b1678f1be908c4}{end}
+\item 
+Iterator$<$ String $>$ {\bfseries it}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a9031519fcff0b68b8c304e8e796e746c}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a9031519fcff0b68b8c304e8e796e746c}
+
+\item 
+int \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a6808a701ca3d7424cca32e2fc4153eb4}{i}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Adaptador del array de urls. 
+
+Cambia la funcionalidad del recorrido del array, para que primero descarga las primeras 3 urls y depues descargue la siguiente solo si la imagen actual apunta a la a la anteultima posicion del array. 
+
+\subsection{Member Data Documentation}
+\index{com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter}!end@{end}}
+\index{end@{end}!com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter}}
+\subsubsection[{\texorpdfstring{end}{end}}]{\setlength{\rightskip}{0pt plus 5cm}int com.\+example.\+sebastian.\+tindertp.\+Url\+Array\+Adapter.\+end\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a8417684fea5fdac9a0b1678f1be908c4}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a8417684fea5fdac9a0b1678f1be908c4}
+Numero para descargar las primeras imagenes. \index{com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter}!i@{i}}
+\index{i@{i}!com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::\+Url\+Array\+Adapter}}
+\subsubsection[{\texorpdfstring{i}{i}}]{\setlength{\rightskip}{0pt plus 5cm}int com.\+example.\+sebastian.\+tindertp.\+Url\+Array\+Adapter.\+i\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a6808a701ca3d7424cca32e2fc4153eb4}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlArrayAdapter_a6808a701ca3d7424cca32e2fc4153eb4}
+posicion actual de imagenes descargas en el array. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/src/main/java/com/example/sebastian/tindertp/Url\+Array\+Adapter.\+java\end{DoxyCompactItemize}
