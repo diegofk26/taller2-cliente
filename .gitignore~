@@ -1,4 +1,7 @@
 .gradle/
+build.gradle~
+configCliente~
+.gitignore~
 local.properties
 .idea/workspace.xml
 .idea/libraries/*

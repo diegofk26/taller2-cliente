@@ -1,6 +1,7 @@
 .gradle/
 build.gradle~
 configCliente~
+README.md~
 .gitignore~
 local.properties
 .idea/workspace.xml
