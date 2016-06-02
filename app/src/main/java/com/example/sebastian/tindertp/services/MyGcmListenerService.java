@@ -54,11 +54,8 @@ public class MyGcmListenerService extends GcmListenerService {
         }
     }
 
-    /**
-     * Create and show a simple notification containing the received GCM message.
-     *
-     * @param message GCM message received.
-     */
+    /**Crea notificaciones y hace un pendingIntent que se usa si la notificacion
+     * es clickeada. */
     private void sendNotification(String fromUser, String message) {
 
         Intent intent = new Intent(this, MainActivity.class);
@@ -71,7 +68,7 @@ public class MyGcmListenerService extends GcmListenerService {
         intent.putStringArrayListExtra(Common.MSSG_KEY, Messages.getInstance().getMessages());
         intent.putStringArrayListExtra(Common.USER_MSG_KEY, Messages.getInstance().getUsers());
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -84,19 +81,24 @@ public class MyGcmListenerService extends GcmListenerService {
                 .setContentIntent(pendingIntent);
 
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        int i = 0;
-        while (i < Messages.getInstance().size() && i <= 6) {
+        int i =  Messages.getInstance().size() - 1;
+        int count = 0;
+        while (i >=0 && count <= 6) {
             inboxStyle.addLine(Messages.getInstance().get(i));
-            i++;
+            i--;
+            count ++;
+        }
+
+        if (count == 6) {
+            inboxStyle.addLine("Tienes " + Messages.getInstance().size() + " nuevos mensajes...");
         }
 
         notificationBuilder.setStyle(inboxStyle);
 
-
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(0, notificationBuilder.build());
     }
 
 
