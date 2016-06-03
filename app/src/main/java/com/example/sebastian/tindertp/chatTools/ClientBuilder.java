@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.sebastian.tindertp.ChatListActivity;
 import com.example.sebastian.tindertp.R;
@@ -139,11 +141,10 @@ public class ClientBuilder {
 
     /**Builder de un cliente que descarga y luego avisa a las vistas de las actividades anteriores
      * se actualicen.*/
-    public static RequestResponseClient build(Activity context, final ChatArrayAdapter adp, final EditText chatText) {
+    public static RequestResponseClient build(Activity context,
+                                              final String text, final ListView list, final ChatMessage chat) {
 
         init(context);
-
-        final String text =  chatText.getText().toString();
 
         ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
         Map<String, String> headers = HeaderBuilder.forSendMessage(token, user, chatName);
@@ -164,11 +165,37 @@ public class ClientBuilder {
             @Override
             protected void onPostExec() {
                 if (!badResponse && isConnected) {
-                    adp.add(new ChatMessage(false, text));
+
+                    ChatArrayAdapter adp = (ChatArrayAdapter) list.getAdapter();
+                    //obtiene la posicion dentro de los items visibles del ListView.
+                    int firstPosition = list.getFirstVisiblePosition() - list.getHeaderViewsCount();
+                    int position = adp.indexOf(chat);
+                    int wantedChild = position - firstPosition;
+
+                    adp.change(position);
+
+                    if (wantedChild >= 0 && wantedChild < list.getChildCount()) {
+                        View v = list.getChildAt( wantedChild );
+                        adp.getView(position, v, list);
+                    }
+
                     updatePriorActivities(chatName, text);
-                    chatText.setText("");
+
                 } else {
-                    showText("No se pudo enviar el mensaje.");
+                    ChatArrayAdapter adp = (ChatArrayAdapter) list.getAdapter();
+                    //obtiene la posicion dentro de los items visibles del ListView.
+                    int firstPosition = list.getFirstVisiblePosition() - list.getHeaderViewsCount();
+                    int position = adp.indexOf(chat);
+                    int wantedChild = position - firstPosition;
+
+                    adp.change(position);
+
+                    if (wantedChild >= 0 && wantedChild < list.getChildCount()) {
+                        View v = list.getChildAt( wantedChild );
+                        adp.getView(position, v, list);
+                    }
+
+                    showText("No se envió el mensaje. Click en el mensaje para reintentar.");
                 }
             }
 

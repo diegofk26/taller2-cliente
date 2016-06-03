@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatTools.ChatArrayAdapter;
@@ -57,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String chatName = this.getIntent().getStringExtra("from");
+        final String chatName = this.getIntent().getStringExtra("from");
 
         setTitle(chatName);
 
@@ -92,6 +95,26 @@ public class ChatActivity extends AppCompatActivity {
         mssgList.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         mssgList.setAdapter(adp);
 
+        final Activity ctx = this;
+
+        mssgList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                if (adp.isFailureMessage(position)) {
+                    TextView chatMssg = (TextView) view.findViewById(R.id.SingleMessage);
+                    String text = chatMssg.getText().toString();
+                    adp.remove(adp.getItem(position), position);
+                    ChatMessage item = new ChatMessage(false, text);
+                    adp.add(item);
+                    Log.i("aaaaa", "mensjaeee " + text );
+                    RequestResponseClient sendMessage = ClientBuilder.build(ctx, text, mssgList, item);
+                    sendMessage.addBody(text);
+                    sendMessage.runInBackground();
+                }
+            }
+        });
+
         adp.registerDataSetObserver(new DataSetObserver() {
 
             public void OnChanged() {
@@ -108,9 +131,13 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private boolean sendChatMessage(){
-        final String text =  chatText.getText().toString();
+        String text =  chatText.getText().toString();
         if ( !text.isEmpty()) {
-            RequestResponseClient sendMessage = ClientBuilder.build(this,adp,chatText);
+            ChatMessage item = new ChatMessage(false, text);
+            adp.add(item);
+
+            RequestResponseClient sendMessage = ClientBuilder.build(this, text, mssgList, item);
+            chatText.setText("");
             sendMessage.addBody(text);
             sendMessage.runInBackground();
         }

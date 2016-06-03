@@ -19,6 +19,7 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
     private TextView chatText;      /**< Texto del mensaje*/
     private List<ChatMessage> messageList = new ArrayList<ChatMessage>();
     private LinearLayout layout;
+    private List<Boolean> failedList = new ArrayList<>() ;
 
 
     public ChatArrayAdapter(Context context, int textViewResourceId) {
@@ -31,12 +32,33 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
 
     public void add(int index, ChatMessage object) {
         messageList.add(index, object);
+        failedList.add(index,false);
         super.insert(object,index);
     }
 
     public void add(ChatMessage object) {
         messageList.add(object);
+        failedList.add(false);
         super.add(object);
+    }
+
+    public void remove(ChatMessage chatMessage, int position ) {
+        failedList.remove(position);
+        messageList.remove(chatMessage);
+        super.remove(chatMessage);
+    }
+
+    public int indexOf (ChatMessage chat) {
+        return messageList.indexOf(chat);
+    }
+
+    public boolean isFailureMessage(int position) {
+        return failedList.get(position);
+    }
+
+    /**Usado si hubo algun error */
+    public void change(int position) {
+        failedList.set(position,true);
     }
 
     public int getCount() {
@@ -60,8 +82,12 @@ public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{
         chatText = (TextView) v.findViewById(R.id.SingleMessage);
 
         chatText.setText(messageObj.message);
-
-        chatText.setBackgroundResource(messageObj.left ? R.drawable.blue_bubble : R.drawable.green_bubble);
+        //chatText.setBackgroundResource(messageObj.left ? R.drawable.blue_bubble : R.drawable.green_bubble);
+        if (failedList.get(position)) {
+            chatText.setBackgroundResource(R.drawable.grey_bubble);
+        }else {
+            chatText.setBackgroundResource(messageObj.left ? R.drawable.blue_bubble : R.drawable.green_bubble);
+        }
 
         layout.setGravity(messageObj.left ? Gravity.START : Gravity.END);
 
