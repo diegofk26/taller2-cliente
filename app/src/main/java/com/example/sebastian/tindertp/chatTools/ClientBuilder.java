@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.sebastian.tindertp.ChatListActivity;
 import com.example.sebastian.tindertp.R;
@@ -165,20 +162,6 @@ public class ClientBuilder {
             @Override
             protected void onPostExec() {
                 if (!badResponse && isConnected) {
-
-                    ChatArrayAdapter adp = (ChatArrayAdapter) list.getAdapter();
-                    //obtiene la posicion dentro de los items visibles del ListView.
-                    int firstPosition = list.getFirstVisiblePosition() - list.getHeaderViewsCount();
-                    int position = adp.indexOf(chat);
-                    int wantedChild = position - firstPosition;
-
-                    adp.change(position);
-
-                    if (wantedChild >= 0 && wantedChild < list.getChildCount()) {
-                        View v = list.getChildAt( wantedChild );
-                        adp.getView(position, v, list);
-                    }
-
                     updatePriorActivities(chatName, text);
 
                 } else {

@@ -1,6 +1,5 @@
 package com.example.sebastian.tindertp;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,19 +17,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatTools.ChatArrayAdapter;
 import com.example.sebastian.tindertp.chatTools.ChatMessage;
 import com.example.sebastian.tindertp.chatTools.ChatTextBuilder;
 import com.example.sebastian.tindertp.chatTools.ClientBuilder;
+import com.example.sebastian.tindertp.chatTools.OnItemClickCustom;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 
 public class ChatActivity extends AppCompatActivity {
@@ -95,25 +93,7 @@ public class ChatActivity extends AppCompatActivity {
         mssgList.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         mssgList.setAdapter(adp);
 
-        final Activity ctx = this;
-
-        mssgList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                if (adp.isFailureMessage(position)) {
-                    TextView chatMssg = (TextView) view.findViewById(R.id.SingleMessage);
-                    String text = chatMssg.getText().toString();
-                    adp.remove(adp.getItem(position), position);
-                    ChatMessage item = new ChatMessage(false, text);
-                    adp.add(item);
-                    Log.i("aaaaa", "mensjaeee " + text );
-                    RequestResponseClient sendMessage = ClientBuilder.build(ctx, text, mssgList, item);
-                    sendMessage.addBody(text);
-                    sendMessage.runInBackground();
-                }
-            }
-        });
+        mssgList.setOnItemClickListener(new OnItemClickCustom(this,mssgList));
 
         adp.registerDataSetObserver(new DataSetObserver() {
 
@@ -135,7 +115,6 @@ public class ChatActivity extends AppCompatActivity {
         if ( !text.isEmpty()) {
             ChatMessage item = new ChatMessage(false, text);
             adp.add(item);
-
             RequestResponseClient sendMessage = ClientBuilder.build(this, text, mssgList, item);
             chatText.setText("");
             sendMessage.addBody(text);
