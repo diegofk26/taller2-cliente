@@ -44,6 +44,7 @@ import java.util.Map;
 public class MatchingActivity extends AppCompatActivity {
 
     private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
+    private final static String MATCH_TAG = "Matching Activity";
 
     private ArrayList<String> messages;
     private ArrayList<String> users;
@@ -92,14 +93,14 @@ public class MatchingActivity extends AppCompatActivity {
         onPriorCall = new PriorActivitiesUpdater(this, onNotice);
 
         if(DataThroughActivities.getInstance().hasMessages()) {
-            Log.i("as","estoy actuzalizando match desde la aplicacion cerrada");
-            messages = DataThroughActivities.getInstance().getMessages();
-            users = DataThroughActivities.getInstance().getUsers();
+            Log.i(MATCH_TAG,"Se abrió nuevamente la apliacion y obtengo mensajes.");
+            messages = new ArrayList<>(DataThroughActivities.getInstance().getMessages());
+            users = new ArrayList<>(DataThroughActivities.getInstance().getUsers());
             onNotice.setNotificationCount(messages.size());
-            Log.i("asd","size en MATCH" + onNotice.getNotificationCount());
+            Log.i(MATCH_TAG,"Notificaciones " + onNotice.getNotificationCount());
             invalidateOptionsMenu();
         } else if (ArraySerialization.hasPersistedMssg(this)) {
-            Log.i("asddd","tiene mensajes persistidos TRUE");
+            Log.i(MATCH_TAG,"Tiene mensajes persistidos.");
             messages = ArraySerialization.getPersistedArray(this, "MSSG");
             users = ArraySerialization.getPersistedArray(this, "USER");
             onNotice.setNotificationCount(messages.size());
@@ -127,7 +128,7 @@ public class MatchingActivity extends AppCompatActivity {
         ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
         Map<String, String> headers = HeaderBuilder.forSendMessage(token, "", "");
 
-        RequestResponseClient client = new RequestResponseClient(this, conn,headers) {
+        /*RequestResponseClient client = new RequestResponseClient(this, conn,headers) {
             @Override
             protected void getJson() throws IOException {
 
@@ -147,7 +148,7 @@ public class MatchingActivity extends AppCompatActivity {
                 Snackbar.make(findViewById(R.id.listview), message, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        };
+        };*/
 
     }
 
@@ -182,6 +183,8 @@ public class MatchingActivity extends AppCompatActivity {
         if (onNotice.getNotificationCount() != 0) {
             chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
             chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
+            Log.i(MATCH_TAG, "Elimino los mensajes atravez de actividades.");
+            DataThroughActivities.getInstance().deleteMssg();
         }
 
         this.startActivity(chatAct);
@@ -233,7 +236,7 @@ public class MatchingActivity extends AppCompatActivity {
         if(firstTime) {
             firstTime = false;
             imgView.setImageBitmap(this.bitmaps.get(0));
-            Log.i("Bitmap saved", "success");
+            Log.i(MATCH_TAG, "Primer imagen");
             imgView.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
         }
     }
@@ -267,10 +270,12 @@ public class MatchingActivity extends AppCompatActivity {
         TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
 
         if(onNotice.getNotificationCount() != 0) {
+            Log.i(MATCH_TAG,"Actualizo la cantidad de mensajes");
             icon.setImageResource(R.drawable.new_msgg);
             tv.setText("+" + onNotice.getNotificationCount());
         } else {
             if (onPriorCall.areMessagesReaded()) {
+                Log.i(MATCH_TAG, "Todos los mensajes leidos");
                 icon.setImageResource(R.drawable.empty_msg);
                 tv.setText("");
             }

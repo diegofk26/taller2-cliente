@@ -1,6 +1,7 @@
 package com.example.sebastian.tindertp.chatTools;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
@@ -11,7 +12,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.sebastian.tindertp.ChatListActivity;
+import com.example.sebastian.tindertp.DataTransfer;
+import com.example.sebastian.tindertp.GetMessagesClient;
 import com.example.sebastian.tindertp.R;
+import com.example.sebastian.tindertp.ViewUpdater;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
@@ -34,35 +38,33 @@ public class ClientBuilder {
     private static String token;/**< Token que devuelve el server.*/
     private static String chatName; /**< Usuario de la persona con la que se esta chateando*/
 
-    private static void init(Activity context) {
-        user = ((TinderTP) context.getApplication()).getUser();
-        url = ((TinderTP) context.getApplication()).getUrl();
-        token = ((TinderTP) context.getApplication()).getToken();
-        chatName = context.getIntent().getStringExtra("from");
+    private static void init(DataTransfer transfer) {
+        user = transfer.getUser();
+        url = transfer.getURL();
+        token = transfer.getToken();
+        chatName = transfer.getChatName();
     }
 
     /**Builder de un cliente para ChatListActivity, y luego ChatList se encarga de
      * recargar su vista.
      * */
-    public static RequestResponseClient build(final ChatListActivity act, final List<String> userNames,
-                                              final String userFrom ) {
+    public static RequestResponseClient build(ViewUpdater updater, final List<String> userNames,
+                                              final String userFrom) {
 
-        init(act);
+        init((DataTransfer)updater);
 
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
         Map<String, String> headers = HeaderBuilder.forLoadOneMessage(token, user, userFrom, 1);
 
         List<String> users = null;
-        final boolean hasExtra = act.getIntent().hasExtra(Common.MSSG_KEY);
+        final boolean hasExtra = updater.hasExtra(Common.MSSG_KEY);
 
         if(hasExtra) {
-            users = act.getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
-            act.getIntent().removeExtra(Common.USER_MSG_KEY);
-            act.getIntent().removeExtra(Common.MSSG_KEY);
+            users = updater.getStringArrayExtra(Common.USER_MSG_KEY);
         }
 
         final List<String> finalUsers = users;
-        RequestResponseClient client = new RequestResponseClient(act, conn, headers) {
+        RequestResponseClient client = new RequestResponseClient((DataTransfer)updater, conn, headers) {
 
             @Override
             protected void getJson() throws IOException {
@@ -78,26 +80,31 @@ public class ClientBuilder {
                             int index = userNames.indexOf(userFrom);
                             JSONObject jsonO = jsonA.getJSONObject(0);
                             String transmitter = jsonO.getString("emisor");
-                            act.addTransmitterToMssg(index, transmitter, jsonO.getString("mensaje"));
-                            act.clearRows();
-                            act.buildRowItems();
-                            act.haveToUpdate(index);
+                            ((ViewUpdater)dTransfer).addTransmitterToMssg(index, transmitter, jsonO.getString("mensaje"));
+                            ((ViewUpdater)dTransfer).clearRows();
+                            ((ViewUpdater)dTransfer).buildRowItems();
+                            ((ViewUpdater)dTransfer).haveToUpdate(index);
                             if (hasExtra && finalUsers.contains(userFrom))
-                                act.updateListView(index, true);
+                                ((ViewUpdater)dTransfer).updateListView(index, true);
                             else
-                                act.updateListView(index, false);
+                                ((ViewUpdater)dTransfer).updateListView(index, false);
+
+                            if(hasExtra && index == userNames.size() -1 ) {
+                                ((ViewUpdater)dTransfer).removeExtra(Common.USER_MSG_KEY);
+                                ((ViewUpdater)dTransfer).removeExtra(Common.MSSG_KEY);
+                            }
                         }
                     } catch (JSONException e) {
                         showText("Problemas con los mensajes guardados.");
                     }
                 } else {
                     showText("No se pudo conectar con el server.");
-                }
+                }dTransfer = null;
             }
 
             @Override
             protected void showText(String message) {
-                Snackbar.make(ctx.findViewById(R.id.list), message, Snackbar.LENGTH_LONG)
+                Snackbar.make(dTransfer.findView(R.id.list), message, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         };
@@ -108,14 +115,14 @@ public class ClientBuilder {
 
     /** Builder de un cliente para chat, en este caso el adapter se encarga de
      * actualizar la vista de ChatActivity. */
-    public static RequestResponseClient build(Activity context, final ChatArrayAdapter adp) {
+    public static RequestResponseClient build(final ChatArrayAdapter adp, DataTransfer transfer) {
 
-        init(context);
+        init(transfer);
 
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
         Map<String, String> headers = HeaderBuilder.forLoadMessages(token,user,chatName,1);
 
-        RequestResponseClient client = new GetMessagesClient(context, conn, headers) {
+        RequestResponseClient client = new GetMessagesClient(transfer, conn, headers) {
             @Override
             protected void onPostExec() {
                 if(!badResponse && isConnected) {
@@ -129,7 +136,7 @@ public class ClientBuilder {
                     }catch (JSONException e) {showText("Problemas con los mensajes guardados.");}
                 }else {
                     showText("No se pudo conectar con el server.");
-                }
+                }dTransfer = null;
             }
         };
 
@@ -138,15 +145,15 @@ public class ClientBuilder {
 
     /**Builder de un cliente que descarga y luego avisa a las vistas de las actividades anteriores
      * se actualicen.*/
-    public static RequestResponseClient build(Activity context,
-                                              final String text, final ListView list, final ChatMessage chat) {
+    public static RequestResponseClient build(final String text, final ListView list,
+                                              final ChatMessage chat, DataTransfer transfer) {
 
-        init(context);
+        init(transfer);
 
         ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
         Map<String, String> headers = HeaderBuilder.forSendMessage(token, user, chatName);
 
-        RequestResponseClient client = new RequestResponseClient(context, conn, headers) {
+        RequestResponseClient client = new RequestResponseClient(transfer, conn, headers) {
 
             @Override
             protected void getJson() throws IOException {
@@ -156,7 +163,7 @@ public class ClientBuilder {
                 Intent activityMsg = new Intent("CHAT_LIST");
                 activityMsg.putExtra("user", user);
                 activityMsg.putExtra("message", message);
-                LocalBroadcastManager.getInstance(ctx).sendBroadcast(activityMsg);
+                LocalBroadcastManager.getInstance(dTransfer.getContext()).sendBroadcast(activityMsg);
             }
 
             @Override
@@ -179,12 +186,12 @@ public class ClientBuilder {
                     }
 
                     showText("No se envió el mensaje. Click en el mensaje para reintentar.");
-                }
+                }dTransfer = null;
             }
 
             @Override
             protected void showText(String message) {
-                Snackbar.make(ctx.findViewById(R.id.listview), message, Snackbar.LENGTH_LONG)
+                Snackbar.make(dTransfer.findView(R.id.listview), message, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         };
@@ -195,9 +202,9 @@ public class ClientBuilder {
      *      - si no tiene mas mensajes actualiza la vista de ChatActivity, que como resultado
      *        cambie el icono de barra.
      *      - si tiene mensajes genera una animacion con el icono de barra.*/
-    public static RequestResponseClient build(Activity context, final ChatArrayAdapter adp, final ListView mssgList) {
+    public static RequestResponseClient build(Context context, final ChatArrayAdapter adp, final ListView mssgList, DataTransfer transfer) {
 
-        init(context);
+        init(transfer);
 
         final Animation rotate = AnimationUtils.loadAnimation(context, R.anim.rotate);
         final Animation rotateInverse = AnimationUtils.loadAnimation(context, R.anim.rotate_inverse);
@@ -205,14 +212,14 @@ public class ClientBuilder {
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
         Map<String, String> headers = HeaderBuilder.forLoadMessages(token, user, chatName, adp.size());
 
-        RequestResponseClient client = new GetMessagesClient(context, conn, headers) {
+        RequestResponseClient client = new GetMessagesClient(transfer, conn, headers) {
             @Override
             protected void onPostExec() {
                 if(!badResponse && isConnected) {
                     try {
                         JSONArray jsonA = new JSONArray(jsonString);
-                        ImageView rows = (ImageView)ctx.findViewById(R.id.row);
-                        ImageView mssg = (ImageView)ctx.findViewById(R.id.center);
+                        ImageView rows = (ImageView)dTransfer.findView(R.id.row);
+                        ImageView mssg = (ImageView)dTransfer.findView(R.id.center);
                         if (jsonA.length() != 0) {
                             rows.startAnimation(rotate);
                             mssg.startAnimation(rotateInverse);
@@ -237,28 +244,10 @@ public class ClientBuilder {
                     }catch (JSONException e) {showText("Problemas con los mensajes guardados.");}
                 }else {
                     showText("No se pudo conectar con el server.");
-                }
+                }dTransfer=null;
             }
         };
 
         return client;
-    }
-
-    abstract private static class GetMessagesClient extends RequestResponseClient {
-
-        public GetMessagesClient(Activity ctx, ConnectionStruct conn, Map<String, String> values) {
-            super(ctx, conn, values);
-        }
-
-        @Override
-        protected void getJson() throws IOException {
-            jsonString = readIt();
-        }
-
-        @Override
-        protected void showText(String message) {
-            Snackbar.make(ctx.findViewById(R.id.listview), message, Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
     }
 }

@@ -1,11 +1,13 @@
 package com.example.sebastian.tindertp;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.database.DataSetObserver;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
@@ -16,7 +18,9 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,7 +35,7 @@ import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.chatTools.OnItemClickCustom;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements DataTransfer{
 
     private ChatArrayAdapter adp;
     private ListView mssgList;
@@ -72,7 +76,7 @@ public class ChatActivity extends AppCompatActivity {
         mssgList = (ListView) findViewById(R.id.listview);
 
         chatText = (EditText) findViewById(R.id.chat_text);
-        ChatTextBuilder.chatEditor(chatText,this);
+        ChatTextBuilder.chatEditor(chatText,getApplicationContext());
 
         adp = new ChatArrayAdapter(getApplicationContext(), R.layout.chat);
         mssgList.setAdapter(adp);
@@ -93,7 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         mssgList.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         mssgList.setAdapter(adp);
 
-        mssgList.setOnItemClickListener(new OnItemClickCustom(this,mssgList));
+        mssgList.setOnItemClickListener(new OnItemClickCustom(getApplicationContext(),mssgList));
 
         adp.registerDataSetObserver(new DataSetObserver() {
 
@@ -103,10 +107,10 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNewMessage,
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNewMessage,
                 new IntentFilter("CHAT"));
 
-        RequestResponseClient getHistory = ClientBuilder.build(this,adp);
+        RequestResponseClient getHistory = ClientBuilder.build(adp,this);
         getHistory.runInBackground();
     }
 
@@ -115,7 +119,7 @@ public class ChatActivity extends AppCompatActivity {
         if ( !text.isEmpty()) {
             ChatMessage item = new ChatMessage(false, text);
             adp.add(item);
-            RequestResponseClient sendMessage = ClientBuilder.build(this, text, mssgList, item);
+            RequestResponseClient sendMessage = ClientBuilder.build(text, mssgList, item,this);
             chatText.setText("");
             sendMessage.addBody(text);
             sendMessage.runInBackground();
@@ -135,7 +139,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void moreMssg(View v) {
-        RequestResponseClient getMoreHistory = ClientBuilder.build(this,adp,mssgList);
+        RequestResponseClient getMoreHistory = ClientBuilder.build(getApplicationContext(), adp, mssgList, this);
         getMoreHistory.runInBackground();
     }
 
@@ -159,12 +163,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setBackgroundOnOrientation(newConfig.orientation);
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         TinderTP.chatResumed();
@@ -174,5 +172,40 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         TinderTP.chatPaused();
+    }
+
+    @Override
+    public String getUser() {
+        return ((TinderTP) this.getApplication()).getUser();
+    }
+
+    @Override
+    public String getURL() {
+        return ((TinderTP) this.getApplication()).getUrl();
+    }
+
+    @Override
+    public String getToken() {
+        return ((TinderTP) this.getApplication()).getToken();
+    }
+
+    @Override
+    public String getChatName() {
+        return getIntent().getStringExtra("from");
+    }
+
+    @Override
+    public ConnectivityManager getConectivityManager() {
+        return (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
+    @Override
+    public View findView(int id) {
+        return findViewById(id);
+    }
+
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
     }
 }

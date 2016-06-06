@@ -1,10 +1,13 @@
 package com.example.sebastian.tindertp;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,13 +21,14 @@ import com.example.sebastian.tindertp.chatListTools.CustomAdapter;
 import com.example.sebastian.tindertp.chatListTools.RowItem;
 import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
+import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.Messages;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,DataTransfer, ViewUpdater {
 
     private List<RowItem> rowItems;
     private List<String> userNames;
@@ -34,6 +38,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private boolean[] haveToUpdate;
     private int lastItemSelected;
     private boolean paused;
+
+    private final static String CHAT_LIST_TAG = "ChatList";
 
     private String user;
 
@@ -62,19 +68,23 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         adapter = new CustomAdapter(this, rowItems);
 
-        if (DataThroughActivities.getInstance().hasMessages() ) {
-            ArrayList<String> recentUsers = DataThroughActivities.getInstance().getUsers();
-            ArrayList<String> recentMessages= DataThroughActivities.getInstance().getMessages();
 
-            int indexLastUser=0;
+
+        if (DataThroughActivities.getInstance().hasMessages() ) {
+            Log.i(CHAT_LIST_TAG,"Tiene mensajes nuevos del Pending Intent.");
+            ArrayList<String> recentUsers = DataThroughActivities.getInstance().getUsers();
+            ArrayList<String> recentMessages = DataThroughActivities.getInstance().getMessages();
+
+            int indexLastUser = 0;
             for(int i = 0; i < recentUsers.size(); i++) {
                 indexLastUser = updateUserLastMessage(recentUsers.get(i),recentMessages.get(i));
                 haveToUpdate[indexLastUser] = true;
                 adapter.updateBold(rowItems, indexLastUser, true);
-
             }
+
             if(!DataThroughActivities.getInstance().areTwoDifferntUsers()) {
-                adapter.restore();
+                Log.i(CHAT_LIST_TAG,"Mensajes Pending Intent de un solo usuario.");
+                adapter.restore(indexLastUser);
                 adapter.notifyDataSetInvalidated();
                 updatePriorActivities(userNames.get(indexLastUser));
                 DataThroughActivities.getInstance().deleteMssg();
@@ -102,10 +112,17 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     private void getLastMessages() {
 
+        ArrayList<String> recentUsers = null;
+
+        if (DataThroughActivities.getInstance().hasMessages() ) {
+            recentUsers = DataThroughActivities.getInstance().getUsers();
+        }
+
         for(int i = 0; i < userNames.size(); i++) {
-            Log.i("GetMSSG", "obtengo mensajes de " + userNames.get(i));
-            RequestResponseClient getOneMessage = ClientBuilder.build(this,userNames,userNames.get(i));
-            getOneMessage.runInBackground();
+            if (recentUsers == null || !recentUsers.contains(userNames.get(i))) {
+                RequestResponseClient getOneMessage = ClientBuilder.build(this, userNames, userNames.get(i));
+                getOneMessage.runInBackground();
+            }
         }
     }
 
@@ -119,12 +136,14 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     private List<String > getUserNames() {
         List<String> users = new ArrayList<>();
+        users.add("Aldana");
         users.add("Rocio");
         return users;
     }
 
     private List<Integer> getProfilePics() {
         List<Integer> profilePics = new ArrayList<>();
+        profilePics.add(R.drawable.aldana);
         profilePics.add(R.drawable.aldana);
         return profilePics;
 
@@ -135,10 +154,13 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             NotificationManager notificationManager = (NotificationManager)getSystemService
                     (Context.NOTIFICATION_SERVICE);
             notificationManager.cancel(0);
+
             Messages.getInstance().clear();
-            adapter.restore();
+
+            adapter.restore(position);
             adapter.notifyDataSetInvalidated();
             chatList.setAdapter(adapter);
+
             updatePriorActivities(userNames.get(position));
         }
     }
@@ -153,8 +175,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     public void onResume() {
         super.onResume();
         if (paused) {
-            Log.i("GetMSSG", "Resumee de chat");
             paused = false;
+            Log.i(CHAT_LIST_TAG,"Obtengo mensajes al resumir ChatListActivity.");
             RequestResponseClient getOneMessage = ClientBuilder.build(this, userNames, userNames.get(lastItemSelected));
             getOneMessage.runInBackground();
         }
@@ -175,8 +197,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         String userName = rowItems.get(position).getUserName();
         if (DataThroughActivities.getInstance().hasMessages()) {
             DataThroughActivities.getInstance().deleteMssg(userName);
-        } else if (ArraySerialization.hasPersistedMssg(this)) {
-            Log.i("asd","Borro mesanjes de usuario");
+        }
+        if (ArraySerialization.hasPersistedMssg(this)) {
             ArraySerialization.deleteStringFromArray(this,userName);
         }
         startChat(userName);
@@ -197,6 +219,21 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
                 chatList.setAdapter(adapter);
             }
         });
+    }
+
+    @Override
+    public void removeExtra(String key) {
+        getIntent().removeExtra(key);
+    }
+
+    @Override
+    public boolean hasExtra(String key) {
+        return getIntent().hasExtra(Common.MSSG_KEY);
+    }
+
+    @Override
+    public ArrayList<String> getStringArrayExtra(String key) {
+        return getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
     }
 
     private BroadcastReceiver onNotice = new BroadcastReceiver() {
@@ -238,5 +275,40 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     public void haveToUpdate(int index) {
         haveToUpdate[index]=true;
+    }
+
+    @Override
+    public String getUser() {
+        return ((TinderTP) this.getApplication()).getUser();
+    }
+
+    @Override
+    public String getURL() {
+        return ((TinderTP) this.getApplication()).getUrl();
+    }
+
+    @Override
+    public String getToken() {
+        return ((TinderTP) this.getApplication()).getToken();
+    }
+
+    @Override
+    public String getChatName() {
+        return getIntent().getStringExtra("from");
+    }
+
+    @Override
+    public ConnectivityManager getConectivityManager() {
+        return (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
+    @Override
+    public View findView(int id) {
+        return findViewById(id);
+    }
+
+    @Override
+    public Context getContext() {
+        return getApplicationContext();
     }
 }

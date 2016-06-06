@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.example.sebastian.tindertp.DataTransfer;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 
 import java.io.BufferedReader;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 public abstract class RequestResponseClient extends MediaDownloader {
 
-    protected Activity ctx;
+    protected DataTransfer dTransfer;
     private ConnectionStruct conn;
     private Map<String, String> values;
     protected boolean badResponse;
@@ -24,9 +25,9 @@ public abstract class RequestResponseClient extends MediaDownloader {
     private String body;
     private boolean hasBody;
 
-    public RequestResponseClient(Activity ctx, ConnectionStruct conn, Map<String, String> values) {
+    public RequestResponseClient(DataTransfer transfer, ConnectionStruct conn, Map<String, String> values) {
         jsonString = "";
-        this.ctx = ctx;
+        dTransfer = transfer;
         this.conn = conn;
         path = conn.path;
         this.values = values;
@@ -48,18 +49,15 @@ public abstract class RequestResponseClient extends MediaDownloader {
     @Override
     void connect() throws IOException {
 
-        Log.i(CONNECTION, "Connection with " + conn.URL + path);
         connection.setReadTimeout(timeOUT_R /* milliseconds */);
         connection.setConnectTimeout(timeOUT_C /* milliseconds */);
         connection.setRequestMethod(conn.requestMethod);
-        Log.i(CONNECTION, "Set request method");
 
         for (Map.Entry<String, String> entry : values.entrySet()) {
             connection.addRequestProperty(entry.getKey(), entry.getValue());
         }
 
         if (hasBody){
-            Log.i("asd","TIENE BODY");
             connection.setDoOutput(true);
             byte[] outputInBytes = body.getBytes("UTF-8");
             OutputStream os = connection.getOutputStream();
@@ -69,19 +67,13 @@ public abstract class RequestResponseClient extends MediaDownloader {
             connection.setDoOutput(false);
         }
 
-        Log.i(CONNECTION, "connecting...");
         connection.connect();
-        Log.i(CONNECTION, "Conected ");
 
         int response = connection.getResponseCode();
-        Log.i(CONNECTION, "" + response);
         if ( response < 300 && response >= 200 ){
             getJson();
-            Log.i("devuelve",jsonString);
-            //contentAsString = "Operación exitosa.";
             isConnected = true;
         }else {
-           // contentAsString = "Fallo la operación.";
             badResponse = true;
         }
     }
@@ -103,7 +95,6 @@ public abstract class RequestResponseClient extends MediaDownloader {
     void closeConnection() throws IOException {
         if (connection != null) {
             connection.disconnect();
-            Log.i(CONNECTION,"Disconected");
         }
     }
 
@@ -111,7 +102,7 @@ public abstract class RequestResponseClient extends MediaDownloader {
 
     @Override
     public void runInBackground() {
-        ConnectivityManager connMgr = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = dTransfer.getConectivityManager();
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(conn.URL+path);

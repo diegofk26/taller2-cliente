@@ -21,6 +21,8 @@ public class PriorActivitiesUpdater extends BroadcastReceiver {
     List<String> message;
     private boolean areMessagesReaded;
 
+    private final static String PRIOR_UPDATER = "Prior updater";
+
     public void setUsersAndMessage(List<String> users, List<String> mssg) {
         this.users = users;
         message = mssg;
@@ -41,6 +43,7 @@ public class PriorActivitiesUpdater extends BroadcastReceiver {
     }
 
     private void deleteMessages(String user) {
+        Log.i(PRIOR_UPDATER,"Se eliminan los mensajes de " + user);
         for (int i = users.size() - 1; i >= 0; i--) {
             if (users.get(i).equals(user)) {
                 users.remove(i);
@@ -56,6 +59,7 @@ public class PriorActivitiesUpdater extends BroadcastReceiver {
 
         if(user != null) {
             int mssgReaded = Collections.frequency(users, user);
+            Log.i(PRIOR_UPDATER, "Borrar notificaciones porque leyó "+mssgReaded+" mensajes");
             deleteMessages(user);
             onNotice.setLessNotificationCount(mssgReaded);
             areMessagesReaded = true;

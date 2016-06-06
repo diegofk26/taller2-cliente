@@ -13,7 +13,10 @@ import java.util.List;
 
 public class ArraySerialization {
 
+    private final static String PERSISTED_TAG = "Persisted Data";
+
     private static void setStringArrayinPref(Context ctx, String key, List<String> values) {
+        Log.i(PERSISTED_TAG, "Guardo un array entero.");
         SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         JSONArray a = new JSONArray();
@@ -32,7 +35,7 @@ public class ArraySerialization {
     public static void persistUserAndMssg(Context ctx, String user, String mssg) {
         pushStringinPref(ctx,"USER",user);
         pushStringinPref(ctx, "MSSG", mssg);
-        Log.i("asddd", "guardooo en service");
+        Log.i(PERSISTED_TAG, "Guardooo " + user + " en service");
     }
 
     private static void pushStringinPref(Context context, String key, String value) {
@@ -40,13 +43,13 @@ public class ArraySerialization {
         SharedPreferences.Editor editor = preferences.edit();
         List<String> values = new ArrayList<>();
         if (preferences.contains(key)) {
-            Log.i("asd","Preferencias ya tienen mensajes guardados anteriomente");
+            Log.i(PERSISTED_TAG,"Preferencias ya tienen mensajes guardados anteriomente");
             ArrayList<String> arrayList = getPersistedArray(context, key);
             arrayList.add(value);
             values.addAll(arrayList);
         } else {
-            Log.i("asddd","preferencias no tienen mensajes guardados anteriomente");
-            values.add(value);
+            Log.i(PERSISTED_TAG,"preferencias no tienen mensajes guardados anteriomente");
+                    values.add(value);
         }
         JSONArray a = new JSONArray();
         for (int i = 0; i < values.size(); i++) {
@@ -61,12 +64,12 @@ public class ArraySerialization {
     }
 
     public static void deleteStringFromArray(Context context, String userToRemove) {
+        Log.i(PERSISTED_TAG,"Borro datos persistidos de " + userToRemove);
         ArrayList<String> messages = getPersistedArray(context, "MSSG");
         ArrayList<String> users = getPersistedArray(context, "USER");
 
         for (int i = users.size() -1; i >= 0; i--) {
             if (users.get(i).equals(userToRemove)) {
-                Log.i("asd","Borro "+ users.get(i));
                 users.remove(i);
                 messages.remove(i);
             }
@@ -78,18 +81,18 @@ public class ArraySerialization {
     }
 
     public static boolean hasPersistedMssg(Context ctx) {
-        Log.i("asddd","Pregunto si tiene mensajes persistidos");
+        Log.i(PERSISTED_TAG,"Pregunto si tiene mensajes persistidos");
         SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         return preferences.contains("USER") && preferences.contains("MSSG");
     }
 
     public static ArrayList<String> getPersistedArray(Context context, String key) {
-        Log.i("asddd","Obtengo mensajes");
+        Log.i(PERSISTED_TAG,"Obtengo mensajes");
         SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         String json = preferences.getString(key, null);
         ArrayList<String> stringArrayList = new ArrayList<>();
         if (json != null) {
-            Log.i("asddd","preparo JSON");
+            Log.i(PERSISTED_TAG,"preparo JSON");
             try {
                 JSONArray a = new JSONArray(json);
                 for (int i = 0; i < a.length(); i++) {

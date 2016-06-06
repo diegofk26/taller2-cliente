@@ -20,29 +20,34 @@ public class CustomAdapter extends BaseAdapter {
 
     Context context;
     List<RowItem> rowItems;     /**< Lista de todos los items del ChatList*/
-    private int updatedIndex;   /**< Indece de uina posicion actualizada*/
-    private boolean updated;
+    private List<Boolean> isBoldList;
+
+    private final static String ADAPTER_TAG = "CustomAdapter CHATLIST";
 
     public CustomAdapter(Context context, List<RowItem> rowItems) {
         this.context = context;
-        updatedIndex = 0;
         this.rowItems = rowItems;
-        updated = false;
+
+        isBoldList = new ArrayList<>();
+        for (int i = 0; i < rowItems.size(); i++) {
+            isBoldList.add(false);
+        }
     }
 
-    /**Actualiza a Negrita el nuevo mensaje.*/
+    /**Actualiza a Negrita o Normal el mensaje.*/
     public void updateBold(List<RowItem> newRows, int index, boolean isBold) {
+        Log.i(ADAPTER_TAG,"Dispara el cambio en la posicion: " + index + ". isBold: " + isBold);
         List<RowItem> aux = new ArrayList<>( newRows);
-        this.updatedIndex = index;
         rowItems.clear();
         rowItems.addAll(aux);
-        updated = isBold;
+        isBoldList.set(index,isBold);
         notifyDataSetChanged();
     }
 
     /** Restaura la negrita a modo normal*/
-    public void restore() {
-        updated = false;
+    public void restore(int position) {
+        Log.i(ADAPTER_TAG,"Dispara el cambio a modo NORMAL de la posicion: " + position);
+        isBoldList.set(position,false);
         notifyDataSetChanged();
     }
 
@@ -61,7 +66,6 @@ public class CustomAdapter extends BaseAdapter {
         return rowItems.indexOf(getItem(position));
     }
 
-    /* private view holder class */
     private class ViewHolder {
         ImageView profilePic;
         TextView userName;
@@ -72,7 +76,6 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
-
 
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -87,11 +90,11 @@ public class CustomAdapter extends BaseAdapter {
 
             holder.lastmessage = (TextView) convertView.findViewById(R.id.message);
 
-            if (updated && updatedIndex == position) {
-                Log.i("BOLDDDD", rowItems.get(position).getUserName());
+            if (isBoldList.get(position)) {
+                Log.i(ADAPTER_TAG, "BOLD: " + rowItems.get(position).getUserName());
                 holder.lastmessage.setTypeface(null, Typeface.BOLD_ITALIC);
             } else {
-                Log.i("NORMAALLL", rowItems.get(position).getUserName());
+                Log.i(ADAPTER_TAG, "NORMAL: " + rowItems.get(position).getUserName());
                 holder.lastmessage.setTypeface(null, Typeface.NORMAL);
             }
 
@@ -99,7 +102,6 @@ public class CustomAdapter extends BaseAdapter {
             holder.profilePic.setImageResource(rowPos.getProfilePic());
             holder.userName.setText(rowPos.getUserName());
             holder.lastmessage.setText(rowPos.getLastMessage());
-            Log.i("en VIEW", holder.lastmessage.getText().toString());
 
             convertView.setTag(holder);
         } else {

@@ -1,12 +1,13 @@
 package com.example.sebastian.tindertp.commonTools;
 
+import android.util.Log;
+
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DataThroughActivities {
     private ArrayList<String> messages = null;
     private ArrayList<String> users = null;
+    private final static String DataThrough_TAG = "DataThrough";
 
 
     public static DataThroughActivities getInstance(){
@@ -14,16 +15,19 @@ public class DataThroughActivities {
     }
 
     public void setMessages(ArrayList<String> users, ArrayList<String> messages) {
+        Log.i(DataThrough_TAG,"Se setean los mensajes y usuarios.");
         this.messages = messages;
         this.users = users;
     }
 
     public void deleteMssg() {
+        Log.i(DataThrough_TAG,"Se eliminan todos los mensajes");
         messages = null;
         users = null;
     }
 
     public void deleteMssg(String userName) {
+        Log.i(DataThrough_TAG,"Se eliminan los mensajes de " + userName);
         for (int i = users.size() - 1; i >= 0; i--) {
             if (users.get(i).equals(userName)){
                 users.remove(i);
