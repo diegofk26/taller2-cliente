@@ -1,13 +1,12 @@
 package com.example.sebastian.tindertp.animationTools;
 
 import java.io.File;
-import android.app.Activity;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +17,14 @@ import com.example.sebastian.tindertp.R;
 /**Adaptador entre PageView y ImageView*/
 public class FullScreenImageAdapter extends PagerAdapter {
 
-    private Activity fullScreenAct;
+    private Context ctx;
     private String[] imgFiles;
     ImageView imgDisplay;
     private LayoutInflater inflater;
 
     // constructor
-    public FullScreenImageAdapter(Activity activity, String[] imgFile) {
-        this.fullScreenAct = activity;
+    public FullScreenImageAdapter(Context ctx, String[] imgFile) {
+        this.ctx = ctx;
         this.imgFiles = imgFile;
     }
 
@@ -51,7 +50,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 
-        inflater = (LayoutInflater) fullScreenAct
+        inflater = (LayoutInflater) ctx
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                 false);

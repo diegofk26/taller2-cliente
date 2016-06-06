@@ -74,7 +74,7 @@ public class MatchingActivity extends AppCompatActivity {
         initalize();
 
         if (DataThroughActivities.getInstance().hasMessages() ){
-            ActivityStarter.start(this, ChatListActivity.class);
+            ActivityStarter.start(getApplicationContext(), ChatListActivity.class);
         }
 
         imageDownloader =  new ImageDownloaderClient(this,mText);
@@ -99,10 +99,10 @@ public class MatchingActivity extends AppCompatActivity {
             onNotice.setNotificationCount(messages.size());
             Log.i(MATCH_TAG,"Notificaciones " + onNotice.getNotificationCount());
             invalidateOptionsMenu();
-        } else if (ArraySerialization.hasPersistedMssg(this)) {
+        } else if (ArraySerialization.hasPersistedMssg(getApplicationContext())) {
             Log.i(MATCH_TAG,"Tiene mensajes persistidos.");
-            messages = ArraySerialization.getPersistedArray(this, "MSSG");
-            users = ArraySerialization.getPersistedArray(this, "USER");
+            messages = ArraySerialization.getPersistedArray(getApplicationContext(), "MSSG");
+            users = ArraySerialization.getPersistedArray(getApplicationContext(), "USER");
             onNotice.setNotificationCount(messages.size());
             invalidateOptionsMenu();
         }
@@ -165,7 +165,7 @@ public class MatchingActivity extends AppCompatActivity {
      * imagen descargada, que es la del perfil.*/
     public void goToProfile(View v) {
         if (imgFiles.size()!= 0){
-            Intent profileAct = new Intent(this, ProfileActivity.class);
+            Intent profileAct = new Intent(getApplicationContext(), ProfileActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             profileAct.putExtra(Common.PROFILE_IMG_KEY, imgFiles.get(0));
             if (onNotice.getNotificationCount() != 0) {
@@ -178,7 +178,7 @@ public class MatchingActivity extends AppCompatActivity {
     }
 
     public void goToMesseges(View v) {
-        Intent chatAct = new Intent(this, ChatListActivity.class);
+        Intent chatAct = new Intent(getApplicationContext(), ChatListActivity.class);
         chatAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (onNotice.getNotificationCount() != 0) {
             chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
@@ -237,7 +237,7 @@ public class MatchingActivity extends AppCompatActivity {
             firstTime = false;
             imgView.setImageBitmap(this.bitmaps.get(0));
             Log.i(MATCH_TAG, "Primer imagen");
-            imgView.startAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
+            imgView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in));
         }
     }
 

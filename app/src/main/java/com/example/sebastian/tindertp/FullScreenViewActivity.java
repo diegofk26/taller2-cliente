@@ -48,7 +48,7 @@ public class FullScreenViewActivity extends Activity{
 
         getDataFromMatchingActivity();
 
-        adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,imgFiles);
+        adapter = new FullScreenImageAdapter(getApplicationContext(),imgFiles);
 
         viewPager.setAdapter(adapter);
         //setea el animador de pagina.

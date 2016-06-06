@@ -2,6 +2,7 @@ package com.example.sebastian.tindertp.chatListTools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,7 +102,9 @@ public class CustomAdapter extends BaseAdapter {
             RowItem rowPos = rowItems.get(position);
             holder.profilePic.setImageResource(rowPos.getProfilePic());
             holder.userName.setText(rowPos.getUserName());
+            holder.userName.setTextColor(Color.BLACK);
             holder.lastmessage.setText(rowPos.getLastMessage());
+            holder.lastmessage.setTextColor(Color.BLACK);
 
             convertView.setTag(holder);
         } else {

@@ -2,7 +2,6 @@ package com.example.sebastian.tindertp.commonTools;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,7 +13,6 @@ public class ViewIdGenerator {
     public static int generateViewId() {
 
         if (Build.VERSION.SDK_INT < 17) {
-            Log.i("aaa","menor que 17");
             for (;;) {
                 final int result = sNextGeneratedId.get();
                 // aapt-generated IDs have the high byte nonzero; clamp to the range under that.

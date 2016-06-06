@@ -1,10 +1,7 @@
 package com.example.sebastian.tindertp.internetTools;
 
-import android.app.Activity;
-import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import com.example.sebastian.tindertp.DataTransfer;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
@@ -17,17 +14,17 @@ import java.util.Map;
 
 public abstract class RequestResponseClient extends MediaDownloader {
 
-    protected DataTransfer dTransfer;
     private ConnectionStruct conn;
     private Map<String, String> values;
     protected boolean badResponse;
     protected String jsonString;
     private String body;
+    ConnectivityManager connMgr;
     private boolean hasBody;
 
     public RequestResponseClient(DataTransfer transfer, ConnectionStruct conn, Map<String, String> values) {
         jsonString = "";
-        dTransfer = transfer;
+        connMgr = transfer.getConectivityManager();
         this.conn = conn;
         path = conn.path;
         this.values = values;
@@ -102,7 +99,6 @@ public abstract class RequestResponseClient extends MediaDownloader {
 
     @Override
     public void runInBackground() {
-        ConnectivityManager connMgr = dTransfer.getConectivityManager();
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(conn.URL+path);

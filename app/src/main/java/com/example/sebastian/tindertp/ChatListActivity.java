@@ -1,13 +1,11 @@
 package com.example.sebastian.tindertp;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +22,6 @@ import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.Messages;
-import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,9 +63,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         buildRowItems();
 
-        adapter = new CustomAdapter(this, rowItems);
-
-
+        adapter = new CustomAdapter(getApplicationContext(), rowItems);
 
         if (DataThroughActivities.getInstance().hasMessages() ) {
             Log.i(CHAT_LIST_TAG,"Tiene mensajes nuevos del Pending Intent.");
@@ -100,7 +95,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         getLastMessages();
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("CHAT_LIST"));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice, new IntentFilter("CHAT_LIST"));
     }
 
     private void initMessages() {
@@ -118,10 +113,12 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             recentUsers = DataThroughActivities.getInstance().getUsers();
         }
 
+        ClientBuilder client = new ClientBuilder(this);
+
         for(int i = 0; i < userNames.size(); i++) {
             if (recentUsers == null || !recentUsers.contains(userNames.get(i))) {
-                RequestResponseClient getOneMessage = ClientBuilder.build(this, userNames, userNames.get(i));
-                getOneMessage.runInBackground();
+
+                client.build(this, userNames, userNames.get(i));
             }
         }
     }
@@ -177,8 +174,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         if (paused) {
             paused = false;
             Log.i(CHAT_LIST_TAG,"Obtengo mensajes al resumir ChatListActivity.");
-            RequestResponseClient getOneMessage = ClientBuilder.build(this, userNames, userNames.get(lastItemSelected));
-            getOneMessage.runInBackground();
+            ClientBuilder client = new ClientBuilder(this);
+            client.build(this, userNames, userNames.get(lastItemSelected));
         }
     }
 
@@ -198,8 +195,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         if (DataThroughActivities.getInstance().hasMessages()) {
             DataThroughActivities.getInstance().deleteMssg(userName);
         }
-        if (ArraySerialization.hasPersistedMssg(this)) {
-            ArraySerialization.deleteStringFromArray(this,userName);
+        if (ArraySerialization.hasPersistedMssg(getApplicationContext())) {
+            ArraySerialization.deleteStringFromArray(getApplicationContext(),userName);
         }
         startChat(userName);
     }

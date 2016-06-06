@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             DataThroughActivities.getInstance().setMessages(users,messages);
         }
 
-        Intent intent = new Intent(this, RegistrationIntentService.class);
+        Intent intent = new Intent(getApplicationContext(), RegistrationIntentService.class);
         startService(intent);
 
         final Handler handler = new Handler();
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }, 500);
-
     }
 
 }

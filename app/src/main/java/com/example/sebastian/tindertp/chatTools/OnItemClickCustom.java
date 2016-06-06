@@ -33,9 +33,8 @@ public class OnItemClickCustom implements AdapterView.OnItemClickListener {
             adp.remove(adp.getItem(position), position);
             ChatMessage item = new ChatMessage(false, text);
             adp.add(item);
-            RequestResponseClient sendMessage = ClientBuilder.build(text, mssgList, item,(DataTransfer)act);
-            sendMessage.addBody(text);
-            sendMessage.runInBackground();
+            ClientBuilder client = new ClientBuilder((DataTransfer)act);
+            client.build(text, mssgList, item, (DataTransfer) act);
         }
     }
 

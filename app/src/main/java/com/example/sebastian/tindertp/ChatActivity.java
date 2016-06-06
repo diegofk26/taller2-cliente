@@ -1,6 +1,5 @@
 package com.example.sebastian.tindertp;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +17,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,7 +30,6 @@ import com.example.sebastian.tindertp.chatTools.ChatMessage;
 import com.example.sebastian.tindertp.chatTools.ChatTextBuilder;
 import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.chatTools.OnItemClickCustom;
-import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 
 public class ChatActivity extends AppCompatActivity implements DataTransfer{
 
@@ -76,7 +72,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer{
         mssgList = (ListView) findViewById(R.id.listview);
 
         chatText = (EditText) findViewById(R.id.chat_text);
-        ChatTextBuilder.chatEditor(chatText,getApplicationContext());
+        ChatTextBuilder.chatEditor(chatText, getApplicationContext());
 
         adp = new ChatArrayAdapter(getApplicationContext(), R.layout.chat);
         mssgList.setAdapter(adp);
@@ -97,7 +93,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer{
         mssgList.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         mssgList.setAdapter(adp);
 
-        mssgList.setOnItemClickListener(new OnItemClickCustom(getApplicationContext(),mssgList));
+        mssgList.setOnItemClickListener(new OnItemClickCustom(getApplicationContext(), mssgList));
 
         adp.registerDataSetObserver(new DataSetObserver() {
 
@@ -109,9 +105,8 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer{
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNewMessage,
                 new IntentFilter("CHAT"));
-
-        RequestResponseClient getHistory = ClientBuilder.build(adp,this);
-        getHistory.runInBackground();
+        ClientBuilder client = new ClientBuilder(this);
+        client.build(adp, this);
     }
 
     private boolean sendChatMessage(){
@@ -119,12 +114,18 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer{
         if ( !text.isEmpty()) {
             ChatMessage item = new ChatMessage(false, text);
             adp.add(item);
-            RequestResponseClient sendMessage = ClientBuilder.build(text, mssgList, item,this);
+            ClientBuilder client = new ClientBuilder(this);
+            client.build(text, mssgList, item, this);
             chatText.setText("");
-            sendMessage.addBody(text);
-            sendMessage.runInBackground();
         }
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RelativeLayout rLayout = (RelativeLayout) findViewById (R.id.relative_chat);
+        rLayout.setBackgroundResource(0);
     }
 
     @Override
@@ -139,8 +140,8 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer{
     }
 
     public void moreMssg(View v) {
-        RequestResponseClient getMoreHistory = ClientBuilder.build(getApplicationContext(), adp, mssgList, this);
-        getMoreHistory.runInBackground();
+        ClientBuilder client = new ClientBuilder(this);
+        client.build(getApplicationContext(), adp, mssgList, this);
     }
 
     @Override
