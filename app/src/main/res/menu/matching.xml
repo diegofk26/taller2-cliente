@@ -19,4 +19,9 @@
         android:orderInCategory="100"
         android:title="@string/action_logout"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/change_pic"
+        android:orderInCategory="100"
+        android:title="@string/action_chage_picture"
+        app:showAsAction="never" />
 </menu>

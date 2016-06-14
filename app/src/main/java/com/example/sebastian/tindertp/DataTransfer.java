@@ -10,7 +10,6 @@ public interface DataTransfer {
     String getURL();
     String getToken();
     String getChatName();
-    ConnectivityManager getConectivityManager();
     View findView(int id);
     Context getContext();
 }

@@ -1,4 +1,4 @@
-<map id="com.example.sebastian.tindertp.internetTools.ImageDownloaderClient" name="com.example.sebastian.tindertp.internetTools.ImageDownloaderClient">
+<map id="com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient" name="com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient">
 <area shape="rect" id="node8" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1MatchingActivity.html" title="Activity donde se matchean las personas. " alt="" coords="1067,333,1277,374"/>
 <area shape="rect" id="node2" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1MediaDownloader.html" title="com.example.sebastian.tindertp.internet\lTools.MediaDownloader" alt="" coords="274,107,529,149"/>
 <area shape="rect" id="node6" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1UrlArrayAdapter.html" title="Adaptador del array de urls. " alt="" coords="274,225,529,266"/>

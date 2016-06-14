@@ -42,8 +42,8 @@
         android:id="@+id/email_text"
         android:text=""
         android:hint="@string/email"
-        android:layout_below="@+id/name"
-        android:layout_centerHorizontal="true"/>
+        android:layout_above="@+id/radioButton"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -52,11 +52,11 @@
         android:text=""
         android:hint="@string/contraseña"
         android:inputType="textPassword"
-        android:layout_below="@+id/email_text"
+        android:layout_above="@+id/checkBox"
         android:layout_alignLeft="@+id/email_text"
         android:layout_alignStart="@+id/email_text"
-        android:layout_alignRight="@+id/email_text"
-        android:layout_alignEnd="@+id/email_text" />
+        android:layout_alignRight="@+id/age"
+        android:layout_alignEnd="@+id/age" />
 
     <Button
         android:layout_width="wrap_content"
@@ -64,7 +64,8 @@
         android:text="@string/ok"
         android:onClick="goToInterests"
         android:id="@+id/button3"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/checkBox"
         android:layout_centerHorizontal="true" />
 
     <CheckBox
@@ -72,7 +73,7 @@
         android:layout_height="wrap_content"
         android:text="@string/mostrar_pass"
         android:id="@+id/checkBox"
-        android:layout_below="@+id/textPassword1"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/textPassword1"
         android:layout_alignStart="@+id/textPassword1" />
 
@@ -96,22 +97,44 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hombre"
+        android:text="@string/mujer"
         android:id="@+id/radioButton"
         android:checked="false"
-        android:layout_below="@+id/checkBox"
-        android:layout_alignLeft="@+id/checkBox"
-        android:layout_alignStart="@+id/checkBox" />
+        android:layout_above="@+id/textPassword1"
+        android:layout_toRightOf="@+id/textView9"
+        android:layout_toEndOf="@+id/textView9" />
 
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mujer"
+        android:text="@string/hombre"
         android:id="@+id/radioButton2"
         android:checked="false"
-        android:layout_below="@+id/checkBox"
-        android:layout_toRightOf="@+id/radioButton"
-        android:layout_toEndOf="@+id/radioButton" />
+        android:layout_above="@+id/textPassword1"
+        android:layout_toLeftOf="@+id/radioButton"
+        android:layout_toStartOf="@+id/radioButton" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alias"
+        android:hint="@string/alias"
+        android:layout_below="@+id/name"
+        android:layout_alignRight="@+id/name"
+        android:layout_alignEnd="@+id/name"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignStart="@+id/name" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/age"
+        android:hint="@string/edad"
+        android:layout_below="@+id/alias"
+        android:layout_alignLeft="@+id/email_text"
+        android:layout_alignStart="@+id/email_text" />
 
 </RelativeLayout>
 </ScrollView>

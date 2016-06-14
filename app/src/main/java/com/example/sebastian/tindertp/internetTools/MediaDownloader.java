@@ -18,7 +18,7 @@ public abstract class MediaDownloader {
     protected InputStream is;
     protected HttpURLConnection connection;
     protected String nURL;
-    protected String path;/**< /test, /login /registro */
+    protected String path;/**< /test, /login, /registro, etc*/
     protected boolean isConnected;
 
     public static final String CONNECTION = "Connection";

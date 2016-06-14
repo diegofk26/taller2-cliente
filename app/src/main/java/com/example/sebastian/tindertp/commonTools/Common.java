@@ -31,6 +31,8 @@ public class Common {
     public static final String REGISTER = "/registro";  /**< Vars para la conexion url */
     public static final String MESSAGES = "/mensajes";  /**< Vars para la conexion url */
     public static final String CHAT = "/chat";          /**< Vars para la conexion url */
+    public static final String PROFILE = "/perfil";          /**< Vars para la conexion url */
+    public static final String PICTURE = "/foto";          /**< Vars para la conexion url */
 
     public static final String IA = "file:///android_asset/IA.gif";     /**< Vars para la ScreenSplash */
     public static final String DOTS = "file:///android_asset/dots.gif"; /**< Vars para la ScreenSplash */
@@ -40,6 +42,16 @@ public class Common {
     //Headers
     public static final String USER_KEY = "Usuario";    /**< Vars para la conexion url */
     public static final String PASS_KEY = "Password";   /**< Vars para la conexion url */
+    public static final String NAME_KEY = "name";   /**< Vars para la conexion url */
+    public static final String ALIAS_KEY = "alias";         /**< Vars para la conexion url */
+    public static final String SEX_KEY = "sex";           /**< Vars para la conexion url */
+    public static final String EMAIL_KEY = "email";   /**< Vars para la conexion url */
+    public static final String AGE_KEY = "edad";   /**< Vars para la conexion url */
+    public static final String INTERESTS_KEY = "interests";   /**< Vars para la conexion url */
+    public static final String LONGITUDE_KEY = "longitude";   /**< Vars para la conexion url */
+    public static final String LATITUDE_KEY = "latitude";   /**< Vars para la conexion url */
+    public static final String LOCATION_KEY = "location";   /**< Vars para la conexion url */
+
     public static final String USER1 = "Usuario1";      /**< Vars para la conexion url */
     public static final String USER2 = "Usuario2";      /**< Vars para la conexion url */
     public static final String DESDE = "Desde";         /**< Vars para la conexion url */
@@ -48,6 +60,15 @@ public class Common {
     public static final String TOKEN = "Token";         /**< Vars para la conexion url */
     public static final String RECEPTOR = "Receptor";   /**< Vars para la conexion url */
     public static final String TOKEN_GCM = "TokenGCM";   /**< Vars para la conexion url */
+
+    //Json Usuario
+    public static final String USER_NAME = "name";
+    public static final String USER_ALIAS = "alias";
+    public static final String USER_SEX = "sex";
+    public static final String USER_AGE = "age";
+    public static final String USER_PHOTO = "photo_profile";
+    public static final String USER_INTERESTS = "interests";
+
 
 
     public static final String IMG_POS_KEY = "position";

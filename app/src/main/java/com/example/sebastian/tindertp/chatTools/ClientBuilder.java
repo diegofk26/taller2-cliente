@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.sebastian.tindertp.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.DataTransfer;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.ViewUpdater;
@@ -59,7 +60,7 @@ public class ClientBuilder {
         }
 
         final List<String> finalUsers = users;
-        RequestResponseClient client = new RequestResponseClient((DataTransfer)updater, conn, headers) {
+        RequestResponseClient client = new RequestResponseClient((ConectivityManagerInterface)updater, conn, headers) {
 
             @Override
             protected void getJson() throws IOException {
@@ -114,7 +115,7 @@ public class ClientBuilder {
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
         Map<String, String> headers = HeaderBuilder.forLoadMessages(token,user,chatName,1);
 
-        RequestResponseClient client = new RequestResponseClient(transfer, conn, headers) {
+        RequestResponseClient client = new RequestResponseClient((ConectivityManagerInterface)transfer, conn, headers) {
 
             @Override
             protected void getJson() throws IOException {
@@ -156,7 +157,7 @@ public class ClientBuilder {
         ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
         Map<String, String> headers = HeaderBuilder.forSendMessage(token, user, chatName);
 
-        RequestResponseClient client = new RequestResponseClient(transfer, conn, headers) {
+        RequestResponseClient client = new RequestResponseClient((ConectivityManagerInterface)transfer, conn, headers) {
 
             @Override
             protected void getJson() throws IOException {
@@ -214,7 +215,7 @@ public class ClientBuilder {
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
         Map<String, String> headers = HeaderBuilder.forLoadMessages(token, user, chatName, adp.size());
 
-        RequestResponseClient client = new RequestResponseClient(transfer, conn, headers) {
+        RequestResponseClient client = new RequestResponseClient((ConectivityManagerInterface)transfer, conn, headers) {
 
             @Override
             protected void getJson() throws IOException {

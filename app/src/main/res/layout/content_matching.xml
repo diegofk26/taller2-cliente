@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context="com.example.sebastian.tindertp.MatchingActivity"
+    android:id="@+id/matchFragment"
     tools:showIn="@layout/activity_matching">
 
     <LinearLayout
@@ -24,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/imageView"
-
+            android:onClick="goToFullScreen"
             android:clickable="false"
             android:focusable="false" />
 

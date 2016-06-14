@@ -1,9 +1,20 @@
 package com.example.sebastian.tindertp;
 
+import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -18,23 +29,37 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.AdapterHashMap;
+import com.example.sebastian.tindertp.commonTools.JsonArrayBuilder;
 import com.example.sebastian.tindertp.commonTools.ViewIdGenerator;
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InterestsActivity extends AppCompatActivity {
 
-    private String user;
-    private String pass;
+
     private AdapterHashMap editTextMap;
+    private Map<String,String> mapper;
     private Animation animationAplha;
+    private LocationManager locationManager;
+    private LocationListener listener;
+    private double longitude;
+    private double latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,31 +70,102 @@ public class InterestsActivity extends AppCompatActivity {
 
         animationAplha = AnimationUtils.loadAnimation(this,R.anim.alpha);
 
-        editTextMap = new AdapterHashMap();
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        if (getIntent().hasExtra(Common.USER_KEY) && getIntent().hasExtra(Common.PASS_KEY)) {
-            user = getIntent().getStringExtra(Common.USER_KEY);
-            pass = getIntent().getStringExtra(Common.PASS_KEY);
+
+        listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                longitude = location.getLongitude();
+                latitude =  location.getLatitude();
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(i);
+            }
+        };
+
+        editTextMap = new AdapterHashMap();
+        buildMapper();
+        locationConfig();
+    }
+
+    void locationConfig(){
+        // first check for permissions
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.INTERNET}
+                        ,10);
+            }
+            return;
+        }
+
+        locationManager.requestLocationUpdates("gps", 2000, 0, listener);
+    }
+
+    private void buildMapper() {
+        mapper = new HashMap<>();
+        List<TextView> interets = new ArrayList<>();
+        interets.add((TextView) findViewById(R.id.textView11));
+        interets.add((TextView) findViewById(R.id.textView10));
+        interets.add((TextView) findViewById(R.id.textView12));
+        interets.add((TextView) findViewById(R.id.textView13));
+        interets.add((TextView) findViewById(R.id.textView14));
+        interets.add((TextView) findViewById(R.id.textView15));
+        interets.add((TextView) findViewById(R.id.textView16));
+        for (int i = 0; i < interets.size(); i++) {
+            String text = interets.get(i).getText().toString();
+            String category = text.substring(0,text.length()-2).toLowerCase();
+            mapper.put(interets.get(i).getHint().toString(),category);
         }
 
     }
 
     public void goToRegister(View v) {
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
-        Map<String,String> values = HeaderBuilder.forRegister(user, pass, tokenGCM);
-        TextView text = (TextView)findViewById(R.id.textView17);
-        String url = ((TinderTP) this.getApplication()).getUrl();
+        if (getIntent().hasExtra(Common.USER_KEY) && getIntent().hasExtra(Common.PASS_KEY)) {
+            String json = getIntent().getStringExtra("json");
+            try {
+                JSONObject jsonObject = new JSONObject(json);
+                String userEmail = jsonObject.getString(Common.EMAIL_KEY);
+                String pass = jsonObject.getString(Common.PASS_KEY);
 
-        if (!url.isEmpty()) {
-            ConnectionStruct conn = new ConnectionStruct(Common.REGISTER,Common.PUT,url);
-            InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn);
-            info.runInBackground();
+                JSONArray jsonInterests = JsonArrayBuilder.buildInterests(editTextMap);
+                jsonObject.put(Common.INTERESTS_KEY,jsonInterests);
 
-        } else {
-            ActivityStarter.startClear(this, UrlActivity.class);
-            this.finish();
+                JSONObject jsonLocation = new JSONObject();
+                jsonLocation.put(Common.LATITUDE_KEY,latitude);
+                jsonLocation.put(Common.LONGITUDE_KEY, longitude);
+                jsonObject.put(Common.LOCATION_KEY,jsonLocation);
+
+                Map<String, String> values = HeaderBuilder.forNewUser(userEmail, pass);
+                TextView text = (TextView) findViewById(R.id.textView17);
+                String url = ((TinderTP) this.getApplication()).getUrl();
+
+                if (!url.isEmpty()) {
+                    ConnectionStruct conn = new ConnectionStruct(Common.REGISTER, Common.PUT, url);
+                    InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn);
+                    info.addBody(jsonObject.toString());
+                    info.runInBackground();
+
+                } else {
+                    ActivityStarter.startClear(this, UrlActivity.class);
+                    this.finish();
+                }
+            }catch(JSONException e){}
         }
     }
 
@@ -141,7 +237,7 @@ public class InterestsActivity extends AppCompatActivity {
         editTextRightOf = (EditText) findViewById(editID);
         String hint = String.valueOf(editTextRightOf.getHint());
 
-        if (editTextMap.hasKey(hint)) {
+        if (editTextMap.hasKey(mapper.get(hint))) {
             editTextRightOf = editTextMap.getLast(hint);
         }
 
@@ -163,7 +259,7 @@ public class InterestsActivity extends AppCompatActivity {
             newEditText = editText(ViewIdGenerator.generateViewId(), editTextRightOf.getId(), hint);
         }
 
-        editTextMap.put(hint, newEditText);
+        editTextMap.put(mapper.get(hint), newEditText);
 
         ImageView img = (ImageView) findViewById(v.getId());
         RelativeLayout.LayoutParams imgParams = (RelativeLayout.LayoutParams)img.getLayoutParams();

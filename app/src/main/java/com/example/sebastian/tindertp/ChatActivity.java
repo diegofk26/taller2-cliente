@@ -31,7 +31,7 @@ import com.example.sebastian.tindertp.chatTools.ChatTextBuilder;
 import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.chatTools.OnItemClickCustom;
 
-public class ChatActivity extends AppCompatActivity implements DataTransfer{
+public class ChatActivity extends AppCompatActivity implements DataTransfer, ConectivityManagerInterface{
 
     private ChatArrayAdapter adp;
     private ListView mssgList;
@@ -126,6 +126,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer{
         super.onDestroy();
         RelativeLayout rLayout = (RelativeLayout) findViewById (R.id.relative_chat);
         rLayout.setBackgroundResource(0);
+
     }
 
     @Override

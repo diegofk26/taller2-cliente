@@ -1,10 +1,7 @@
 package com.example.sebastian.tindertp.animationTools;
 
-import java.io.File;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -13,24 +10,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.R;
 /**Adaptador entre PageView y ImageView*/
 public class FullScreenImageAdapter extends PagerAdapter {
 
     private Context ctx;
-    private String[] imgFiles;
+    private String picBase64;
     ImageView imgDisplay;
     private LayoutInflater inflater;
 
     // constructor
-    public FullScreenImageAdapter(Context ctx, String[] imgFile) {
+    public FullScreenImageAdapter(Context ctx, String base64) {
         this.ctx = ctx;
-        this.imgFiles = imgFile;
+        this.picBase64 = base64;
     }
 
     @Override
     public int getCount() {
-        return this.imgFiles.length;
+        return 1;
     }
 
     @Override
@@ -38,11 +36,10 @@ public class FullScreenImageAdapter extends PagerAdapter {
         return view == ((RelativeLayout) object);
     }
 
-    private void setImgViewPager(View viewLayout,int position){
+    private void setImgViewPager(View viewLayout){
         imgDisplay = (ImageView) viewLayout.findViewById(R.id.imageView3);
 
-        final File myImageFile = new File(imgFiles[position]);
-        Bitmap myBitmap = BitmapFactory.decodeFile(myImageFile.getAbsolutePath());
+        Bitmap myBitmap = ImageBase64.decodeBase64(picBase64);
 
         imgDisplay.setImageBitmap(myBitmap);
     }
@@ -56,7 +53,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
                 false);
 
         //Set the current Image to ImageView in ViewPager
-        setImgViewPager(viewLayout, position);
+        setImgViewPager(viewLayout);
         ((ViewPager) container).addView(viewLayout);
 
         return viewLayout;

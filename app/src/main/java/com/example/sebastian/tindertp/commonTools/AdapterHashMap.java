@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AdapterHashMap {
 
@@ -28,6 +29,18 @@ public class AdapterHashMap {
 
         editTextList.add(editText);
         editTextMap.put(key,editTextList);
+    }
+
+    public Set<Map.Entry<String, List<EditText>>> entrySet() {
+        return editTextMap.entrySet();
+    }
+
+    public List<EditText> get(String key) {
+        return editTextMap.get(key);
+    }
+
+    public int size() {
+        return editTextMap.size();
     }
 
     public EditText getLast (String key) {

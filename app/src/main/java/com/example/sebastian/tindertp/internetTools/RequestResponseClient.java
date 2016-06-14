@@ -3,6 +3,7 @@ package com.example.sebastian.tindertp.internetTools;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.sebastian.tindertp.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.DataTransfer;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 
@@ -22,7 +23,7 @@ public abstract class RequestResponseClient extends MediaDownloader {
     ConnectivityManager connMgr;
     private boolean hasBody;
 
-    public RequestResponseClient(DataTransfer transfer, ConnectionStruct conn, Map<String, String> values) {
+    public RequestResponseClient(ConectivityManagerInterface transfer, ConnectionStruct conn, Map<String, String> values) {
         jsonString = "";
         connMgr = transfer.getConectivityManager();
         this.conn = conn;

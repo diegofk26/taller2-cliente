@@ -1,11 +1,17 @@
 package com.example.sebastian.tindertp;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +21,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 
 public class RegistryActivity extends AppCompatActivity {
 
@@ -84,15 +96,31 @@ public class RegistryActivity extends AppCompatActivity {
 
     public void goToInterests(View v) {
 
-        EditText user = (EditText) findViewById(R.id.email_text);
+        EditText email = (EditText) findViewById(R.id.email_text);
+        EditText alias = (EditText) findViewById(R.id.alias);
+        EditText age = (EditText) findViewById(R.id.age);
+        EditText name = (EditText) findViewById(R.id.name);
+
         TextView text = (TextView) findViewById(R.id.textView9);
 
-        if( Common.userAndPass_OK(user, passText, text) ) {
+        if( Common.userAndPass_OK(email, passText, text) ) {
 
             Intent interestsAct = new Intent(this, InterestsActivity.class);
             interestsAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            interestsAct.putExtra(Common.USER_KEY, user.getText().toString());
-            interestsAct.putExtra(Common.PASS_KEY, passText.getText().toString());
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put(Common.EMAIL_KEY, email.getText().toString());
+                jsonObject.put(Common.PASS_KEY, passText.getText().toString());
+                jsonObject.put(Common.ALIAS_KEY, alias.getText().toString());
+                jsonObject.put(Common.AGE_KEY, Integer.parseInt(age.getText().toString()));
+                jsonObject.put(Common.NAME_KEY, name.getText().toString());
+                if (menrButton.isChecked()){
+                    jsonObject.put(Common.SEX_KEY, menrButton.getHint().toString());
+                }else {
+                    jsonObject.put(Common.SEX_KEY, womanrButton.getHint().toString());
+                }
+            }catch(JSONException e){}
+            interestsAct.putExtra("json",jsonObject.toString());
             startActivity(interestsAct);
         }
     }

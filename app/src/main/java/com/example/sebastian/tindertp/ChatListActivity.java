@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -14,18 +15,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatListTools.CustomAdapter;
 import com.example.sebastian.tindertp.chatListTools.RowItem;
 import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.Messages;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,DataTransfer, ViewUpdater {
+public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,DataTransfer, ViewUpdater,ConectivityManagerInterface {
 
     private List<RowItem> rowItems;
     private List<String> userNames;
@@ -50,6 +54,10 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         setSupportActionBar(toolbar);
 
         user = ((TinderTP) this.getApplication()).getUser();
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        setBackgroundOnOrientation(orientation);
 
         rowItems = new ArrayList<>();
         paused = false;
@@ -105,6 +113,14 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RelativeLayout rLayout = (RelativeLayout) findViewById (R.id.relative_chat_list);
+        rLayout.setBackgroundResource(0);
+
+    }
+
     private void getLastMessages() {
 
         ArrayList<String> recentUsers = null;
@@ -144,6 +160,15 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         profilePics.add(R.drawable.aldana);
         return profilePics;
 
+    }
+
+    private void setBackgroundOnOrientation(int orientation){
+        RelativeLayout rLayout = (RelativeLayout) findViewById (R.id.relative_chat_list);
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            rLayout.setBackgroundResource(R.drawable.beach_horizontal);
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
+            rLayout.setBackgroundResource(R.drawable.beach_vertical);
+        }
     }
 
     private void restoreFonts(int position) {

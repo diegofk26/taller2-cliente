@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
 import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
@@ -34,8 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void setImgProfile(String imgFile){
 
-        final File myImageFile = new File(imgFile);
-        Bitmap myBitmap = BitmapFactory.decodeFile(myImageFile.getAbsolutePath());
+        Bitmap myBitmap = ImageBase64.decodeBase64(imgFile);
         imgProfile.setImageBitmap(myBitmap);
     }
 

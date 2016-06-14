@@ -1,12 +1,17 @@
 package com.example.sebastian.tindertp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
@@ -16,11 +21,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
@@ -28,20 +33,22 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
-import com.example.sebastian.tindertp.commonTools.ImagesPosition;
-import com.example.sebastian.tindertp.internetTools.ImageDownloaderClient;
-import com.example.sebastian.tindertp.gestureTools.OnSwipeTapTouchListener;
+import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
+import com.example.sebastian.tindertp.services.JSON_BroadCastReceiver;
 import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
 import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
 
+import org.json.JSONArray;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 //!Activity donde se matchean las personas.
-public class MatchingActivity extends AppCompatActivity {
+public class MatchingActivity extends AppCompatActivity implements ConectivityManagerInterface{
 
     private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
     private final static String MATCH_TAG = "Matching Activity";
@@ -50,14 +57,22 @@ public class MatchingActivity extends AppCompatActivity {
     private ArrayList<String> users;
     private MyBroadCastReceiver onNotice;
     private PriorActivitiesUpdater onPriorCall;
+    private JSON_BroadCastReceiver onJsonNotice;
 
     private List<Bitmap> bitmaps;
     private ImageView imgView;
-    private boolean firstTime;
-    private List<String> imgFiles;
-    private int imgPosition;
-    private ImageDownloaderClient imageDownloader;
-    private OnSwipeTapTouchListener customListener;/**< Listener para fling y tap.*/
+
+    private NewUserDownloaderClient newUserDownloader;
+
+    private final static String ADD_PIC_TAG = "Add picture Activity";
+    private final static int SELECT_PICTURE = 1;
+    private String selectedImagePath;
+
+    private String photoBase64;
+
+    private String url;
+    private String user;
+    private String token;
 
     @Override
     /**En la creacion se empiezan a descargas las 3 primeras imagenes o menos.*/
@@ -77,20 +92,28 @@ public class MatchingActivity extends AppCompatActivity {
             ActivityStarter.start(getApplicationContext(), ChatListActivity.class);
         }
 
-        imageDownloader =  new ImageDownloaderClient(this,mText);
-        imageDownloader.runInBackground();
+        url = ((TinderTP) this.getApplication()).getUrl();
+        user = ((TinderTP) this.getApplication()).getUser();
+        token = ((TinderTP) this.getApplication()).getToken();
 
-        customListener = new OnSwipeTapTouchListener(this);
-        //escucha por fling o tap
-        imgView.setOnTouchListener(customListener);
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("MATCH"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onPriorCall, new IntentFilter("PRIOR"));
+        ConnectionStruct conn = new ConnectionStruct(Common.PROFILE,Common.GET,url);
+        Map<String,String> values = HeaderBuilder.forNewUser(user,token);
+        newUserDownloader =  new NewUserDownloaderClient(this,mText, conn,values);
+        newUserDownloader.runInBackground();
+
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
+                new IntentFilter("MATCH"));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onPriorCall,
+                new IntentFilter("PRIOR"));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onJsonNotice,
+                new IntentFilter("JSON"));
     }
 
     private void initalize(){
 
         onNotice = new MyBroadCastReceiver(this);
         onPriorCall = new PriorActivitiesUpdater(this, onNotice);
+        onJsonNotice = new JSON_BroadCastReceiver(this);
 
         if(DataThroughActivities.getInstance().hasMessages()) {
             Log.i(MATCH_TAG,"Se abrió nuevamente la apliacion y obtengo mensajes.");
@@ -116,8 +139,6 @@ public class MatchingActivity extends AppCompatActivity {
         onPriorCall.setUsersAndMessage(users, messages);
 
         bitmaps = new ArrayList<>();
-        imgFiles = new ArrayList<>();
-        firstTime = true;
         imgView = (ImageView)findViewById(R.id.imageView);
         imgView.setImageResource(RES_PLACEHOLDER);
     }
@@ -164,10 +185,10 @@ public class MatchingActivity extends AppCompatActivity {
     /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer
      * imagen descargada, que es la del perfil.*/
     public void goToProfile(View v) {
-        if (imgFiles.size()!= 0){
+        if (bitmaps.size()!= 0){
             Intent profileAct = new Intent(getApplicationContext(), ProfileActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            profileAct.putExtra(Common.PROFILE_IMG_KEY, imgFiles.get(0));
+            profileAct.putExtra(Common.PROFILE_IMG_KEY, photoBase64);
             if (onNotice.getNotificationCount() != 0) {
                 profileAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
                 profileAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
@@ -190,71 +211,17 @@ public class MatchingActivity extends AppCompatActivity {
         this.startActivity(chatAct);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    //!Actualiza la posicion de la imagen al retornar a la actividad.
-    /**Cuando se retorna a la actividad si tiene imagenes en bitmaps, se llama al
-     * singleton ImagesPosition, que de no estar seteado devuelve la posicion actual de las imagenes
-     * y si esta seteado es porque se ingreso en FullscreenActivity y se cambio el foco de la imagen.
-     * Setea la nueva imagen y si esta en la anteultima posicion de las imagenes ya descargadas
-     * se descarga la siguiente.*/
-    public void onResume() {
-        super.onResume();
-
-        if (bitmaps.size() != 0 && ImagesPosition.getInstance().positionChanged() ) {
-            int newImgPos = ImagesPosition.getInstance(imgPosition).getPosition();
-            setImagePosition(newImgPos);
-            if (newImgPos + 1 == getBitmaps().size()) {
-                if (!downloadComplete())
-                    downloadNextImg();
-            }
-            customListener.setPosition(newImgPos);
-            imgView.setImageBitmap(this.bitmaps.get(newImgPos));
+    public void goToFullScreen(View v) {
+        if ( hasImage() ) {
+            Intent fullScreen = new Intent(getApplicationContext(), FullScreenViewActivity.class);
+            fullScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            fullScreen.putExtra(Common.IMG_KEY, photoBase64);
+            startActivity(fullScreen);
         }
     }
 
-    public ImageView getImgView(){
-        return imgView;
-    }
-
-    public List<String> getImgFiles(){
-        return imgFiles;
-    }
-
-
-    public List<Bitmap> getBitmaps(){
-        return bitmaps;
-    }
-
-    /**Cuando la descarga de una imagen se completo se obtiene los datos y setea la imagen. */
-    public void onBackgroundTaskDataObtained(Bitmap bitmap,String file) {
-        this.imgFiles.add(file);
-        this.bitmaps.add(bitmap);
-        if(firstTime) {
-            firstTime = false;
-            imgView.setImageBitmap(this.bitmaps.get(0));
-            Log.i(MATCH_TAG, "Primer imagen");
-            imgView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in));
-        }
-    }
-
-    public void downloadNextImg(){
-        imageDownloader.runInBackground();
-    }
-
-    public boolean downloadComplete() {
-        return imageDownloader.downloadComplete();
-    }
-
-    public void setImagePosition(int newPosition){
-        imgPosition = newPosition;
-    }
-
-    public int getImagePosition(){
-        return imgPosition ;
+    public boolean hasImage(){
+        return bitmaps.size() != 0;
     }
 
     @Override
@@ -291,11 +258,120 @@ public class MatchingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return Common.optionSelectedItem(item, this) || super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            ActivityStarter.start(getApplicationContext(), UrlActivity.class);
+            return true;
+        } else if (id == R.id.action_logout ) {
+            Common.clearLoginSaved(getApplicationContext());
+            ActivityStarter.startClear(getApplicationContext(), SelectLoginOrRegistryActivity.class);
+            finish();
+            return true;
+        }else if (id == R.id.badge) {
+            ActivityStarter.start(getApplicationContext(), ChatListActivity.class);
+            return true;
+        }else if (id == R.id.change_pic) {
+            selectImageProfile();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void selectImageProfile() {
+        Log.i(ADD_PIC_TAG, "seleccion imagen");
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(ADD_PIC_TAG, "Resultado onActivityResult");
+        if (resultCode == RESULT_OK) {
+            Log.i(ADD_PIC_TAG, "onActivityResult OK");
+            if (requestCode == SELECT_PICTURE) {
+                Log.i(ADD_PIC_TAG, "onActivityResult select picture");
+                Uri selectedImageUri = data.getData();
+                selectedImagePath = getPath(selectedImageUri);
+                Log.i(ADD_PIC_TAG, "getting data" + selectedImagePath);
+
+                final File myImageFile = new File(selectedImagePath);
+                Bitmap myBitmap = BitmapFactory.decodeFile(myImageFile.getAbsolutePath());
+                String picBase64 = ImageBase64.encodeToBase64(myBitmap, Bitmap.CompressFormat.JPEG);
+
+                ConnectionStruct conn = new ConnectionStruct(Common.PICTURE, Common.PUT, url);
+                Map<String, String> headers = HeaderBuilder.forNewUser(token, user);
+
+                RequestResponseClient client = new RequestResponseClient(this,conn,headers) {
+                    @Override
+                    protected void getJson() throws IOException {}
+
+                    @Override
+                    protected void onPostExec() {
+                        if (!badResponse && isConnected) {
+                            showText("Foto actualizada.");
+                        }else {
+                            showText("No se pudo conectar con el server.");
+                        }
+                    }
+
+                    @Override
+                    protected void showText(String message) {
+                        Snackbar.make(findViewById(R.id.matchFragment), message, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                };
+                client.addBody(picBase64);
+                client.runInBackground();
+
+            }
+        }
+    }
+
+    public String getPath(Uri uri) {
+        // just some safety built in
+        Log.i("reg","getting data");
+        if( uri == null ) {
+            // TODO perform some logging or show user feedback
+            Log.i("reg","getting NADA");
+            return null;
+        }
+        // try to retrieve the image from the media store first
+        // this will only work for images selected from gallery
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if( cursor != null ){
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            Log.i("reg", "getting cursor != null");
+            return cursor.getString(column_index);
+        }
+        // this is our fallback here
+        Log.i("reg", "getting final");
+        return uri.getPath();
     }
 
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    public void setImage(Bitmap bitmap, String photo) {
+        Log.i(MATCH_TAG,"set image");
+        bitmaps.add(bitmap);
+        imgView.setImageBitmap(bitmap);
+        photoBase64 = photo;
+    }
+
+    public void storeToProfile(String name, String alias, int age, String sex, JSONArray interests, Bitmap bitmap) {
+
+    }
+
+    @Override
+    public ConnectivityManager getConectivityManager() {
+        return (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 }

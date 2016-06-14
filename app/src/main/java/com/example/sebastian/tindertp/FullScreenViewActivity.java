@@ -1,11 +1,8 @@
 package com.example.sebastian.tindertp;
 
 
-import com.example.sebastian.tindertp.animationTools.DepthPageTransformer;
 import com.example.sebastian.tindertp.animationTools.FullScreenImageAdapter;
-import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
-import com.example.sebastian.tindertp.commonTools.ImagesPosition;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,8 +15,8 @@ public class FullScreenViewActivity extends Activity{
     private FullScreenImageAdapter adapter;
     private ViewPager viewPager;
 
-    private int firtPosition;
-    private String[] imgFiles;
+    private String picBase64;
+
     /**Oculta la barra de estados en fullscreen.*/
     private void hideClockBateryBar(){
         View decorView = getWindow().getDecorView();
@@ -31,8 +28,7 @@ public class FullScreenViewActivity extends Activity{
     /**Obtiene datos pasados por Intent.*/
     private void getDataFromMatchingActivity(){
         Intent i = getIntent();
-        firtPosition = i.getIntExtra(Common.IMG_POS_KEY, 0);
-        imgFiles = i.getStringArrayExtra(Common.IMG_KEY);
+        picBase64 = i.getStringExtra(Common.IMG_KEY);
     }
 
     @Override
@@ -43,40 +39,16 @@ public class FullScreenViewActivity extends Activity{
 
         hideClockBateryBar();
 
-
         viewPager = (ViewPager) findViewById(R.id.pager);
 
         getDataFromMatchingActivity();
 
-        adapter = new FullScreenImageAdapter(getApplicationContext(),imgFiles);
+        adapter = new FullScreenImageAdapter(getApplicationContext(), picBase64);
 
         viewPager.setAdapter(adapter);
-        //setea el animador de pagina.
-        viewPager.setPageTransformer(true, new DepthPageTransformer());
 
         // muestra la imagen seleccionada
-        viewPager.setCurrentItem(firtPosition);
+        viewPager.setCurrentItem(0);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    /**Al volver a la activitidad que la llamo, setea la nueva posicion de la imagen si esta cambió.*/
-    @Override
-    public void onBackPressed() {
-        if (firtPosition != viewPager.getCurrentItem()) {
-            ImagesPosition.getInstance().setPosition(viewPager.getCurrentItem());
-            ImagesPosition.getInstance().setPositionChanged(true);
-        }
-        super.onBackPressed();
-        finish();
     }
 }

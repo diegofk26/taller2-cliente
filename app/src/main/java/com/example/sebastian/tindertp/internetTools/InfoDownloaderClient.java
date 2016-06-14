@@ -19,6 +19,7 @@ import com.example.sebastian.tindertp.UrlActivity;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 
 public class InfoDownloaderClient extends MediaDownloader {
@@ -31,6 +32,9 @@ public class InfoDownloaderClient extends MediaDownloader {
     private Map<String,String> values;
     private boolean loginFail;
     SharedPreferences.Editor editor;
+
+    private boolean hasBody;
+    private String jsonBody;
 
     private String user;
     private String token;
@@ -48,6 +52,7 @@ public class InfoDownloaderClient extends MediaDownloader {
         contentAsString = "";
         isConnected = true;
         loginFail = false;
+        hasBody = false;
         SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         editor = preferences.edit();
 
@@ -72,7 +77,15 @@ public class InfoDownloaderClient extends MediaDownloader {
             connection.addRequestProperty(entry.getKey(), entry.getValue());
         }
 
-        connection.setDoOutput(false);
+        if (hasBody){
+            connection.setDoOutput(true);
+            byte[] outputInBytes = jsonBody.getBytes("UTF-8");
+            OutputStream os = connection.getOutputStream();
+            os.write( outputInBytes );
+            os.close();
+        } else {
+            connection.setDoOutput(false);
+        }
 
         Log.i(CONNECTION, "connecting...");
         // Starts the query
@@ -95,6 +108,11 @@ public class InfoDownloaderClient extends MediaDownloader {
         }
 
         savePreferencesUrl();
+    }
+
+    public void addBody(String json) {
+        hasBody = true;
+        jsonBody = json;
     }
 
     @Override
@@ -133,9 +151,16 @@ public class InfoDownloaderClient extends MediaDownloader {
 
         if(!loginFail) {
             if (isConnected) {
-                ((TinderTP)((Activity) context).getApplication()).setToken(token);
-                ((TinderTP) ((Activity) context).getApplication()).setUser(user);
-                ActivityStarter.startClear(context, MatchingActivity.class);
+
+                if (path.equals(Common.REGISTER)){
+                    ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET, url);
+                    InfoDownloaderClient info = new InfoDownloaderClient(text, context, values, conn);
+                    info.runInBackground();
+                }else {
+                    ((TinderTP) ((Activity) context).getApplication()).setToken(token);
+                    ((TinderTP) ((Activity) context).getApplication()).setUser(user);
+                    ActivityStarter.startClear(context, MatchingActivity.class);
+                }
             }
             else {
                 ActivityStarter.startClear(context, UrlActivity.class);
