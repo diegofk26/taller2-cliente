@@ -30,7 +30,7 @@ import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
-import com.example.sebastian.tindertp.commonTools.AdapterHashMap;
+import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.JsonArrayBuilder;
 import com.example.sebastian.tindertp.commonTools.ViewIdGenerator;
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
@@ -47,7 +47,7 @@ import java.util.Map;
 public class InterestsActivity extends AppCompatActivity {
 
 
-    private AdapterHashMap editTextMap;
+    private MultiHashMap editTextMap;
     private Map<String,String> mapper;
     private Animation animationAplha;
     private LocationManager locationManager;
@@ -92,7 +92,7 @@ public class InterestsActivity extends AppCompatActivity {
             }
         };
 
-        editTextMap = new AdapterHashMap();
+        editTextMap = new MultiHashMap();
         buildMapper();
         locationConfig();
     }
@@ -233,7 +233,7 @@ public class InterestsActivity extends AppCompatActivity {
         String hint = String.valueOf(editTextRightOf.getHint());
 
         if (editTextMap.hasKey(mapper.get(hint))) {
-            editTextRightOf = editTextMap.getLast(hint);
+            editTextRightOf = (EditText)editTextMap.getLast(hint);
         }
 
         EditText newEditText;

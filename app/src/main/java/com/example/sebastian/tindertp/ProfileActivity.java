@@ -8,6 +8,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
 import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
 import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
@@ -80,7 +82,41 @@ public class ProfileActivity extends AppCompatActivity {
         onPriorCall.setUsersAndMessage(users, messages);
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("PROFILE"));
         LocalBroadcastManager.getInstance(this).registerReceiver(onPriorCall, new IntentFilter("PRIOR"));
+        setProfileInfo();
 
+    }
+
+    private void setProfileInfo() {
+        TextView name = (TextView) findViewById(R.id.textView4);
+        TextView alias = (TextView) findViewById(R.id.textView5);
+        TextView age = (TextView) findViewById(R.id.textView18);
+        TextView sex = (TextView) findViewById(R.id.textView19);
+        TextView music = (TextView) findViewById(R.id.textView20);
+        TextView bands = (TextView) findViewById(R.id.textView21);
+        TextView sports = (TextView) findViewById(R.id.textView22);
+        TextView sex_interest = (TextView) findViewById(R.id.textView23);
+        TextView act = (TextView) findViewById(R.id.textView24);
+        TextView trips = (TextView) findViewById(R.id.textView25);
+        TextView meals = (TextView) findViewById(R.id.textView26);
+
+        name.setText(Html.fromHtml("<b>" + name.getText().toString() + "</b> " + profile.name));
+        alias.setText(Html.fromHtml("<b>" + alias.getText().toString() + "</b> " + profile.alias));
+        age.setText(Html.fromHtml("<b>" + age.getText().toString() + "</b> " + profile.age));
+        sex.setText(Html.fromHtml("<b>" + sex.getText().toString() + "</b> " + profile.sex));
+
+        setInterestsTextView(music);
+        setInterestsTextView(bands);
+        setInterestsTextView(sports);
+        setInterestsTextView(sex_interest);
+        setInterestsTextView(act);
+        setInterestsTextView(trips);
+        setInterestsTextView(meals);
+    }
+
+    private void setInterestsTextView(TextView text){
+        String category = text.getText().toString();
+        String key = category.substring(0, category.length() - 2).toLowerCase();
+        text.setText(Html.fromHtml("<b>"+category+"</b> "+profile.getInterestMap(key)));
     }
 
     @Override
@@ -116,9 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
             chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
             chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
         }
-
         this.startActivity(chatAct);
-
     }
 
     @Override

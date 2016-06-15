@@ -54,6 +54,8 @@ public class Common {
     public static final String LATITUDE_KEY = "latitude";   /**< Vars para la conexion url */
     public static final String LOCATION_KEY = "location";   /**< Vars para la conexion url */
     public static final String PHOTO_KEY = "photo_profile";
+    public static final String CATEGORY_KEY = "category";
+    public static final String VALUE_KEY = "value";
 
     public static final String USER1 = "Usuario1";      /**< Vars para la conexion url */
     public static final String USER2 = "Usuario2";      /**< Vars para la conexion url */

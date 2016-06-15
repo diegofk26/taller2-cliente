@@ -47,10 +47,12 @@
     <string name="mujer">Mujer</string>
     <string name="usuario">Usuario</string>
     <string name="alias">Alias</string>
+    <string name="alias_text">Alias:</string>
     <string name="edad">Edad</string>
+    <string name="edad_text">Edad:</string>
     <string name="mostrar_pass">Mostrar contraseña.</string>
-    <string name="nombre_">Nombre: </string>
-    <string name="intereces">Intereces: </string>
+    <string name="nombre_">Nombre:</string>
+    <string name="intereces">Intereses:</string>
     <string name="espere">Por favor, espere mientras se conecta a la red.</string>
     <string name="title_activity_add_picture">AddPictureActivity</string>
 </resources>

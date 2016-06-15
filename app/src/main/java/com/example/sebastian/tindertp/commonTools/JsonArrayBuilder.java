@@ -12,17 +12,17 @@ import java.util.Map;
 
 public class JsonArrayBuilder {
 
-    public static JSONArray buildInterests(AdapterHashMap adpHashMap) {
+    public static JSONArray buildInterests(MultiHashMap adpHashMap) {
 
         JSONArray jsonArray = new JSONArray();
 
-        for (Map.Entry<String, List<EditText>> entry : adpHashMap.entrySet()) {
-            List<EditText> interests = entry.getValue();
+        for (Map.Entry<String, List<Object>> entry : adpHashMap.entrySet()) {
+            List<Object> interests = entry.getValue();
             for(int i = 0; i < interests.size(); i++) {
                 JSONObject jsonObject = new JSONObject();
                 try {
-                    jsonObject.put("category",entry.getKey());
-                    jsonObject.put("value", interests.get(i).getText().toString());
+                    jsonObject.put(Common.CATEGORY_KEY, entry.getKey());
+                    jsonObject.put(Common.VALUE_KEY, ((EditText)interests.get(i)).getText().toString());
                     jsonArray.put(jsonObject);
                 } catch (JSONException e) {
                     e.printStackTrace();
