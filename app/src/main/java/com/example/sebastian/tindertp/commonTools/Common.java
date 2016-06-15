@@ -33,13 +33,15 @@ public class Common {
     public static final String CHAT = "/chat";          /**< Vars para la conexion url */
     public static final String PROFILE = "/perfil";          /**< Vars para la conexion url */
     public static final String PICTURE = "/foto";          /**< Vars para la conexion url */
+    public static final String MATCH = "/matcheo";          /**< Vars para la conexion url */
 
     public static final String IA = "file:///android_asset/IA.gif";     /**< Vars para la ScreenSplash */
     public static final String DOTS = "file:///android_asset/dots.gif"; /**< Vars para la ScreenSplash */
 
-    public static final String PROFILE_IMG_KEY = "profileFile";
+    public static final String PROFILE_JSON = "profileJson";
     public static final String URL_KEY = "url";
-    //Headers
+
+    //Headers y Json Usuario
     public static final String USER_KEY = "Usuario";    /**< Vars para la conexion url */
     public static final String PASS_KEY = "Password";   /**< Vars para la conexion url */
     public static final String NAME_KEY = "name";   /**< Vars para la conexion url */
@@ -51,6 +53,7 @@ public class Common {
     public static final String LONGITUDE_KEY = "longitude";   /**< Vars para la conexion url */
     public static final String LATITUDE_KEY = "latitude";   /**< Vars para la conexion url */
     public static final String LOCATION_KEY = "location";   /**< Vars para la conexion url */
+    public static final String PHOTO_KEY = "photo_profile";
 
     public static final String USER1 = "Usuario1";      /**< Vars para la conexion url */
     public static final String USER2 = "Usuario2";      /**< Vars para la conexion url */
@@ -61,26 +64,20 @@ public class Common {
     public static final String RECEPTOR = "Receptor";   /**< Vars para la conexion url */
     public static final String TOKEN_GCM = "TokenGCM";   /**< Vars para la conexion url */
 
-    //Json Usuario
-    public static final String USER_NAME = "name";
-    public static final String USER_ALIAS = "alias";
-    public static final String USER_SEX = "sex";
-    public static final String USER_AGE = "age";
-    public static final String USER_PHOTO = "photo_profile";
-    public static final String USER_INTERESTS = "interests";
-
-
-
-    public static final String IMG_POS_KEY = "position";
     public static final String IMG_KEY = "images";
     public static final String MSSG_KEY = "MSSG";
     public static final String USER_MSG_KEY = "USER_MSG";
 
-    public static final int BUFF_SIZE = 8192;
+    //respuestas de like dilike
+    public static final String RESPONSE_KEY = "respuesta";
+    public static final String LIKE_KEY = "like";
+    public static final String DISLIKE_KEY = "dislike";
 
+    //min max caracteres para contraseña y nombre de usuario ingresado en el registro
     public static final int MAX_CHARS = 30;
     public static final int MIN_CHARS = 5;
 
+    //maxima cantidad de notificaciones q se muestran.
     public static final int MAX_MSSG_NOTIF = 6;
 
     private static boolean userOrPassAreEmpty( String user, String password,TextView message ) {

@@ -73,7 +73,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if (!url.isEmpty()) {
                 ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
-                InfoDownloaderClient info = new InfoDownloaderClient(text, this, values,conn);
+                InfoDownloaderClient info = new InfoDownloaderClient(text, this, values,conn,
+                        findViewById(R.id.login_relative) );
                 info.runInBackground();
 
             } else {

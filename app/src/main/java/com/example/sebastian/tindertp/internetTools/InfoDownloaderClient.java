@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.R;
@@ -25,6 +27,7 @@ import java.util.Map;
 public class InfoDownloaderClient extends MediaDownloader {
 
     public TextView text; /**< Se pasan los errores por UI.*/
+    private View view;
     private Context context;
     private String contentAsString;
     private String url;
@@ -39,13 +42,14 @@ public class InfoDownloaderClient extends MediaDownloader {
     private String user;
     private String token;
 
-    public InfoDownloaderClient(TextView text, Context context, Map<String,String> values, ConnectionStruct conn) {
+    public InfoDownloaderClient(TextView text, Context context, Map<String, String> values, ConnectionStruct conn, View view) {
        //Connection vars
         this.url = conn.URL;
         this.path = conn.path;
         this.requestMethod = conn.requestMethod;
         //
         this.text = text;
+        this.view = view;
         this.context = context;
         this.values = values;
         //initialize
@@ -146,6 +150,8 @@ public class InfoDownloaderClient extends MediaDownloader {
     void onPostExec() {
         if (!contentAsString.equals("")) {
             this.text.setText(contentAsString);
+            Snackbar.make(view, contentAsString, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
             Log.i(CONNECTION, contentAsString);
         }
 
@@ -154,7 +160,7 @@ public class InfoDownloaderClient extends MediaDownloader {
 
                 if (path.equals(Common.REGISTER)){
                     ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET, url);
-                    InfoDownloaderClient info = new InfoDownloaderClient(text, context, values, conn);
+                    InfoDownloaderClient info = new InfoDownloaderClient(text, context, values, conn,view);
                     info.runInBackground();
                 }else {
                     ((TinderTP) ((Activity) context).getApplication()).setToken(token);
@@ -179,7 +185,9 @@ public class InfoDownloaderClient extends MediaDownloader {
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(url+path);
         } else {
-            text.setText(R.string.no_network);
+            //text.setText(R.string.no_network);
+            Snackbar.make(view, R.string.no_network, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
 
     }

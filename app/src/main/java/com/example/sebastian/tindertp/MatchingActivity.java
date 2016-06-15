@@ -1,6 +1,5 @@
 package com.example.sebastian.tindertp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -39,8 +38,6 @@ import com.example.sebastian.tindertp.services.JSON_BroadCastReceiver;
 import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
 import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
 
-import org.json.JSONArray;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,10 +66,12 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     private String selectedImagePath;
 
     private String photoBase64;
+    private String jsonProfile;
 
     private String url;
     private String user;
     private String token;
+    private String emailUserMatch;
 
     @Override
     /**En la creacion se empiezan a descargas las 3 primeras imagenes o menos.*/
@@ -96,17 +95,18 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         user = ((TinderTP) this.getApplication()).getUser();
         token = ((TinderTP) this.getApplication()).getToken();
 
-        ConnectionStruct conn = new ConnectionStruct(Common.PROFILE,Common.GET,url);
-        Map<String,String> values = HeaderBuilder.forNewUser(user,token);
-        newUserDownloader =  new NewUserDownloaderClient(this,mText, conn,values);
-        newUserDownloader.runInBackground();
-
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
                 new IntentFilter("MATCH"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onPriorCall,
                 new IntentFilter("PRIOR"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onJsonNotice,
                 new IntentFilter("JSON"));
+
+        ConnectionStruct conn = new ConnectionStruct(Common.PROFILE,Common.GET,url);
+        Map<String,String> values = HeaderBuilder.forNewUser(user,token);
+        newUserDownloader =  new NewUserDownloaderClient(this,mText, conn,values);
+        newUserDownloader.runInBackground();
+
     }
 
     private void initalize(){
@@ -143,43 +143,38 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         imgView.setImageResource(RES_PLACEHOLDER);
     }
 
-    public void sendLike(View v) {
-        String url = ((TinderTP) this.getApplication()).getUrl();
-        String token = ((TinderTP) this.getApplication()).getToken();
-        ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
-        Map<String, String> headers = HeaderBuilder.forSendMessage(token, "", "");
+    public void sendResponse(String response, final String errorMessage) {
+        ConnectionStruct conn = new ConnectionStruct(Common.MATCH, Common.POST, url);
+        Map<String, String> headers = HeaderBuilder.forSendResponseMatch(user, token,
+                emailUserMatch, response);
 
-        /*RequestResponseClient client = new RequestResponseClient(this, conn,headers) {
+        RequestResponseClient client = new RequestResponseClient(this, conn,headers) {
+
             @Override
-            protected void getJson() throws IOException {
-
-            }
+            protected void getJson() throws IOException {}
 
             @Override
             protected void onPostExec() {
-                if(!badResponse && isConnected) {
-
-                } else {
-                    showText("No se pudo enviar el Like.");
+                if (badResponse || !isConnected) {
+                    showText(errorMessage);
                 }
             }
 
             @Override
             protected void showText(String message) {
-                Snackbar.make(findViewById(R.id.listview), message, Snackbar.LENGTH_LONG)
+                Snackbar.make(findViewById(R.id.matchFragment), message, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        };*/
+        };
+        client.runInBackground();
+    }
 
+    public void sendLike(View v) {
+        sendResponse(Common.LIKE_KEY, "No se puedo enviar el Like.");
     }
 
     public void sendDislike(View v) {
-        String url = ((TinderTP) this.getApplication()).getUrl();
-        String token = ((TinderTP) this.getApplication()).getToken();
-        ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
-        Map<String,String> headers = HeaderBuilder.forSendMessage(token, "", "");
-
-
+        sendResponse(Common.DISLIKE_KEY, "No se puedo enviar el Dislike.");
     }
 
     /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer
@@ -188,7 +183,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         if (bitmaps.size()!= 0){
             Intent profileAct = new Intent(getApplicationContext(), ProfileActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            profileAct.putExtra(Common.PROFILE_IMG_KEY, photoBase64);
+            profileAct.putExtra(Common.PROFILE_JSON, jsonProfile);
             if (onNotice.getNotificationCount() != 0) {
                 profileAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
                 profileAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
@@ -366,12 +361,16 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         photoBase64 = photo;
     }
 
-    public void storeToProfile(String name, String alias, int age, String sex, JSONArray interests, Bitmap bitmap) {
-
+    public void storeToProfile(String json) {
+        jsonProfile = json;
     }
 
     @Override
     public ConnectivityManager getConectivityManager() {
         return (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+    }
+
+    public void saveEmailPossibleMatch(String email) {
+        this.emailUserMatch = email;
     }
 }

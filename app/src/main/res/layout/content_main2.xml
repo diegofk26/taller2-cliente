@@ -16,6 +16,7 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.example.sebastian.tindertp.MainActivity"
+        android:id="@+id/main"
         tools:showIn="@layout/activity_main2"
         android:background="#FFFFFFFF">
 

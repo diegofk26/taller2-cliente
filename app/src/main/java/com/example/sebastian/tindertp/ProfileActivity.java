@@ -3,7 +3,6 @@ package com.example.sebastian.tindertp;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
@@ -18,10 +17,10 @@ import android.widget.TextView;
 
 import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.ProfileInfo;
 import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
 import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -30,19 +29,19 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView txtView;/**< En caso de error.*/
     private ArrayList<String> messages;
     private ArrayList<String> users;
+    private ProfileInfo profile;
     private MyBroadCastReceiver onNotice;
     private PriorActivitiesUpdater onPriorCall;
 
-    private void setImgProfile(String imgFile){
-
-        Bitmap myBitmap = ImageBase64.decodeBase64(imgFile);
+    private void setImgProfile(Bitmap myBitmap){
         imgProfile.setImageBitmap(myBitmap);
     }
 
     private void getProfileImageIntoView(){
-        if( getIntent().hasExtra(Common.PROFILE_IMG_KEY) ) {
-            String profileImage = getIntent().getStringExtra(Common.PROFILE_IMG_KEY);
-            setImgProfile(profileImage);
+        if( getIntent().hasExtra(Common.PROFILE_JSON) ) {
+            String profileJson = getIntent().getStringExtra(Common.PROFILE_JSON);
+            profile = new ProfileInfo(profileJson);
+            setImgProfile(profile.bitmap);
         } else{
             txtView.setText(R.string.error_image_profile);
         }

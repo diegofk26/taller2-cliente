@@ -2,17 +2,13 @@ package com.example.sebastian.tindertp;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
@@ -44,7 +39,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -157,7 +151,8 @@ public class InterestsActivity extends AppCompatActivity {
 
                 if (!url.isEmpty()) {
                     ConnectionStruct conn = new ConnectionStruct(Common.REGISTER, Common.PUT, url);
-                    InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn);
+                    InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn,
+                            findViewById(R.id.relative));
                     info.addBody(jsonObject.toString());
                     info.runInBackground();
 

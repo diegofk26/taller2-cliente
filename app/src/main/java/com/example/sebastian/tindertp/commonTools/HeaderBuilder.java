@@ -42,6 +42,16 @@ public class HeaderBuilder {
         return headers;
     }
 
+    public static Map<String, String> forSendResponseMatch(String user, String token,
+                                                           String possibleMatchUser, String response) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put(Common.USER_KEY, user);
+        headers.put(Common.RECEPTOR, possibleMatchUser);
+        headers.put(Common.TOKEN, token);
+        headers.put(Common.RESPONSE_KEY, response);
+        return headers;
+    }
+
     public static Map<String, String> forSendMessage(String token, String user, String chatName) {
         Map<String, String> headers = new HashMap<>();
         headers.put(Common.USER_KEY, user);
