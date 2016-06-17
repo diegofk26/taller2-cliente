@@ -17,6 +17,7 @@ import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.Messages;
+import com.example.sebastian.tindertp.commonTools.ViewIdGenerator;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import org.json.JSONObject;
@@ -31,27 +32,48 @@ public class MyGcmListenerService extends GcmListenerService {
     /**
      * Es llamado cuando un mensaje es recibido.
      *
-     * @param from SenderID of the sender.
-     * @param data Data bundle containing message data as key/value pairs.
-     *             For Set of keys use data.keySet().
+     * @param from SenderID del server.
+     * @param data Data que envia el server.
      */
     @Override
     public void onMessageReceived(String from, Bundle data) {
 
         String message = data.getString("Mensaje");
-        String fromUser = data.getString("Emisor");
+        if(message == null) {
+            handleMatch(data);
+        }else {
+            handleMessage(data);
+        }
+    }
 
-        Log.d(TAG, "From: " + fromUser);
+    private void handleMessage(Bundle data) {
+        String message = data.getString("Mensaje");
+        String fromUserEmail = data.getString("Emisor");
+        String fromUserName = data.getString("Emisor nombre");
+
+        Log.d(TAG, "From: " + fromUserEmail);
         Log.d(TAG, "Message: " + message);
 
-        if(!TinderTP.isTheSameChat(fromUser)) {
-            update(this, fromUser, message, "MATCH");
-            update(this, fromUser, message, "PROFILE");
-            update(this, fromUser, message, "CHAT_LIST");
-            sendNotification(fromUser, message);
+        if(!TinderTP.isTheSameChat(fromUserEmail)) {
+            update(this, fromUserEmail, message, Common.MATCH_MSG_KEY);
+            update(this, fromUserEmail, message, Common.PROFILE_MSG_KEY);
+            update(this, fromUserEmail, message, Common.CHAT_LIST_MSG_KEY);
+                    sendNotification(fromUserEmail, message);
         }else {
-            update(this, fromUser, message, "CHAT");
+            update(this, fromUserEmail, message, Common.CHAT_KEY);
         }
+    }
+
+    private void handleMatch(Bundle data) {
+
+        String userEmailMatch = data.getString("Usuario");
+        String fromUserName = data.getString("Emisor nombre");
+
+        updateMatch(this, userEmailMatch, Common.MATCH_MATCH_KEY);
+        updateMatch(this, userEmailMatch, Common.PROFILE_MATCH_KEY);
+        updateMatch(this, userEmailMatch, Common.CHAT_LIST_MATCH_KEY);
+        sendNotificationMatch(userEmailMatch, fromUserName);
+
     }
 
     /**Crea notificaciones y hace un pendingIntent que se usa si la notificacion
@@ -99,6 +121,40 @@ public class MyGcmListenerService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, notificationBuilder.build());
+    }
+
+    private void sendNotificationMatch(String fromUserEmail, String userName) {
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        ArraySerialization.persistUserMatch(this, fromUserEmail);
+        ArraySerialization.persistUserMatch(this, fromUserEmail, userName);
+
+        intent.putExtra(Common.MATCH_KEY, true);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setContentTitle("TinderTP - Un nuevo match con:")
+                .setContentText(userName)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(ViewIdGenerator.generateViewId(), notificationBuilder.build());
+    }
+
+    private static void updateMatch(Context context, String userMatched, String type) {
+        Intent activityMsg = new Intent(type);
+        activityMsg.putExtra("user", userMatched);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
     }
 
 

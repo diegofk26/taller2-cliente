@@ -16,12 +16,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.commonTools.Common;
-import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
-import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
-import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
+import com.example.sebastian.tindertp.services.ReceiverOnMssgReaded;
+import com.example.sebastian.tindertp.services.ReceiverOnNewMatch;
+import com.example.sebastian.tindertp.services.ReceiverOnNewMessage;
 
 import java.util.ArrayList;
 
@@ -32,8 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
     private ArrayList<String> messages;
     private ArrayList<String> users;
     private ProfileInfo profile;
-    private MyBroadCastReceiver onNotice;
-    private PriorActivitiesUpdater onPriorCall;
+    private ReceiverOnNewMessage onNotice;
+    private ReceiverOnMssgReaded onMssgReaded;
+    private ReceiverOnNewMatch onMatch;
 
     private void setImgProfile(Bitmap myBitmap){
         imgProfile.setImageBitmap(myBitmap);
@@ -73,15 +73,22 @@ public class ProfileActivity extends AppCompatActivity {
         imgProfile = (ImageView)findViewById(R.id.imageView2);
         txtView = (TextView)findViewById(R.id.textView3);
 
-        onNotice = new MyBroadCastReceiver(this);
-        onPriorCall = new PriorActivitiesUpdater(this, onNotice);
+        onNotice = new ReceiverOnNewMessage(this);
+        onMssgReaded = new ReceiverOnMssgReaded(this, onNotice);
+        onMatch = new ReceiverOnNewMatch(this);
 
         getNotificationCount();
         getProfileImageIntoView();
         onNotice.setUsersAndMessages(users, messages);
-        onPriorCall.setUsersAndMessage(users, messages);
-        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("PROFILE"));
-        LocalBroadcastManager.getInstance(this).registerReceiver(onPriorCall, new IntentFilter("PRIOR"));
+        onMssgReaded.setUsersAndMessage(users, messages);
+
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
+                new IntentFilter(Common.PROFILE_MSG_KEY));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onMssgReaded,
+                new IntentFilter(Common.MSSG_READED_KEY));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onMatch,
+                new IntentFilter(Common.PROFILE_MATCH_KEY));
+
         setProfileInfo();
 
     }
@@ -125,18 +132,29 @@ public class ProfileActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.matching, menu);
 
         MenuItem item = menu.findItem(R.id.badge);
-
-        MenuItemCompat.setActionView(item, R.layout.match_icon);
+        MenuItemCompat.setActionView(item, R.layout.mssg_icon);
 
         RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
         ImageView icon = (ImageView)notifCount.findViewById(R.id.img);
         TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
 
+        MenuItem matchItem = menu.findItem(R.id.match_fire);
+        MenuItemCompat.setActionView(matchItem, R.layout.fire_icon);
+
+        RelativeLayout matchRelative = (RelativeLayout) MenuItemCompat.getActionView(matchItem);
+        ImageView matchIcon = (ImageView)matchRelative.findViewById(R.id.fire_item);
+
+        if (onMatch.haveMatch()) {
+            matchIcon.setImageResource(R.drawable.match_fire);
+        } else {
+            matchIcon.setImageResource(R.drawable.match_no_fire);
+        }
+
         if(onNotice.getNotificationCount() != 0) {
             icon.setImageResource(R.drawable.new_msgg);
             tv.setText("+" + onNotice.getNotificationCount());
         } else {
-            if (onPriorCall.areMessagesReaded()) {
+            if (onMssgReaded.areMessagesReaded()) {
                 icon.setImageResource(R.drawable.empty_msg);
                 tv.setText("");
             }

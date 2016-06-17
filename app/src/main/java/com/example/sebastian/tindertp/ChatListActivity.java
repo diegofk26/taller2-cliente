@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -25,16 +27,25 @@ import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
+import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.Messages;
+import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
+import com.example.sebastian.tindertp.services.ReceiverOnInfoIncome;
+import com.example.sebastian.tindertp.services.ReceiverOnNewUserMatch;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ChatListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,DataTransfer, ViewUpdater,ConectivityManagerInterface {
 
     private List<RowItem> rowItems;
-    private List<String> userNames;
-    private List<Integer> profilePics;
+
+    private List<String> usersEmails;
+    private List<String> usersNames;
+    private List<Bitmap> profilePics;
     private List<String> lastMessages;
+
     private ListView chatList;
     private boolean[] haveToUpdate;
     private int lastItemSelected;
@@ -45,6 +56,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private String user;
 
     private CustomAdapter adapter;
+    private ReceiverOnNewUserMatch onMatch;
+    private ReceiverOnInfoIncome onProfileInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +75,10 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         rowItems = new ArrayList<>();
         paused = false;
 
-        //pedir usuarios al server
-        userNames = getUserNames();
-        haveToUpdate = new boolean[userNames.size()];
-        profilePics = getProfilePics();
+        getUsersEmailsAndNames();
+        haveToUpdate = new boolean[usersEmails.size()];
+        getProfilePicsDefault();
         initMessages();
-        //hasta aca
 
         buildRowItems();
 
@@ -89,10 +100,10 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
                 Log.i(CHAT_LIST_TAG,"Mensajes Pending Intent de un solo usuario.");
                 adapter.restore(indexLastUser);
                 adapter.notifyDataSetInvalidated();
-                updatePriorActivities(userNames.get(indexLastUser));
+                updatePriorActivities(usersEmails.get(indexLastUser));
                 DataThroughActivities.getInstance().deleteMssg();
-                ArraySerialization.deleteStringFromArray(this, userNames.get(indexLastUser));
-                startChat(userNames.get(indexLastUser));
+                ArraySerialization.deleteStringFromArray(this, usersEmails.get(indexLastUser));
+                startChat(usersEmails.get(indexLastUser));
             }
         }
 
@@ -103,12 +114,22 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         getLastMessages();
 
-        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice, new IntentFilter("CHAT_LIST"));
+        onMatch = new ReceiverOnNewUserMatch(getApplicationContext(),findViewById(R.id.relative_chat_list));
+        onProfileInfo = new ReceiverOnInfoIncome(adapter,rowItems, usersEmails);
+
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
+                new IntentFilter(Common.CHAT_LIST_MSG_KEY));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onMatch,
+                new IntentFilter(Common.CHAT_LIST_MATCH_KEY));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onProfileInfo,
+                new IntentFilter(Common.SPECIFIC_USER_KEY));
+
+        getRealProfilePics();
     }
 
     private void initMessages() {
         lastMessages = new ArrayList<>();
-        for (int i = 0; i < userNames.size(); i++) {
+        for (int i = 0; i < usersEmails.size(); i++) {
             lastMessages.add("");
         }
     }
@@ -131,35 +152,52 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         ClientBuilder client = new ClientBuilder(this);
 
-        for(int i = 0; i < userNames.size(); i++) {
-            if (recentUsers == null || !recentUsers.contains(userNames.get(i))) {
-
-                client.build(this, userNames, userNames.get(i));
+        for(int i = 0; i < usersEmails.size(); i++) {
+            if (recentUsers == null || !recentUsers.contains(usersEmails.get(i))) {
+                client.build(this, usersEmails, usersEmails.get(i));
             }
         }
     }
 
     public void buildRowItems() {
-        for (int i = 0; i < userNames.size(); i++) {
-            RowItem item = new RowItem(userNames.get(i),
-                    profilePics.get(i), lastMessages.get(i));
+        for (int i = 0; i < usersNames.size(); i++) {
+            RowItem item = new RowItem(usersNames.get(i), profilePics.get(i), lastMessages.get(i));
             rowItems.add(item);
         }
     }
 
-    private List<String > getUserNames() {
-        List<String> users = new ArrayList<>();
-        users.add("Aldana");
-        users.add("Rocio");
-        return users;
+    private void getUsersEmailsAndNames() {
+        usersEmails = new ArrayList<>();
+        if (ArraySerialization.hasPersistedMatches(getApplicationContext())) {
+            usersEmails = ArraySerialization.getPersistedArray(getApplicationContext(), Common.MATCH_KEY);
+        }
+
+        usersNames = new ArrayList<>();
+
+        for(int i = 0; i < usersEmails.size(); i++) {
+            usersNames.add(ArraySerialization.getUserName( getApplicationContext(), usersEmails.get(i)));
+        }
+
     }
 
-    private List<Integer> getProfilePics() {
-        List<Integer> profilePics = new ArrayList<>();
-        profilePics.add(R.drawable.aldana);
-        profilePics.add(R.drawable.aldana);
-        return profilePics;
+    private void getProfilePicsDefault() {
+        profilePics = new ArrayList<>();
+        for (int i = 0; i < usersEmails.size(); i++) {
+            profilePics.add(BitmapFactory.decodeResource(getResources(),R.drawable.aldana));
+        }
+    }
 
+    private void getRealProfilePics() {
+        String url = getURL();
+        String token = getToken();
+        ConnectionStruct conn = new ConnectionStruct(Common.INFO,Common.GET,url);
+
+        for (int i = 0; i < usersEmails.size(); i++) {
+            Map<String,String> values = HeaderBuilder.forUserInfo(user, token, usersEmails.get(i));
+            NewUserDownloaderClient client = new NewUserDownloaderClient(getApplicationContext(), findViewById(R.id.relative_chat_list),
+                    Common.SPECIFIC_USER_KEY, conn, values);
+            client.runInBackground();
+        }
     }
 
     private void setBackgroundOnOrientation(int orientation){
@@ -183,7 +221,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             adapter.notifyDataSetInvalidated();
             chatList.setAdapter(adapter);
 
-            updatePriorActivities(userNames.get(position));
+            updatePriorActivities(usersEmails.get(position));
         }
     }
 
@@ -200,7 +238,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             paused = false;
             Log.i(CHAT_LIST_TAG,"Obtengo mensajes al resumir ChatListActivity.");
             ClientBuilder client = new ClientBuilder(this);
-            client.build(this, userNames, userNames.get(lastItemSelected));
+            client.build(this, usersEmails, usersEmails.get(lastItemSelected));
         }
     }
 
@@ -227,7 +265,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void updatePriorActivities(String user) {
-        Intent activityMsg = new Intent("PRIOR");
+        Intent activityMsg = new Intent(Common.MSSG_READED_KEY);
         activityMsg.putExtra("user", user);
         LocalBroadcastManager.getInstance(this).sendBroadcast(activityMsg);
     }
@@ -276,7 +314,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     };
 
     private int updateUserLastMessage(String user, String message) {
-        int index = userNames.indexOf(user);
+        int index = usersEmails.indexOf(user);
         addTransmitterToMssg(index,user,message);
         rowItems.clear();
         buildRowItems();
@@ -287,7 +325,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         if (transmitter.equals(user)) {
             lastMessages.set(index, "Tú: " + message);
         } else {
-            lastMessages.set(index, transmitter + ": " + message);
+            lastMessages.set(index, usersNames.get(index) + ": " + message);
         }
     }
 

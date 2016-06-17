@@ -11,7 +11,6 @@
     <string name="title_activity_select_login_or_registry">TinderTP</string>
     <string name="title_activity_main">TinderTP</string>
     <string name="title_activity_chat">ChatActivity</string>
-    <string name="empty_spaces">Algunos campos estan vacios.</string>
     <string name="error_image_profile">Error al cargar la imagen de perfil.</string>
     <string name="no_network">No hay conexión de red disponible.</string>
     <string name="comidas">Comidas favoritas</string>
@@ -33,6 +32,7 @@
     <string name="reload">reload</string>
     <string name="get_more">Carga mensajes anteriores.</string>
     <string name="mssg">msj</string>
+    <string name="fire">fire</string>
     <string name="txt">txt</string>
     <string name="registrarse">Registrarse</string>
     <string name="login">Login</string>

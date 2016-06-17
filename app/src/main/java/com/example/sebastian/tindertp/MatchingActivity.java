@@ -34,14 +34,14 @@ import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
-import com.example.sebastian.tindertp.services.JSON_BroadCastReceiver;
-import com.example.sebastian.tindertp.services.MyBroadCastReceiver;
-import com.example.sebastian.tindertp.services.PriorActivitiesUpdater;
+import com.example.sebastian.tindertp.services.ReceiverOnNewUserToMatch;
+import com.example.sebastian.tindertp.services.ReceiverOnMssgReaded;
+import com.example.sebastian.tindertp.services.ReceiverOnNewMatch;
+import com.example.sebastian.tindertp.services.ReceiverOnNewMessage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 //!Activity donde se matchean las personas.
@@ -52,11 +52,12 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
     private ArrayList<String> messages;
     private ArrayList<String> users;
-    private MyBroadCastReceiver onNotice;
-    private PriorActivitiesUpdater onPriorCall;
-    private JSON_BroadCastReceiver onJsonNotice;
+    private ReceiverOnNewMessage onNotice;
+    private ReceiverOnNewMatch onMatch;
+    private ReceiverOnMssgReaded onPriorCall;
+    private ReceiverOnNewUserToMatch onJsonNotice;
 
-    private List<Bitmap> bitmaps;
+    private Bitmap bitmaps;
     private ImageView imgView;
 
     private NewUserDownloaderClient newUserDownloader;
@@ -72,6 +73,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     private String user;
     private String token;
     private String emailUserMatch;
+    private boolean haveSomeoneToMatch;
 
     @Override
     /**En la creacion se empiezan a descargas las 3 primeras imagenes o menos.*/
@@ -81,13 +83,11 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarM);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        TextView mText = (TextView)findViewById(R.id.textView2);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         initalize();
 
-        if (DataThroughActivities.getInstance().hasMessages() ){
+        if (hasNotification()){
             ActivityStarter.start(getApplicationContext(), ChatListActivity.class);
         }
 
@@ -96,24 +96,34 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         token = ((TinderTP) this.getApplication()).getToken();
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
-                new IntentFilter("MATCH"));
+                new IntentFilter(Common.MATCH_MSG_KEY));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onMatch,
+                new IntentFilter(Common.MATCH_MATCH_KEY));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onPriorCall,
-                new IntentFilter("PRIOR"));
+                new IntentFilter(Common.MSSG_READED_KEY));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onJsonNotice,
-                new IntentFilter("JSON"));
+                new IntentFilter(Common.RAND_USER_KEY));
 
         ConnectionStruct conn = new ConnectionStruct(Common.PROFILE,Common.GET,url);
         Map<String,String> values = HeaderBuilder.forNewUser(user,token);
-        newUserDownloader =  new NewUserDownloaderClient(this,mText, conn,values);
+        newUserDownloader =  new NewUserDownloaderClient(this,findViewById(R.id.matchFragment),
+                Common.RAND_USER_KEY, conn,values);
         newUserDownloader.runInBackground();
 
     }
 
+    private boolean hasNotification() {
+        return DataThroughActivities.getInstance().hasMessages() ||
+                DataThroughActivities.getInstance().hasMatches();
+    }
+
     private void initalize(){
 
-        onNotice = new MyBroadCastReceiver(this);
-        onPriorCall = new PriorActivitiesUpdater(this, onNotice);
-        onJsonNotice = new JSON_BroadCastReceiver(this);
+        onNotice = new ReceiverOnNewMessage(this);
+        onMatch = new ReceiverOnNewMatch(this);
+        onPriorCall = new ReceiverOnMssgReaded(this, onNotice);
+        onJsonNotice = new ReceiverOnNewUserToMatch(this);
+        haveSomeoneToMatch = false;
 
         if(DataThroughActivities.getInstance().hasMessages()) {
             Log.i(MATCH_TAG,"Se abrió nuevamente la apliacion y obtengo mensajes.");
@@ -138,7 +148,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         onNotice.setUsersAndMessages(users, messages);
         onPriorCall.setUsersAndMessage(users, messages);
 
-        bitmaps = new ArrayList<>();
+        bitmaps = null;
         imgView = (ImageView)findViewById(R.id.imageView);
         imgView.setImageResource(RES_PLACEHOLDER);
     }
@@ -157,6 +167,9 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             protected void onPostExec() {
                 if (badResponse || !isConnected) {
                     showText(errorMessage);
+                }else {
+                    setImage(null,"");
+                    newUserDownloader.runInBackground();
                 }
             }
 
@@ -170,17 +183,25 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     }
 
     public void sendLike(View v) {
-        sendResponse(Common.LIKE_KEY, "No se puedo enviar el Like.");
+        if (haveSomeoneToMatch)
+            sendResponse(Common.LIKE_KEY, "No se puedo enviar el Like.");
+        else
+            Snackbar.make(findViewById(R.id.matchFragment), "No tienes un usuario a quien calificar.",
+                    Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     public void sendDislike(View v) {
-        sendResponse(Common.DISLIKE_KEY, "No se puedo enviar el Dislike.");
+        if (haveSomeoneToMatch)
+            sendResponse(Common.DISLIKE_KEY, "No se puedo enviar el Dislike.");
+        else
+            Snackbar.make(findViewById(R.id.matchFragment), "No tienes un usuario a quien calificar.",
+                    Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer
      * imagen descargada, que es la del perfil.*/
     public void goToProfile(View v) {
-        if (bitmaps.size()!= 0){
+        if (hasImage()){
             Intent profileAct = new Intent(getApplicationContext(), ProfileActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             profileAct.putExtra(Common.PROFILE_JSON, jsonProfile);
@@ -190,7 +211,9 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             }
 
             this.startActivity(profileAct);
-        }
+        } else
+            Snackbar.make(findViewById(R.id.matchFragment), "No tienes un usuario.",
+                    Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     public void goToMesseges(View v) {
@@ -199,9 +222,12 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         if (onNotice.getNotificationCount() != 0) {
             chatAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
             chatAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
-            Log.i(MATCH_TAG, "Elimino los mensajes atravez de actividades.");
+            Log.i(MATCH_TAG, "Elimino los mensajes atraves de actividades.");
             DataThroughActivities.getInstance().deleteMssg();
         }
+
+        onMatch.setHaveMatch(false);
+        invalidateOptionsMenu();
 
         this.startActivity(chatAct);
     }
@@ -216,7 +242,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     }
 
     public boolean hasImage(){
-        return bitmaps.size() != 0;
+        return bitmaps != null;
     }
 
     @Override
@@ -224,21 +250,35 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         //muestra el menu.
         getMenuInflater().inflate(R.menu.matching, menu);
 
-        MenuItem item = menu.findItem(R.id.badge);
+        MenuItem matchItem = menu.findItem(R.id.match_fire);
+        MenuItemCompat.setActionView(matchItem, R.layout.fire_icon);
 
-        MenuItemCompat.setActionView(item, R.layout.match_icon);
-        RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
-        ImageView icon = (ImageView)notifCount.findViewById(R.id.img);
+        RelativeLayout matchRelative = (RelativeLayout) MenuItemCompat.getActionView(matchItem);
+        ImageView matchIcon = (ImageView)matchRelative.findViewById(R.id.fire_item);
+
+        MenuItem mssgItem = menu.findItem(R.id.badge);
+        MenuItemCompat.setActionView(mssgItem, R.layout.mssg_icon);
+
+        RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(mssgItem);
+        ImageView mssgIcon = (ImageView)notifCount.findViewById(R.id.img);
         TextView tv = (TextView) notifCount.findViewById(R.id.actionbar_notifcation_textview);
+
+        if (onMatch.haveMatch()) {
+            Log.i(MATCH_TAG,"Nuevo match view update");
+            matchIcon.setImageResource(R.drawable.match_fire);
+        } else {
+            Log.i(MATCH_TAG,"No tiene nuevos match");
+            matchIcon.setImageResource(R.drawable.match_no_fire);
+        }
 
         if(onNotice.getNotificationCount() != 0) {
             Log.i(MATCH_TAG,"Actualizo la cantidad de mensajes");
-            icon.setImageResource(R.drawable.new_msgg);
+            mssgIcon.setImageResource(R.drawable.new_msgg);
             tv.setText("+" + onNotice.getNotificationCount());
         } else {
             if (onPriorCall.areMessagesReaded()) {
                 Log.i(MATCH_TAG, "Todos los mensajes leidos");
-                icon.setImageResource(R.drawable.empty_msg);
+                mssgIcon.setImageResource(R.drawable.empty_msg);
                 tv.setText("");
             }
         }
@@ -356,7 +396,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
     public void setImage(Bitmap bitmap, String photo) {
         Log.i(MATCH_TAG,"set image");
-        bitmaps.add(bitmap);
+        bitmaps = bitmap;
         imgView.setImageBitmap(bitmap);
         photoBase64 = photo;
     }
@@ -372,5 +412,9 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
     public void saveEmailPossibleMatch(String email) {
         this.emailUserMatch = email;
+    }
+
+    public void setHaveSomeoneToMatch(boolean have) {
+        haveSomeoneToMatch = have;
     }
 }

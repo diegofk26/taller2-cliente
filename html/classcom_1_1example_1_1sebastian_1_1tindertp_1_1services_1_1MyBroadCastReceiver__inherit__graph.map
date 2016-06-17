@@ -1,2 +1,2 @@
-<map id="com.example.sebastian.tindertp.services.MyBroadCastReceiver" name="com.example.sebastian.tindertp.services.MyBroadCastReceiver">
+<map id="com.example.sebastian.tindertp.services.ReceiverOnNewMessage" name="com.example.sebastian.tindertp.services.ReceiverOnNewMessage">
 </map>

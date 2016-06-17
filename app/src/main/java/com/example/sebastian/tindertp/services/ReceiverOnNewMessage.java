@@ -11,7 +11,7 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import java.util.List;
 
 
-public class MyBroadCastReceiver extends BroadcastReceiver {
+public class ReceiverOnNewMessage extends BroadcastReceiver {
 
     private List<String> messages;
     private List<String> users;
@@ -35,7 +35,7 @@ public class MyBroadCastReceiver extends BroadcastReceiver {
         this.notificationCount -= less;
     }
 
-    public MyBroadCastReceiver(Activity fromActivity) {
+    public ReceiverOnNewMessage(Activity fromActivity) {
         this.fromActivity = fromActivity;
         notificationCount = 0;
     }

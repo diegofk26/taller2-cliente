@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="55dp"
+    android:layout_height="fill_parent"
+    android:layout_gravity="end" >
+
+    <!-- Menu Item Image -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:id="@+id/fire_item"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:onClick="goToMesseges"
+        android:src="@drawable/match_no_fire" />
+
+</RelativeLayout>

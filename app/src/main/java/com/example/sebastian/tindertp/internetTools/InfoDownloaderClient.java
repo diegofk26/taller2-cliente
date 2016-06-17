@@ -26,7 +26,6 @@ import java.util.Map;
 
 public class InfoDownloaderClient extends MediaDownloader {
 
-    public TextView text; /**< Se pasan los errores por UI.*/
     private View view;
     private Context context;
     private String contentAsString;
@@ -42,13 +41,12 @@ public class InfoDownloaderClient extends MediaDownloader {
     private String user;
     private String token;
 
-    public InfoDownloaderClient(TextView text, Context context, Map<String, String> values, ConnectionStruct conn, View view) {
-       //Connection vars
+    public InfoDownloaderClient( Context context, Map<String, String> values, ConnectionStruct conn, View view) {
+        //Connection vars
         this.url = conn.URL;
         this.path = conn.path;
         this.requestMethod = conn.requestMethod;
-        //
-        this.text = text;
+
         this.view = view;
         this.context = context;
         this.values = values;
@@ -149,7 +147,6 @@ public class InfoDownloaderClient extends MediaDownloader {
     @Override
     void onPostExec() {
         if (!contentAsString.equals("")) {
-            this.text.setText(contentAsString);
             Snackbar.make(view, contentAsString, Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             Log.i(CONNECTION, contentAsString);
@@ -160,7 +157,7 @@ public class InfoDownloaderClient extends MediaDownloader {
 
                 if (path.equals(Common.REGISTER)){
                     ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET, url);
-                    InfoDownloaderClient info = new InfoDownloaderClient(text, context, values, conn,view);
+                    InfoDownloaderClient info = new InfoDownloaderClient(context, values, conn,view);
                     info.runInBackground();
                 }else {
                     ((TinderTP) ((Activity) context).getApplication()).setToken(token);
@@ -185,8 +182,7 @@ public class InfoDownloaderClient extends MediaDownloader {
         if (networkInfo != null && networkInfo.isConnected()) {
             new DownloadInBackground(this).execute(url+path);
         } else {
-            //text.setText(R.string.no_network);
-            Snackbar.make(view, R.string.no_network, Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "No hay conexión de red disponible.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
 

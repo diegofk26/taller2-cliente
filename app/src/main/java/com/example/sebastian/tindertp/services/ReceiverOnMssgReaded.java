@@ -6,16 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.sebastian.tindertp.MatchingActivity;
-import com.example.sebastian.tindertp.commonTools.Common;
-
 import java.util.Collections;
 import java.util.List;
 
 
-public class PriorActivitiesUpdater extends BroadcastReceiver {
+public class ReceiverOnMssgReaded extends BroadcastReceiver {
 
-    MyBroadCastReceiver onNotice;
+    ReceiverOnNewMessage onNotice;
     private Activity fromActivity;
     List<String> users;
     List<String> message;
@@ -36,7 +33,7 @@ public class PriorActivitiesUpdater extends BroadcastReceiver {
         this.areMessagesReaded = areMessagesReaded;
     }
 
-    public PriorActivitiesUpdater(Activity fromActivity, MyBroadCastReceiver onNotice) {
+    public ReceiverOnMssgReaded(Activity fromActivity, ReceiverOnNewMessage onNotice) {
         this.fromActivity = fromActivity;
         this.onNotice = onNotice;
         this.areMessagesReaded = false;

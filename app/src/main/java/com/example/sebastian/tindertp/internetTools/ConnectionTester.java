@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
-import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
@@ -74,17 +73,15 @@ public class ConnectionTester extends MediaDownloader {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
 
-        Map<String,String> values = HeaderBuilder.forRegister(user, password, tokenGCM);
+        Map<String,String> values = HeaderBuilder.forLogin(user, password, tokenGCM);
 
         MainActivity main = ((MainActivity)context);
 
         String url = ((TinderTP) main.getApplication()).getUrl();
 
-        TextView text = (TextView) main.findViewById(R.id.textView8);
-
         ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
 
-        InfoDownloaderClient info = new InfoDownloaderClient(text,context,values,conn,
+        InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn,
                 ((MainActivity) context).findViewById(R.id.main) );
 
         info.runInBackground();

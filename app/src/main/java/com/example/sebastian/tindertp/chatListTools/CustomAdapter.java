@@ -35,10 +35,18 @@ public class CustomAdapter extends BaseAdapter {
         }
     }
 
+    public void addRowItem(List<RowItem> newRows) {
+        Log.i(ADAPTER_TAG, "Dispara el agregado de un nuevo Item");
+        List<RowItem> aux = new ArrayList<>(newRows);
+        rowItems.clear();
+        rowItems.addAll(aux);
+        notifyDataSetChanged();
+    }
+
     /**Actualiza a Negrita o Normal el mensaje.*/
     public void updateBold(List<RowItem> newRows, int index, boolean isBold) {
         Log.i(ADAPTER_TAG,"Dispara el cambio en la posicion: " + index + ". isBold: " + isBold);
-        List<RowItem> aux = new ArrayList<>( newRows);
+        List<RowItem> aux = new ArrayList<>(newRows);
         rowItems.clear();
         rowItems.addAll(aux);
         isBoldList.set(index,isBold);
@@ -100,7 +108,7 @@ public class CustomAdapter extends BaseAdapter {
             }
 
             RowItem rowPos = rowItems.get(position);
-            holder.profilePic.setImageResource(rowPos.getProfilePic());
+            holder.profilePic.setImageBitmap(rowPos.getProfilePic());
             holder.userName.setText(rowPos.getUserName());
             holder.userName.setTextColor(Color.BLACK);
             holder.lastmessage.setText(rowPos.getLastMessage());

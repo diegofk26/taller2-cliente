@@ -3,6 +3,7 @@ package com.example.sebastian.tindertp;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
@@ -58,22 +58,28 @@ public class LoginActivity extends AppCompatActivity {
     /**Listener del boton Login. Si los campos de entrada son validos se procede hacer el logeo.
      * Si no hay URL seteada se llama a UrlActivity, terminando la actual.*/
     public void loginL(View v) {
-        EditText user = (EditText)findViewById(R.id.editText2);
+        String user = ((EditText)findViewById(R.id.editText2)).getText().toString();
         EditText password = (EditText) findViewById(R.id.editText3);
-        TextView text = (TextView) findViewById(R.id.textView7);
+        StringBuilder response = new StringBuilder();
 
-        if ( Common.userAndPass_OK(user, password, text) ) {
+        boolean userEmpty = user.isEmpty();
+
+        if (userEmpty) {
+            response.append("El campo usuario está vacío. ");
+        }
+
+        if ( Common.pass_OK(password, response) && !userEmpty) {
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
-            Map<String, String> values = HeaderBuilder.forRegister(
-                    user.getText().toString(), passText.getText().toString(),tokenGCM);
+            Map<String, String> values = HeaderBuilder.forLogin(
+                    user, passText.getText().toString(), tokenGCM);
 
             String url = ((TinderTP) this.getApplication()).getUrl();
 
             if (!url.isEmpty()) {
                 ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
-                InfoDownloaderClient info = new InfoDownloaderClient(text, this, values,conn,
+                InfoDownloaderClient info = new InfoDownloaderClient( this, values,conn,
                         findViewById(R.id.login_relative) );
                 info.runInBackground();
 
@@ -81,6 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                 ActivityStarter.startClear(this, UrlActivity.class);
                 this.finish();
             }
+        } else {
+            Snackbar.make(findViewById(R.id.login_relative), response.toString(), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
     }
 

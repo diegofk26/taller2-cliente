@@ -15,11 +15,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JSON_BroadCastReceiver extends BroadcastReceiver {
+public class ReceiverOnNewUserToMatch extends BroadcastReceiver {
 
     private MatchingActivity matchingActivity;
 
-    public JSON_BroadCastReceiver(MatchingActivity matching) {
+    public ReceiverOnNewUserToMatch(MatchingActivity matching) {
         matchingActivity = matching;
     }
 
@@ -29,12 +29,17 @@ public class JSON_BroadCastReceiver extends BroadcastReceiver {
         Log.i("BROAD", "entra broad");
         if(json != null) {
 
-            ProfileInfo profile = new ProfileInfo(json);
+            if (!json.isEmpty()) {
+                ProfileInfo profile = new ProfileInfo(json);
 
-            matchingActivity.saveEmailPossibleMatch(profile.email);
-            matchingActivity.setTitle(profile.name + ", " + profile.age + ".");
-            matchingActivity.setImage(profile.bitmap, profile.photo);
-            matchingActivity.storeToProfile(json);
+                matchingActivity.saveEmailPossibleMatch(profile.email);
+                matchingActivity.setTitle(profile.name + ", " + profile.age + ".");
+                matchingActivity.setImage(profile.bitmap, profile.photo);
+                matchingActivity.storeToProfile(json);
+                matchingActivity.setHaveSomeoneToMatch(true);
+            } else {
+                matchingActivity.setHaveSomeoneToMatch(false);
+            }
         }
 
     }

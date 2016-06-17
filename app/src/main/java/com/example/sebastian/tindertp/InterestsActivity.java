@@ -75,14 +75,10 @@ public class InterestsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
+            public void onStatusChanged(String s, int i, Bundle bundle) {}
 
             @Override
-            public void onProviderEnabled(String s) {
-
-            }
+            public void onProviderEnabled(String s) {}
 
             @Override
             public void onProviderDisabled(String s) {
@@ -112,26 +108,26 @@ public class InterestsActivity extends AppCompatActivity {
 
     private void buildMapper() {
         mapper = new HashMap<>();
-        List<TextView> interets = new ArrayList<>();
-        interets.add((TextView) findViewById(R.id.textView11));
-        interets.add((TextView) findViewById(R.id.textView10));
-        interets.add((TextView) findViewById(R.id.textView12));
-        interets.add((TextView) findViewById(R.id.textView13));
-        interets.add((TextView) findViewById(R.id.textView14));
-        interets.add((TextView) findViewById(R.id.textView15));
-        interets.add((TextView) findViewById(R.id.textView16));
-        for (int i = 0; i < interets.size(); i++) {
-            String text = interets.get(i).getText().toString();
-            String category = text.substring(0,text.length()-2).toLowerCase();
-            mapper.put(interets.get(i).getHint().toString(),category);
-        }
+        putInMapper((TextView) findViewById(R.id.textView11), (EditText)findViewById(R.id.editText4));
+        putInMapper((TextView) findViewById(R.id.textView10), (EditText)findViewById(R.id.editText5));
+        putInMapper((TextView) findViewById(R.id.textView12), (EditText)findViewById(R.id.editText6));
+        putInMapper((TextView) findViewById(R.id.textView13), (EditText)findViewById(R.id.editText7));
+        putInMapper((TextView) findViewById(R.id.textView14), (EditText)findViewById(R.id.editText8));
+        putInMapper((TextView) findViewById(R.id.textView15), (EditText)findViewById(R.id.editText9));
+        putInMapper((TextView) findViewById(R.id.textView16), (EditText)findViewById(R.id.editText10));
+    }
 
+    private void putInMapper(TextView textV, EditText editT) {
+        String text = textV.getText().toString();
+        String category = text.substring(0,text.length()-2).toLowerCase();
+        Log.i("INTERESt", "category: " + category + " - Hint: "  + editT.getHint().toString());
+        mapper.put(editT.getHint().toString(), category);
     }
 
     public void goToRegister(View v) {
 
-        if (getIntent().hasExtra(Common.USER_KEY) && getIntent().hasExtra(Common.PASS_KEY)) {
-            String json = getIntent().getStringExtra("json");
+        if (getIntent().hasExtra(Common.PROFILE_JSON)) {
+            String json = getIntent().getStringExtra(Common.PROFILE_JSON);
             try {
                 JSONObject jsonObject = new JSONObject(json);
                 String userEmail = jsonObject.getString(Common.EMAIL_KEY);
@@ -145,13 +141,12 @@ public class InterestsActivity extends AppCompatActivity {
                 jsonLocation.put(Common.LONGITUDE_KEY, longitude);
                 jsonObject.put(Common.LOCATION_KEY,jsonLocation);
 
-                Map<String, String> values = HeaderBuilder.forNewUser(userEmail, pass);
-                TextView text = (TextView) findViewById(R.id.textView17);
+                Map<String, String> values = HeaderBuilder.forRegister(userEmail, pass);
                 String url = ((TinderTP) this.getApplication()).getUrl();
 
                 if (!url.isEmpty()) {
                     ConnectionStruct conn = new ConnectionStruct(Common.REGISTER, Common.PUT, url);
-                    InfoDownloaderClient info = new InfoDownloaderClient(text, this, values, conn,
+                    InfoDownloaderClient info = new InfoDownloaderClient(this, values, conn,
                             findViewById(R.id.relative));
                     info.addBody(jsonObject.toString());
                     info.runInBackground();
@@ -220,7 +215,6 @@ public class InterestsActivity extends AppCompatActivity {
 
     private int getIDfromRules( ViewGroup.LayoutParams params, int rule) {
         int[] editRules = ((RelativeLayout.LayoutParams) params).getRules();
-        Log.i("asd", "RULE" + editRules[rule]);
         return editRules[rule];
     }
 
@@ -231,9 +225,10 @@ public class InterestsActivity extends AppCompatActivity {
 
         editTextRightOf = (EditText) findViewById(editID);
         String hint = String.valueOf(editTextRightOf.getHint());
+        String category = mapper.get(hint);
 
-        if (editTextMap.hasKey(mapper.get(hint))) {
-            editTextRightOf = (EditText)editTextMap.getLast(hint);
+        if (editTextMap.hasKey(category)) {
+            editTextRightOf = (EditText)editTextMap.getLast(category);
         }
 
         EditText newEditText;
@@ -254,7 +249,7 @@ public class InterestsActivity extends AppCompatActivity {
             newEditText = editText(ViewIdGenerator.generateViewId(), editTextRightOf.getId(), hint);
         }
 
-        editTextMap.put(mapper.get(hint), newEditText);
+        editTextMap.put(category, newEditText);
 
         ImageView img = (ImageView) findViewById(v.getId());
         RelativeLayout.LayoutParams imgParams = (RelativeLayout.LayoutParams)img.getLayoutParams();

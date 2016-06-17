@@ -1,11 +1,14 @@
 package com.example.sebastian.tindertp.internetTools;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
@@ -26,20 +29,19 @@ public class NewUserDownloaderClient extends MediaDownloader{
     private Context context;
     private ConnectionStruct conn;
     private Map<String,String> values;
+    private View view;
+    private String filter;
 
     private String jsonString;
 
-    TextView mText;
 
-
-    public NewUserDownloaderClient(Context ctx, TextView mtext,ConnectionStruct conn, Map<String,String> values) {
+    public NewUserDownloaderClient(Context ctx, View v, String intentFilter, ConnectionStruct conn, Map<String,String> values) {
         this.conn = conn;
         this.values = values;
-
+        filter = intentFilter;
         badResponse = false;
-
+        view = v;
         context = ctx;
-        this.mText = mtext;
     }
 
     @Override
@@ -101,16 +103,17 @@ public class NewUserDownloaderClient extends MediaDownloader{
     @Override
     void onPostExec() {
 
-        if (!badResponse && isConnected) {
-                Intent activityMsg = new Intent("JSON");
+        if (!badResponse && isConnected && !jsonString.isEmpty()) {
+                Intent activityMsg = new Intent(filter);
                 activityMsg.putExtra("json", jsonString);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
         }else {
-            Intent activityMsg = new Intent("JSON");
-            Log.i("DOWN","termino mal");
-            activityMsg.putExtra("json", jsonString);
-            LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
-            mText.setText("No se pudo descarga Usuarios.");
+            if (jsonString.isEmpty()) {
+                showText("No se encontraron usuarios compatibles.");
+                ((Activity) context).setTitle("");
+            }else {
+                showText("No se pudo descargar Usuarios.");
+            }
         }
 
     }
@@ -125,17 +128,14 @@ public class NewUserDownloaderClient extends MediaDownloader{
             new DownloadInBackground(this).execute(conn.URL+conn.path);
 
         } else {
-            mText.setText("No network connection available.");
+
+            showText("No hay conección disponible.");
         }
     }
 
     @Override
     void showText(String message) {
-
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
-
-
-    /*public boolean downloadComplete() {
-        return urlAdapter.downloadComplete();
-    }*/
 }

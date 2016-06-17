@@ -4,8 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MatchingActivity">
     <item
+        android:id="@+id/match_fire"
+        android:actionLayout="@layout/fire_icon"
+        android:title="@string/fire"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/badge"
-        android:actionLayout="@layout/match_icon"
+        android:actionLayout="@layout/mssg_icon"
         android:title="@string/mssg"
         android:orderInCategory="100"
         app:showAsAction="always"/>

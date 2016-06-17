@@ -1,17 +1,12 @@
 package com.example.sebastian.tindertp;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,16 +14,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
-import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.File;
 
 public class RegistryActivity extends AppCompatActivity {
 
@@ -96,32 +87,42 @@ public class RegistryActivity extends AppCompatActivity {
 
     public void goToInterests(View v) {
 
-        EditText email = (EditText) findViewById(R.id.email_text);
-        EditText alias = (EditText) findViewById(R.id.alias);
-        EditText age = (EditText) findViewById(R.id.age);
-        EditText name = (EditText) findViewById(R.id.name);
+        String email = ((EditText) findViewById(R.id.email_text)).getText().toString();
+        String alias = ((EditText) findViewById(R.id.alias)).getText().toString();
+        String age = ((EditText) findViewById(R.id.age)).getText().toString();
+        String name = ((EditText) findViewById(R.id.name)).getText().toString();
 
-        TextView text = (TextView) findViewById(R.id.textView9);
+        boolean emptyFields = email.isEmpty() || alias.isEmpty() || age.isEmpty() || name.isEmpty()
+                || ( !womanrButton.isChecked() && !menrButton.isChecked());
 
-        if( Common.userAndPass_OK(email, passText, text) ) {
+        StringBuilder response =  new StringBuilder();
+
+        if (emptyFields) {
+            response.append("Algunos campos están vacíos. ");
+        }
+
+        if( !emptyFields && Common.pass_OK(passText, response) ) {
 
             Intent interestsAct = new Intent(this, InterestsActivity.class);
             interestsAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             JSONObject jsonObject = new JSONObject();
             try {
-                jsonObject.put(Common.EMAIL_KEY, email.getText().toString());
+                jsonObject.put(Common.EMAIL_KEY, email);
                 jsonObject.put(Common.PASS_KEY, passText.getText().toString());
-                jsonObject.put(Common.ALIAS_KEY, alias.getText().toString());
-                jsonObject.put(Common.AGE_KEY, Integer.parseInt(age.getText().toString()));
-                jsonObject.put(Common.NAME_KEY, name.getText().toString());
+                jsonObject.put(Common.ALIAS_KEY, alias);
+                jsonObject.put(Common.AGE_KEY, Integer.parseInt(age));
+                jsonObject.put(Common.NAME_KEY, name);
                 if (menrButton.isChecked()){
-                    jsonObject.put(Common.SEX_KEY, menrButton.getHint().toString());
+                    jsonObject.put(Common.SEX_KEY, menrButton.getText().toString());
                 }else {
-                    jsonObject.put(Common.SEX_KEY, womanrButton.getHint().toString());
+                    jsonObject.put(Common.SEX_KEY, womanrButton.getText().toString());
                 }
             }catch(JSONException e){}
-            interestsAct.putExtra("json",jsonObject.toString());
+            interestsAct.putExtra(Common.PROFILE_JSON,jsonObject.toString());
             startActivity(interestsAct);
+        } else {
+            Snackbar.make(findViewById(R.id.scrollView1),response.toString(), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
     }
 

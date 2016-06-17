@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.sebastian.tindertp.services.MyGcmListenerService;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -33,7 +35,7 @@ public class ArraySerialization {
     }
 
     public static void persistUserAndMssg(Context ctx, String user, String mssg) {
-        pushStringinPref(ctx,"USER",user);
+        pushStringinPref(ctx, "USER", user);
         pushStringinPref(ctx, "MSSG", mssg);
         Log.i(PERSISTED_TAG, "Guardooo " + user + " en service");
     }
@@ -43,12 +45,12 @@ public class ArraySerialization {
         SharedPreferences.Editor editor = preferences.edit();
         List<String> values = new ArrayList<>();
         if (preferences.contains(key)) {
-            Log.i(PERSISTED_TAG,"Preferencias ya tienen mensajes guardados anteriomente");
+            Log.i(PERSISTED_TAG,"Preferencias ya tienen datos guardados anteriomente");
             ArrayList<String> arrayList = getPersistedArray(context, key);
             arrayList.add(value);
             values.addAll(arrayList);
         } else {
-            Log.i(PERSISTED_TAG,"preferencias no tienen mensajes guardados anteriomente");
+            Log.i(PERSISTED_TAG,"preferencias no tienen datos guardados anteriomente");
                     values.add(value);
         }
         JSONArray a = new JSONArray();
@@ -86,8 +88,14 @@ public class ArraySerialization {
         return preferences.contains("USER") && preferences.contains("MSSG");
     }
 
+    public static boolean hasPersistedMatches(Context ctx) {
+        Log.i(PERSISTED_TAG,"Pregunto si tiene matches persistidos");
+        SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        return preferences.contains(Common.MATCH_KEY);
+    }
+
     public static ArrayList<String> getPersistedArray(Context context, String key) {
-        Log.i(PERSISTED_TAG,"Obtengo mensajes");
+        Log.i(PERSISTED_TAG,"Obtengo datos con key: " + key);
         SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         String json = preferences.getString(key, null);
         ArrayList<String> stringArrayList = new ArrayList<>();
@@ -104,5 +112,25 @@ public class ArraySerialization {
             }
         }
         return stringArrayList;
+    }
+
+    public static void persistUserMatch(Context ctx, String userMatch) {
+        pushStringinPref(ctx, Common.MATCH_KEY, userMatch);
+        Log.i(PERSISTED_TAG, "Guardo " + userMatch + " en service");
+    }
+
+    public static String getUserName(Context ctx, String userEmailMatch) {
+        SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        return preferences.getString(userEmailMatch, null);
+
+    }
+
+    public static void persistUserMatch(Context ctx, String userEmailMatch, String userNameMatch) {
+        SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(userEmailMatch, userNameMatch);
+        editor.apply();
+
+        Log.i(PERSISTED_TAG, "Guardo " + userEmailMatch + "->" + userNameMatch + " en service");
     }
 }

@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
             DataThroughActivities.getInstance().setMessages(users,messages);
         }
 
+        if (getIntent().hasExtra(Common.MATCH_KEY)){
+            boolean haveMatch = getIntent().getBooleanExtra(Common.MATCH_KEY,false);
+            DataThroughActivities.getInstance().setMatches(haveMatch);
+        }
+
         Intent intent = new Intent(getApplicationContext(), RegistrationIntentService.class);
         startService(intent);
 

@@ -1,6 +1,7 @@
 package com.example.sebastian.tindertp.commonTools;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 
@@ -34,6 +35,7 @@ public class ProfileInfo {
             interests = jsonO.getJSONArray(Common.INTERESTS_KEY);
             buildInterestMap();
             photo = jsonO.getString(Common.PHOTO_KEY);
+            Log.i("aaa", "" + name + " - " + alias + " - " + age + " - " + email);
             bitmap = ImageBase64.decodeBase64(photo);
 
         }catch (JSONException e){}

@@ -30,6 +30,7 @@ import com.example.sebastian.tindertp.chatTools.ChatMessage;
 import com.example.sebastian.tindertp.chatTools.ChatTextBuilder;
 import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.chatTools.OnItemClickCustom;
+import com.example.sebastian.tindertp.commonTools.Common;
 
 public class ChatActivity extends AppCompatActivity implements DataTransfer, ConectivityManagerInterface{
 
@@ -104,7 +105,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
         });
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNewMessage,
-                new IntentFilter("CHAT"));
+                new IntentFilter(Common.CHAT_KEY));
         ClientBuilder client = new ClientBuilder(this);
         client.build(adp, this);
     }

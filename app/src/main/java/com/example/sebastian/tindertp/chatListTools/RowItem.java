@@ -1,12 +1,14 @@
 package com.example.sebastian.tindertp.chatListTools;
 
+import android.graphics.Bitmap;
+
 public class RowItem {
 
     private String userName;
-    private int profilePic;
+    private Bitmap profilePic;
     private String lastMessage;
 
-    public RowItem(String userName, int profilePic, String message) {
+    public RowItem(String userName, Bitmap profilePic, String message) {
 
         this.userName = userName;
         this.profilePic = profilePic;
@@ -21,11 +23,11 @@ public class RowItem {
         this.userName = userName;
     }
 
-    public int getProfilePic() {
+    public Bitmap getProfilePic() {
         return profilePic;
     }
 
-    public void setProfilePic(int profilePic) {
+    public void setProfilePic(Bitmap profilePic) {
         this.profilePic = profilePic;
     }
 

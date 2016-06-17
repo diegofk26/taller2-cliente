@@ -46,7 +46,7 @@ public class ClientBuilder {
     /**Builder de un cliente para ChatListActivity, y luego ChatList se encarga de
      * recargar su vista.
      * */
-    public void build(final ViewUpdater updater, final List<String> userNames,
+    public void build(final ViewUpdater updater, final List<String> usersEmails,
                                               final String userFrom) {
 
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
@@ -73,7 +73,7 @@ public class ClientBuilder {
                     try {
                         JSONArray jsonA = new JSONArray(jsonString);
                         if(jsonA.length() != 0) {
-                            int index = userNames.indexOf(userFrom);
+                            int index = usersEmails.indexOf(userFrom);
                             JSONObject jsonO = jsonA.getJSONObject(0);
                             String transmitter = jsonO.getString("emisor");
                             updater.addTransmitterToMssg(index, transmitter, jsonO.getString("mensaje"));
@@ -85,7 +85,7 @@ public class ClientBuilder {
                             else
                                 updater.updateListView(index, false);
 
-                            if(hasExtra && index == userNames.size() -1 ) {
+                            if(hasExtra && index == usersEmails.size() -1 ) {
                                 updater.removeExtra(Common.USER_MSG_KEY);
                                 updater.removeExtra(Common.MSSG_KEY);
                             }

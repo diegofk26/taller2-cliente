@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,10 +23,12 @@ public class Common {
 
     public static final String FAIL = "fail";
 
+    //request methods
     public static final String GET = "GET";             /**< Vars para la conexion url */
     public static final String PUT = "PUT";             /**< Vars para la conexion url */
     public static final String POST = "POST";           /**< Vars para la conexion url */
 
+    //paths ej: url/login
     public static final String TEST = "/test";          /**< Vars para la conexion url */
     public static final String LOGIN = "/login";        /**< Vars para la conexion url */
     public static final String REGISTER = "/registro";  /**< Vars para la conexion url */
@@ -34,7 +37,9 @@ public class Common {
     public static final String PROFILE = "/perfil";          /**< Vars para la conexion url */
     public static final String PICTURE = "/foto";          /**< Vars para la conexion url */
     public static final String MATCH = "/matcheo";          /**< Vars para la conexion url */
+    public static final String INFO = "/info";          /**< Vars para la conexion url */
 
+    //files para screenSplash
     public static final String IA = "file:///android_asset/IA.gif";     /**< Vars para la ScreenSplash */
     public static final String DOTS = "file:///android_asset/dots.gif"; /**< Vars para la ScreenSplash */
 
@@ -57,6 +62,7 @@ public class Common {
     public static final String CATEGORY_KEY = "category";
     public static final String VALUE_KEY = "value";
 
+    //Headers keys
     public static final String USER1 = "Usuario1";      /**< Vars para la conexion url */
     public static final String USER2 = "Usuario2";      /**< Vars para la conexion url */
     public static final String DESDE = "Desde";         /**< Vars para la conexion url */
@@ -64,11 +70,26 @@ public class Common {
     public static final String MAX_MESSAGES= "10";      /**< Vars para la conexion url */
     public static final String TOKEN = "Token";         /**< Vars para la conexion url */
     public static final String RECEPTOR = "Receptor";   /**< Vars para la conexion url */
+    public static final String USER_GET = "UsuarioGet";
     public static final String TOKEN_GCM = "TokenGCM";   /**< Vars para la conexion url */
 
+    // intent.putExtra() keys
     public static final String IMG_KEY = "images";
     public static final String MSSG_KEY = "MSSG";
     public static final String USER_MSG_KEY = "USER_MSG";
+    public static final String MATCH_KEY = "MATCH";
+
+    //intentFilter keys
+    public static final String MATCH_MSG_KEY = "MATCH_MSG";
+    public static final String MATCH_MATCH_KEY = "MATCH_match";
+    public static final String MSSG_READED_KEY = "mssg readed";
+    public static final String RAND_USER_KEY = "RAND_USER";
+    public static final String SPECIFIC_USER_KEY = "SPEC_USER";
+    public static final String CHAT_KEY = "CHAT";
+    public static final String PROFILE_MSG_KEY = "PROFILE_MSG";
+    public static final String PROFILE_MATCH_KEY = "PROFILE_MATCH";
+    public static final String CHAT_LIST_MSG_KEY = "CHAT_LIST_MSG";
+    public static final String CHAT_LIST_MATCH_KEY = "CHAT_LIST_MATCH";
 
     //respuestas de like dilike
     public static final String RESPONSE_KEY = "respuesta";
@@ -82,29 +103,28 @@ public class Common {
     //maxima cantidad de notificaciones q se muestran.
     public static final int MAX_MSSG_NOTIF = 6;
 
-    private static boolean userOrPassAreEmpty( String user, String password,TextView message ) {
-        if ( user.isEmpty() || password.isEmpty()) {
-            message.setText(R.string.empty_spaces);
+    private static boolean passAreEmpty( String password,StringBuilder response ) {
+        if ( password.isEmpty()) {
+            response.append("El campo contraseña está vacío.");
             return true;
         } else
             return false;
     }
 
-    private static boolean userOrPassLong (String user, String pass, TextView message){
-        if (user.length() > Common.MAX_CHARS || pass.length() > Common.MAX_CHARS) {
-            message.setText("Algunos campos superan los " + Common.MAX_CHARS + " caracteres.");
+    private static boolean passLong (String pass, StringBuilder response){
+        if (pass.length() > Common.MAX_CHARS) {
+            response.append("La contraseña supera los " + Common.MAX_CHARS + " caracteres.");
             return true;
         } else if(pass.length() < Common.MIN_CHARS) {
-            message.setText("La contraseña no supera los " + Common.MIN_CHARS + " caracteres.");
+            response.append("La contraseña no supera los " + Common.MIN_CHARS + " caracteres.");
             return true;
         } else
             return false;
     }
 
-    public static boolean userAndPass_OK(EditText user, EditText password,TextView text){
-        String us = user.getText().toString();
+    public static boolean pass_OK(EditText password, StringBuilder response){
         String pass = password.getText().toString();
-        return ( !userOrPassAreEmpty(us,pass,text) && !userOrPassLong(us, pass, text) );
+        return ( !passAreEmpty(pass, response) && !passLong(pass, response) );
     }
 
     public static void clearLoginSaved(Context context){

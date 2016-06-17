@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class DataThroughActivities {
     private ArrayList<String> messages = null;
     private ArrayList<String> users = null;
+    private boolean matches = false;
     private final static String DataThrough_TAG = "DataThrough";
 
 
@@ -18,6 +19,11 @@ public class DataThroughActivities {
         Log.i(DataThrough_TAG,"Se setean los mensajes y usuarios.");
         this.messages = messages;
         this.users = users;
+    }
+
+    public void setMatches(boolean haveMatch) {
+        Log.i(DataThrough_TAG,"Se setean el match.");
+        matches = haveMatch;
     }
 
     public void deleteMssg() {
@@ -47,6 +53,10 @@ public class DataThroughActivities {
 
     public boolean hasMessages() {
         return messages != null;
+    }
+
+    public boolean hasMatches() {
+        return matches;
     }
 
     public boolean areTwoDifferntUsers() {
