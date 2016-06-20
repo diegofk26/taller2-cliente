@@ -2,6 +2,7 @@ package com.example.sebastian.tindertp.internetTools;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
 import java.io.IOException;
 
 public class DownloadInBackground extends AsyncTask<String, Void, Integer> {

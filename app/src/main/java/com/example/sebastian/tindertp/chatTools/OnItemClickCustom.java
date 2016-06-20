@@ -1,6 +1,5 @@
 package com.example.sebastian.tindertp.chatTools;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 
 import com.example.sebastian.tindertp.DataTransfer;
 import com.example.sebastian.tindertp.R;
-import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
-import com.google.android.gms.fitness.request.DailyTotalRequest;
 
 public class OnItemClickCustom implements AdapterView.OnItemClickListener {
 

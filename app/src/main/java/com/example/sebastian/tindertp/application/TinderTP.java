@@ -1,7 +1,6 @@
 package com.example.sebastian.tindertp.application;
 
 import android.app.Application;
-import android.content.Context;
 
 
 public class TinderTP extends Application {

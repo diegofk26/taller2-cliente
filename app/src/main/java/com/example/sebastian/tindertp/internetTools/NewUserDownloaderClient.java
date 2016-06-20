@@ -9,11 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
-
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

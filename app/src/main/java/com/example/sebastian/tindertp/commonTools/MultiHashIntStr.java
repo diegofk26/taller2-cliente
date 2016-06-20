@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MultiHashMap {
 
-    private Map<String,List<Object>> multiMap;
+public class MultiHashIntStr {
+
+    private Map<Integer,List<String>> multiMap;
 
 
-    public MultiHashMap() {
+    public MultiHashIntStr() {
         this.multiMap = new HashMap<>();
     }
 
-    public void put (String key, Object value) {
-        List<Object> list;
+    public void put (Integer key, String value) {
+        List<String> list;
 
         if(multiMap.containsKey(key)) {
             list = multiMap.get(key);
@@ -28,15 +29,15 @@ public class MultiHashMap {
         multiMap.put(key, list);
     }
 
-    public void set(String key, int pos, Object value) {
+    public void set(Integer key, int pos, String value) {
         get(key).set(pos,value);
     }
 
-    public Set<Map.Entry<String, List<Object>>> entrySet() {
+    public Set<Map.Entry<Integer, List<String>>> entrySet() {
         return multiMap.entrySet();
     }
 
-    public List<Object> get(String key) {
+    public List<String> get(Integer key) {
         return multiMap.get(key);
     }
 
@@ -44,13 +45,13 @@ public class MultiHashMap {
         return multiMap.size();
     }
 
-    public Object getLast (String key) {
-        List<Object> editTextList = multiMap.get(key);
+    public String getLast (Integer key) {
+        List<String> editTextList = multiMap.get(key);
         int lastIndex = editTextList.size() - 1;
         return editTextList.get(lastIndex);
     }
 
-    public boolean hasKey(String hint) {
-        return multiMap.containsKey(hint);
+    public boolean hasKey(Integer key) {
+        return multiMap.containsKey(key);
     }
 }

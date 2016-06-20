@@ -1,6 +1,9 @@
 package com.example.sebastian.tindertp.commonTools;
 
-import android.widget.EditText;
+
+import android.util.Log;
+
+import com.example.sebastian.tindertp.ExpandableListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,23 +15,33 @@ import java.util.Map;
 
 public class JsonArrayBuilder {
 
-    public static JSONArray buildInterests(MultiHashMap adpHashMap) {
+    public static JSONArray buildInterests(List<String> categories, ExpandableListAdapter adapter) {
 
         JSONArray jsonArray = new JSONArray();
 
-        for (Map.Entry<String, List<Object>> entry : adpHashMap.entrySet()) {
-            List<Object> interests = entry.getValue();
-            for(int i = 0; i < interests.size(); i++) {
+        Map<Integer,String> values = adapter.getSavedTextMap();
+
+        for (int i = 0; i < categories.size(); i++) {
+            String category = categories.get(i);
+
+            int childCount = adapter.getChildrenCount(i);
+
+            for (int j = 0; j < childCount; j++ ) {
+                int textID = Integer.parseInt(""+(i+1)+""+j);
+
+                String value = values.get(textID);
+
+                Log.i("JSONARRAY", "Categoria: " + category + " Valor: " + value);
+
                 JSONObject jsonObject = new JSONObject();
                 try {
-                    jsonObject.put(Common.CATEGORY_KEY, entry.getKey());
-                    jsonObject.put(Common.VALUE_KEY, ((EditText)interests.get(i)).getText().toString());
+                    jsonObject.put(Common.CATEGORY_KEY,category);
+                    jsonObject.put(Common.VALUE_KEY, value);
                     jsonArray.put(jsonObject);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                } catch (JSONException e) { e.printStackTrace();}
             }
         }
+
         return jsonArray;
     }
 }

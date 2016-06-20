@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="2dp" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/plus"
+        android:src="@drawable/more"
+        android:onClick="more"
+        android:contentDescription="@string/agregar_item"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese un interés."
+        android:id="@+id/autoCompleteTextView"
+        android:layout_alignTop="@+id/plus"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/plus"
+        android:layout_toStartOf="@+id/plus"
+        android:layout_alignBottom="@+id/plus" />
+
+</RelativeLayout>

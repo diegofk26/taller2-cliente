@@ -8,16 +8,14 @@ import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
-import com.example.sebastian.tindertp.R;
-import com.example.sebastian.tindertp.application.TinderTP;
-import com.example.sebastian.tindertp.commonTools.ActivityStarter;
-import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.LoginActivity;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
 import com.example.sebastian.tindertp.UrlActivity;
+import com.example.sebastian.tindertp.application.TinderTP;
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
+import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 
 import java.io.IOException;
@@ -187,6 +185,4 @@ public class InfoDownloaderClient extends MediaDownloader {
         }
 
     }
-
-
 }

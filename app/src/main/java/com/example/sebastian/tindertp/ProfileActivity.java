@@ -102,28 +102,27 @@ public class ProfileActivity extends AppCompatActivity {
         TextView bands = (TextView) findViewById(R.id.textView21);
         TextView sports = (TextView) findViewById(R.id.textView22);
         TextView sex_interest = (TextView) findViewById(R.id.textView23);
-        TextView act = (TextView) findViewById(R.id.textView24);
-        TextView trips = (TextView) findViewById(R.id.textView25);
-        TextView meals = (TextView) findViewById(R.id.textView26);
+        TextView outdoors = (TextView) findViewById(R.id.textView24);
+        TextView travel = (TextView) findViewById(R.id.textView25);
+        TextView food = (TextView) findViewById(R.id.textView26);
 
         name.setText(Html.fromHtml("<b>" + name.getText().toString() + "</b> " + profile.name));
         alias.setText(Html.fromHtml("<b>" + alias.getText().toString() + "</b> " + profile.alias));
         age.setText(Html.fromHtml("<b>" + age.getText().toString() + "</b> " + profile.age));
         sex.setText(Html.fromHtml("<b>" + sex.getText().toString() + "</b> " + profile.sex));
 
-        setInterestsTextView(music);
-        setInterestsTextView(bands);
-        setInterestsTextView(sports);
-        setInterestsTextView(sex_interest);
-        setInterestsTextView(act);
-        setInterestsTextView(trips);
-        setInterestsTextView(meals);
+        setInterestsTextView(Common.MUSIC, music);
+        setInterestsTextView(Common.MUSIC_BAND, bands);
+        setInterestsTextView(Common.SPORT, sports);
+        setInterestsTextView(Common.SEX, sex_interest);
+        setInterestsTextView(Common.OUTDOORS, outdoors);
+        setInterestsTextView(Common.TRAVEL, travel);
+        setInterestsTextView(Common.FOOD, food);
     }
 
-    private void setInterestsTextView(TextView text){
-        String category = text.getText().toString();
-        String key = category.substring(0, category.length() - 2).toLowerCase();
-        text.setText(Html.fromHtml("<b>"+category+"</b> "+profile.getInterestMap(key)));
+    private void setInterestsTextView(String category, TextView text){
+        String categorySpanish = text.getText().toString();
+        text.setText(Html.fromHtml("<b>"+categorySpanish+"</b> "+profile.getInterestMap(category)));
     }
 
     @Override

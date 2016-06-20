@@ -1,6 +1,5 @@
 package com.example.sebastian.tindertp.internetTools;
 
-import android.content.Intent;
 import android.util.Log;
 
 import java.io.IOException;

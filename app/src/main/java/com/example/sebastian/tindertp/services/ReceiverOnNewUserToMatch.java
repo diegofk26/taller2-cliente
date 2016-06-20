@@ -3,17 +3,10 @@ package com.example.sebastian.tindertp.services;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.MatchingActivity;
-import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ReceiverOnNewUserToMatch extends BroadcastReceiver {
 

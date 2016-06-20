@@ -20,8 +20,6 @@ import com.example.sebastian.tindertp.commonTools.Messages;
 import com.example.sebastian.tindertp.commonTools.ViewIdGenerator;
 import com.google.android.gms.gcm.GcmListenerService;
 
-import org.json.JSONObject;
-
 public class MyGcmListenerService extends GcmListenerService {
 
     public MyGcmListenerService() {

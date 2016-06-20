@@ -103,7 +103,7 @@ public class RegistryActivity extends AppCompatActivity {
 
         if( !emptyFields && Common.pass_OK(passText, response) ) {
 
-            Intent interestsAct = new Intent(this, InterestsActivity.class);
+            Intent interestsAct = new Intent(this, InterActivity.class);
             interestsAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             JSONObject jsonObject = new JSONObject();
             try {

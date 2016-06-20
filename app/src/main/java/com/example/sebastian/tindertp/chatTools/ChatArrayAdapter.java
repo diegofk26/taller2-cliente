@@ -1,8 +1,5 @@
 package com.example.sebastian.tindertp.chatTools;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Adaptador para los mensajes del Chat*/
 public class ChatArrayAdapter extends ArrayAdapter<ChatMessage>{

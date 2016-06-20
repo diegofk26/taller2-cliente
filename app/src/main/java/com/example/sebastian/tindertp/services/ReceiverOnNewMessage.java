@@ -5,9 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.sebastian.tindertp.MatchingActivity;
-import com.example.sebastian.tindertp.commonTools.Common;
-
 import java.util.List;
 
 

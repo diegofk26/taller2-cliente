@@ -3,11 +3,11 @@ package com.example.sebastian.tindertp.commonTools;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.sebastian.tindertp.ChatListActivity;
 import com.example.sebastian.tindertp.R;
@@ -35,6 +35,7 @@ public class Common {
     public static final String MESSAGES = "/mensajes";  /**< Vars para la conexion url */
     public static final String CHAT = "/chat";          /**< Vars para la conexion url */
     public static final String PROFILE = "/perfil";          /**< Vars para la conexion url */
+    public static final String INTERESTS = "/intereses";          /**< Vars para la conexion url */
     public static final String PICTURE = "/foto";          /**< Vars para la conexion url */
     public static final String MATCH = "/matcheo";          /**< Vars para la conexion url */
     public static final String INFO = "/info";          /**< Vars para la conexion url */
@@ -61,6 +62,16 @@ public class Common {
     public static final String PHOTO_KEY = "photo_profile";
     public static final String CATEGORY_KEY = "category";
     public static final String VALUE_KEY = "value";
+
+    //intereses
+    public static final String MUSIC = "music";
+    public static final String MUSIC_BAND = "music/band";
+    public static final String TRAVEL = "travel";
+    public static final String FOOD = "food";
+    public static final String SPORT = "sport";
+    public static final String SEX = "sex";
+    public static final String OUTDOORS = "outdoors";
+
 
     //Headers keys
     public static final String USER1 = "Usuario1";      /**< Vars para la conexion url */
@@ -154,6 +165,11 @@ public class Common {
         }
 
         return false;
+    }
+
+    public static void showSnackbar(View view, String message) {
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 
 }

@@ -16,6 +16,7 @@
     <string name="comidas">Comidas favoritas</string>
     <string name="comidas_text">Comidas:</string>
     <string name="sexo">Sexo</string>
+    <string name="category_void">------</string>
     <string name="sexo_text">Sexo:</string>
     <string name="musica">Estilo de músca favorito</string>
     <string name="musica_text">Música:</string>
@@ -35,8 +36,13 @@
     <string name="fire">fire</string>
     <string name="txt">txt</string>
     <string name="registrarse">Registrarse</string>
+    <string name="add_more_interests">Agregar más intereses</string>
+    <string name="add_new_interests">Agregar nuevos intereses:</string>
     <string name="login">Login</string>
+    <string name="separator">: </string>
     <string name="nombre">Nombre</string>
+    <string name="add_category">Nueva categoria</string>
+    <string name="add_interest">Interés</string>
     <string name="url">URL</string>
     <string name="enviar">Enviar</string>
     <string name="email">Email</string>
@@ -55,4 +61,6 @@
     <string name="intereces">Intereses:</string>
     <string name="espere">Por favor, espere mientras se conecta a la red.</string>
     <string name="title_activity_add_picture">AddPictureActivity</string>
+    <string name="title_activity_more_interests">MoreInterestsActivity</string>
+    <string name="title_activity_inter">InterActivity</string>
 </resources>
