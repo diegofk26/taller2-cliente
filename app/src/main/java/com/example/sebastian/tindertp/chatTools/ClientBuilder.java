@@ -33,13 +33,13 @@ public class ClientBuilder {
     private String user; /**< Usuario al que pertenece la app */
     private String url;  /**< Url del server*/
     private String token;/**< Token que devuelve el server.*/
-    private String chatName; /**< Usuario de la persona con la que se esta chateando*/
+    private String chatEmail; /**< Usuario de la persona con la que se esta chateando*/
 
     public ClientBuilder(DataTransfer transfer) {
         user = transfer.getUser();
         url = transfer.getURL();
         token = transfer.getToken();
-        chatName = transfer.getChatName();
+        chatEmail = transfer.getChatEmail();
     }
 
     /**Builder de un cliente para ChatListActivity, y luego ChatList se encarga de
@@ -112,7 +112,7 @@ public class ClientBuilder {
     public void build(final ChatArrayAdapter adp,final DataTransfer transfer) {
 
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
-        Map<String, String> headers = HeaderBuilder.forLoadMessages(token,user,chatName,1);
+        Map<String, String> headers = HeaderBuilder.forLoadMessages(token,user, chatEmail,1);
 
         RequestResponseClient client = new RequestResponseClient((ConectivityManagerInterface)transfer, conn, headers) {
 
@@ -154,7 +154,7 @@ public class ClientBuilder {
 
 
         ConnectionStruct conn = new ConnectionStruct(Common.CHAT, Common.POST, url);
-        Map<String, String> headers = HeaderBuilder.forSendMessage(token, user, chatName);
+        Map<String, String> headers = HeaderBuilder.forSendMessage(token, user, chatEmail);
 
         RequestResponseClient client = new RequestResponseClient((ConectivityManagerInterface)transfer, conn, headers) {
 
@@ -172,7 +172,7 @@ public class ClientBuilder {
             @Override
             protected void onPostExec() {
                 if (!badResponse && isConnected) {
-                    updatePriorActivities(chatName, text);
+                    updatePriorActivities(chatEmail, text);
 
                 } else {
                     ChatArrayAdapter adp = (ChatArrayAdapter) list.getAdapter();
@@ -212,7 +212,7 @@ public class ClientBuilder {
         final Animation rotateInverse = AnimationUtils.loadAnimation(context, R.anim.rotate_inverse);
 
         ConnectionStruct conn = new ConnectionStruct(Common.MESSAGES, Common.GET, url);
-        Map<String, String> headers = HeaderBuilder.forLoadMessages(token, user, chatName, adp.size());
+        Map<String, String> headers = HeaderBuilder.forLoadMessages(token, user, chatEmail, adp.size());
 
         RequestResponseClient client = new RequestResponseClient((ConectivityManagerInterface)transfer, conn, headers) {
 

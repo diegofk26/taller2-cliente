@@ -103,7 +103,8 @@ public class Common {
     public static final String CHAT_LIST_MATCH_KEY = "CHAT_LIST_MATCH";
 
     //respuestas de like dilike
-    public static final String RESPONSE_KEY = "respuesta";
+    public static final String RESPONSE_KEY = "Resultado";
+    public static final String CANDIDATE_KEY = "Candidato";
     public static final String LIKE_KEY = "like";
     public static final String DISLIKE_KEY = "dislike";
 

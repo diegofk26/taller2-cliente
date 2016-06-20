@@ -17,6 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:layout_toRightOf="@+id/profilePic"
         android:paddingBottom="10dp"
         android:text="@string/txt"

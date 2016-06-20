@@ -9,6 +9,7 @@ public interface DataTransfer {
     String getURL();
     String getToken();
     String getChatName();
+    String getChatEmail();
     View findView(int id);
     Context getContext();
 }

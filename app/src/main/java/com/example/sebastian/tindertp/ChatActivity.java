@@ -59,11 +59,12 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final String chatName = this.getIntent().getStringExtra("from");
+        final String chatName = this.getIntent().getStringExtra("fromName");
+        final String chatEmail = this.getIntent().getStringExtra("fromEmail");
 
         setTitle(chatName);
 
-        TinderTP.updateChatName(chatName);
+        TinderTP.updateChatName(chatEmail);
 
         int orientation = getResources().getConfiguration().orientation;
 
@@ -194,7 +195,12 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
 
     @Override
     public String getChatName() {
-        return getIntent().getStringExtra("from");
+        return getIntent().getStringExtra("fromName");
+    }
+
+    @Override
+    public String getChatEmail() {
+        return getIntent().getStringExtra("fromEmail");
     }
 
     @Override

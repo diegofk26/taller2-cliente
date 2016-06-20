@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -154,6 +155,9 @@ public class InfoDownloaderClient extends MediaDownloader {
             if (isConnected) {
 
                 if (path.equals(Common.REGISTER)){
+                    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                    String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
+                    values.put(Common.TOKEN_GCM,tokenGCM);
                     ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET, url);
                     InfoDownloaderClient info = new InfoDownloaderClient(context, values, conn,view);
                     info.runInBackground();

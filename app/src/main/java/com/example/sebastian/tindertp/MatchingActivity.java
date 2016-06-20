@@ -1,6 +1,7 @@
 package com.example.sebastian.tindertp;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -41,6 +42,7 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
+import com.example.sebastian.tindertp.commonTools.NotificationIDs;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import com.example.sebastian.tindertp.services.ReceiverOnMssgReaded;
@@ -290,6 +292,17 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     }
 
     public void goToMesseges(View v) {
+
+        if (NotificationIDs.getInstance().haveNotifications()) {
+            NotificationManager notificationManager = (NotificationManager) getSystemService
+                    (Context.NOTIFICATION_SERVICE);
+            int notificationCount = NotificationIDs.getInstance().getSize();
+            for (int i = 0; i < notificationCount; i++) {
+                notificationManager.cancel(NotificationIDs.getInstance().getNotification(i));
+            }
+            NotificationIDs.getInstance().deleteNotifications();
+        }
+
         Intent chatAct = new Intent(getApplicationContext(), ChatListActivity.class);
         chatAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (onNotice.getNotificationCount() != 0) {

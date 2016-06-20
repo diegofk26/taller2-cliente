@@ -53,7 +53,7 @@ public class HeaderBuilder {
                                                            String possibleMatchUser, String response) {
         Map<String, String> headers = new HashMap<>();
         headers.put(Common.USER_KEY, user);
-        headers.put(Common.RECEPTOR, possibleMatchUser);
+        headers.put(Common.CANDIDATE_KEY, possibleMatchUser);
         headers.put(Common.TOKEN, token);
         headers.put(Common.RESPONSE_KEY, response);
         return headers;

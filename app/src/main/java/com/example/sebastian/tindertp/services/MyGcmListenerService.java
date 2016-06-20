@@ -17,6 +17,7 @@ import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.Messages;
+import com.example.sebastian.tindertp.commonTools.NotificationIDs;
 import com.example.sebastian.tindertp.commonTools.ViewIdGenerator;
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -64,8 +65,8 @@ public class MyGcmListenerService extends GcmListenerService {
 
     private void handleMatch(Bundle data) {
 
-        String userEmailMatch = data.getString("Usuario");
-        String fromUserName = data.getString("Emisor nombre");
+        String userEmailMatch = data.getString("Email");
+        String fromUserName = data.getString("Nombre");
 
         updateMatch(this, userEmailMatch, Common.MATCH_MATCH_KEY);
         updateMatch(this, userEmailMatch, Common.PROFILE_MATCH_KEY);
@@ -146,7 +147,10 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(ViewIdGenerator.generateViewId(), notificationBuilder.build());
+        int notificationID = ViewIdGenerator.generateViewId();
+        NotificationIDs.getInstance().addNotification(notificationID);
+
+        notificationManager.notify(notificationID, notificationBuilder.build());
     }
 
     private static void updateMatch(Context context, String userMatched, String type) {

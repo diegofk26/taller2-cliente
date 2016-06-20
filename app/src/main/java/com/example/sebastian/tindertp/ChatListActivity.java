@@ -103,7 +103,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
                 updatePriorActivities(usersEmails.get(indexLastUser));
                 DataThroughActivities.getInstance().deleteMssg();
                 ArraySerialization.deleteStringFromArray(this, usersEmails.get(indexLastUser));
-                startChat(usersEmails.get(indexLastUser));
+                startChat(usersNames.get(indexLastUser), usersEmails.get(indexLastUser));
             }
         }
 
@@ -194,7 +194,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         for (int i = 0; i < usersEmails.size(); i++) {
             Map<String,String> values = HeaderBuilder.forUserInfo(user, token, usersEmails.get(i));
-            NewUserDownloaderClient client = new NewUserDownloaderClient(getApplicationContext(), findViewById(R.id.relative_chat_list),
+            NewUserDownloaderClient client = new NewUserDownloaderClient(this, findViewById(R.id.relative_chat_list),
                     Common.SPECIFIC_USER_KEY, conn, values);
             client.runInBackground();
         }
@@ -242,10 +242,11 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    private void startChat(String userName) {
+    private void startChat(String userName, String userEmial) {
         Intent chat = new Intent(this, ChatActivity.class);
         chat.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        chat.putExtra("from",userName);
+        chat.putExtra("fromName", userName);
+        chat.putExtra("fromEmail",userEmial);
         this.startActivity(chat);
     }
 
@@ -255,18 +256,19 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         lastItemSelected = position;
         restoreFonts(position);
         String userName = rowItems.get(position).getUserName();
+        String userEmial = usersEmails.get(position);
         if (DataThroughActivities.getInstance().hasMessages()) {
-            DataThroughActivities.getInstance().deleteMssg(userName);
+            DataThroughActivities.getInstance().deleteMssg(userEmial);
         }
         if (ArraySerialization.hasPersistedMssg(getApplicationContext())) {
-            ArraySerialization.deleteStringFromArray(getApplicationContext(),userName);
+            ArraySerialization.deleteStringFromArray(getApplicationContext(),userEmial);
         }
-        startChat(userName);
+        startChat(userName,userEmial);
     }
 
-    private void updatePriorActivities(String user) {
+    private void updatePriorActivities(String userEmail) {
         Intent activityMsg = new Intent(Common.MSSG_READED_KEY);
-        activityMsg.putExtra("user", user);
+        activityMsg.putExtra("user", userEmail);
         LocalBroadcastManager.getInstance(this).sendBroadcast(activityMsg);
     }
 
@@ -295,6 +297,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     public ArrayList<String> getStringArrayExtra(String key) {
         return getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
     }
+
 
     private BroadcastReceiver onNotice = new BroadcastReceiver() {
 
@@ -354,7 +357,12 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public String getChatName() {
-        return getIntent().getStringExtra("from");
+        return null;
+    }
+
+    @Override
+    public String getChatEmail() {
+        return null;
     }
 
     @Override
