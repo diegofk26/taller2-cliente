@@ -9,8 +9,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -20,7 +18,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -32,7 +29,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -44,7 +40,6 @@ import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
-import com.example.sebastian.tindertp.commonTools.Dimension;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.NotificationIDs;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
@@ -279,9 +274,9 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
     /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer
      * imagen descargada, que es la del perfil.*/
-    public void goToProfile(View v) {
+    public void goToInformation(View v) {
         if (hasImage()){
-            Intent profileAct = new Intent(getApplicationContext(), ProfileActivity.class);
+            Intent profileAct = new Intent(getApplicationContext(), InfomationActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             profileAct.putExtra(Common.PROFILE_JSON, jsonProfile);
             if (onNotice.getNotificationCount() != 0) {

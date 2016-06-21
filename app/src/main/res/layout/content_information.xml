@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollViewProf"
+    android:id="@+id/scrollView1"
     android:layout_gravity="center_horizontal"
     android:fillViewport="true">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,8 +15,8 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".ProfileActivity"
-        tools:showIn="@layout/activity_profile">
+        tools:context=".InfomationActivity"
+        tools:showIn="@layout/activity_information">
 
         <LinearLayout
             android:orientation="vertical"
@@ -27,30 +27,45 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/linearLayoutProf">
+            android:id="@+id/linearLayout">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/progImage"
+                android:id="@+id/imageView2"
                 android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textv" />
+                android:id="@+id/textView3"
+                android:layout_below="@+id/imageView2"
+                android:layout_alignLeft="@+id/imageView2"
+                android:layout_alignStart="@+id/imageView2"
+                android:layout_alignRight="@+id/imageView2"
+                android:layout_alignEnd="@+id/imageView2" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/nombreProf"
-                android:text="@string/nombre_" />
+                android:id="@+id/textView4"
+                android:text="@string/nombre_"
+                android:layout_below="@+id/textView3"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_alignRight="@+id/textView3"
+                android:layout_alignEnd="@+id/textView3" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/aliasProf"
-                android:text="@string/alias_text" />
+                android:id="@+id/textView5"
+                android:text="@string/alias_text"
+                android:layout_below="@+id/textView4"
+                android:layout_alignLeft="@+id/textView4"
+                android:layout_alignStart="@+id/textView4"
+                android:layout_alignRight="@+id/textView4"
+                android:layout_alignEnd="@+id/textView4" />
 
         </LinearLayout>
 
@@ -58,17 +73,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edad_text"
-            android:id="@+id/edadProf"
+            android:id="@+id/textView18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/linearLayoutProf" />
+            android:layout_below="@+id/linearLayout" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sexo_text"
-            android:id="@+id/sexProf"
-            android:layout_below="@+id/edadProf"
+            android:id="@+id/textView19"
+            android:layout_below="@+id/textView18"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -76,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/musica_text"
-            android:id="@+id/musicTextProf"
+            android:id="@+id/textView20"
             android:layout_below="@+id/textView27"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -85,8 +100,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bandas_text"
-            android:id="@+id/bandTextProf"
-            android:layout_below="@+id/musicTextProf"
+            android:id="@+id/textView21"
+            android:layout_below="@+id/textView20"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -94,8 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/deportes_text"
-            android:id="@+id/sportsTextProf"
-            android:layout_below="@+id/bandTextProf"
+            android:id="@+id/textView22"
+            android:layout_below="@+id/textView21"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -103,8 +118,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sexo_text"
-            android:id="@+id/sexTextProf"
-            android:layout_below="@+id/sportsTextProf"
+            android:id="@+id/textView23"
+            android:layout_below="@+id/textView22"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -112,8 +127,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/actividades_text"
-            android:id="@+id/actProf"
-            android:layout_below="@+id/sexTextProf"
+            android:id="@+id/textView24"
+            android:layout_below="@+id/textView23"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -121,8 +136,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/viajes_text"
-            android:id="@+id/travelProf"
-            android:layout_below="@+id/actProf"
+            android:id="@+id/textView25"
+            android:layout_below="@+id/textView24"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -130,8 +145,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/comidas_text"
-            android:id="@+id/foodProf"
-            android:layout_below="@+id/travelProf"
+            android:id="@+id/textView26"
+            android:layout_below="@+id/textView25"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -141,9 +156,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/intereces"
             android:id="@+id/textView27"
-            android:layout_below="@+id/sexProf"
+            android:layout_below="@+id/textView19"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 </ScrollView>
-

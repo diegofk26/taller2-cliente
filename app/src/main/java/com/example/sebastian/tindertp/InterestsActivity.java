@@ -39,7 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InterActivity extends AppCompatActivity implements  CategoryUpdater{
+public class InterestsActivity extends AppCompatActivity implements  CategoryUpdater{
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -59,7 +59,7 @@ public class InterActivity extends AppCompatActivity implements  CategoryUpdater
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inter);
+        setContentView(R.layout.activity_interests);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

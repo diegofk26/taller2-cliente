@@ -70,7 +70,7 @@
             android:name=".FullScreenViewActivity"
             android:theme="@android:style/Theme.Holo.NoActionBar" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".InfomationActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -101,11 +101,14 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
-            android:name=".InterActivity"
+            android:name=".InterestsActivity"
             android:label="@string/title_activity_inter"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

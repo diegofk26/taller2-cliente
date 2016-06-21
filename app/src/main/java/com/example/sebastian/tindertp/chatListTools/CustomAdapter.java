@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sebastian.tindertp.ProfileActivity;
 import com.example.sebastian.tindertp.R;
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +99,13 @@ public class CustomAdapter extends BaseAdapter {
                     .findViewById(R.id.userName);
             holder.profilePic = (ImageView) convertView
                     .findViewById(R.id.profilePic);
+            holder.profilePic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityStarter.start(context, ProfileActivity.class);
+                }
+            });
+
 
             holder.lastmessage = (TextView) convertView.findViewById(R.id.message);
 
