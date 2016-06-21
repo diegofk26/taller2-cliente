@@ -25,6 +25,7 @@ public class RegistrationIntentService extends IntentService {
         try {
 
             InstanceID instanceID = InstanceID.getInstance(this);
+            instanceID.deleteInstanceID();
             String token = instanceID.getToken("361567099505",
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 

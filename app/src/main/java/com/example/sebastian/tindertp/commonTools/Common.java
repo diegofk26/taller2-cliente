@@ -173,4 +173,12 @@ public class Common {
                 .setAction("Action", null).show();
     }
 
+    public static final int MAX_MEGAS_PIC = 30;
+
+    private static final long  MEGABYTE = 1024L * 1024L;
+
+    public static long bytesToMeg(long bytes) {
+        return bytes / MEGABYTE ;
+    }
+
 }

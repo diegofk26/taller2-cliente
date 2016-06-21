@@ -2,14 +2,92 @@ package com.example.sebastian.tindertp.ImageTools;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
+
+import com.example.sebastian.tindertp.commonTools.Dimension;
 
 import java.io.ByteArrayOutputStream;
 
 public class ImageBase64 {
 
     private final static int quality = 100;
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    public static Bitmap decodeSampledBitmap(String file, WindowManager manager) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(file, options);
+
+        Dimension dimension = new Dimension();
+        dimension.height = options.outHeight;
+        dimension.width = options.outWidth;
+
+        scalingBounds(manager,dimension);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, dimension.width, dimension.height);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(file, options);
+    }
+
+    public static void scalingBounds(WindowManager windowManager, Dimension dimension) {
+
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int maxWidth = size.x;
+        int maxHeight = size.y;
+
+        Log.i("Base64", "Ancho original: " + dimension.width + "Altura original: " + dimension.height);
+
+        if (dimension.width > dimension.height) {
+            // landscape
+            float ratio = (float) dimension.width / maxWidth;
+            dimension.width = maxWidth;
+            dimension.height = (int)(dimension.height / ratio);
+        } else if (dimension.height > dimension.width) {
+            // portrait
+            float ratio = (float) dimension.height / maxHeight;
+            dimension.height = maxHeight;
+            dimension.width = (int)(dimension.width / ratio);
+        } else {
+            // square
+            dimension.height = maxHeight;
+            dimension.width = maxWidth;
+        }
+
+        Log.i("Base64", "escalado a " + dimension.width + "--" + dimension.height);
+    }
 
     public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat) {
         ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();

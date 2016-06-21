@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +32,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +44,7 @@ import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
+import com.example.sebastian.tindertp.commonTools.Dimension;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.NotificationIDs;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
@@ -172,7 +176,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             return;
         }
 
-        locationManager.requestLocationUpdates("gps", 900000, 20, listener);
+        locationManager.requestLocationUpdates("gps", 900000, 100, listener);
     }
 
     @Override
@@ -416,53 +420,54 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
                 Log.i(ADD_PIC_TAG, "onActivityResult select picture");
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
-                Log.i(ADD_PIC_TAG, "getting data" + selectedImagePath);
+                Log.i(ADD_PIC_TAG, "Obtengo dato" + selectedImagePath);
 
                 final File myImageFile = new File(selectedImagePath);
-                Bitmap myBitmap = BitmapFactory.decodeFile(myImageFile.getAbsolutePath());
+
+                Bitmap myBitmap = ImageBase64.decodeSampledBitmap(myImageFile.getAbsolutePath(),getWindowManager());
+
                 String picBase64 = ImageBase64.encodeToBase64(myBitmap, Bitmap.CompressFormat.JPEG);
 
-                System.out.println(picBase64);
+                if (Common.bytesToMeg(picBase64.length()) < Common.MAX_MEGAS_PIC) {
 
-                ConnectionStruct conn = new ConnectionStruct(Common.PICTURE, Common.PUT, url);
-                Map<String, String> headers = HeaderBuilder.forNewUser(user, token);
+                    ConnectionStruct conn = new ConnectionStruct(Common.PICTURE, Common.PUT, url);
+                    Map<String, String> headers = HeaderBuilder.forNewUser(user, token);
 
-                RequestResponseClient client = new RequestResponseClient(this,conn,headers) {
-                    @Override
-                    protected void getJson() throws IOException {}
-
-                    @Override
-                    protected void onPostExec() {
-                        if (!badResponse && isConnected) {
-                            showText("Foto actualizada.");
-                        }else {
-                            showText("No se pudo conectar con el server.");
+                    RequestResponseClient client = new RequestResponseClient(this, conn, headers) {
+                        @Override
+                        protected void getJson() throws IOException {
                         }
-                    }
 
-                    @Override
-                    protected void showText(String message) {
-                        Snackbar.make(findViewById(R.id.matchFragment), message, Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-                };
-                client.addBody(picBase64);
-                client.runInBackground();
+                        @Override
+                        protected void onPostExec() {
+                            if (!badResponse && isConnected) {
+                                showText("Foto actualizada.");
+                            } else {
+                                showText("No se pudo conectar con el server.");
+                            }
+                        }
 
+                        @Override
+                        protected void showText(String message) {
+                            Common.showSnackbar(findViewById(R.id.matchFragment), message);
+                        }
+                    };
+                    client.addBody(picBase64);
+                    client.runInBackground();
+                } else {
+                    Common.showSnackbar(findViewById(R.id.matchFragment), "Imagen muy grande, selecciones otra.");
+                }
             }
         }
     }
 
     public String getPath(Uri uri) {
-        // just some safety built in
         Log.i("reg","getting data");
         if( uri == null ) {
-            // TODO perform some logging or show user feedback
             Log.i("reg","getting NADA");
             return null;
         }
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
+        //galeria
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
         if( cursor != null ){
@@ -472,7 +477,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             Log.i("reg", "getting cursor != null");
             return cursor.getString(column_index);
         }
-        // this is our fallback here
+
         Log.i("reg", "getting final");
         return uri.getPath();
     }
