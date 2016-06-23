@@ -103,7 +103,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 for (int j = 0; j < values.size(); j++) {
                     int positionID = Integer.parseInt("" + (i + 1) + "" + j);
                     mapperID.put(positionID, categoryMod);
-                    positionCategoryMapper.put(positionID,categoryMod);
                     savedTextMap.put(positionID, (String) values.get(j));
                     if ( j != 0 ) {
                         listDataChild.put(categoryMod, edit);
@@ -246,9 +245,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
             savedTextMap.put(position, editText.getText().toString());
 
-            int categoryPosition = Integer.parseInt((""+position).substring(1));
-
-            listDataChild.set(positionCategoryMapper.get(position), categoryPosition, editText);
+            int digitSize = String.valueOf(listDataHeader.size()).length();
+            int childPosition = Integer.parseInt(("" + position).substring(digitSize));
+            int categoryPart = Integer.parseInt(("" + position).substring(0,digitSize));
+            int categoryPosition = Integer.parseInt(""+categoryPart+""+0);
+            listDataChild.set(positionCategoryMapper.get(categoryPosition), childPosition, editText);
 
         }
     }
