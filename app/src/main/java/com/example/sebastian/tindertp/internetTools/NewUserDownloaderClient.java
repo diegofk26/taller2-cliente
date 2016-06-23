@@ -105,7 +105,7 @@ public class NewUserDownloaderClient extends MediaDownloader{
                 activityMsg.putExtra("json", jsonString);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
         }else {
-            if (jsonString.isEmpty()) {
+            if (jsonString != null && jsonString.isEmpty()) {
                 showText("No se encontraron usuarios compatibles.");
                 ((Activity) context).setTitle("");
             }else {

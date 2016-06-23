@@ -23,11 +23,14 @@ public class RegistrationIntentService extends IntentService {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
-
+            //InstanceID.getInstance(this).deleteInstanceID();
             InstanceID instanceID = InstanceID.getInstance(this);
-            instanceID.deleteInstanceID();
-            String token = instanceID.getToken("361567099505",
-                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+            String authorizedEntity = "361567099505";
+
+            //InstanceID.getInstance(this).deleteToken(authorizedEntity,GoogleCloudMessaging.INSTANCE_ID_SCOPE);
+            //instanceID.deleteInstanceID();
+            String token = instanceID.getToken(authorizedEntity,
+                    GoogleCloudMessaging.INSTANCE_ID_SCOPE,null);
 
             Log.i(TAG, "GCM Registration Token: " + token);
 
@@ -38,7 +41,7 @@ public class RegistrationIntentService extends IntentService {
             sharedPreferences.edit().putBoolean("sentTokenToServer", false).apply();
         }
 
-        Intent registrationComplete = new Intent("registrationComplete");
+        Intent registrationComplete = new Intent(Common.REGIST_COMPLETE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 }

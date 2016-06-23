@@ -27,6 +27,7 @@ public class Common {
     public static final String GET = "GET";             /**< Vars para la conexion url */
     public static final String PUT = "PUT";             /**< Vars para la conexion url */
     public static final String POST = "POST";           /**< Vars para la conexion url */
+    public static final String DELETE = "DELETE";           /**< Vars para la conexion url */
 
     //paths ej: url/login
     public static final String TEST = "/test";          /**< Vars para la conexion url */
@@ -39,6 +40,9 @@ public class Common {
     public static final String PICTURE = "/foto";          /**< Vars para la conexion url */
     public static final String MATCH = "/matcheo";          /**< Vars para la conexion url */
     public static final String INFO = "/info";          /**< Vars para la conexion url */
+    public static final String GPS = "/gps";          /**< Vars para la conexion url */
+    public static final String REMOVE = "/eliminar";          /**< Vars para la conexion url */
+    public static final String EDIT = "/editar";          /**< Vars para la conexion url */
 
     //files para screenSplash
     public static final String IA = "file:///android_asset/IA.gif";     /**< Vars para la ScreenSplash */
@@ -54,7 +58,7 @@ public class Common {
     public static final String ALIAS_KEY = "alias";         /**< Vars para la conexion url */
     public static final String SEX_KEY = "sex";           /**< Vars para la conexion url */
     public static final String EMAIL_KEY = "email";   /**< Vars para la conexion url */
-    public static final String AGE_KEY = "edad";   /**< Vars para la conexion url */
+    public static final String AGE_KEY = "age";   /**< Vars para la conexion url */
     public static final String INTERESTS_KEY = "interests";   /**< Vars para la conexion url */
     public static final String LONGITUDE_KEY = "longitude";   /**< Vars para la conexion url */
     public static final String LATITUDE_KEY = "latitude";   /**< Vars para la conexion url */
@@ -62,6 +66,7 @@ public class Common {
     public static final String PHOTO_KEY = "photo_profile";
     public static final String CATEGORY_KEY = "category";
     public static final String VALUE_KEY = "value";
+    public static final String USER = "user";
 
     //intereses
     public static final String MUSIC = "music";
@@ -81,7 +86,7 @@ public class Common {
     public static final String MAX_MESSAGES= "10";      /**< Vars para la conexion url */
     public static final String TOKEN = "Token";         /**< Vars para la conexion url */
     public static final String RECEPTOR = "Receptor";   /**< Vars para la conexion url */
-    public static final String USER_GET = "UsuarioGet";
+    public static final String USER_GET = "UsuarioPedido";
     public static final String TOKEN_GCM = "TokenGCM";   /**< Vars para la conexion url */
 
     // intent.putExtra() keys
@@ -95,12 +100,15 @@ public class Common {
     public static final String MATCH_MATCH_KEY = "MATCH_match";
     public static final String MSSG_READED_KEY = "mssg readed";
     public static final String RAND_USER_KEY = "RAND_USER";
-    public static final String SPECIFIC_USER_KEY = "SPEC_USER";
+    public static final String SPECIFIC_USER_KEY = "SPEC_USER_CHAT";
+    public static final String SPECIFIC_USER_PROF = "SPEC_USER_PROF";
     public static final String CHAT_KEY = "CHAT";
     public static final String PROFILE_MSG_KEY = "PROFILE_MSG";
     public static final String PROFILE_MATCH_KEY = "PROFILE_MATCH";
     public static final String CHAT_LIST_MSG_KEY = "CHAT_LIST_MSG";
     public static final String CHAT_LIST_MATCH_KEY = "CHAT_LIST_MATCH";
+    public static final String REGIST_COMPLETE = "registrationComplete";
+    public static final String MY_PROFILE = "mi perfil";
 
     //respuestas de like dilike
     public static final String RESPONSE_KEY = "Resultado";

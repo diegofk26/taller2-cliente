@@ -98,15 +98,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Inheritance diagram for com.example.sebastian.tindertp.chatTools.ChatArrayAdapter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter__inherit__graph.png" border="0" usemap="#com_8example_8sebastian_8tindertp_8chatTools_8ChatArrayAdapter_inherit__map" alt="Inheritance graph"/></div>
-<map name="com_8example_8sebastian_8tindertp_8chatTools_8ChatArrayAdapter_inherit__map" id="com_8example_8sebastian_8tindertp_8chatTools_8ChatArrayAdapter_inherit__map">
-</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for com.example.sebastian.tindertp.chatTools.ChatArrayAdapter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter__coll__graph.png" border="0" usemap="#com_8example_8sebastian_8tindertp_8chatTools_8ChatArrayAdapter_coll__map" alt="Collaboration graph"/></div>
-<map name="com_8example_8sebastian_8tindertp_8chatTools_8ChatArrayAdapter_coll__map" id="com_8example_8sebastian_8tindertp_8chatTools_8ChatArrayAdapter_coll__map">
-</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -123,6 +119,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (int index, <
 <tr class="memitem:ae7653a95738b1963e852654c32cfbe43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7653a95738b1963e852654c32cfbe43"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage.html">ChatMessage</a> object)</td></tr>
 <tr class="separator:ae7653a95738b1963e852654c32cfbe43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af896618500f06da11bdf1db5772c4250"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af896618500f06da11bdf1db5772c4250"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> (<a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage.html">ChatMessage</a> chatMessage, int position)</td></tr>
+<tr class="separator:af896618500f06da11bdf1db5772c4250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafeeb2a0afb6427cab1511278a6d51b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafeeb2a0afb6427cab1511278a6d51b1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>indexOf</b> (<a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage.html">ChatMessage</a> chat)</td></tr>
+<tr class="separator:aafeeb2a0afb6427cab1511278a6d51b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece5e1f369f91522bfa5be4ef8959798"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aece5e1f369f91522bfa5be4ef8959798"></a>
+boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isFailureMessage</b> (int position)</td></tr>
+<tr class="separator:aece5e1f369f91522bfa5be4ef8959798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a989085a843268e8302cb593d0871279d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter.html#a989085a843268e8302cb593d0871279d">change</a> (int position)</td></tr>
+<tr class="separator:a989085a843268e8302cb593d0871279d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d9595db7be4637f270fd2e22df25afb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d9595db7be4637f270fd2e22df25afb"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getCount</b> ()</td></tr>
 <tr class="separator:a8d9595db7be4637f270fd2e22df25afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,10 +150,39 @@ List&lt; <a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1cha
 <tr class="memitem:af8d0dcdc96da0bade29586b7f3fd6625"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8d0dcdc96da0bade29586b7f3fd6625"></a>
 LinearLayout&#160;</td><td class="memItemRight" valign="bottom"><b>layout</b></td></tr>
 <tr class="separator:af8d0dcdc96da0bade29586b7f3fd6625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4590c2c2454eac0519f7e35911668b5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4590c2c2454eac0519f7e35911668b5b"></a>
+List&lt; Boolean &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>failedList</b> = new ArrayList&lt;&gt;()</td></tr>
+<tr class="separator:a4590c2c2454eac0519f7e35911668b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Adaptador para los mensajes del Chat </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a989085a843268e8302cb593d0871279d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void com.example.sebastian.tindertp.chatTools.ChatArrayAdapter.change </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Usado si hubo algun error </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="abebb98649311b1a98f60a8238e346b99"></a>
 <div class="memitem">
 <div class="memproto">

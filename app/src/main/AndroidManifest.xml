@@ -104,11 +104,20 @@
             android:name=".InterestsActivity"
             android:label="@string/title_activity_inter"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/title_activity_edit_profile"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".AreYouSureActivity"
+            android:label="@string/title_activity_are_you_sure"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

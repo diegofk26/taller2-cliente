@@ -12,22 +12,24 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.commonTools.Common;
+import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
 import com.example.sebastian.tindertp.services.ReceiverOnMssgReaded;
 import com.example.sebastian.tindertp.services.ReceiverOnNewMatch;
 import com.example.sebastian.tindertp.services.ReceiverOnNewMessage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InfomationActivity extends AppCompatActivity {
 
     private ImageView imgProfile;
-    private TextView txtView;/**< En caso de error.*/
     private ArrayList<String> messages;
     private ArrayList<String> users;
     private ProfileInfo profile;
@@ -39,13 +41,23 @@ public class InfomationActivity extends AppCompatActivity {
         imgProfile.setImageBitmap(myBitmap);
     }
 
-    private void getProfileImageIntoView(){
+    private void getProfileIntoView(MultiHashMap listDataChild, List<String> listDataParent){
         if( getIntent().hasExtra(Common.PROFILE_JSON) ) {
             String profileJson = getIntent().getStringExtra(Common.PROFILE_JSON);
-            profile = new ProfileInfo(profileJson);
+            profile = new ProfileInfo(profileJson,listDataChild);
             setImgProfile(profile.bitmap);
+            for (String key : listDataChild.getKeys()) {
+                listDataParent.add(key);
+            }
+
+            ExpandableAdpProfile profileAdp = new ExpandableAdpProfile(this,listDataChild,listDataParent);
+
+            ExpandableListView expView = (ExpandableListView) findViewById(R.id.expandInfo);
+            expView.setAdapter(profileAdp);
+
+            profileAdp.addHeaders(listDataParent);
         } else{
-            txtView.setText(R.string.error_image_profile);
+            Common.showSnackbar(findViewById(R.id.relative_information),"Error al cargar la imagen.");
         }
     }
 
@@ -70,15 +82,18 @@ public class InfomationActivity extends AppCompatActivity {
         messages = new ArrayList<>();
         users = new ArrayList<>();
 
-        imgProfile = (ImageView)findViewById(R.id.imageView2);
-        txtView = (TextView)findViewById(R.id.textView3);
+        imgProfile = (ImageView)findViewById(R.id.infoImage);
 
         onNotice = new ReceiverOnNewMessage(this);
         onMssgReaded = new ReceiverOnMssgReaded(this, onNotice);
         onMatch = new ReceiverOnNewMatch(this);
 
+        MultiHashMap listDataChild = new MultiHashMap();
+        List<String> listDataParent = new ArrayList<>();
+
         getNotificationCount();
-        getProfileImageIntoView();
+        getProfileIntoView(listDataChild, listDataParent);
+
         onNotice.setUsersAndMessages(users, messages);
         onMssgReaded.setUsersAndMessage(users, messages);
 
@@ -94,35 +109,17 @@ public class InfomationActivity extends AppCompatActivity {
     }
 
     private void setProfileInfo() {
-        TextView name = (TextView) findViewById(R.id.textView4);
-        TextView alias = (TextView) findViewById(R.id.textView5);
-        TextView age = (TextView) findViewById(R.id.textView18);
-        TextView sex = (TextView) findViewById(R.id.textView19);
-        TextView music = (TextView) findViewById(R.id.textView20);
-        TextView bands = (TextView) findViewById(R.id.textView21);
-        TextView sports = (TextView) findViewById(R.id.textView22);
-        TextView sex_interest = (TextView) findViewById(R.id.textView23);
-        TextView outdoors = (TextView) findViewById(R.id.textView24);
-        TextView travel = (TextView) findViewById(R.id.textView25);
-        TextView food = (TextView) findViewById(R.id.textView26);
+        TextView name = (TextView) findViewById(R.id.nombreInfo);
+        TextView alias = (TextView) findViewById(R.id.aliasInfo);
+        TextView age = (TextView) findViewById(R.id.edadInfo);
+        TextView sex = (TextView) findViewById(R.id.sexInfo);
 
         name.setText(Html.fromHtml("<b>" + name.getText().toString() + "</b> " + profile.name));
         alias.setText(Html.fromHtml("<b>" + alias.getText().toString() + "</b> " + profile.alias));
         age.setText(Html.fromHtml("<b>" + age.getText().toString() + "</b> " + profile.age));
         sex.setText(Html.fromHtml("<b>" + sex.getText().toString() + "</b> " + profile.sex));
 
-        setInterestsTextView(Common.MUSIC, music);
-        setInterestsTextView(Common.MUSIC_BAND, bands);
-        setInterestsTextView(Common.SPORT, sports);
-        setInterestsTextView(Common.SEX, sex_interest);
-        setInterestsTextView(Common.OUTDOORS, outdoors);
-        setInterestsTextView(Common.TRAVEL, travel);
-        setInterestsTextView(Common.FOOD, food);
-    }
 
-    private void setInterestsTextView(String category, TextView text){
-        String categorySpanish = text.getText().toString();
-        text.setText(Html.fromHtml("<b>"+categorySpanish+"</b> "+profile.getInterestMap(category)));
     }
 
     @Override

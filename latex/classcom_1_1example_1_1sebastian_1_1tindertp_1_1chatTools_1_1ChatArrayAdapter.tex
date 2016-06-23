@@ -2,8 +2,7 @@
 \label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter}\index{com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Chat\+Array\+Adapter@{com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Chat\+Array\+Adapter}}
 
 
-Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Chat\+Array\+Adapter\+:
-\nopagebreak
+Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Chat\+Array\+Adapter\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,8 +11,7 @@ Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Cha
 \end{figure}
 
 
-Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Chat\+Array\+Adapter\+:
-\nopagebreak
+Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Chat\+Array\+Adapter\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -35,6 +33,17 @@ void {\bfseries add} (int index, \hyperlink{classcom_1_1example_1_1sebastian_1_1
 void {\bfseries add} (\hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage}{Chat\+Message} object)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_ae7653a95738b1963e852654c32cfbe43}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_ae7653a95738b1963e852654c32cfbe43}
 
 \item 
+void {\bfseries remove} (\hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage}{Chat\+Message} chat\+Message, int position)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_af896618500f06da11bdf1db5772c4250}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_af896618500f06da11bdf1db5772c4250}
+
+\item 
+int {\bfseries index\+Of} (\hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage}{Chat\+Message} chat)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_aafeeb2a0afb6427cab1511278a6d51b1}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_aafeeb2a0afb6427cab1511278a6d51b1}
+
+\item 
+boolean {\bfseries is\+Failure\+Message} (int position)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_aece5e1f369f91522bfa5be4ef8959798}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_aece5e1f369f91522bfa5be4ef8959798}
+
+\item 
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_a989085a843268e8302cb593d0871279d}{change} (int position)
+\item 
 int {\bfseries get\+Count} ()\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_a8d9595db7be4637f270fd2e22df25afb}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_a8d9595db7be4637f270fd2e22df25afb}
 
 \item 
@@ -54,11 +63,24 @@ List$<$ \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1
 \item 
 Linear\+Layout {\bfseries layout}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_af8d0dcdc96da0bade29586b7f3fd6625}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_af8d0dcdc96da0bade29586b7f3fd6625}
 
+\item 
+List$<$ Boolean $>$ {\bfseries failed\+List} = new Array\+List$<$$>$()\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_a4590c2c2454eac0519f7e35911668b5b}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_a4590c2c2454eac0519f7e35911668b5b}
+
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Adaptador para los mensajes del Chat 
+
+\subsection{Member Function Documentation}
+\index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Chat\+Array\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Chat\+Array\+Adapter}!change@{change}}
+\index{change@{change}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Chat\+Array\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Chat\+Array\+Adapter}}
+\subsubsection[{\texorpdfstring{change(int position)}{change(int position)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Chat\+Array\+Adapter.\+change (
+\begin{DoxyParamCaption}
+\item[{int}]{position}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_a989085a843268e8302cb593d0871279d}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter_a989085a843268e8302cb593d0871279d}
+Usado si hubo algun error 
 
 \subsection{Member Data Documentation}
 \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Chat\+Array\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Chat\+Array\+Adapter}!chat\+Text@{chat\+Text}}

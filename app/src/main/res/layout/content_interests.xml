@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".InterestsActivity"
+    android:background="@drawable/gradient_background"
     android:id="@+id/relative"
     tools:showIn="@layout/activity_interests">
 
@@ -17,7 +18,7 @@
         android:id="@+id/lvExp"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:descendantFocusability="beforeDescendants"
+        android:descendantFocusability="afterDescendants"
         android:layout_marginBottom="65dp"
         android:cacheColorHint="#00000000"/>
 

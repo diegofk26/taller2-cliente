@@ -1,6 +1,7 @@
 <map id="com.example.sebastian.tindertp.internetTools.MediaDownloader" name="com.example.sebastian.tindertp.internetTools.MediaDownloader">
 <area shape="rect" id="node2" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1ConnectionTester.html" title="com.example.sebastian.tindertp.internet\lTools.ConnectionTester" alt="" coords="310,5,565,46"/>
-<area shape="rect" id="node3" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1ImageDownloaderClient.html" title="com.example.sebastian.tindertp.internet\lTools.ImageDownloaderClient" alt="" coords="310,70,565,111"/>
-<area shape="rect" id="node4" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient.html" title="com.example.sebastian.tindertp.internet\lTools.InfoDownloaderClient" alt="" coords="310,135,565,177"/>
-<area shape="rect" id="node5" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1RequestResponseClient.html" title="com.example.sebastian.tindertp.internet\lTools.RequestResponseClient" alt="" coords="310,201,565,242"/>
+<area shape="rect" id="node3" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient.html" title="com.example.sebastian.tindertp.internet\lTools.InfoDownloaderClient" alt="" coords="310,70,565,111"/>
+<area shape="rect" id="node4" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InterestsInfoDownloader.html" title="com.example.sebastian.tindertp.internet\lTools.InterestsInfoDownloader" alt="" coords="310,135,565,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1NewUserDownloaderClient.html" title="com.example.sebastian.tindertp.internet\lTools.NewUserDownloaderClient" alt="" coords="310,201,565,242"/>
+<area shape="rect" id="node6" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1RequestResponseClient.html" title="com.example.sebastian.tindertp.internet\lTools.RequestResponseClient" alt="" coords="310,266,565,307"/>
 </map>

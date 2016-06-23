@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loginl',['loginL',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1LoginActivity.html#a96627280f892b2702e01699f75899a06',1,'com::example::sebastian::tindertp::LoginActivity']]]
+  ['ishttpformat',['isHTTPFormat',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1MediaDownloader.html#ac8e1d242c293e0a37c1a6027dc7a026a',1,'com::example::sebastian::tindertp::internetTools::MediaDownloader']]]
 ];

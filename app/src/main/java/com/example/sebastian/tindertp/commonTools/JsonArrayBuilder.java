@@ -31,14 +31,20 @@ public class JsonArrayBuilder {
 
                 String value = values.get(textID);
 
-                Log.i("JSONARRAY", "Categoria: " + category + " Valor: " + value);
+                if (!value.isEmpty()) {
 
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put(Common.CATEGORY_KEY,category);
-                    jsonObject.put(Common.VALUE_KEY, value);
-                    jsonArray.put(jsonObject);
-                } catch (JSONException e) { e.printStackTrace();}
+                    Log.i("JSONARRAY", "Categoria: " + category + " Valor: " + value);
+
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put(Common.CATEGORY_KEY, category);
+                        jsonObject.put(Common.VALUE_KEY, value);
+                        jsonArray.put(jsonObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
         }
 

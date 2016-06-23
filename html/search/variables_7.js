@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['pass_5fkey',['PASS_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#adde52a07405e8d140a9f86d733e2e160',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['passtext',['passText',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1LoginActivity.html#a8590bdba6d094c75f8dd360c5a78c928',1,'com::example::sebastian::tindertp::LoginActivity']]],
-  ['path',['path',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1MediaDownloader.html#a99ab591fedeaa392762bf534499a2279',1,'com::example::sebastian::tindertp::internetTools::MediaDownloader']]],
-  ['post',['POST',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aef1815c3b4427639e9ffdd99d36674be',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['put',['PUT',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a034675c5513960eb228c8788a450612e',1,'com::example::sebastian::tindertp::commonTools::Common']]]
+  ['match',['MATCH',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a28fde071b3faf6ab868ef469ed66cb70',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['max_5fmessages',['MAX_MESSAGES',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#af961b08c8185ef3e31468a6b75a51c19',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['message',['message',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage.html#aee5e1e99652c0f954aec7f99975c2714',1,'com::example::sebastian::tindertp::chatTools::ChatMessage']]],
+  ['messages',['MESSAGES',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#acada4b49a0d72e7c468fd64c3e7ed6eb',1,'com::example::sebastian::tindertp::commonTools::Common']]]
 ];

@@ -89,6 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1ArraySerialization-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">com.example.sebastian.tindertp.commonTools.ArraySerialization Class Reference</div>  </div>
@@ -100,15 +101,30 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a78c724ccfa96d1a6c168f7a4d417acb1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78c724ccfa96d1a6c168f7a4d417acb1"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>persistUserAndMssg</b> (Context ctx, String user, String mssg)</td></tr>
 <tr class="separator:a78c724ccfa96d1a6c168f7a4d417acb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62582fe2d3820c1e6c165f89248737f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62582fe2d3820c1e6c165f89248737f4"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteAll</b> (Context context)</td></tr>
+<tr class="separator:a62582fe2d3820c1e6c165f89248737f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec11c0960c8ad2eea8e61aee8e22b276"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec11c0960c8ad2eea8e61aee8e22b276"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteStringFromArray</b> (Context context, String userToRemove)</td></tr>
 <tr class="separator:aec11c0960c8ad2eea8e61aee8e22b276"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00bd808527962e2a8dc4e61fa0790129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00bd808527962e2a8dc4e61fa0790129"></a>
 static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>hasPersistedMssg</b> (Context ctx)</td></tr>
 <tr class="separator:a00bd808527962e2a8dc4e61fa0790129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0df8bc47cbdc075f004ea005d690c82c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0df8bc47cbdc075f004ea005d690c82c"></a>
+static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>hasPersistedMatches</b> (Context ctx)</td></tr>
+<tr class="separator:a0df8bc47cbdc075f004ea005d690c82c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab5218831832e2dfd0807177e139225d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab5218831832e2dfd0807177e139225d"></a>
 static ArrayList&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getPersistedArray</b> (Context context, String key)</td></tr>
 <tr class="separator:aab5218831832e2dfd0807177e139225d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59bd32db77f877b42d4d0fe14dc4c5c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59bd32db77f877b42d4d0fe14dc4c5c0"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>persistUserMatch</b> (Context ctx, String userMatch)</td></tr>
+<tr class="separator:a59bd32db77f877b42d4d0fe14dc4c5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7ae212523ee85ff8e3c1ab9ab2baf84"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7ae212523ee85ff8e3c1ab9ab2baf84"></a>
+static String&#160;</td><td class="memItemRight" valign="bottom"><b>getUserName</b> (Context ctx, String userEmailMatch)</td></tr>
+<tr class="separator:aa7ae212523ee85ff8e3c1ab9ab2baf84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74148a23761f8cd487aa6d48370e030d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74148a23761f8cd487aa6d48370e030d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>persistUserMatch</b> (Context ctx, String userEmailMatch, String userNameMatch)</td></tr>
+<tr class="separator:a74148a23761f8cd487aa6d48370e030d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
@@ -118,6 +134,12 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>setStringArray
 <tr class="memitem:a78eaa44f55be648142894e06f6ee089f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78eaa44f55be648142894e06f6ee089f"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>pushStringinPref</b> (Context context, String key, String value)</td></tr>
 <tr class="separator:a78eaa44f55be648142894e06f6ee089f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ac97509cc0f256f877558c94a3c690ea5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac97509cc0f256f877558c94a3c690ea5"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>PERSISTED_TAG</b> = &quot;Persisted Data&quot;</td></tr>
+<tr class="separator:ac97509cc0f256f877558c94a3c690ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>app/src/main/java/com/example/sebastian/tindertp/commonTools/ArraySerialization.java</li>

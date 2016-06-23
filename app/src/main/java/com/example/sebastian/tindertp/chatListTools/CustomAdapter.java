@@ -2,6 +2,7 @@ package com.example.sebastian.tindertp.chatListTools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.sebastian.tindertp.ProfileActivity;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
+import com.example.sebastian.tindertp.commonTools.Common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,14 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     public void addRowItem(List<RowItem> newRows) {
-        Log.i(ADAPTER_TAG, "Dispara el agregado de un nuevo Item");
+        Log.i(ADAPTER_TAG, "Dispara el agregado de un nuevos Items");
+        if (newRows.size() > isBoldList.size()) {
+            Log.i(ADAPTER_TAG, "Dispara hay un nuevo match");
+            int diff = newRows.size() - isBoldList.size();
+            for(int i = 0; i < diff; i++) {
+                isBoldList.add(false);
+            }
+        }
         List<RowItem> aux = new ArrayList<>(newRows);
         rowItems.clear();
         rowItems.addAll(aux);
@@ -48,17 +57,17 @@ public class CustomAdapter extends BaseAdapter {
 
     /**Actualiza a Negrita o Normal el mensaje.*/
     public void updateBold(List<RowItem> newRows, int index, boolean isBold) {
-        Log.i(ADAPTER_TAG,"Dispara el cambio en la posicion: " + index + ". isBold: " + isBold);
+        Log.i(ADAPTER_TAG, "Dispara el cambio en la posicion: " + index + ". isBold: " + isBold);
         List<RowItem> aux = new ArrayList<>(newRows);
         rowItems.clear();
         rowItems.addAll(aux);
-        isBoldList.set(index,isBold);
+        isBoldList.set(index, isBold);
         notifyDataSetChanged();
     }
 
     /** Restaura la negrita a modo normal*/
     public void restore(int position) {
-        Log.i(ADAPTER_TAG,"Dispara el cambio a modo NORMAL de la posicion: " + position);
+        Log.i(ADAPTER_TAG, "Dispara el cambio a modo NORMAL de la posicion: " + position);
         isBoldList.set(position,false);
         notifyDataSetChanged();
     }
@@ -87,6 +96,8 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        final int finalPos = position;
+
         ViewHolder holder = null;
 
         LayoutInflater mInflater = (LayoutInflater) context
@@ -95,17 +106,18 @@ public class CustomAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.list_item, null);
             holder = new ViewHolder();
 
-            holder.userName = (TextView) convertView
-                    .findViewById(R.id.userName);
-            holder.profilePic = (ImageView) convertView
-                    .findViewById(R.id.profilePic);
+            holder.userName = (TextView) convertView.findViewById(R.id.userName);
+
+            holder.profilePic = (ImageView) convertView.findViewById(R.id.profilePic);
             holder.profilePic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ActivityStarter.start(context, ProfileActivity.class);
+                    Intent activity = new Intent(context, ProfileActivity.class);
+                    activity.putExtra(Common.EMAIL_KEY, rowItems.get(finalPos).getUserEmail());
+                    activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(activity);
                 }
             });
-
 
             holder.lastmessage = (TextView) convertView.findViewById(R.id.message);
 
@@ -117,17 +129,17 @@ public class CustomAdapter extends BaseAdapter {
                 holder.lastmessage.setTypeface(null, Typeface.NORMAL);
             }
 
-            RowItem rowPos = rowItems.get(position);
-            holder.profilePic.setImageBitmap(rowPos.getProfilePic());
-            holder.userName.setText(rowPos.getUserName());
-            holder.userName.setTextColor(Color.BLACK);
-            holder.lastmessage.setText(rowPos.getLastMessage());
-            holder.lastmessage.setTextColor(Color.BLACK);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        RowItem rowPos = rowItems.get(position);
+        holder.profilePic.setImageBitmap(rowPos.getProfilePic());
+        holder.userName.setText(rowPos.getUserName());
+        holder.userName.setTextColor(Color.BLACK);
+        holder.lastmessage.setText(rowPos.getLastMessage());
+        holder.lastmessage.setTextColor(Color.BLACK);
 
         return convertView;
     }

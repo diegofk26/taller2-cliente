@@ -1,37 +1,29 @@
 \hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder}{}\section{com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder Class Reference}
 \label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder}\index{com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder@{com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder}}
-\subsection*{Classes}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-class {\bfseries Get\+Messages\+Client}
-\end{DoxyCompactItemize}
-\subsection*{Static Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-static \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1RequestResponseClient}{Request\+Response\+Client} \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a63a1adda7ac262c72a9439884529bd8e}{build} (final \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatListActivity}{Chat\+List\+Activity} act, final List$<$ String $>$ user\+Names, final String user\+From)
-\item 
-static \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1RequestResponseClient}{Request\+Response\+Client} \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a833b26ff17816ebe203bfcb62f80c577}{build} (Activity context, final \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter}{Chat\+Array\+Adapter} adp)
-\item 
-static \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1RequestResponseClient}{Request\+Response\+Client} \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a8500d455df4ef3a6dbe81bbe99418667}{build} (Activity context, final \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter}{Chat\+Array\+Adapter} adp, final Edit\+Text chat\+Text)
-\item 
-static \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1RequestResponseClient}{Request\+Response\+Client} \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_aaf8dc904d31c1bf4cfc3a670b5f989bf}{build} (Activity context, final \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter}{Chat\+Array\+Adapter} adp, final List\+View mssg\+List)
-\end{DoxyCompactItemize}
-\subsection*{Static Private Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-static void {\bfseries init} (Activity context)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_aa96d6a3c713b976ed9631c355ac45d2e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_aa96d6a3c713b976ed9631c355ac45d2e}
+{\bfseries Client\+Builder} (\hyperlink{interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1DataTransfer}{Data\+Transfer} transfer)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_ab8a1f8735877585aa3116450ac690cd5}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_ab8a1f8735877585aa3116450ac690cd5}
 
+\item 
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a84c8904454dbc0c98dc5519567ed939b}{build} (final \hyperlink{interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1ViewUpdater}{View\+Updater} updater, final List$<$ String $>$ users\+Emails, final String user\+From)
+\item 
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a59e84af6f975cf618d2d36c2aa3a6d64}{build} (final \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter}{Chat\+Array\+Adapter} adp, final \hyperlink{interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1DataTransfer}{Data\+Transfer} transfer)
+\item 
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_ac09b2b950cd7116f84bacc5a366ec33d}{build} (final String text, final List\+View list, final \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage}{Chat\+Message} chat, final \hyperlink{interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1DataTransfer}{Data\+Transfer} transfer)
+\item 
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a59be5c24aa674e233fe21eac707cc114}{build} (Context context, final \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatArrayAdapter}{Chat\+Array\+Adapter} adp, final List\+View mssg\+List, final \hyperlink{interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1DataTransfer}{Data\+Transfer} transfer)
 \end{DoxyCompactItemize}
-\subsection*{Static Private Attributes}
+\subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a5689629482292f87ffd3c7786568f7d6}{user}
+String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a5689629482292f87ffd3c7786568f7d6}{user}
 \item 
-static String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a7c433c4fc6c3c4d3e3f451e26e00f5c6}{url}
+String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a7c433c4fc6c3c4d3e3f451e26e00f5c6}{url}
 \item 
-static String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a4b37d07fc558a8cda6b6ce6a865ea8e6}{token}
+String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a4b37d07fc558a8cda6b6ce6a865ea8e6}{token}
 \item 
-static String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a930f0da55439617c4c79ae9b7a154548}{chat\+Name}
+String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_abc4b53df08d44c92f674531ee3ec9a12}{chat\+Email}
 \end{DoxyCompactItemize}
 
 
@@ -41,39 +33,41 @@ Construye el cliente para la descarga de Mensajes.
 \subsection{Member Function Documentation}
 \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!build@{build}}
 \index{build@{build}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{build(final Chat\+List\+Activity act, final List$<$ String $>$ user\+Names, final String user\+From)}{build(final ChatListActivity act, final List< String > userNames, final String userFrom)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Request\+Response\+Client} com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
+\subsubsection[{\texorpdfstring{build(final View\+Updater updater, final List$<$ String $>$ users\+Emails, final String user\+From)}{build(final ViewUpdater updater, final List< String > usersEmails, final String userFrom)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
 \begin{DoxyParamCaption}
-\item[{final {\bf Chat\+List\+Activity}}]{act, }
-\item[{final List$<$ String $>$}]{user\+Names, }
+\item[{final {\bf View\+Updater}}]{updater, }
+\item[{final List$<$ String $>$}]{users\+Emails, }
 \item[{final String}]{user\+From}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a63a1adda7ac262c72a9439884529bd8e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a63a1adda7ac262c72a9439884529bd8e}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a84c8904454dbc0c98dc5519567ed939b}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a84c8904454dbc0c98dc5519567ed939b}
 Builder de un cliente para \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatListActivity}{Chat\+List\+Activity}, y luego Chat\+List se encarga de recargar su vista. \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!build@{build}}
 \index{build@{build}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{build(\+Activity context, final Chat\+Array\+Adapter adp)}{build(Activity context, final ChatArrayAdapter adp)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Request\+Response\+Client} com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
+\subsubsection[{\texorpdfstring{build(final Chat\+Array\+Adapter adp, final Data\+Transfer transfer)}{build(final ChatArrayAdapter adp, final DataTransfer transfer)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
 \begin{DoxyParamCaption}
-\item[{Activity}]{context, }
-\item[{final {\bf Chat\+Array\+Adapter}}]{adp}
+\item[{final {\bf Chat\+Array\+Adapter}}]{adp, }
+\item[{final {\bf Data\+Transfer}}]{transfer}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a833b26ff17816ebe203bfcb62f80c577}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a833b26ff17816ebe203bfcb62f80c577}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a59e84af6f975cf618d2d36c2aa3a6d64}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a59e84af6f975cf618d2d36c2aa3a6d64}
 Builder de un cliente para chat, en este caso el adapter se encarga de actualizar la vista de \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatActivity}{Chat\+Activity}. \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!build@{build}}
 \index{build@{build}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{build(\+Activity context, final Chat\+Array\+Adapter adp, final Edit\+Text chat\+Text)}{build(Activity context, final ChatArrayAdapter adp, final EditText chatText)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Request\+Response\+Client} com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
+\subsubsection[{\texorpdfstring{build(final String text, final List\+View list, final Chat\+Message chat, final Data\+Transfer transfer)}{build(final String text, final ListView list, final ChatMessage chat, final DataTransfer transfer)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
 \begin{DoxyParamCaption}
-\item[{Activity}]{context, }
-\item[{final {\bf Chat\+Array\+Adapter}}]{adp, }
-\item[{final Edit\+Text}]{chat\+Text}
+\item[{final String}]{text, }
+\item[{final List\+View}]{list, }
+\item[{final {\bf Chat\+Message}}]{chat, }
+\item[{final {\bf Data\+Transfer}}]{transfer}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a8500d455df4ef3a6dbe81bbe99418667}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a8500d455df4ef3a6dbe81bbe99418667}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_ac09b2b950cd7116f84bacc5a366ec33d}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_ac09b2b950cd7116f84bacc5a366ec33d}
 Builder de un cliente que descarga y luego avisa a las vistas de las actividades anteriores se actualicen. \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!build@{build}}
 \index{build@{build}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{build(\+Activity context, final Chat\+Array\+Adapter adp, final List\+View mssg\+List)}{build(Activity context, final ChatArrayAdapter adp, final ListView mssgList)}}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Request\+Response\+Client} com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
+\subsubsection[{\texorpdfstring{build(\+Context context, final Chat\+Array\+Adapter adp, final List\+View mssg\+List, final Data\+Transfer transfer)}{build(Context context, final ChatArrayAdapter adp, final ListView mssgList, final DataTransfer transfer)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+build (
 \begin{DoxyParamCaption}
-\item[{Activity}]{context, }
+\item[{Context}]{context, }
 \item[{final {\bf Chat\+Array\+Adapter}}]{adp, }
-\item[{final List\+View}]{mssg\+List}
+\item[{final List\+View}]{mssg\+List, }
+\item[{final {\bf Data\+Transfer}}]{transfer}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_aaf8dc904d31c1bf4cfc3a670b5f989bf}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_aaf8dc904d31c1bf4cfc3a670b5f989bf}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a59be5c24aa674e233fe21eac707cc114}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a59be5c24aa674e233fe21eac707cc114}
 Builder de un cliente que luego de la descarga,
 \begin{DoxyItemize}
 \item si no tiene mas mensajes actualiza la vista de \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatActivity}{Chat\+Activity}, que como resultado cambie el icono de barra.
@@ -81,18 +75,18 @@ Builder de un cliente que luego de la descarga,
 \end{DoxyItemize}
 
 \subsection{Member Data Documentation}
-\index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!chat\+Name@{chat\+Name}}
-\index{chat\+Name@{chat\+Name}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{chat\+Name}{chatName}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+chat\+Name\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a930f0da55439617c4c79ae9b7a154548}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a930f0da55439617c4c79ae9b7a154548}
+\index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!chat\+Email@{chat\+Email}}
+\index{chat\+Email@{chat\+Email}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
+\subsubsection[{\texorpdfstring{chat\+Email}{chatEmail}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+chat\+Email\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_abc4b53df08d44c92f674531ee3ec9a12}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_abc4b53df08d44c92f674531ee3ec9a12}
 Usuario de la persona con la que se esta chateando \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!token@{token}}
 \index{token@{token}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{token}{token}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+token\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a4b37d07fc558a8cda6b6ce6a865ea8e6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a4b37d07fc558a8cda6b6ce6a865ea8e6}
+\subsubsection[{\texorpdfstring{token}{token}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+token\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a4b37d07fc558a8cda6b6ce6a865ea8e6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a4b37d07fc558a8cda6b6ce6a865ea8e6}
 Token que devuelve el server. \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!url@{url}}
 \index{url@{url}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{url}{url}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+url\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a7c433c4fc6c3c4d3e3f451e26e00f5c6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a7c433c4fc6c3c4d3e3f451e26e00f5c6}
+\subsubsection[{\texorpdfstring{url}{url}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+url\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a7c433c4fc6c3c4d3e3f451e26e00f5c6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a7c433c4fc6c3c4d3e3f451e26e00f5c6}
 Url del server \index{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}!user@{user}}
 \index{user@{user}!com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder@{com\+::example\+::sebastian\+::tindertp\+::chat\+Tools\+::\+Client\+Builder}}
-\subsubsection[{\texorpdfstring{user}{user}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+user\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a5689629482292f87ffd3c7786568f7d6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a5689629482292f87ffd3c7786568f7d6}
+\subsubsection[{\texorpdfstring{user}{user}}]{\setlength{\rightskip}{0pt plus 5cm}String com.\+example.\+sebastian.\+tindertp.\+chat\+Tools.\+Client\+Builder.\+user\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a5689629482292f87ffd3c7786568f7d6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder_a5689629482292f87ffd3c7786568f7d6}
 Usuario al que pertenece la app 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

@@ -3,13 +3,19 @@
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static boolean {\bfseries user\+And\+Pass\+\_\+\+OK} (Edit\+Text user, Edit\+Text password, Text\+View text)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a60d6942529cc3e5192abb0662da4a59e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a60d6942529cc3e5192abb0662da4a59e}
+static boolean {\bfseries pass\+\_\+\+OK} (Edit\+Text password, String\+Builder response)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aa8a00a26fec3015d703474c715548ceb}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aa8a00a26fec3015d703474c715548ceb}
 
 \item 
 static void {\bfseries clear\+Login\+Saved} (Context context)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a602f78b647b4c1617a2173a9d94d97a1}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a602f78b647b4c1617a2173a9d94d97a1}
 
 \item 
 static boolean {\bfseries option\+Selected\+Item} (Menu\+Item item, Context context)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ad5a698303b87f0930ce1f129d87e22c2}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ad5a698303b87f0930ce1f129d87e22c2}
+
+\item 
+static void {\bfseries show\+Snackbar} (View view, String message)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af59bc9ff042336c3d62c4bc55bd45499}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af59bc9ff042336c3d62c4bc55bd45499}
+
+\item 
+static long {\bfseries bytes\+To\+Meg} (long bytes)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aedc85af8b31ee8f5ef82a63055bcb1bd}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aedc85af8b31ee8f5ef82a63055bcb1bd}
 
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
@@ -27,6 +33,8 @@ static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1c
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aef1815c3b4427639e9ffdd99d36674be}{P\+O\+ST} = \char`\"{}P\+O\+ST\char`\"{}
 \item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a67f9c93c36818b5e774ffbac7e9004ec}{D\+E\+L\+E\+TE} = \char`\"{}D\+E\+L\+E\+TE\char`\"{}
+\item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a2cf3afaf3a741d3286bafb5606c9aede}{T\+E\+ST} = \char`\"{}/test\char`\"{}
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ac3459941ff680be2f021432f775220b3}{L\+O\+G\+IN} = \char`\"{}/login\char`\"{}
@@ -37,11 +45,27 @@ static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1c
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a22cdbc7c176add88325a44caaace5168}{C\+H\+AT} = \char`\"{}/chat\char`\"{}
 \item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a35eb34a2323adbc080a8e5836bbd57dd}{P\+R\+O\+F\+I\+LE} = \char`\"{}/perfil\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_add1426e1c9ce182255dd37bae66b670a}{I\+N\+T\+E\+R\+E\+S\+TS} = \char`\"{}/intereses\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_acdb1d46dccfc9bbec73e0ca4b7ecb96a}{P\+I\+C\+T\+U\+RE} = \char`\"{}/foto\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a28fde071b3faf6ab868ef469ed66cb70}{M\+A\+T\+CH} = \char`\"{}/matcheo\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a415909b836ea7079008f081e482ad1a5}{I\+N\+FO} = \char`\"{}/info\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6b409e03c3a58eeff3ba5f7001b7f17d}{G\+PS} = \char`\"{}/gps\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae0c3e1d895c90e3e6daf8346012200f}{R\+E\+M\+O\+VE} = \char`\"{}/eliminar\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a55102a3c9815bdf347b4d124d0e52a76}{E\+D\+IT} = \char`\"{}/editar\char`\"{}
+\item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae5ecea5aa3915aa216f04a10f1d6074}{IA} = \char`\"{}file\+:///android\+\_\+asset/I\+A.\+gif\char`\"{}
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af9ff2dd415fc9361e082cf3877c8c635}{D\+O\+TS} = \char`\"{}file\+:///android\+\_\+asset/dots.\+gif\char`\"{}
 \item 
-static final String {\bfseries P\+R\+O\+F\+I\+L\+E\+\_\+\+I\+M\+G\+\_\+\+K\+EY} = \char`\"{}profile\+File\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a9e1c969f09ba9c7b331a6eede34b3ba7}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a9e1c969f09ba9c7b331a6eede34b3ba7}
+static final String {\bfseries P\+R\+O\+F\+I\+L\+E\+\_\+\+J\+S\+ON} = \char`\"{}profile\+Json\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a2d70e4f1b3e6b5876072315847f46fcb}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a2d70e4f1b3e6b5876072315847f46fcb}
 
 \item 
 static final String {\bfseries U\+R\+L\+\_\+\+K\+EY} = \char`\"{}url\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a55021db0efa3887ab7fb69950534c8da}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a55021db0efa3887ab7fb69950534c8da}
@@ -50,6 +74,57 @@ static final String {\bfseries U\+R\+L\+\_\+\+K\+EY} = \char`\"{}url\char`\"{}\h
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab1a1f8a9db6e36312ae326c86361829c}{U\+S\+E\+R\+\_\+\+K\+EY} = \char`\"{}Usuario\char`\"{}
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adde52a07405e8d140a9f86d733e2e160}{P\+A\+S\+S\+\_\+\+K\+EY} = \char`\"{}Password\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a64fbc8f2b601668b5918377d325f26ee}{N\+A\+M\+E\+\_\+\+K\+EY} = \char`\"{}name\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6dfb282dfc359147e031d77f0b409594}{A\+L\+I\+A\+S\+\_\+\+K\+EY} = \char`\"{}alias\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a540855ccad31accb2c6a9d8a9071ad59}{S\+E\+X\+\_\+\+K\+EY} = \char`\"{}sex\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1e32ec84b98617bbaf3beb96aefc259c}{E\+M\+A\+I\+L\+\_\+\+K\+EY} = \char`\"{}email\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a659946a530f7152a828e547f39259dc6}{A\+G\+E\+\_\+\+K\+EY} = \char`\"{}age\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a73b907c50a597827595b340dc0e21d04}{I\+N\+T\+E\+R\+E\+S\+T\+S\+\_\+\+K\+EY} = \char`\"{}interests\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aaf0632358f2b089a026fa988b5e17053}{L\+O\+N\+G\+I\+T\+U\+D\+E\+\_\+\+K\+EY} = \char`\"{}longitude\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adc92ba88d0f66397f4ef66fbb9c3d7f3}{L\+A\+T\+I\+T\+U\+D\+E\+\_\+\+K\+EY} = \char`\"{}latitude\char`\"{}
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a173accb141be0b1e5ffcac00660c7af4}{L\+O\+C\+A\+T\+I\+O\+N\+\_\+\+K\+EY} = \char`\"{}location\char`\"{}
+\item 
+static final String {\bfseries P\+H\+O\+T\+O\+\_\+\+K\+EY} = \char`\"{}photo\+\_\+profile\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a891cb70cf9f108c6c78a7459eff12faa}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a891cb70cf9f108c6c78a7459eff12faa}
+
+\item 
+static final String {\bfseries C\+A\+T\+E\+G\+O\+R\+Y\+\_\+\+K\+EY} = \char`\"{}category\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a73a4c061c111551d087aef26cf8469a5}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a73a4c061c111551d087aef26cf8469a5}
+
+\item 
+static final String {\bfseries V\+A\+L\+U\+E\+\_\+\+K\+EY} = \char`\"{}value\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1b392e32c2d51973afb086e07d5c110d}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1b392e32c2d51973afb086e07d5c110d}
+
+\item 
+static final String {\bfseries U\+S\+ER} = \char`\"{}user\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a173cfd6857023a499e506185874e79ad}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a173cfd6857023a499e506185874e79ad}
+
+\item 
+static final String {\bfseries M\+U\+S\+IC} = \char`\"{}music\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a49a39628d6aa91397614d5820faa316e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a49a39628d6aa91397614d5820faa316e}
+
+\item 
+static final String {\bfseries M\+U\+S\+I\+C\+\_\+\+B\+A\+ND} = \char`\"{}music/band\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a67de206e5a45d657f0b68cb8d2789844}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a67de206e5a45d657f0b68cb8d2789844}
+
+\item 
+static final String {\bfseries T\+R\+A\+V\+EL} = \char`\"{}travel\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a31bc5a92133158135c4ec8db23917b0c}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a31bc5a92133158135c4ec8db23917b0c}
+
+\item 
+static final String {\bfseries F\+O\+OD} = \char`\"{}food\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab715aa895e23f85f54e8577d146e5a50}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab715aa895e23f85f54e8577d146e5a50}
+
+\item 
+static final String {\bfseries S\+P\+O\+RT} = \char`\"{}sport\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a607a95f92eda130735b777dba00e1a1c}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a607a95f92eda130735b777dba00e1a1c}
+
+\item 
+static final String {\bfseries S\+EX} = \char`\"{}sex\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab9c6b341031c629065efa24d97aeef2e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab9c6b341031c629065efa24d97aeef2e}
+
+\item 
+static final String {\bfseries O\+U\+T\+D\+O\+O\+RS} = \char`\"{}outdoors\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aec74069a867dd83e69da87b8dd17ff42}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aec74069a867dd83e69da87b8dd17ff42}
+
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a881be9247adeac81160ec711fbf46d6d}{U\+S\+E\+R1} = \char`\"{}Usuario1\char`\"{}
 \item 
@@ -65,10 +140,10 @@ static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1c
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a8d6a9a740fdcbcb44b21209728cdf6c8}{R\+E\+C\+E\+P\+T\+OR} = \char`\"{}Receptor\char`\"{}
 \item 
-static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ae728ecac466e96a18cd4d77b5027386d}{T\+O\+K\+E\+N\+\_\+\+G\+CM} = \char`\"{}Token\+G\+CM\char`\"{}
-\item 
-static final String {\bfseries I\+M\+G\+\_\+\+P\+O\+S\+\_\+\+K\+EY} = \char`\"{}position\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a855b10d332fa64ff2a3b593fa280002f}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a855b10d332fa64ff2a3b593fa280002f}
+static final String {\bfseries U\+S\+E\+R\+\_\+\+G\+ET} = \char`\"{}Usuario\+Pedido\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_affc142f542a7f0e34fff4d65c57efdad}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_affc142f542a7f0e34fff4d65c57efdad}
 
+\item 
+static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ae728ecac466e96a18cd4d77b5027386d}{T\+O\+K\+E\+N\+\_\+\+G\+CM} = \char`\"{}Token\+G\+CM\char`\"{}
 \item 
 static final String {\bfseries I\+M\+G\+\_\+\+K\+EY} = \char`\"{}images\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab2a40ecd7fdf915aed1fa2eabf4571f6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab2a40ecd7fdf915aed1fa2eabf4571f6}
 
@@ -79,7 +154,58 @@ static final String {\bfseries M\+S\+S\+G\+\_\+\+K\+EY} = \char`\"{}M\+S\+SG\cha
 static final String {\bfseries U\+S\+E\+R\+\_\+\+M\+S\+G\+\_\+\+K\+EY} = \char`\"{}U\+S\+E\+R\+\_\+\+M\+SG\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ac474112701e08b70a7e898e76f81bd2e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ac474112701e08b70a7e898e76f81bd2e}
 
 \item 
-static final int {\bfseries B\+U\+F\+F\+\_\+\+S\+I\+ZE} = 8192\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ace44890b2b3e50ac89b8d980a99b656e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ace44890b2b3e50ac89b8d980a99b656e}
+static final String {\bfseries M\+A\+T\+C\+H\+\_\+\+K\+EY} = \char`\"{}M\+A\+T\+CH\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af580697871393967f902af8b8c013186}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af580697871393967f902af8b8c013186}
+
+\item 
+static final String {\bfseries M\+A\+T\+C\+H\+\_\+\+M\+S\+G\+\_\+\+K\+EY} = \char`\"{}M\+A\+T\+C\+H\+\_\+\+M\+SG\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a58567e3ccd1f64234f3ff2891b3440ac}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a58567e3ccd1f64234f3ff2891b3440ac}
+
+\item 
+static final String {\bfseries M\+A\+T\+C\+H\+\_\+\+M\+A\+T\+C\+H\+\_\+\+K\+EY} = \char`\"{}M\+A\+T\+C\+H\+\_\+match\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ac2442f2738a6392069d5dcad95e2f715}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ac2442f2738a6392069d5dcad95e2f715}
+
+\item 
+static final String {\bfseries M\+S\+S\+G\+\_\+\+R\+E\+A\+D\+E\+D\+\_\+\+K\+EY} = \char`\"{}mssg readed\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1f96d2ded8ac8f69a530ddcfabae16dd}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1f96d2ded8ac8f69a530ddcfabae16dd}
+
+\item 
+static final String {\bfseries R\+A\+N\+D\+\_\+\+U\+S\+E\+R\+\_\+\+K\+EY} = \char`\"{}R\+A\+N\+D\+\_\+\+U\+S\+ER\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6694a96049d33ac35045f0e3bc09a343}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6694a96049d33ac35045f0e3bc09a343}
+
+\item 
+static final String {\bfseries S\+P\+E\+C\+I\+F\+I\+C\+\_\+\+U\+S\+E\+R\+\_\+\+K\+EY} = \char`\"{}S\+P\+E\+C\+\_\+\+U\+S\+E\+R\+\_\+\+C\+H\+AT\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1c0fe6b8c5f12b5007b82cd496aa5cff}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1c0fe6b8c5f12b5007b82cd496aa5cff}
+
+\item 
+static final String {\bfseries S\+P\+E\+C\+I\+F\+I\+C\+\_\+\+U\+S\+E\+R\+\_\+\+P\+R\+OF} = \char`\"{}S\+P\+E\+C\+\_\+\+U\+S\+E\+R\+\_\+\+P\+R\+OF\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a8dde0d83718220d63de880dcb4c92496}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a8dde0d83718220d63de880dcb4c92496}
+
+\item 
+static final String {\bfseries C\+H\+A\+T\+\_\+\+K\+EY} = \char`\"{}C\+H\+AT\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab131b067344d17698422f5cf10e86671}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab131b067344d17698422f5cf10e86671}
+
+\item 
+static final String {\bfseries P\+R\+O\+F\+I\+L\+E\+\_\+\+M\+S\+G\+\_\+\+K\+EY} = \char`\"{}P\+R\+O\+F\+I\+L\+E\+\_\+\+M\+SG\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_abd5d48b02faec8d144db82db2b1f4fc4}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_abd5d48b02faec8d144db82db2b1f4fc4}
+
+\item 
+static final String {\bfseries P\+R\+O\+F\+I\+L\+E\+\_\+\+M\+A\+T\+C\+H\+\_\+\+K\+EY} = \char`\"{}P\+R\+O\+F\+I\+L\+E\+\_\+\+M\+A\+T\+CH\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ae2015569c32bcd945e54df6d0c5a0ef1}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ae2015569c32bcd945e54df6d0c5a0ef1}
+
+\item 
+static final String {\bfseries C\+H\+A\+T\+\_\+\+L\+I\+S\+T\+\_\+\+M\+S\+G\+\_\+\+K\+EY} = \char`\"{}C\+H\+A\+T\+\_\+\+L\+I\+S\+T\+\_\+\+M\+SG\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_affec12cf842fb69ae9cdf42e94441ce6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_affec12cf842fb69ae9cdf42e94441ce6}
+
+\item 
+static final String {\bfseries C\+H\+A\+T\+\_\+\+L\+I\+S\+T\+\_\+\+M\+A\+T\+C\+H\+\_\+\+K\+EY} = \char`\"{}C\+H\+A\+T\+\_\+\+L\+I\+S\+T\+\_\+\+M\+A\+T\+CH\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ad496530096b33c4c89f57dcdeabf12ee}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ad496530096b33c4c89f57dcdeabf12ee}
+
+\item 
+static final String {\bfseries R\+E\+G\+I\+S\+T\+\_\+\+C\+O\+M\+P\+L\+E\+TE} = \char`\"{}registration\+Complete\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a047a0831449e5030253f6696fb61510e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a047a0831449e5030253f6696fb61510e}
+
+\item 
+static final String {\bfseries M\+Y\+\_\+\+P\+R\+O\+F\+I\+LE} = \char`\"{}mi perfil\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab6a8cf14db48d49c6a8b44ebc3bfd8c6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab6a8cf14db48d49c6a8b44ebc3bfd8c6}
+
+\item 
+static final String {\bfseries R\+E\+S\+P\+O\+N\+S\+E\+\_\+\+K\+EY} = \char`\"{}Resultado\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab63d618e92930e911aee8cd7370fe011}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab63d618e92930e911aee8cd7370fe011}
+
+\item 
+static final String {\bfseries C\+A\+N\+D\+I\+D\+A\+T\+E\+\_\+\+K\+EY} = \char`\"{}Candidato\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_abb579e9f9e0b3df226ee9fa590192f90}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_abb579e9f9e0b3df226ee9fa590192f90}
+
+\item 
+static final String {\bfseries L\+I\+K\+E\+\_\+\+K\+EY} = \char`\"{}like\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a759ec2bac8a476c48167aac54e4f68c4}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a759ec2bac8a476c48167aac54e4f68c4}
+
+\item 
+static final String {\bfseries D\+I\+S\+L\+I\+K\+E\+\_\+\+K\+EY} = \char`\"{}dislike\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a44e626d8cda1e1ce73e1fd98c13c9fd6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a44e626d8cda1e1ce73e1fd98c13c9fd6}
 
 \item 
 static final int {\bfseries M\+A\+X\+\_\+\+C\+H\+A\+RS} = 30\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a33e2e3466136affefb31e64904d2885e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a33e2e3466136affefb31e64904d2885e}
@@ -90,14 +216,23 @@ static final int {\bfseries M\+I\+N\+\_\+\+C\+H\+A\+RS} = 5\hypertarget{classcom
 \item 
 static final int {\bfseries M\+A\+X\+\_\+\+M\+S\+S\+G\+\_\+\+N\+O\+T\+IF} = 6\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6ce4f54e49fdc36622c4ba2ce24c9e3c}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6ce4f54e49fdc36622c4ba2ce24c9e3c}
 
+\item 
+static final int {\bfseries M\+A\+X\+\_\+\+M\+E\+G\+A\+S\+\_\+\+P\+IC} = 30\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ad3c210687394f5705170772645cda6a6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ad3c210687394f5705170772645cda6a6}
+
 \end{DoxyCompactItemize}
 \subsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static boolean {\bfseries user\+Or\+Pass\+Are\+Empty} (String user, String password, Text\+View message)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a0f2e7e9b432c7fc49695c9f1e752b928}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a0f2e7e9b432c7fc49695c9f1e752b928}
+static boolean {\bfseries pass\+Are\+Empty} (String password, String\+Builder response)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a824d7411383e3fa2a7c3d9754ee0e950}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a824d7411383e3fa2a7c3d9754ee0e950}
 
 \item 
-static boolean {\bfseries user\+Or\+Pass\+Long} (String user, String pass, Text\+View message)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af14dab85e4017ccb5a702adeb68074b0}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af14dab85e4017ccb5a702adeb68074b0}
+static boolean {\bfseries pass\+Long} (String pass, String\+Builder response)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a5e66efe07443c8aadee9736fb637602a}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a5e66efe07443c8aadee9736fb637602a}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final long {\bfseries M\+E\+G\+A\+B\+Y\+TE} = 1024\+L $\ast$ 1024L\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a2d34a6eb47d9949b171c61f5191667e8}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a2d34a6eb47d9949b171c61f5191667e8}
 
 \end{DoxyCompactItemize}
 
@@ -106,39 +241,87 @@ static boolean {\bfseries user\+Or\+Pass\+Long} (String user, String pass, Text\
 Contiene principalmente todas las variables en strings necesarias para una conexcion, headers y sus keys. Reglas para registrar usuarios. 
 
 \subsection{Member Data Documentation}
-\index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!C\+A\+NT@{C\+A\+NT}}
+\index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!A\+G\+E\+\_\+\+K\+EY@{A\+G\+E\+\_\+\+K\+EY}}
+\index{A\+G\+E\+\_\+\+K\+EY@{A\+G\+E\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{A\+G\+E\+\_\+\+K\+EY}{AGE\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+A\+G\+E\+\_\+\+K\+EY = \char`\"{}age\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a659946a530f7152a828e547f39259dc6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a659946a530f7152a828e547f39259dc6}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!A\+L\+I\+A\+S\+\_\+\+K\+EY@{A\+L\+I\+A\+S\+\_\+\+K\+EY}}
+\index{A\+L\+I\+A\+S\+\_\+\+K\+EY@{A\+L\+I\+A\+S\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{A\+L\+I\+A\+S\+\_\+\+K\+EY}{ALIAS\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+A\+L\+I\+A\+S\+\_\+\+K\+EY = \char`\"{}alias\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6dfb282dfc359147e031d77f0b409594}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6dfb282dfc359147e031d77f0b409594}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!C\+A\+NT@{C\+A\+NT}}
 \index{C\+A\+NT@{C\+A\+NT}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{C\+A\+NT}{CANT}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+C\+A\+NT = \char`\"{}Cantidad\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a722cf675c0b955610c1909182d9cde13}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a722cf675c0b955610c1909182d9cde13}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!C\+H\+AT@{C\+H\+AT}}
 \index{C\+H\+AT@{C\+H\+AT}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{C\+H\+AT}{CHAT}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+C\+H\+AT = \char`\"{}/chat\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a22cdbc7c176add88325a44caaace5168}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a22cdbc7c176add88325a44caaace5168}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!D\+E\+L\+E\+TE@{D\+E\+L\+E\+TE}}
+\index{D\+E\+L\+E\+TE@{D\+E\+L\+E\+TE}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{D\+E\+L\+E\+TE}{DELETE}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+D\+E\+L\+E\+TE = \char`\"{}D\+E\+L\+E\+TE\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a67f9c93c36818b5e774ffbac7e9004ec}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a67f9c93c36818b5e774ffbac7e9004ec}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!D\+E\+S\+DE@{D\+E\+S\+DE}}
 \index{D\+E\+S\+DE@{D\+E\+S\+DE}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{D\+E\+S\+DE}{DESDE}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+D\+E\+S\+DE = \char`\"{}Desde\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adaea9c1bfcff07777a2434f19ea035f5}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adaea9c1bfcff07777a2434f19ea035f5}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!D\+O\+TS@{D\+O\+TS}}
 \index{D\+O\+TS@{D\+O\+TS}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{D\+O\+TS}{DOTS}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+D\+O\+TS = \char`\"{}file\+:///android\+\_\+asset/dots.\+gif\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af9ff2dd415fc9361e082cf3877c8c635}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af9ff2dd415fc9361e082cf3877c8c635}
-Vars para la Screen\+Splash \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!G\+ET@{G\+ET}}
+Vars para la Screen\+Splash \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!E\+D\+IT@{E\+D\+IT}}
+\index{E\+D\+IT@{E\+D\+IT}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{E\+D\+IT}{EDIT}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+E\+D\+IT = \char`\"{}/editar\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a55102a3c9815bdf347b4d124d0e52a76}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a55102a3c9815bdf347b4d124d0e52a76}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!E\+M\+A\+I\+L\+\_\+\+K\+EY@{E\+M\+A\+I\+L\+\_\+\+K\+EY}}
+\index{E\+M\+A\+I\+L\+\_\+\+K\+EY@{E\+M\+A\+I\+L\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{E\+M\+A\+I\+L\+\_\+\+K\+EY}{EMAIL\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+E\+M\+A\+I\+L\+\_\+\+K\+EY = \char`\"{}email\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1e32ec84b98617bbaf3beb96aefc259c}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a1e32ec84b98617bbaf3beb96aefc259c}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!G\+ET@{G\+ET}}
 \index{G\+ET@{G\+ET}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{G\+ET}{GET}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+G\+ET = \char`\"{}G\+ET\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a8937fc1ac037355631286d3b45bb959b}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a8937fc1ac037355631286d3b45bb959b}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!G\+PS@{G\+PS}}
+\index{G\+PS@{G\+PS}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{G\+PS}{GPS}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+G\+PS = \char`\"{}/gps\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6b409e03c3a58eeff3ba5f7001b7f17d}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6b409e03c3a58eeff3ba5f7001b7f17d}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!IA@{IA}}
 \index{IA@{IA}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{IA}{IA}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+IA = \char`\"{}file\+:///android\+\_\+asset/I\+A.\+gif\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae5ecea5aa3915aa216f04a10f1d6074}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae5ecea5aa3915aa216f04a10f1d6074}
-Vars para la Screen\+Splash \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!L\+O\+G\+IN@{L\+O\+G\+IN}}
+Vars para la Screen\+Splash \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!I\+N\+FO@{I\+N\+FO}}
+\index{I\+N\+FO@{I\+N\+FO}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{I\+N\+FO}{INFO}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+I\+N\+FO = \char`\"{}/info\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a415909b836ea7079008f081e482ad1a5}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a415909b836ea7079008f081e482ad1a5}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!I\+N\+T\+E\+R\+E\+S\+TS@{I\+N\+T\+E\+R\+E\+S\+TS}}
+\index{I\+N\+T\+E\+R\+E\+S\+TS@{I\+N\+T\+E\+R\+E\+S\+TS}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{I\+N\+T\+E\+R\+E\+S\+TS}{INTERESTS}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+I\+N\+T\+E\+R\+E\+S\+TS = \char`\"{}/intereses\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_add1426e1c9ce182255dd37bae66b670a}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_add1426e1c9ce182255dd37bae66b670a}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!I\+N\+T\+E\+R\+E\+S\+T\+S\+\_\+\+K\+EY@{I\+N\+T\+E\+R\+E\+S\+T\+S\+\_\+\+K\+EY}}
+\index{I\+N\+T\+E\+R\+E\+S\+T\+S\+\_\+\+K\+EY@{I\+N\+T\+E\+R\+E\+S\+T\+S\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{I\+N\+T\+E\+R\+E\+S\+T\+S\+\_\+\+K\+EY}{INTERESTS\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+I\+N\+T\+E\+R\+E\+S\+T\+S\+\_\+\+K\+EY = \char`\"{}interests\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a73b907c50a597827595b340dc0e21d04}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a73b907c50a597827595b340dc0e21d04}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!L\+A\+T\+I\+T\+U\+D\+E\+\_\+\+K\+EY@{L\+A\+T\+I\+T\+U\+D\+E\+\_\+\+K\+EY}}
+\index{L\+A\+T\+I\+T\+U\+D\+E\+\_\+\+K\+EY@{L\+A\+T\+I\+T\+U\+D\+E\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{L\+A\+T\+I\+T\+U\+D\+E\+\_\+\+K\+EY}{LATITUDE\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+L\+A\+T\+I\+T\+U\+D\+E\+\_\+\+K\+EY = \char`\"{}latitude\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adc92ba88d0f66397f4ef66fbb9c3d7f3}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adc92ba88d0f66397f4ef66fbb9c3d7f3}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!L\+O\+C\+A\+T\+I\+O\+N\+\_\+\+K\+EY@{L\+O\+C\+A\+T\+I\+O\+N\+\_\+\+K\+EY}}
+\index{L\+O\+C\+A\+T\+I\+O\+N\+\_\+\+K\+EY@{L\+O\+C\+A\+T\+I\+O\+N\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{L\+O\+C\+A\+T\+I\+O\+N\+\_\+\+K\+EY}{LOCATION\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+L\+O\+C\+A\+T\+I\+O\+N\+\_\+\+K\+EY = \char`\"{}location\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a173accb141be0b1e5ffcac00660c7af4}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a173accb141be0b1e5ffcac00660c7af4}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!L\+O\+G\+IN@{L\+O\+G\+IN}}
 \index{L\+O\+G\+IN@{L\+O\+G\+IN}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{L\+O\+G\+IN}{LOGIN}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+L\+O\+G\+IN = \char`\"{}/login\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ac3459941ff680be2f021432f775220b3}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ac3459941ff680be2f021432f775220b3}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!L\+O\+N\+G\+I\+T\+U\+D\+E\+\_\+\+K\+EY@{L\+O\+N\+G\+I\+T\+U\+D\+E\+\_\+\+K\+EY}}
+\index{L\+O\+N\+G\+I\+T\+U\+D\+E\+\_\+\+K\+EY@{L\+O\+N\+G\+I\+T\+U\+D\+E\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{L\+O\+N\+G\+I\+T\+U\+D\+E\+\_\+\+K\+EY}{LONGITUDE\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+L\+O\+N\+G\+I\+T\+U\+D\+E\+\_\+\+K\+EY = \char`\"{}longitude\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aaf0632358f2b089a026fa988b5e17053}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aaf0632358f2b089a026fa988b5e17053}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!M\+A\+T\+CH@{M\+A\+T\+CH}}
+\index{M\+A\+T\+CH@{M\+A\+T\+CH}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{M\+A\+T\+CH}{MATCH}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+M\+A\+T\+CH = \char`\"{}/matcheo\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a28fde071b3faf6ab868ef469ed66cb70}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a28fde071b3faf6ab868ef469ed66cb70}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!M\+A\+X\+\_\+\+M\+E\+S\+S\+A\+G\+ES@{M\+A\+X\+\_\+\+M\+E\+S\+S\+A\+G\+ES}}
 \index{M\+A\+X\+\_\+\+M\+E\+S\+S\+A\+G\+ES@{M\+A\+X\+\_\+\+M\+E\+S\+S\+A\+G\+ES}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{M\+A\+X\+\_\+\+M\+E\+S\+S\+A\+G\+ES}{MAX\_MESSAGES}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+M\+A\+X\+\_\+\+M\+E\+S\+S\+A\+G\+ES = \char`\"{}10\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af961b08c8185ef3e31468a6b75a51c19}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_af961b08c8185ef3e31468a6b75a51c19}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!M\+E\+S\+S\+A\+G\+ES@{M\+E\+S\+S\+A\+G\+ES}}
 \index{M\+E\+S\+S\+A\+G\+ES@{M\+E\+S\+S\+A\+G\+ES}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{M\+E\+S\+S\+A\+G\+ES}{MESSAGES}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+M\+E\+S\+S\+A\+G\+ES = \char`\"{}/mensajes\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_acada4b49a0d72e7c468fd64c3e7ed6eb}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_acada4b49a0d72e7c468fd64c3e7ed6eb}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!N\+A\+M\+E\+\_\+\+K\+EY@{N\+A\+M\+E\+\_\+\+K\+EY}}
+\index{N\+A\+M\+E\+\_\+\+K\+EY@{N\+A\+M\+E\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{N\+A\+M\+E\+\_\+\+K\+EY}{NAME\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+N\+A\+M\+E\+\_\+\+K\+EY = \char`\"{}name\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a64fbc8f2b601668b5918377d325f26ee}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a64fbc8f2b601668b5918377d325f26ee}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!P\+A\+S\+S\+\_\+\+K\+EY@{P\+A\+S\+S\+\_\+\+K\+EY}}
 \index{P\+A\+S\+S\+\_\+\+K\+EY@{P\+A\+S\+S\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{P\+A\+S\+S\+\_\+\+K\+EY}{PASS\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+P\+A\+S\+S\+\_\+\+K\+EY = \char`\"{}Password\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adde52a07405e8d140a9f86d733e2e160}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_adde52a07405e8d140a9f86d733e2e160}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!P\+I\+C\+T\+U\+RE@{P\+I\+C\+T\+U\+RE}}
+\index{P\+I\+C\+T\+U\+RE@{P\+I\+C\+T\+U\+RE}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{P\+I\+C\+T\+U\+RE}{PICTURE}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+P\+I\+C\+T\+U\+RE = \char`\"{}/foto\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_acdb1d46dccfc9bbec73e0ca4b7ecb96a}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_acdb1d46dccfc9bbec73e0ca4b7ecb96a}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!P\+O\+ST@{P\+O\+ST}}
 \index{P\+O\+ST@{P\+O\+ST}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{P\+O\+ST}{POST}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+P\+O\+ST = \char`\"{}P\+O\+ST\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aef1815c3b4427639e9ffdd99d36674be}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aef1815c3b4427639e9ffdd99d36674be}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!P\+R\+O\+F\+I\+LE@{P\+R\+O\+F\+I\+LE}}
+\index{P\+R\+O\+F\+I\+LE@{P\+R\+O\+F\+I\+LE}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{P\+R\+O\+F\+I\+LE}{PROFILE}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+P\+R\+O\+F\+I\+LE = \char`\"{}/perfil\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a35eb34a2323adbc080a8e5836bbd57dd}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a35eb34a2323adbc080a8e5836bbd57dd}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!P\+UT@{P\+UT}}
 \index{P\+UT@{P\+UT}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{P\+UT}{PUT}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+P\+UT = \char`\"{}P\+UT\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a034675c5513960eb228c8788a450612e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a034675c5513960eb228c8788a450612e}
@@ -148,6 +331,12 @@ Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::comm
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!R\+E\+G\+I\+S\+T\+ER@{R\+E\+G\+I\+S\+T\+ER}}
 \index{R\+E\+G\+I\+S\+T\+ER@{R\+E\+G\+I\+S\+T\+ER}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{R\+E\+G\+I\+S\+T\+ER}{REGISTER}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+R\+E\+G\+I\+S\+T\+ER = \char`\"{}/registro\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_afb144b85f2295930ca07d403cc547f48}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_afb144b85f2295930ca07d403cc547f48}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!R\+E\+M\+O\+VE@{R\+E\+M\+O\+VE}}
+\index{R\+E\+M\+O\+VE@{R\+E\+M\+O\+VE}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{R\+E\+M\+O\+VE}{REMOVE}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+R\+E\+M\+O\+VE = \char`\"{}/eliminar\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae0c3e1d895c90e3e6daf8346012200f}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae0c3e1d895c90e3e6daf8346012200f}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!S\+E\+X\+\_\+\+K\+EY@{S\+E\+X\+\_\+\+K\+EY}}
+\index{S\+E\+X\+\_\+\+K\+EY@{S\+E\+X\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{S\+E\+X\+\_\+\+K\+EY}{SEX\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+S\+E\+X\+\_\+\+K\+EY = \char`\"{}sex\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a540855ccad31accb2c6a9d8a9071ad59}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a540855ccad31accb2c6a9d8a9071ad59}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!T\+E\+ST@{T\+E\+ST}}
 \index{T\+E\+ST@{T\+E\+ST}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{T\+E\+ST}{TEST}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+T\+E\+ST = \char`\"{}/test\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a2cf3afaf3a741d3286bafb5606c9aede}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a2cf3afaf3a741d3286bafb5606c9aede}

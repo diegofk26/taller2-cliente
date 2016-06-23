@@ -8,8 +8,15 @@ public class RowItem {
     private Bitmap profilePic;
     private String lastMessage;
 
-    public RowItem(String userName, Bitmap profilePic, String message) {
+    public String getUserEmail() {
+        return userEmail;
+    }
 
+    private String userEmail;
+
+    public RowItem(String userName, String userEmail, Bitmap profilePic, String message) {
+
+        this.userEmail = userEmail;
         this.userName = userName;
         this.profilePic = profilePic;
         this.lastMessage = message;

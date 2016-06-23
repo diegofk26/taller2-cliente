@@ -2,10 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollView1"
-    android:layout_gravity="center_horizontal"
+    android:id="@+id/scrollView_info"
     android:fillViewport="true">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -16,137 +16,52 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".InfomationActivity"
+        android:id="@+id/relative_information"
         tools:showIn="@layout/activity_information">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:id="@+id/infoImage"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/placeholder_grey"
+            android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/linearLayout">
+            android:layout_centerHorizontal="true" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView2"
-                android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nombreInfo"
+            android:text="@string/nombre_"
+            android:layout_below="@+id/infoImage"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3"
-                android:layout_below="@+id/imageView2"
-                android:layout_alignLeft="@+id/imageView2"
-                android:layout_alignStart="@+id/imageView2"
-                android:layout_alignRight="@+id/imageView2"
-                android:layout_alignEnd="@+id/imageView2" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nombreInfo"
+            android:id="@+id/aliasInfo"
+            android:text="@string/alias_text" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView4"
-                android:text="@string/nombre_"
-                android:layout_below="@+id/textView3"
-                android:layout_alignLeft="@+id/textView3"
-                android:layout_alignStart="@+id/textView3"
-                android:layout_alignRight="@+id/textView3"
-                android:layout_alignEnd="@+id/textView3" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView5"
-                android:text="@string/alias_text"
-                android:layout_below="@+id/textView4"
-                android:layout_alignLeft="@+id/textView4"
-                android:layout_alignStart="@+id/textView4"
-                android:layout_alignRight="@+id/textView4"
-                android:layout_alignEnd="@+id/textView4" />
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edad_text"
-            android:id="@+id/textView18"
+            android:id="@+id/edadInfo"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/linearLayout" />
+            android:layout_below="@+id/aliasInfo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sexo_text"
-            android:id="@+id/textView19"
-            android:layout_below="@+id/textView18"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/musica_text"
-            android:id="@+id/textView20"
-            android:layout_below="@+id/textView27"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bandas_text"
-            android:id="@+id/textView21"
-            android:layout_below="@+id/textView20"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deportes_text"
-            android:id="@+id/textView22"
-            android:layout_below="@+id/textView21"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sexo_text"
-            android:id="@+id/textView23"
-            android:layout_below="@+id/textView22"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/actividades_text"
-            android:id="@+id/textView24"
-            android:layout_below="@+id/textView23"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/viajes_text"
-            android:id="@+id/textView25"
-            android:layout_below="@+id/textView24"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comidas_text"
-            android:id="@+id/textView26"
-            android:layout_below="@+id/textView25"
+            android:id="@+id/sexInfo"
+            android:layout_below="@+id/edadInfo"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -155,9 +70,21 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/intereces"
-            android:id="@+id/textView27"
-            android:layout_below="@+id/textView19"
+            android:id="@+id/interestInfo"
+            android:layout_below="@+id/sexInfo"
+            android:gravity="center"
             android:layout_centerHorizontal="true" />
+
+        <ExpandableListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/expandInfo"
+            android:layout_below="@+id/interestInfo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 </ScrollView>

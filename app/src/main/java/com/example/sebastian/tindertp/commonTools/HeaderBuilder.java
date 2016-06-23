@@ -20,6 +20,10 @@ public class HeaderBuilder {
         return  headers;
     }
 
+    public static Map<String,String> forUnRegister(String user, String pass) {
+        return forRegister(user, pass);
+    }
+
     public static Map<String,String> forNewUser(String user, String token) {
         Map<String, String> headers = new HashMap<>();
         headers.put(Common.USER_KEY, user);

@@ -116,7 +116,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         getLastMessages();
 
         onMatch = new ReceiverOnNewUserMatch(getApplicationContext(),findViewById(R.id.relative_chat_list));
-        onProfileInfo = new ReceiverOnInfoIncome(adapter,rowItems, usersEmails);
+        onProfileInfo = new ReceiverOnInfoIncome(adapter,rowItems, usersEmails,profilePics);
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
                 new IntentFilter(Common.CHAT_LIST_MSG_KEY));
@@ -162,7 +162,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     public void buildRowItems() {
         for (int i = 0; i < usersNames.size(); i++) {
-            RowItem item = new RowItem(usersNames.get(i), profilePics.get(i), lastMessages.get(i));
+            RowItem item = new RowItem(usersNames.get(i), usersEmails.get(i), profilePics.get(i), lastMessages.get(i));
             rowItems.add(item);
         }
     }
@@ -176,6 +176,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         usersNames = new ArrayList<>();
 
         for(int i = 0; i < usersEmails.size(); i++) {
+            Log.i("nom", usersEmails.get(i));
             usersNames.add(ArraySerialization.getUserName( getApplicationContext(), usersEmails.get(i)));
         }
 
@@ -184,7 +185,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private void getProfilePicsDefault() {
         profilePics = new ArrayList<>();
         for (int i = 0; i < usersEmails.size(); i++) {
-            profilePics.add(BitmapFactory.decodeResource(getResources(),R.drawable.aldana));
+            profilePics.add(null);
         }
     }
 

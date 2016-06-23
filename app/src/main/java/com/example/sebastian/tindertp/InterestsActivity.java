@@ -15,7 +15,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 
 import com.example.sebastian.tindertp.application.TinderTP;
@@ -24,7 +24,6 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.JsonArrayBuilder;
-import com.example.sebastian.tindertp.commonTools.MultiHashIntStr;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.InterestsInfoDownloader;
@@ -47,8 +46,8 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
     List<String> listDataHeader;
     MultiHashMap listDataChild;
 
-    private Map<Integer,String> mapperID = new HashMap<>();
-    private Map<String,String> categoryMapper = new HashMap<>();
+    private Map<Integer,String> mapperID;
+    private Map<String,String> categoryMapper;
 
     private LocationManager locationManager;
     private LocationListener listener;
@@ -63,7 +62,12 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ReceiverOnGetInterests getInterests = new ReceiverOnGetInterests(this);
+        mapperID = new HashMap<>();
+        categoryMapper = new HashMap<>();
+        longitude = 1;
+        latitude = 1;
+
+        ReceiverOnGetInterests getInterests = new ReceiverOnGetInterests(this,false);
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(getInterests,
                 new IntentFilter(Common.INTERESTS));
 
@@ -121,7 +125,6 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
         finishUpdate = false;
 
         locationConfig();
-
     }
 
     private void buildCategoryMapper() {
@@ -162,19 +165,24 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
     public void goToRegister(View v) {
 
         if (getIntent().hasExtra(Common.PROFILE_JSON) && finishUpdate) {
+            finishUpdate = false;
             String json = getIntent().getStringExtra(Common.PROFILE_JSON);
             try {
                 JSONObject jsonObject = new JSONObject(json);
                 String userEmail = jsonObject.getString(Common.EMAIL_KEY);
                 String pass = jsonObject.getString(Common.PASS_KEY);
-
+                jsonObject.remove(Common.PASS_KEY);
+                //intereses
                 JSONArray jsonInterests = JsonArrayBuilder.buildInterests(categories, listAdapter);
                 jsonObject.put(Common.INTERESTS_KEY,jsonInterests);
-
+                //gps
                 JSONObject jsonLocation = new JSONObject();
                 jsonLocation.put(Common.LATITUDE_KEY,latitude);
                 jsonLocation.put(Common.LONGITUDE_KEY, longitude);
                 jsonObject.put(Common.LOCATION_KEY, jsonLocation);
+                //agrega todo_ a un user
+                JSONObject jsonFinal = new JSONObject();
+                jsonFinal.put("user",jsonObject);
 
                 Map<String, String> values = HeaderBuilder.forRegister(userEmail, pass);
                 String url = ((TinderTP) this.getApplication()).getUrl();
@@ -183,7 +191,7 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
                     ConnectionStruct conn = new ConnectionStruct(Common.REGISTER, Common.PUT, url);
                     InfoDownloaderClient info = new InfoDownloaderClient(this, values, conn,
                             findViewById(R.id.relative));
-                    info.addBody(jsonObject.toString());
+                    info.addBody(jsonFinal.toString());
                     info.runInBackground();
 
                 } else {
@@ -197,15 +205,18 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
     }
 
     @Override
-    public void update(List<String> categoryList, MultiHashIntStr categoryValues) {
+    public void update(MultiHashMap categoryValues) {
 
-        AutoCompleteTextView edit = null;
+        EditText edit = null;
+        listDataHeader.clear();
+        mapperID.clear();
+        listDataChild.clear();
 
-        categories = categoryList;
+        categories = categoryValues.getKeysList();
 
-        for(int i = 0; i < categoryList.size(); i++) {
+        for(int i = 0; i < categories.size(); i++) {
 
-            String category = categoryList.get(i);
+            String category = categories.get(i);
             String categoryMod;
             if (categoryMapper.containsKey(category)) {
                 categoryMod = categoryMapper.get(category);
@@ -220,7 +231,7 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
             listDataChild.put(categoryMod,edit);
         }
 
-        listAdapter.setSuggestions(categoryValues);
+        listAdapter.setSuggestions(categories, categoryValues);
         listAdapter.addHeaders(listDataHeader);
 
 
@@ -239,7 +250,7 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
         int nextViewID = Integer.parseInt(""+categoryID+""+childIDnext);
 
         mapperID.put(nextViewID, mapperID.get(ID));
-        AutoCompleteTextView newEdit = null;
+        EditText newEdit = null;
         listDataChild.put(mapperID.get(nextViewID), newEdit);
         listAdapter.addHeaders(listDataHeader);
     }

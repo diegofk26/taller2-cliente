@@ -2,8 +2,7 @@
 \label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService}\index{com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service@{com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service}}
 
 
-Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service\+:
-\nopagebreak
+Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,8 +11,7 @@ Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gc
 \end{figure}
 
 
-Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service\+:
-\nopagebreak
+Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+services.\+My\+Gcm\+Listener\+Service\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -28,10 +26,22 @@ void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGc
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+void {\bfseries handle\+Message} (Bundle data)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ad5da91b9a4770cf5ed83bb6b896c84d1}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ad5da91b9a4770cf5ed83bb6b896c84d1}
+
+\item 
+void {\bfseries handle\+Match} (Bundle data)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a0bd04bde444fcf0d8c78c8b05a1f2395}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a0bd04bde444fcf0d8c78c8b05a1f2395}
+
+\item 
 void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_ae7a722e3ab78f165da8183b952188fa0}{send\+Notification} (String from\+User, String message)
+\item 
+void {\bfseries send\+Notification\+Match} (String from\+User\+Email, String user\+Name)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a8a77e09a4e898bc4321ec87656e6010d}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a8a77e09a4e898bc4321ec87656e6010d}
+
 \end{DoxyCompactItemize}
 \subsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+static void {\bfseries update\+Match} (Context context, String user\+Matched, String type)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a020d35e51e367509e0d7df3c42fc6df3}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a020d35e51e367509e0d7df3c42fc6df3}
+
 \item 
 static void {\bfseries update} (Context context, String from, String message, String type)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a7a0f68b8970db0fe0d8e2a895eac4389}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService_a7a0f68b8970db0fe0d8e2a895eac4389}
 
@@ -57,9 +67,9 @@ Es llamado cuando un mensaje es recibido.
 
 
 \begin{DoxyParams}{Parameters}
-{\em from} & Sender\+ID of the sender. \\
+{\em from} & Sender\+ID del server. \\
 \hline
-{\em data} & Data bundle containing message data as key/value pairs. For Set of keys use data.\+key\+Set(). \\
+{\em data} & Data que envia el server. \\
 \hline
 \end{DoxyParams}
 \index{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service@{com\+::example\+::sebastian\+::tindertp\+::services\+::\+My\+Gcm\+Listener\+Service}!send\+Notification@{send\+Notification}}

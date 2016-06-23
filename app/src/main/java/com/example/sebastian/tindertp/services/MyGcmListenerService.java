@@ -48,7 +48,6 @@ public class MyGcmListenerService extends GcmListenerService {
     private void handleMessage(Bundle data) {
         String message = data.getString("Mensaje");
         String fromUserEmail = data.getString("Emisor");
-        String fromUserName = data.getString("Emisor nombre");
 
         Log.d(TAG, "From: " + fromUserEmail);
         Log.d(TAG, "Message: " + message);

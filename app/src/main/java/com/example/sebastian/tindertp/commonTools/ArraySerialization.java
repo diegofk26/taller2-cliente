@@ -63,6 +63,18 @@ public class ArraySerialization {
         editor.apply();
     }
 
+    public static void deleteAll(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Log.i(PERSISTED_TAG,"Borro todos los mensajes.");
+        editor.remove("MSSG");
+        editor.remove("USER");
+        if (hasPersistedMatches(context)) {
+            Log.i(PERSISTED_TAG,"Borro todos los matches.");
+            editor.remove(Common.MATCH_KEY);
+        }
+    }
+
     public static void deleteStringFromArray(Context context, String userToRemove) {
         Log.i(PERSISTED_TAG,"Borro datos persistidos de " + userToRemove);
         ArrayList<String> messages = getPersistedArray(context, "MSSG");

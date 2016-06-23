@@ -21,19 +21,17 @@ Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+internet\+Tools
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Info\+Downloader\+Client} (Text\+View \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_af7bc063a43057f8926845d9d0b636ca6}{text}, Context context, Map$<$ String, String $>$ values, \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1ConnectionStruct}{Connection\+Struct} conn)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a747d5511c8f058d445ceb1177b44f9d3}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a747d5511c8f058d445ceb1177b44f9d3}
+{\bfseries Info\+Downloader\+Client} (Context context, Map$<$ String, String $>$ values, \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1ConnectionStruct}{Connection\+Struct} conn, View view)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a28029f376286dd760397c4dd1db025aa}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a28029f376286dd760397c4dd1db025aa}
 
 \item 
 void {\bfseries show\+Text} (String message)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_acbbb215c97cd0f0d90be7543d6fb5c99}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_acbbb215c97cd0f0d90be7543d6fb5c99}
 
 \item 
+void {\bfseries add\+Body} (String json)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a27ccaa781902eb95f82a8951da84fc67}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a27ccaa781902eb95f82a8951da84fc67}
+
+\item 
 void {\bfseries run\+In\+Background} ()\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_abb73f39b841d14e1ab56e1dd090cac1a}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_abb73f39b841d14e1ab56e1dd090cac1a}
 
-\end{DoxyCompactItemize}
-\subsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-Text\+View \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_af7bc063a43057f8926845d9d0b636ca6}{text}
 \end{DoxyCompactItemize}
 \subsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -49,6 +47,9 @@ boolean {\bfseries is\+Executed\+By\+Main\+Activity} ()\hypertarget{classcom_1_1
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
+\item 
+View {\bfseries view}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a4142132a2c97a68947c410a6cb5f810e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a4142132a2c97a68947c410a6cb5f810e}
+
 \item 
 Context {\bfseries context}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a4fc01c753adf2f6bab6421ae811421af}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a4fc01c753adf2f6bab6421ae811421af}
 
@@ -68,6 +69,12 @@ Map$<$ String, String $>$ {\bfseries values}\hypertarget{classcom_1_1example_1_1
 boolean {\bfseries login\+Fail}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_adaf53a73fa7416d500c0b6c43bd7986a}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_adaf53a73fa7416d500c0b6c43bd7986a}
 
 \item 
+boolean {\bfseries has\+Body}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a2217d1c1ea32c15b97858b154b471f16}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a2217d1c1ea32c15b97858b154b471f16}
+
+\item 
+String {\bfseries json\+Body}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a89b084e2a602542f33e7659bb007d482}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_a89b084e2a602542f33e7659bb007d482}
+
+\item 
 String {\bfseries user}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_ab21b06c36213edd601a1a8e341a34af5}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_ab21b06c36213edd601a1a8e341a34af5}
 
 \item 
@@ -76,12 +83,6 @@ String {\bfseries token}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindert
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
-
-\subsection{Member Data Documentation}
-\index{com\+::example\+::sebastian\+::tindertp\+::internet\+Tools\+::\+Info\+Downloader\+Client@{com\+::example\+::sebastian\+::tindertp\+::internet\+Tools\+::\+Info\+Downloader\+Client}!text@{text}}
-\index{text@{text}!com\+::example\+::sebastian\+::tindertp\+::internet\+Tools\+::\+Info\+Downloader\+Client@{com\+::example\+::sebastian\+::tindertp\+::internet\+Tools\+::\+Info\+Downloader\+Client}}
-\subsubsection[{\texorpdfstring{text}{text}}]{\setlength{\rightskip}{0pt plus 5cm}Text\+View com.\+example.\+sebastian.\+tindertp.\+internet\+Tools.\+Info\+Downloader\+Client.\+text}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_af7bc063a43057f8926845d9d0b636ca6}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient_af7bc063a43057f8926845d9d0b636ca6}
-Se pasan los errores por UI. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

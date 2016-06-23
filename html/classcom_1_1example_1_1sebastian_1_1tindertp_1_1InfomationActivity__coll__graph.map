@@ -1,0 +1,7 @@
+<map id="com.example.sebastian.tindertp.InfomationActivity" name="com.example.sebastian.tindertp.InfomationActivity">
+<area shape="rect" id="node3" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnMssgReaded.html" title="com.example.sebastian.tindertp.services.\lReceiverOnMssgReaded" alt="" coords="648,214,912,255"/>
+<area shape="rect" id="node7" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnNewMessage.html" title="com.example.sebastian.tindertp.services.\lReceiverOnNewMessage" alt="" coords="261,175,525,217"/>
+<area shape="rect" id="node8" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnNewMatch.html" title="com.example.sebastian.tindertp.services.\lReceiverOnNewMatch" alt="" coords="261,46,525,87"/>
+<area shape="rect" id="node9" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1ProfileInfo.html" title="com.example.sebastian.tindertp.common\lTools.ProfileInfo" alt="" coords="649,371,911,413"/>
+<area shape="rect" id="node12" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1MultiHashMap.html" title="com.example.sebastian.tindertp.common\lTools.MultiHashMap" alt="" coords="263,371,524,413"/>
+</map>

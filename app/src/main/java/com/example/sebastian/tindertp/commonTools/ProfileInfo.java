@@ -22,27 +22,51 @@ public class ProfileInfo {
     public String email;
     public JSONArray interests;
     private MultiHashMap interestMap;
+    private JSONObject jsonUser;
+
+    /**Construye los intereses sobre un MultiHashMap dado.*/
+    public ProfileInfo(String json, MultiHashMap interests) {
+        interestMap = interests;
+        buildProfile(json);
+    }
 
     public ProfileInfo(String json) {
+        interestMap = new MultiHashMap();
+        buildProfile(json);
+    }
 
+    public void buildProfile(String json) {
         try {
             JSONObject jsonO = new JSONObject(json);
-            name = jsonO.getString(Common.NAME_KEY);
-            alias = jsonO.getString(Common.ALIAS_KEY);
-            age = jsonO.getInt(Common.AGE_KEY);
-            sex = jsonO.getString(Common.SEX_KEY);
-            email = jsonO.getString(Common.EMAIL_KEY);
-            interests = jsonO.getJSONArray(Common.INTERESTS_KEY);
+            jsonUser = jsonO.getJSONObject(Common.USER);
+            name = jsonUser.getString(Common.NAME_KEY);
+            alias = jsonUser.getString(Common.ALIAS_KEY);
+            age = jsonUser.getInt(Common.AGE_KEY);
+            sex = jsonUser.getString(Common.SEX_KEY);
+            email = jsonUser.getString(Common.EMAIL_KEY);
+            interests = jsonUser.getJSONArray(Common.INTERESTS_KEY);
             buildInterestMap();
-            photo = jsonO.getString(Common.PHOTO_KEY);
+            photo = jsonUser.getString(Common.PHOTO_KEY);
             Log.i("aaa", "" + name + " - " + alias + " - " + age + " - " + email);
             bitmap = ImageBase64.decodeBase64(photo);
 
         }catch (JSONException e){}
     }
 
+    public JSONObject updateProfile(String alias, String name, JSONArray interests) {
+
+        try {
+            jsonUser.put(Common.NAME_KEY,name);
+            jsonUser.put(Common.ALIAS_KEY, alias);
+            jsonUser.put(Common.INTERESTS_KEY,interests);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonUser;
+    }
+
     private void buildInterestMap() {
-        interestMap = new MultiHashMap();
         for(int i = 0; i< interests.length(); i++) {
             try {
                 JSONObject jsonO = (JSONObject) interests.get(i);
@@ -55,6 +79,7 @@ public class ProfileInfo {
             }catch (JSONException e) {}
         }
     }
+
 
     public String getInterestMap(String key) {
         StringBuilder interests = new StringBuilder();

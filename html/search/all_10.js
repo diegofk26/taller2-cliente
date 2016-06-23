@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['updatebold',['updateBold',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html#a50145336c0020de96d4fc7135c34e138',1,'com::example::sebastian::tindertp::chatListTools::CustomAdapter']]],
-  ['updatedindex',['updatedIndex',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html#a2ad86fdb1a8b73c45016e4d8e73fb602',1,'com::example::sebastian::tindertp::chatListTools::CustomAdapter']]],
-  ['url',['url',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder.html#a7c433c4fc6c3c4d3e3f451e26e00f5c6',1,'com::example::sebastian::tindertp::chatTools::ClientBuilder']]],
-  ['urlactivity',['UrlActivity',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1UrlActivity.html',1,'com::example::sebastian::tindertp']]],
-  ['urlarrayadapter',['UrlArrayAdapter',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1UrlArrayAdapter.html',1,'com::example::sebastian::tindertp::internetTools']]],
-  ['user',['user',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ClientBuilder.html#a5689629482292f87ffd3c7786568f7d6',1,'com::example::sebastian::tindertp::chatTools::ClientBuilder']]],
-  ['user1',['USER1',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a881be9247adeac81160ec711fbf46d6d',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['user2',['USER2',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a4061156dedbfffc7885219e7068a2e6b',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['user_5fkey',['USER_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#ab1a1f8a9db6e36312ae326c86361829c',1,'com::example::sebastian::tindertp::commonTools::Common']]]
+  ['savedtextmap',['savedTextMap',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1ExpandableListAdapter.html#abde424871e914e8a473529e34eab49ca',1,'com::example::sebastian::tindertp::ExpandableListAdapter']]],
+  ['savefileinbackground',['SaveFileInBackground',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1diskTools_1_1SaveFileInBackground.html',1,'com::example::sebastian::tindertp::diskTools']]],
+  ['scrolllistmaintainer',['ScrollListMaintainer',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ScrollListMaintainer.html',1,'com::example::sebastian::tindertp::chatTools']]],
+  ['selectloginorregistryactivity',['SelectLoginOrRegistryActivity',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1SelectLoginOrRegistryActivity.html',1,'com::example::sebastian::tindertp']]],
+  ['sendnotification',['sendNotification',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService.html#ae7a722e3ab78f165da8183b952188fa0',1,'com::example::sebastian::tindertp::services::MyGcmListenerService']]],
+  ['sex_5fkey',['SEX_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a540855ccad31accb2c6a9d8a9071ad59',1,'com::example::sebastian::tindertp::commonTools::Common']]]
 ];

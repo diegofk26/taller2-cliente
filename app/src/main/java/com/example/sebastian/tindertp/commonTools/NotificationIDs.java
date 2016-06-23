@@ -15,7 +15,11 @@ public class NotificationIDs {
 
     public void addNotification(int notification) {
         Log.i(NotificationIDs, "Agrega Id de notifcacion.");
+        if (notifications == null) {
+            notifications = new ArrayList<>();
+        }
         notifications.add(notification);
+
     }
 
     public boolean haveNotifications() {
@@ -39,8 +43,6 @@ public class NotificationIDs {
         private static final NotificationIDs INSTANCE = new NotificationIDs();
     }
 
-    private NotificationIDs() {
-        notifications = new ArrayList<>();
-    }
+    private NotificationIDs() {}
 }
 

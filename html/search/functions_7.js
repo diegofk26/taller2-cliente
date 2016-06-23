@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sendnotification',['sendNotification',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService.html#ae7a722e3ab78f165da8183b952188fa0',1,'com::example::sebastian::tindertp::services::MyGcmListenerService']]]
+  ['profileinfo',['ProfileInfo',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1ProfileInfo.html#a5e82e8fa6e169043cd953ac505fd50d5',1,'com::example::sebastian::tindertp::commonTools::ProfileInfo']]]
 ];

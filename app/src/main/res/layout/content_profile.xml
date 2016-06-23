@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/scrollViewProf"
-    android:layout_gravity="center_horizontal"
-    android:fillViewport="true">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:fillViewport="false">
+    <RelativeLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -16,43 +16,36 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".ProfileActivity"
+        android:id="@+id/relative_profile"
         tools:showIn="@layout/activity_profile">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/linearLayoutProf">
+
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/progImage"
-                android:layout_gravity="center_horizontal"/>
+                android:id="@+id/profImage"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/placeholder_grey"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textv" />
-
-            <TextView
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/nombreProf"
-                android:text="@string/nombre_" />
+                android:text="@string/nombre_"
+                android:layout_below="@+id/profImage"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/nombreProf"
                 android:id="@+id/aliasProf"
                 android:text="@string/alias_text" />
 
-        </LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +54,7 @@
             android:id="@+id/edadProf"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/linearLayoutProf" />
+            android:layout_below="@+id/aliasProf" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,74 +68,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/musica_text"
-            android:id="@+id/musicTextProf"
-            android:layout_below="@+id/textView27"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bandas_text"
-            android:id="@+id/bandTextProf"
-            android:layout_below="@+id/musicTextProf"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deportes_text"
-            android:id="@+id/sportsTextProf"
-            android:layout_below="@+id/bandTextProf"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sexo_text"
-            android:id="@+id/sexTextProf"
-            android:layout_below="@+id/sportsTextProf"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/actividades_text"
-            android:id="@+id/actProf"
-            android:layout_below="@+id/sexTextProf"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/viajes_text"
-            android:id="@+id/travelProf"
-            android:layout_below="@+id/actProf"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/comidas_text"
-            android:id="@+id/foodProf"
-            android:layout_below="@+id/travelProf"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/intereces"
             android:id="@+id/textView27"
             android:layout_below="@+id/sexProf"
+            android:gravity="center"
             android:layout_centerHorizontal="true" />
+
+        <ExpandableListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandableListView"
+            android:layout_below="@+id/textView27"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="false" />
 
     </RelativeLayout>
 </ScrollView>

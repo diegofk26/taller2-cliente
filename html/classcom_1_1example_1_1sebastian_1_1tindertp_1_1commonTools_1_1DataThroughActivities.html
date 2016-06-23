@@ -91,6 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1DataThroughActivities-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">com.example.sebastian.tindertp.commonTools.DataThroughActivities Class Reference</div>  </div>
@@ -100,8 +101,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Collaboration diagram for com.example.sebastian.tindertp.commonTools.DataThroughActivities:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1DataThroughActivities__coll__graph.png" border="0" usemap="#com_8example_8sebastian_8tindertp_8commonTools_8DataThroughActivities_coll__map" alt="Collaboration graph"/></div>
-<map name="com_8example_8sebastian_8tindertp_8commonTools_8DataThroughActivities_coll__map" id="com_8example_8sebastian_8tindertp_8commonTools_8DataThroughActivities_coll__map">
-</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -114,6 +113,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1aafa7439bada6ac8f188db070a46f33"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1aafa7439bada6ac8f188db070a46f33"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMessages</b> (ArrayList&lt; String &gt; users, ArrayList&lt; String &gt; messages)</td></tr>
 <tr class="separator:a1aafa7439bada6ac8f188db070a46f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a029ef54dd516e8f933a2c91b0f13827a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a029ef54dd516e8f933a2c91b0f13827a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMatches</b> (boolean haveMatch)</td></tr>
+<tr class="separator:a029ef54dd516e8f933a2c91b0f13827a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0746d6008ca77bf6a2615263a39bcfe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0746d6008ca77bf6a2615263a39bcfe"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteMssg</b> ()</td></tr>
 <tr class="separator:ab0746d6008ca77bf6a2615263a39bcfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +131,9 @@ ArrayList&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a06994d99593618b6fdc225a64e188b1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06994d99593618b6fdc225a64e188b1c"></a>
 boolean&#160;</td><td class="memItemRight" valign="bottom"><b>hasMessages</b> ()</td></tr>
 <tr class="separator:a06994d99593618b6fdc225a64e188b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f31cfffeff324bde704556793f6fc56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f31cfffeff324bde704556793f6fc56"></a>
+boolean&#160;</td><td class="memItemRight" valign="bottom"><b>hasMatches</b> ()</td></tr>
+<tr class="separator:a2f31cfffeff324bde704556793f6fc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac792827825bb7130b28495a068249376"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac792827825bb7130b28495a068249376"></a>
 boolean&#160;</td><td class="memItemRight" valign="bottom"><b>areTwoDifferntUsers</b> ()</td></tr>
 <tr class="separator:ac792827825bb7130b28495a068249376"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +152,15 @@ ArrayList&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:a0d600cb94fad59fe0762bed9094079c7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d600cb94fad59fe0762bed9094079c7"></a>
 ArrayList&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>users</b> = null</td></tr>
 <tr class="separator:a0d600cb94fad59fe0762bed9094079c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd5e629450c09be618845cd397cd5c53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abd5e629450c09be618845cd397cd5c53"></a>
+boolean&#160;</td><td class="memItemRight" valign="bottom"><b>matches</b> = false</td></tr>
+<tr class="separator:abd5e629450c09be618845cd397cd5c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:aaf9e342c71665a67acaf12193bd7a7ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf9e342c71665a67acaf12193bd7a7ec"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>DataThrough_TAG</b> = &quot;DataThrough&quot;</td></tr>
+<tr class="separator:aaf9e342c71665a67acaf12193bd7a7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>app/src/main/java/com/example/sebastian/tindertp/commonTools/DataThroughActivities.java</li>

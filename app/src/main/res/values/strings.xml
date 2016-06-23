@@ -3,6 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
     <string name="action_chage_picture">Cambiar foto de perfil</string>
+    <string name="action_my_profile">Mi perfil</string>
+    <string name="action_edit_profile">Editar mi perfil</string>
+    <string name="action_delete_profile">Eliminar perfil</string>
     <string name="title_activity_registro">TinderTP</string>
     <string name="title_activity_matching">TinderTP</string>
     <string name="title_activity_full_screen_view">TinderTP</string>
@@ -16,6 +19,8 @@
     <string name="comidas">Comidas favoritas</string>
     <string name="comidas_text">Comidas:</string>
     <string name="sexo">Sexo</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
     <string name="category_void">------</string>
     <string name="sexo_text">Sexo:</string>
     <string name="musica">Estilo de músca favorito</string>
@@ -38,6 +43,8 @@
     <string name="registrarse">Registrarse</string>
     <string name="add_more_interests">Agregar más intereses</string>
     <string name="add_new_interests">Agregar nuevos intereses:</string>
+    <string name="are_you_sure">¿Esta seguro que desea borrar su perfil de forma permanente? \n (No tiene vuelta atras)</string>
+
     <string name="login">Login</string>
     <string name="separator">: </string>
     <string name="nombre">Nombre</string>
@@ -59,7 +66,12 @@
     <string name="mostrar_pass">Mostrar contraseña.</string>
     <string name="nombre_">Nombre:</string>
     <string name="intereces">Intereses:</string>
+    <string name="modify">Modificar</string>
+    <string name="add_name">Ingrese su nombre.</string>
+    <string name="add_alias">Ingrese un alias.</string>
     <string name="espere">Por favor, espere mientras se conecta a la red.</string>
     <string name="title_activity_add_picture">AddPictureActivity</string>
     <string name="title_activity_inter">InterActivity</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_are_you_sure">AreYouSureActivity</string>
 </resources>

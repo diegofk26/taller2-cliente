@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import com.example.sebastian.tindertp.application.TinderTP;
@@ -26,7 +27,7 @@ public class ReceiverOnNewUserMatch extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context ctx, Intent intent) {
-
+        Log.i("OnNewUserMatch","Recibo un nuevo match");
         String userMatch = intent.getStringExtra("user");
 
         if( userMatch != null) {

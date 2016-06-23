@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">com.example.sebastian.tindertp.chatListTools.CustomAdapter Class Reference</div>  </div>
@@ -99,15 +100,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Inheritance diagram for com.example.sebastian.tindertp.chatListTools.CustomAdapter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter__inherit__graph.png" border="0" usemap="#com_8example_8sebastian_8tindertp_8chatListTools_8CustomAdapter_inherit__map" alt="Inheritance graph"/></div>
-<map name="com_8example_8sebastian_8tindertp_8chatListTools_8CustomAdapter_inherit__map" id="com_8example_8sebastian_8tindertp_8chatListTools_8CustomAdapter_inherit__map">
-</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for com.example.sebastian.tindertp.chatListTools.CustomAdapter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter__coll__graph.png" border="0" usemap="#com_8example_8sebastian_8tindertp_8chatListTools_8CustomAdapter_coll__map" alt="Collaboration graph"/></div>
-<map name="com_8example_8sebastian_8tindertp_8chatListTools_8CustomAdapter_coll__map" id="com_8example_8sebastian_8tindertp_8chatListTools_8CustomAdapter_coll__map">
-</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -120,10 +117,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aba04e26fba7bea06e3f5c8b0d91c8ec2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba04e26fba7bea06e3f5c8b0d91c8ec2"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>CustomAdapter</b> (Context context, List&lt; <a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1RowItem.html">RowItem</a> &gt; rowItems)</td></tr>
 <tr class="separator:aba04e26fba7bea06e3f5c8b0d91c8ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a140e6a0fd7147f1d147dd7d1182cc9d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a140e6a0fd7147f1d147dd7d1182cc9d0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addRowItem</b> (List&lt; <a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1RowItem.html">RowItem</a> &gt; newRows)</td></tr>
+<tr class="separator:a140e6a0fd7147f1d147dd7d1182cc9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50145336c0020de96d4fc7135c34e138"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html#a50145336c0020de96d4fc7135c34e138">updateBold</a> (List&lt; <a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1RowItem.html">RowItem</a> &gt; newRows, int index, boolean isBold)</td></tr>
 <tr class="separator:a50145336c0020de96d4fc7135c34e138"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84395a100fc80e3ae2bc614497003fc5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html#a84395a100fc80e3ae2bc614497003fc5">restore</a> ()</td></tr>
-<tr class="separator:a84395a100fc80e3ae2bc614497003fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad469da0f929b4bc20d3fb4afb5fc1a59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html#ad469da0f929b4bc20d3fb4afb5fc1a59">restore</a> (int position)</td></tr>
+<tr class="separator:ad469da0f929b4bc20d3fb4afb5fc1a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb208fb87cab994c0f2def005b9b76f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb208fb87cab994c0f2def005b9b76f0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getCount</b> ()</td></tr>
 <tr class="separator:aeb208fb87cab994c0f2def005b9b76f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,16 +139,20 @@ View&#160;</td><td class="memItemRight" valign="bottom"><b>getView</b> (int posi
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a2ad86fdb1a8b73c45016e4d8e73fb602"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html#a2ad86fdb1a8b73c45016e4d8e73fb602">updatedIndex</a></td></tr>
-<tr class="separator:a2ad86fdb1a8b73c45016e4d8e73fb602"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bdb0fdae585726f8832bb43ecb432b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4bdb0fdae585726f8832bb43ecb432b8"></a>
-boolean&#160;</td><td class="memItemRight" valign="bottom"><b>updated</b></td></tr>
-<tr class="separator:a4bdb0fdae585726f8832bb43ecb432b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94d04d0f12ecdaab9b8265f28ba42fa0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94d04d0f12ecdaab9b8265f28ba42fa0"></a>
+List&lt; Boolean &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>isBoldList</b></td></tr>
+<tr class="separator:a94d04d0f12ecdaab9b8265f28ba42fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a5d8877525e59a96729da8556732318ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d8877525e59a96729da8556732318ce"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>ADAPTER_TAG</b> = &quot;CustomAdapter CHATLIST&quot;</td></tr>
+<tr class="separator:a5d8877525e59a96729da8556732318ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Adaptador para ChatList, se encarga de preparar las Views para el ChatList </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a84395a100fc80e3ae2bc614497003fc5"></a>
+<a class="anchor" id="ad469da0f929b4bc20d3fb4afb5fc1a59"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -158,7 +162,8 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>updated</b></td></
         <tr>
           <td class="memname">void com.example.sebastian.tindertp.chatListTools.CustomAdapter.restore </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -209,29 +214,7 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>updated</b></td></
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Actualiza a Negrita el nuevo mensaje. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="a2ad86fdb1a8b73c45016e4d8e73fb602"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int com.example.sebastian.tindertp.chatListTools.CustomAdapter.updatedIndex</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Indece de uina posicion actualizada </p>
+<p>Actualiza a Negrita o Normal el mensaje. </p>
 
 </div>
 </div>

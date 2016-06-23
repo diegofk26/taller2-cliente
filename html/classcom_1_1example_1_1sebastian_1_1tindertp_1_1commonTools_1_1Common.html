@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">com.example.sebastian.tindertp.commonTools.Common Class Reference</div>  </div>
@@ -98,15 +99,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a60d6942529cc3e5192abb0662da4a59e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60d6942529cc3e5192abb0662da4a59e"></a>
-static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userAndPass_OK</b> (EditText user, EditText password, TextView text)</td></tr>
-<tr class="separator:a60d6942529cc3e5192abb0662da4a59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a00a26fec3015d703474c715548ceb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8a00a26fec3015d703474c715548ceb"></a>
+static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>pass_OK</b> (EditText password, StringBuilder response)</td></tr>
+<tr class="separator:aa8a00a26fec3015d703474c715548ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a602f78b647b4c1617a2173a9d94d97a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a602f78b647b4c1617a2173a9d94d97a1"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>clearLoginSaved</b> (Context context)</td></tr>
 <tr class="separator:a602f78b647b4c1617a2173a9d94d97a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5a698303b87f0930ce1f129d87e22c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5a698303b87f0930ce1f129d87e22c2"></a>
 static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>optionSelectedItem</b> (MenuItem item, Context context)</td></tr>
 <tr class="separator:ad5a698303b87f0930ce1f129d87e22c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af59bc9ff042336c3d62c4bc55bd45499"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af59bc9ff042336c3d62c4bc55bd45499"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>showSnackbar</b> (View view, String message)</td></tr>
+<tr class="separator:af59bc9ff042336c3d62c4bc55bd45499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedc85af8b31ee8f5ef82a63055bcb1bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aedc85af8b31ee8f5ef82a63055bcb1bd"></a>
+static long&#160;</td><td class="memItemRight" valign="bottom"><b>bytesToMeg</b> (long bytes)</td></tr>
+<tr class="separator:aedc85af8b31ee8f5ef82a63055bcb1bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -122,6 +129,8 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>FAIL</
 <tr class="separator:a034675c5513960eb228c8788a450612e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef1815c3b4427639e9ffdd99d36674be"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aef1815c3b4427639e9ffdd99d36674be">POST</a> = &quot;POST&quot;</td></tr>
 <tr class="separator:aef1815c3b4427639e9ffdd99d36674be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f9c93c36818b5e774ffbac7e9004ec"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a67f9c93c36818b5e774ffbac7e9004ec">DELETE</a> = &quot;DELETE&quot;</td></tr>
+<tr class="separator:a67f9c93c36818b5e774ffbac7e9004ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cf3afaf3a741d3286bafb5606c9aede"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a2cf3afaf3a741d3286bafb5606c9aede">TEST</a> = &quot;/test&quot;</td></tr>
 <tr class="separator:a2cf3afaf3a741d3286bafb5606c9aede"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3459941ff680be2f021432f775220b3"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#ac3459941ff680be2f021432f775220b3">LOGIN</a> = &quot;/login&quot;</td></tr>
@@ -132,13 +141,29 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>FAIL</
 <tr class="separator:acada4b49a0d72e7c468fd64c3e7ed6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22cdbc7c176add88325a44caaace5168"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a22cdbc7c176add88325a44caaace5168">CHAT</a> = &quot;/chat&quot;</td></tr>
 <tr class="separator:a22cdbc7c176add88325a44caaace5168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35eb34a2323adbc080a8e5836bbd57dd"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a35eb34a2323adbc080a8e5836bbd57dd">PROFILE</a> = &quot;/perfil&quot;</td></tr>
+<tr class="separator:a35eb34a2323adbc080a8e5836bbd57dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add1426e1c9ce182255dd37bae66b670a"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#add1426e1c9ce182255dd37bae66b670a">INTERESTS</a> = &quot;/intereses&quot;</td></tr>
+<tr class="separator:add1426e1c9ce182255dd37bae66b670a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdb1d46dccfc9bbec73e0ca4b7ecb96a"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#acdb1d46dccfc9bbec73e0ca4b7ecb96a">PICTURE</a> = &quot;/foto&quot;</td></tr>
+<tr class="separator:acdb1d46dccfc9bbec73e0ca4b7ecb96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28fde071b3faf6ab868ef469ed66cb70"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a28fde071b3faf6ab868ef469ed66cb70">MATCH</a> = &quot;/matcheo&quot;</td></tr>
+<tr class="separator:a28fde071b3faf6ab868ef469ed66cb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415909b836ea7079008f081e482ad1a5"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a415909b836ea7079008f081e482ad1a5">INFO</a> = &quot;/info&quot;</td></tr>
+<tr class="separator:a415909b836ea7079008f081e482ad1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b409e03c3a58eeff3ba5f7001b7f17d"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a6b409e03c3a58eeff3ba5f7001b7f17d">GPS</a> = &quot;/gps&quot;</td></tr>
+<tr class="separator:a6b409e03c3a58eeff3ba5f7001b7f17d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae0c3e1d895c90e3e6daf8346012200f"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aae0c3e1d895c90e3e6daf8346012200f">REMOVE</a> = &quot;/eliminar&quot;</td></tr>
+<tr class="separator:aae0c3e1d895c90e3e6daf8346012200f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55102a3c9815bdf347b4d124d0e52a76"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a55102a3c9815bdf347b4d124d0e52a76">EDIT</a> = &quot;/editar&quot;</td></tr>
+<tr class="separator:a55102a3c9815bdf347b4d124d0e52a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae5ecea5aa3915aa216f04a10f1d6074"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aae5ecea5aa3915aa216f04a10f1d6074">IA</a> = &quot;file:///android_asset/IA.gif&quot;</td></tr>
 <tr class="separator:aae5ecea5aa3915aa216f04a10f1d6074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9ff2dd415fc9361e082cf3877c8c635"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#af9ff2dd415fc9361e082cf3877c8c635">DOTS</a> = &quot;file:///android_asset/dots.gif&quot;</td></tr>
 <tr class="separator:af9ff2dd415fc9361e082cf3877c8c635"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e1c969f09ba9c7b331a6eede34b3ba7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e1c969f09ba9c7b331a6eede34b3ba7"></a>
-static final String&#160;</td><td class="memItemRight" valign="bottom"><b>PROFILE_IMG_KEY</b> = &quot;profileFile&quot;</td></tr>
-<tr class="separator:a9e1c969f09ba9c7b331a6eede34b3ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d70e4f1b3e6b5876072315847f46fcb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d70e4f1b3e6b5876072315847f46fcb"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>PROFILE_JSON</b> = &quot;profileJson&quot;</td></tr>
+<tr class="separator:a2d70e4f1b3e6b5876072315847f46fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55021db0efa3887ab7fb69950534c8da"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55021db0efa3887ab7fb69950534c8da"></a>
 static final String&#160;</td><td class="memItemRight" valign="bottom"><b>URL_KEY</b> = &quot;url&quot;</td></tr>
 <tr class="separator:a55021db0efa3887ab7fb69950534c8da"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,6 +171,57 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>URL_KE
 <tr class="separator:ab1a1f8a9db6e36312ae326c86361829c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adde52a07405e8d140a9f86d733e2e160"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#adde52a07405e8d140a9f86d733e2e160">PASS_KEY</a> = &quot;Password&quot;</td></tr>
 <tr class="separator:adde52a07405e8d140a9f86d733e2e160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64fbc8f2b601668b5918377d325f26ee"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a64fbc8f2b601668b5918377d325f26ee">NAME_KEY</a> = &quot;name&quot;</td></tr>
+<tr class="separator:a64fbc8f2b601668b5918377d325f26ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dfb282dfc359147e031d77f0b409594"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a6dfb282dfc359147e031d77f0b409594">ALIAS_KEY</a> = &quot;alias&quot;</td></tr>
+<tr class="separator:a6dfb282dfc359147e031d77f0b409594"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a540855ccad31accb2c6a9d8a9071ad59"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a540855ccad31accb2c6a9d8a9071ad59">SEX_KEY</a> = &quot;sex&quot;</td></tr>
+<tr class="separator:a540855ccad31accb2c6a9d8a9071ad59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e32ec84b98617bbaf3beb96aefc259c"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a1e32ec84b98617bbaf3beb96aefc259c">EMAIL_KEY</a> = &quot;email&quot;</td></tr>
+<tr class="separator:a1e32ec84b98617bbaf3beb96aefc259c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a659946a530f7152a828e547f39259dc6"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a659946a530f7152a828e547f39259dc6">AGE_KEY</a> = &quot;age&quot;</td></tr>
+<tr class="separator:a659946a530f7152a828e547f39259dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b907c50a597827595b340dc0e21d04"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a73b907c50a597827595b340dc0e21d04">INTERESTS_KEY</a> = &quot;interests&quot;</td></tr>
+<tr class="separator:a73b907c50a597827595b340dc0e21d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf0632358f2b089a026fa988b5e17053"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aaf0632358f2b089a026fa988b5e17053">LONGITUDE_KEY</a> = &quot;longitude&quot;</td></tr>
+<tr class="separator:aaf0632358f2b089a026fa988b5e17053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc92ba88d0f66397f4ef66fbb9c3d7f3"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#adc92ba88d0f66397f4ef66fbb9c3d7f3">LATITUDE_KEY</a> = &quot;latitude&quot;</td></tr>
+<tr class="separator:adc92ba88d0f66397f4ef66fbb9c3d7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a173accb141be0b1e5ffcac00660c7af4"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a173accb141be0b1e5ffcac00660c7af4">LOCATION_KEY</a> = &quot;location&quot;</td></tr>
+<tr class="separator:a173accb141be0b1e5ffcac00660c7af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a891cb70cf9f108c6c78a7459eff12faa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a891cb70cf9f108c6c78a7459eff12faa"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>PHOTO_KEY</b> = &quot;photo_profile&quot;</td></tr>
+<tr class="separator:a891cb70cf9f108c6c78a7459eff12faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a4c061c111551d087aef26cf8469a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73a4c061c111551d087aef26cf8469a5"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>CATEGORY_KEY</b> = &quot;category&quot;</td></tr>
+<tr class="separator:a73a4c061c111551d087aef26cf8469a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b392e32c2d51973afb086e07d5c110d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b392e32c2d51973afb086e07d5c110d"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>VALUE_KEY</b> = &quot;value&quot;</td></tr>
+<tr class="separator:a1b392e32c2d51973afb086e07d5c110d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a173cfd6857023a499e506185874e79ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a173cfd6857023a499e506185874e79ad"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>USER</b> = &quot;user&quot;</td></tr>
+<tr class="separator:a173cfd6857023a499e506185874e79ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49a39628d6aa91397614d5820faa316e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49a39628d6aa91397614d5820faa316e"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MUSIC</b> = &quot;music&quot;</td></tr>
+<tr class="separator:a49a39628d6aa91397614d5820faa316e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67de206e5a45d657f0b68cb8d2789844"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67de206e5a45d657f0b68cb8d2789844"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MUSIC_BAND</b> = &quot;music/band&quot;</td></tr>
+<tr class="separator:a67de206e5a45d657f0b68cb8d2789844"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31bc5a92133158135c4ec8db23917b0c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a31bc5a92133158135c4ec8db23917b0c"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>TRAVEL</b> = &quot;travel&quot;</td></tr>
+<tr class="separator:a31bc5a92133158135c4ec8db23917b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab715aa895e23f85f54e8577d146e5a50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab715aa895e23f85f54e8577d146e5a50"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>FOOD</b> = &quot;food&quot;</td></tr>
+<tr class="separator:ab715aa895e23f85f54e8577d146e5a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a607a95f92eda130735b777dba00e1a1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a607a95f92eda130735b777dba00e1a1c"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>SPORT</b> = &quot;sport&quot;</td></tr>
+<tr class="separator:a607a95f92eda130735b777dba00e1a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9c6b341031c629065efa24d97aeef2e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9c6b341031c629065efa24d97aeef2e"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>SEX</b> = &quot;sex&quot;</td></tr>
+<tr class="separator:ab9c6b341031c629065efa24d97aeef2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec74069a867dd83e69da87b8dd17ff42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec74069a867dd83e69da87b8dd17ff42"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>OUTDOORS</b> = &quot;outdoors&quot;</td></tr>
+<tr class="separator:aec74069a867dd83e69da87b8dd17ff42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a881be9247adeac81160ec711fbf46d6d"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a881be9247adeac81160ec711fbf46d6d">USER1</a> = &quot;Usuario1&quot;</td></tr>
 <tr class="separator:a881be9247adeac81160ec711fbf46d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4061156dedbfffc7885219e7068a2e6b"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a4061156dedbfffc7885219e7068a2e6b">USER2</a> = &quot;Usuario2&quot;</td></tr>
@@ -160,11 +236,11 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>URL_KE
 <tr class="separator:a31c7a5b9ed601b9b2a006d786e7d882c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d6a9a740fdcbcb44b21209728cdf6c8"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a8d6a9a740fdcbcb44b21209728cdf6c8">RECEPTOR</a> = &quot;Receptor&quot;</td></tr>
 <tr class="separator:a8d6a9a740fdcbcb44b21209728cdf6c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affc142f542a7f0e34fff4d65c57efdad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="affc142f542a7f0e34fff4d65c57efdad"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>USER_GET</b> = &quot;UsuarioPedido&quot;</td></tr>
+<tr class="separator:affc142f542a7f0e34fff4d65c57efdad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae728ecac466e96a18cd4d77b5027386d"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#ae728ecac466e96a18cd4d77b5027386d">TOKEN_GCM</a> = &quot;TokenGCM&quot;</td></tr>
 <tr class="separator:ae728ecac466e96a18cd4d77b5027386d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a855b10d332fa64ff2a3b593fa280002f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a855b10d332fa64ff2a3b593fa280002f"></a>
-static final String&#160;</td><td class="memItemRight" valign="bottom"><b>IMG_POS_KEY</b> = &quot;position&quot;</td></tr>
-<tr class="separator:a855b10d332fa64ff2a3b593fa280002f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2a40ecd7fdf915aed1fa2eabf4571f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab2a40ecd7fdf915aed1fa2eabf4571f6"></a>
 static final String&#160;</td><td class="memItemRight" valign="bottom"><b>IMG_KEY</b> = &quot;images&quot;</td></tr>
 <tr class="separator:ab2a40ecd7fdf915aed1fa2eabf4571f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,9 +250,60 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MSSG_K
 <tr class="memitem:ac474112701e08b70a7e898e76f81bd2e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac474112701e08b70a7e898e76f81bd2e"></a>
 static final String&#160;</td><td class="memItemRight" valign="bottom"><b>USER_MSG_KEY</b> = &quot;USER_MSG&quot;</td></tr>
 <tr class="separator:ac474112701e08b70a7e898e76f81bd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace44890b2b3e50ac89b8d980a99b656e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace44890b2b3e50ac89b8d980a99b656e"></a>
-static final int&#160;</td><td class="memItemRight" valign="bottom"><b>BUFF_SIZE</b> = 8192</td></tr>
-<tr class="separator:ace44890b2b3e50ac89b8d980a99b656e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af580697871393967f902af8b8c013186"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af580697871393967f902af8b8c013186"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MATCH_KEY</b> = &quot;MATCH&quot;</td></tr>
+<tr class="separator:af580697871393967f902af8b8c013186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58567e3ccd1f64234f3ff2891b3440ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58567e3ccd1f64234f3ff2891b3440ac"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MATCH_MSG_KEY</b> = &quot;MATCH_MSG&quot;</td></tr>
+<tr class="separator:a58567e3ccd1f64234f3ff2891b3440ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2442f2738a6392069d5dcad95e2f715"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2442f2738a6392069d5dcad95e2f715"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MATCH_MATCH_KEY</b> = &quot;MATCH_match&quot;</td></tr>
+<tr class="separator:ac2442f2738a6392069d5dcad95e2f715"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f96d2ded8ac8f69a530ddcfabae16dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f96d2ded8ac8f69a530ddcfabae16dd"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MSSG_READED_KEY</b> = &quot;mssg readed&quot;</td></tr>
+<tr class="separator:a1f96d2ded8ac8f69a530ddcfabae16dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6694a96049d33ac35045f0e3bc09a343"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6694a96049d33ac35045f0e3bc09a343"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>RAND_USER_KEY</b> = &quot;RAND_USER&quot;</td></tr>
+<tr class="separator:a6694a96049d33ac35045f0e3bc09a343"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c0fe6b8c5f12b5007b82cd496aa5cff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c0fe6b8c5f12b5007b82cd496aa5cff"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>SPECIFIC_USER_KEY</b> = &quot;SPEC_USER_CHAT&quot;</td></tr>
+<tr class="separator:a1c0fe6b8c5f12b5007b82cd496aa5cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dde0d83718220d63de880dcb4c92496"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8dde0d83718220d63de880dcb4c92496"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>SPECIFIC_USER_PROF</b> = &quot;SPEC_USER_PROF&quot;</td></tr>
+<tr class="separator:a8dde0d83718220d63de880dcb4c92496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab131b067344d17698422f5cf10e86671"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab131b067344d17698422f5cf10e86671"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>CHAT_KEY</b> = &quot;CHAT&quot;</td></tr>
+<tr class="separator:ab131b067344d17698422f5cf10e86671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd5d48b02faec8d144db82db2b1f4fc4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abd5d48b02faec8d144db82db2b1f4fc4"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>PROFILE_MSG_KEY</b> = &quot;PROFILE_MSG&quot;</td></tr>
+<tr class="separator:abd5d48b02faec8d144db82db2b1f4fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2015569c32bcd945e54df6d0c5a0ef1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae2015569c32bcd945e54df6d0c5a0ef1"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>PROFILE_MATCH_KEY</b> = &quot;PROFILE_MATCH&quot;</td></tr>
+<tr class="separator:ae2015569c32bcd945e54df6d0c5a0ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affec12cf842fb69ae9cdf42e94441ce6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="affec12cf842fb69ae9cdf42e94441ce6"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>CHAT_LIST_MSG_KEY</b> = &quot;CHAT_LIST_MSG&quot;</td></tr>
+<tr class="separator:affec12cf842fb69ae9cdf42e94441ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad496530096b33c4c89f57dcdeabf12ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad496530096b33c4c89f57dcdeabf12ee"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>CHAT_LIST_MATCH_KEY</b> = &quot;CHAT_LIST_MATCH&quot;</td></tr>
+<tr class="separator:ad496530096b33c4c89f57dcdeabf12ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a047a0831449e5030253f6696fb61510e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a047a0831449e5030253f6696fb61510e"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>REGIST_COMPLETE</b> = &quot;registrationComplete&quot;</td></tr>
+<tr class="separator:a047a0831449e5030253f6696fb61510e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6a8cf14db48d49c6a8b44ebc3bfd8c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab6a8cf14db48d49c6a8b44ebc3bfd8c6"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>MY_PROFILE</b> = &quot;mi perfil&quot;</td></tr>
+<tr class="separator:ab6a8cf14db48d49c6a8b44ebc3bfd8c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab63d618e92930e911aee8cd7370fe011"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab63d618e92930e911aee8cd7370fe011"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>RESPONSE_KEY</b> = &quot;Resultado&quot;</td></tr>
+<tr class="separator:ab63d618e92930e911aee8cd7370fe011"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb579e9f9e0b3df226ee9fa590192f90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb579e9f9e0b3df226ee9fa590192f90"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>CANDIDATE_KEY</b> = &quot;Candidato&quot;</td></tr>
+<tr class="separator:abb579e9f9e0b3df226ee9fa590192f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a759ec2bac8a476c48167aac54e4f68c4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a759ec2bac8a476c48167aac54e4f68c4"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>LIKE_KEY</b> = &quot;like&quot;</td></tr>
+<tr class="separator:a759ec2bac8a476c48167aac54e4f68c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44e626d8cda1e1ce73e1fd98c13c9fd6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a44e626d8cda1e1ce73e1fd98c13c9fd6"></a>
+static final String&#160;</td><td class="memItemRight" valign="bottom"><b>DISLIKE_KEY</b> = &quot;dislike&quot;</td></tr>
+<tr class="separator:a44e626d8cda1e1ce73e1fd98c13c9fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33e2e3466136affefb31e64904d2885e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33e2e3466136affefb31e64904d2885e"></a>
 static final int&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_CHARS</b> = 30</td></tr>
 <tr class="separator:a33e2e3466136affefb31e64904d2885e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,19 +313,70 @@ static final int&#160;</td><td class="memItemRight" valign="bottom"><b>MIN_CHARS
 <tr class="memitem:a6ce4f54e49fdc36622c4ba2ce24c9e3c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ce4f54e49fdc36622c4ba2ce24c9e3c"></a>
 static final int&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_MSSG_NOTIF</b> = 6</td></tr>
 <tr class="separator:a6ce4f54e49fdc36622c4ba2ce24c9e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3c210687394f5705170772645cda6a6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3c210687394f5705170772645cda6a6"></a>
+static final int&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_MEGAS_PIC</b> = 30</td></tr>
+<tr class="separator:ad3c210687394f5705170772645cda6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
-<tr class="memitem:a0f2e7e9b432c7fc49695c9f1e752b928"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f2e7e9b432c7fc49695c9f1e752b928"></a>
-static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassAreEmpty</b> (String user, String password, TextView message)</td></tr>
-<tr class="separator:a0f2e7e9b432c7fc49695c9f1e752b928"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af14dab85e4017ccb5a702adeb68074b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af14dab85e4017ccb5a702adeb68074b0"></a>
-static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassLong</b> (String user, String pass, TextView message)</td></tr>
-<tr class="separator:af14dab85e4017ccb5a702adeb68074b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a824d7411383e3fa2a7c3d9754ee0e950"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a824d7411383e3fa2a7c3d9754ee0e950"></a>
+static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>passAreEmpty</b> (String password, StringBuilder response)</td></tr>
+<tr class="separator:a824d7411383e3fa2a7c3d9754ee0e950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e66efe07443c8aadee9736fb637602a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e66efe07443c8aadee9736fb637602a"></a>
+static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>passLong</b> (String pass, StringBuilder response)</td></tr>
+<tr class="separator:a5e66efe07443c8aadee9736fb637602a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a2d34a6eb47d9949b171c61f5191667e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d34a6eb47d9949b171c61f5191667e8"></a>
+static final long&#160;</td><td class="memItemRight" valign="bottom"><b>MEGABYTE</b> = 1024L * 1024L</td></tr>
+<tr class="separator:a2d34a6eb47d9949b171c61f5191667e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contiene principalmente todas las variables en strings necesarias para una conexcion, headers y sus keys. Reglas para registrar usuarios. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a659946a530f7152a828e547f39259dc6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.AGE_KEY = &quot;age&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a6dfb282dfc359147e031d77f0b409594"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.ALIAS_KEY = &quot;alias&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
 <a class="anchor" id="a722cf675c0b955610c1909182d9cde13"></a>
 <div class="memitem">
 <div class="memproto">
@@ -229,6 +407,27 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
       <table class="memname">
         <tr>
           <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.CHAT = &quot;/chat&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a67f9c93c36818b5e774ffbac7e9004ec"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.DELETE = &quot;DELETE&quot;</td>
         </tr>
       </table>
   </td>
@@ -283,6 +482,48 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
 
 </div>
 </div>
+<a class="anchor" id="a55102a3c9815bdf347b4d124d0e52a76"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.EDIT = &quot;/editar&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a1e32ec84b98617bbaf3beb96aefc259c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.EMAIL_KEY = &quot;email&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
 <a class="anchor" id="a8937fc1ac037355631286d3b45bb959b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -292,6 +533,27 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
       <table class="memname">
         <tr>
           <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.GET = &quot;GET&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a6b409e03c3a58eeff3ba5f7001b7f17d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.GPS = &quot;/gps&quot;</td>
         </tr>
       </table>
   </td>
@@ -325,6 +587,111 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
 
 </div>
 </div>
+<a class="anchor" id="a415909b836ea7079008f081e482ad1a5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.INFO = &quot;/info&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="add1426e1c9ce182255dd37bae66b670a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.INTERESTS = &quot;/intereses&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a73b907c50a597827595b340dc0e21d04"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.INTERESTS_KEY = &quot;interests&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="adc92ba88d0f66397f4ef66fbb9c3d7f3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.LATITUDE_KEY = &quot;latitude&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a173accb141be0b1e5ffcac00660c7af4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.LOCATION_KEY = &quot;location&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
 <a class="anchor" id="ac3459941ff680be2f021432f775220b3"></a>
 <div class="memitem">
 <div class="memproto">
@@ -334,6 +701,48 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
       <table class="memname">
         <tr>
           <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.LOGIN = &quot;/login&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="aaf0632358f2b089a026fa988b5e17053"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.LONGITUDE_KEY = &quot;longitude&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a28fde071b3faf6ab868ef469ed66cb70"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.MATCH = &quot;/matcheo&quot;</td>
         </tr>
       </table>
   </td>
@@ -388,6 +797,27 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
 
 </div>
 </div>
+<a class="anchor" id="a64fbc8f2b601668b5918377d325f26ee"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.NAME_KEY = &quot;name&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
 <a class="anchor" id="adde52a07405e8d140a9f86d733e2e160"></a>
 <div class="memitem">
 <div class="memproto">
@@ -409,6 +839,27 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
 
 </div>
 </div>
+<a class="anchor" id="acdb1d46dccfc9bbec73e0ca4b7ecb96a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.PICTURE = &quot;/foto&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
 <a class="anchor" id="aef1815c3b4427639e9ffdd99d36674be"></a>
 <div class="memitem">
 <div class="memproto">
@@ -418,6 +869,27 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
       <table class="memname">
         <tr>
           <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.POST = &quot;POST&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a35eb34a2323adbc080a8e5836bbd57dd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.PROFILE = &quot;/perfil&quot;</td>
         </tr>
       </table>
   </td>
@@ -481,6 +953,48 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>userOrPassL
       <table class="memname">
         <tr>
           <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.REGISTER = &quot;/registro&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="aae0c3e1d895c90e3e6daf8346012200f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.REMOVE = &quot;/eliminar&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="a540855ccad31accb2c6a9d8a9071ad59"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.SEX_KEY = &quot;sex&quot;</td>
         </tr>
       </table>
   </td>

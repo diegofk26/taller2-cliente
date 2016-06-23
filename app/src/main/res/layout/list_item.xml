@@ -9,6 +9,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="desc"
+        android:background="@drawable/placeholder_grey"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" />
 

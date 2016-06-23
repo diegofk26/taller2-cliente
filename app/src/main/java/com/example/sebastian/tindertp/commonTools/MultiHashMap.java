@@ -10,7 +10,6 @@ public class MultiHashMap {
 
     private Map<String,List<Object>> multiMap;
 
-
     public MultiHashMap() {
         this.multiMap = new HashMap<>();
     }
@@ -28,12 +27,20 @@ public class MultiHashMap {
         multiMap.put(key, list);
     }
 
-    public void set(String key, int pos, Object value) {
-        get(key).set(pos,value);
+    public void clear() {
+        multiMap.clear();
+    }
+
+    public void set(String key, int arrayPosition, Object value) {
+        get(key).set(arrayPosition, value);
     }
 
     public Set<Map.Entry<String, List<Object>>> entrySet() {
         return multiMap.entrySet();
+    }
+
+    public Set<String> getKeys() {
+        return multiMap.keySet();
     }
 
     public List<Object> get(String key) {
@@ -52,5 +59,13 @@ public class MultiHashMap {
 
     public boolean hasKey(String hint) {
         return multiMap.containsKey(hint);
+    }
+
+    public List<String> getKeysList() {
+        List<String> keys = new ArrayList<>();
+        for (String key : getKeys()) {
+            keys.add(key);
+        }
+        return keys;
     }
 }

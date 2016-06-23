@@ -2,8 +2,7 @@
 \label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter}\index{com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter@{com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter}}
 
 
-Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter\+:
-\nopagebreak
+Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,8 +11,7 @@ Inheritance diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools
 \end{figure}
 
 
-Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter\+:
-\nopagebreak
+Collaboration diagram for com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,9 +29,12 @@ class \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1
 {\bfseries Custom\+Adapter} (Context context, List$<$ \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1RowItem}{Row\+Item} $>$ row\+Items)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_aba04e26fba7bea06e3f5c8b0d91c8ec2}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_aba04e26fba7bea06e3f5c8b0d91c8ec2}
 
 \item 
+void {\bfseries add\+Row\+Item} (List$<$ \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1RowItem}{Row\+Item} $>$ new\+Rows)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a140e6a0fd7147f1d147dd7d1182cc9d0}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a140e6a0fd7147f1d147dd7d1182cc9d0}
+
+\item 
 void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a50145336c0020de96d4fc7135c34e138}{update\+Bold} (List$<$ \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1RowItem}{Row\+Item} $>$ new\+Rows, int index, boolean is\+Bold)
 \item 
-void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a84395a100fc80e3ae2bc614497003fc5}{restore} ()
+void \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_ad469da0f929b4bc20d3fb4afb5fc1a59}{restore} (int position)
 \item 
 int {\bfseries get\+Count} ()\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_aeb208fb87cab994c0f2def005b9b76f0}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_aeb208fb87cab994c0f2def005b9b76f0}
 
@@ -50,9 +51,13 @@ View {\bfseries get\+View} (int position, View convert\+View, View\+Group parent
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a2ad86fdb1a8b73c45016e4d8e73fb602}{updated\+Index}
+List$<$ Boolean $>$ {\bfseries is\+Bold\+List}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a94d04d0f12ecdaab9b8265f28ba42fa0}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a94d04d0f12ecdaab9b8265f28ba42fa0}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
 \item 
-boolean {\bfseries updated}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a4bdb0fdae585726f8832bb43ecb432b8}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a4bdb0fdae585726f8832bb43ecb432b8}
+static final String {\bfseries A\+D\+A\+P\+T\+E\+R\+\_\+\+T\+AG} = \char`\"{}Custom\+Adapter C\+H\+A\+T\+L\+I\+ST\char`\"{}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a5d8877525e59a96729da8556732318ce}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a5d8877525e59a96729da8556732318ce}
 
 \end{DoxyCompactItemize}
 
@@ -63,11 +68,11 @@ Adaptador para Chat\+List, se encarga de preparar las Views para el Chat\+List
 \subsection{Member Function Documentation}
 \index{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter}!restore@{restore}}
 \index{restore@{restore}!com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter}}
-\subsubsection[{\texorpdfstring{restore()}{restore()}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter.\+restore (
+\subsubsection[{\texorpdfstring{restore(int position)}{restore(int position)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter.\+restore (
 \begin{DoxyParamCaption}
-{}
+\item[{int}]{position}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a84395a100fc80e3ae2bc614497003fc5}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a84395a100fc80e3ae2bc614497003fc5}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_ad469da0f929b4bc20d3fb4afb5fc1a59}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_ad469da0f929b4bc20d3fb4afb5fc1a59}
 Restaura la negrita a modo normal \index{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter}!update\+Bold@{update\+Bold}}
 \index{update\+Bold@{update\+Bold}!com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter}}
 \subsubsection[{\texorpdfstring{update\+Bold(\+List$<$ Row\+Item $>$ new\+Rows, int index, boolean is\+Bold)}{updateBold(List< RowItem > newRows, int index, boolean isBold)}}]{\setlength{\rightskip}{0pt plus 5cm}void com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter.\+update\+Bold (
@@ -77,13 +82,7 @@ Restaura la negrita a modo normal \index{com\+::example\+::sebastian\+::tindertp
 \item[{boolean}]{is\+Bold}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a50145336c0020de96d4fc7135c34e138}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a50145336c0020de96d4fc7135c34e138}
-Actualiza a Negrita el nuevo mensaje. 
-
-\subsection{Member Data Documentation}
-\index{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter}!updated\+Index@{updated\+Index}}
-\index{updated\+Index@{updated\+Index}!com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter@{com\+::example\+::sebastian\+::tindertp\+::chat\+List\+Tools\+::\+Custom\+Adapter}}
-\subsubsection[{\texorpdfstring{updated\+Index}{updatedIndex}}]{\setlength{\rightskip}{0pt plus 5cm}int com.\+example.\+sebastian.\+tindertp.\+chat\+List\+Tools.\+Custom\+Adapter.\+updated\+Index\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a2ad86fdb1a8b73c45016e4d8e73fb602}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter_a2ad86fdb1a8b73c45016e4d8e73fb602}
-Indece de uina posicion actualizada 
+Actualiza a Negrita o Normal el mensaje. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

@@ -16,16 +16,29 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <AutoCompleteTextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Ingrese un interés."
-        android:id="@+id/autoCompleteTextView"
-        android:layout_alignTop="@+id/plus"
+        android:id="@+id/editText4"
+        android:hint="Ingreses un interés aqui."
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/plus"
-        android:layout_toStartOf="@+id/plus"
-        android:layout_alignBottom="@+id/plus" />
+        android:layout_toStartOf="@+id/plus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView10"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit ="marquee_forever"
+
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/plus"
+        android:layout_alignRight="@+id/plus"
+        android:layout_alignEnd="@+id/plus" />
 
 </RelativeLayout>

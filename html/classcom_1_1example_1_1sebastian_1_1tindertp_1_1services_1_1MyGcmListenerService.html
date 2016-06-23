@@ -100,15 +100,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Inheritance diagram for com.example.sebastian.tindertp.services.MyGcmListenerService:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService__inherit__graph.png" border="0" usemap="#com_8example_8sebastian_8tindertp_8services_8MyGcmListenerService_inherit__map" alt="Inheritance graph"/></div>
-<map name="com_8example_8sebastian_8tindertp_8services_8MyGcmListenerService_inherit__map" id="com_8example_8sebastian_8tindertp_8services_8MyGcmListenerService_inherit__map">
-</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for com.example.sebastian.tindertp.services.MyGcmListenerService:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService__coll__graph.png" border="0" usemap="#com_8example_8sebastian_8tindertp_8services_8MyGcmListenerService_coll__map" alt="Collaboration graph"/></div>
-<map name="com_8example_8sebastian_8tindertp_8services_8MyGcmListenerService_coll__map" id="com_8example_8sebastian_8tindertp_8services_8MyGcmListenerService_coll__map">
-</map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -118,11 +114,23 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:ad5da91b9a4770cf5ed83bb6b896c84d1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5da91b9a4770cf5ed83bb6b896c84d1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>handleMessage</b> (Bundle data)</td></tr>
+<tr class="separator:ad5da91b9a4770cf5ed83bb6b896c84d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bd04bde444fcf0d8c78c8b05a1f2395"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0bd04bde444fcf0d8c78c8b05a1f2395"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>handleMatch</b> (Bundle data)</td></tr>
+<tr class="separator:a0bd04bde444fcf0d8c78c8b05a1f2395"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7a722e3ab78f165da8183b952188fa0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1MyGcmListenerService.html#ae7a722e3ab78f165da8183b952188fa0">sendNotification</a> (String fromUser, String message)</td></tr>
 <tr class="separator:ae7a722e3ab78f165da8183b952188fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a77e09a4e898bc4321ec87656e6010d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a77e09a4e898bc4321ec87656e6010d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sendNotificationMatch</b> (String fromUserEmail, String userName)</td></tr>
+<tr class="separator:a8a77e09a4e898bc4321ec87656e6010d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a020d35e51e367509e0d7df3c42fc6df3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a020d35e51e367509e0d7df3c42fc6df3"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>updateMatch</b> (Context context, String userMatched, String type)</td></tr>
+<tr class="separator:a020d35e51e367509e0d7df3c42fc6df3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a0f68b8970db0fe0d8e2a895eac4389"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a0f68b8970db0fe0d8e2a895eac4389"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Context context, String from, String message, String type)</td></tr>
 <tr class="separator:a7a0f68b8970db0fe0d8e2a895eac4389"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,8 +176,8 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>TAG</b
 <p>Es llamado cuando un mensaje es recibido.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">from</td><td>SenderID of the sender. </td></tr>
-    <tr><td class="paramname">data</td><td>Data bundle containing message data as key/value pairs. For Set of keys use data.keySet(). </td></tr>
+    <tr><td class="paramname">from</td><td>SenderID del server. </td></tr>
+    <tr><td class="paramname">data</td><td>Data que envia el server. </td></tr>
   </table>
   </dd>
 </dl>

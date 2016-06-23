@@ -5,20 +5,15 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.TextKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.commonTools.MultiHashIntStr;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 
 import java.util.ArrayList;
@@ -33,7 +28,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private MultiHashMap listDataChild;                 /**< guarda los EditText*/
     private Map<Integer,String> savedTextMap;           /**< guarda el texto ingresado*/
     private Map<Integer,String> positionCategoryMapper; /**< relaciones (groupPosition.concat(childPosition)) con la categoria*/
-    private Map<Integer,ArrayAdapter<String>> adapters;
+    private List<String> suggestions;
+    private List<String> indexCategoryLink;
 
     public void addHeaders(List<String> newData) {
         Log.i("   adddd 32-", "Dispara el agregado de un nuevo Item");
@@ -68,17 +64,47 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this.listDataChild = listChildData;
     }
 
-    public void setSuggestions(MultiHashIntStr suggestions) {
+    public void setSuggestions(List<String> indexCategoryLink, MultiHashMap suggestions) {
 
-        adapters = new HashMap<>();
+        this.suggestions = new ArrayList<>();
+        this.indexCategoryLink = indexCategoryLink;
 
         for(int i = 0; i < listDataHeader.size(); i++ ) {
-            List<Object> childs = listDataChild.get(listDataHeader.get(i));
-            for (int j = 0; j < childs.size(); j++) {
-                Integer position =  Integer.parseInt(""+(i+1)+""+j);
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                        android.R.layout.simple_list_item_1, suggestions.get(i));
-                adapters.put(position, adapter);
+
+            StringBuilder valuesSuggested = new StringBuilder();
+            valuesSuggested.append("Sugerencias: ");
+            String category = indexCategoryLink.get(i);
+            List<Object> values = suggestions.get(category);
+            for (int j = 0; j < values.size(); j++) {
+                valuesSuggested.append((String) values.get(j));
+                if (j == values.size() -1) {
+                    valuesSuggested.append(".");
+                }else {
+                    valuesSuggested.append(", ");
+                }
+            }
+
+            this.suggestions.add(valuesSuggested.toString());
+        }
+    }
+
+    public void setAllEditText(Map<Integer,String> mapperID, MultiHashMap newValues) {
+
+        EditText edit = null;
+
+        for(int i = 0; i < listDataHeader.size(); i++ ) {
+            String categoryMod = listDataHeader.get(i);
+            String category = indexCategoryLink.get(i);
+            if (newValues.hasKey(category)) {
+                List<Object> values = newValues.get(category);
+                for (int j = 0; j < values.size(); j++) {
+                    int positionID = Integer.parseInt("" + (i + 1) + "" + j);
+                    mapperID.put(positionID, categoryMod);
+                    savedTextMap.put(positionID, (String) values.get(j));
+                    if ( j != 0 ) {
+                        listDataChild.put(categoryMod, edit);
+                    }
+                }
             }
         }
 
@@ -95,7 +121,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     static class ViewHolder {
-        AutoCompleteTextView autoCompText;
+        EditText editText;
+        TextView textView;
         ImageView plus;
     }
 
@@ -120,9 +147,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setId(positionID);
 
             holder.plus = (ImageView) convertView.findViewById(R.id.plus);
-            holder.autoCompText = (AutoCompleteTextView) convertView.findViewById(R.id.autoCompleteTextView);
-            holder.autoCompText.setAdapter(adapters.get(positionID));
-            holder.autoCompText.addTextChangedListener(new GenericTextWatcher(holder.autoCompText));
+            holder.textView = (TextView) convertView.findViewById(R.id.textView10);
+            holder.editText = (EditText) convertView.findViewById(R.id.editText4);
+            holder.editText.addTextChangedListener(new GenericTextWatcher(holder.editText));
 
             convertView.setTag(holder);
         }else{
@@ -137,21 +164,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             holder.plus.setVisibility(View.VISIBLE);
         }
 
-        holder.autoCompText.setId(positionID);
+        holder.textView.setId(positionID);
+        holder.textView.setText(suggestions.get(groupPosition));
+        holder.textView.setSelected(true);
+
+        holder.editText.setId(positionID);
 
         Log.i("EXP adap", "" + positionID + " - " + savedTextMap.get(positionID));
 
-        if (holder.autoCompText.getText().length() != 0) {
-            Log.i("asd", "BORRRROOOOO");
-            holder.autoCompText.setAdapter(null);
-            holder.autoCompText.getText().clear();
-            Log.i("asd", "ESTOY SETEARRR");
-            holder.autoCompText.setText(savedTextMap.get(positionID));
-            Log.i("asd", "SETEOOOO");
-            holder.autoCompText.setAdapter(adapters.get(positionID));
-        }
 
-        Log.i("adap", "adp ID" + positionID + " "+ adapters.get(positionID));
+        holder.editText.setText(savedTextMap.get(positionID));
+
+
 
         return convertView;
     }
@@ -217,7 +241,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         public void afterTextChanged(Editable editable) {
             final int position = view.getId();
-            final AutoCompleteTextView editText = (AutoCompleteTextView) view;
+            final EditText editText = (EditText) view;
 
             Log.i("ADAPTER", editText.getText().toString());
 

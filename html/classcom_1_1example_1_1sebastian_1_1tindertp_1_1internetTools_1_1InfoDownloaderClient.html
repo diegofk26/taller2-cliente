@@ -88,7 +88,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient-members.html">List of all members</a>  </div>
@@ -115,12 +114,15 @@ Collaboration diagram for com.example.sebastian.tindertp.internetTools.InfoDownl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a747d5511c8f058d445ceb1177b44f9d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a747d5511c8f058d445ceb1177b44f9d3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>InfoDownloaderClient</b> (TextView <a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient.html#af7bc063a43057f8926845d9d0b636ca6">text</a>, Context context, Map&lt; String, String &gt; values, <a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1ConnectionStruct.html">ConnectionStruct</a> conn)</td></tr>
-<tr class="separator:a747d5511c8f058d445ceb1177b44f9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28029f376286dd760397c4dd1db025aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28029f376286dd760397c4dd1db025aa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InfoDownloaderClient</b> (Context context, Map&lt; String, String &gt; values, <a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1ConnectionStruct.html">ConnectionStruct</a> conn, View view)</td></tr>
+<tr class="separator:a28029f376286dd760397c4dd1db025aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbbb215c97cd0f0d90be7543d6fb5c99"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbbb215c97cd0f0d90be7543d6fb5c99"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>showText</b> (String message)</td></tr>
 <tr class="separator:acbbb215c97cd0f0d90be7543d6fb5c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27ccaa781902eb95f82a8951da84fc67"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27ccaa781902eb95f82a8951da84fc67"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addBody</b> (String json)</td></tr>
+<tr class="separator:a27ccaa781902eb95f82a8951da84fc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb73f39b841d14e1ab56e1dd090cac1a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb73f39b841d14e1ab56e1dd090cac1a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>runInBackground</b> ()</td></tr>
 <tr class="separator:abb73f39b841d14e1ab56e1dd090cac1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,11 +135,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setConnection</b> (bo
 <tr class="memitem:ad4c3129f9cac2cf8db54c705787a9f9f inherit pub_methods_classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1MediaDownloader"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4c3129f9cac2cf8db54c705787a9f9f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>establishConnection</b> (String url)  throws IOException </td></tr>
 <tr class="separator:ad4c3129f9cac2cf8db54c705787a9f9f inherit pub_methods_classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1MediaDownloader"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:af7bc063a43057f8926845d9d0b636ca6"><td class="memItemLeft" align="right" valign="top">TextView&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1InfoDownloaderClient.html#af7bc063a43057f8926845d9d0b636ca6">text</a></td></tr>
-<tr class="separator:af7bc063a43057f8926845d9d0b636ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -153,6 +150,9 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isExecutedByMainAc
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:a4142132a2c97a68947c410a6cb5f810e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4142132a2c97a68947c410a6cb5f810e"></a>
+View&#160;</td><td class="memItemRight" valign="bottom"><b>view</b></td></tr>
+<tr class="separator:a4142132a2c97a68947c410a6cb5f810e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01c753adf2f6bab6421ae811421af"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4fc01c753adf2f6bab6421ae811421af"></a>
 Context&#160;</td><td class="memItemRight" valign="bottom"><b>context</b></td></tr>
 <tr class="separator:a4fc01c753adf2f6bab6421ae811421af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +171,12 @@ Map&lt; String, String &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 <tr class="memitem:adaf53a73fa7416d500c0b6c43bd7986a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adaf53a73fa7416d500c0b6c43bd7986a"></a>
 boolean&#160;</td><td class="memItemRight" valign="bottom"><b>loginFail</b></td></tr>
 <tr class="separator:adaf53a73fa7416d500c0b6c43bd7986a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2217d1c1ea32c15b97858b154b471f16"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2217d1c1ea32c15b97858b154b471f16"></a>
+boolean&#160;</td><td class="memItemRight" valign="bottom"><b>hasBody</b></td></tr>
+<tr class="separator:a2217d1c1ea32c15b97858b154b471f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89b084e2a602542f33e7659bb007d482"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89b084e2a602542f33e7659bb007d482"></a>
+String&#160;</td><td class="memItemRight" valign="bottom"><b>jsonBody</b></td></tr>
+<tr class="separator:a89b084e2a602542f33e7659bb007d482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab21b06c36213edd601a1a8e341a34af5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab21b06c36213edd601a1a8e341a34af5"></a>
 String&#160;</td><td class="memItemRight" valign="bottom"><b>user</b></td></tr>
 <tr class="separator:ab21b06c36213edd601a1a8e341a34af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,20 +217,6 @@ static final int&#160;</td><td class="memItemRight" valign="bottom"><b>timeOUT_R
 static final int&#160;</td><td class="memItemRight" valign="bottom"><b>timeOUT_C</b> = 15000</td></tr>
 <tr class="separator:a2cfe74bc0e75d6d47726ab11596dc3c7 inherit pro_static_attribs_classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1MediaDownloader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="af7bc063a43057f8926845d9d0b636ca6"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">TextView com.example.sebastian.tindertp.internetTools.InfoDownloaderClient.text</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Se pasan los errores por UI. </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>app/src/main/java/com/example/sebastian/tindertp/internetTools/InfoDownloaderClient.java</li>
 </ul>

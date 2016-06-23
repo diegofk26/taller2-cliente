@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -17,7 +16,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -44,13 +42,11 @@ import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.NotificationIDs;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
+import com.example.sebastian.tindertp.services.LocationGPSListener;
 import com.example.sebastian.tindertp.services.ReceiverOnMssgReaded;
 import com.example.sebastian.tindertp.services.ReceiverOnNewMatch;
 import com.example.sebastian.tindertp.services.ReceiverOnNewMessage;
 import com.example.sebastian.tindertp.services.ReceiverOnNewUserToMatch;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -103,34 +99,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        listener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Log.i(" location", "Longitude" + location.getLongitude());
-                Log.i(" location", "Latitude" + location.getLatitude());
-                // TODO: enviar al server
-                JSONObject jsonObject = new JSONObject();
-                JSONObject jsonLocation = new JSONObject();
-                try {
-                    jsonLocation.put(Common.LATITUDE_KEY,location.getLatitude());
-                    jsonLocation.put(Common.LONGITUDE_KEY, location.getLongitude());
-                    jsonObject.put(Common.LOCATION_KEY, jsonLocation);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {}
-            @Override
-            public void onProviderEnabled(String s) {}
-
-            @Override
-            public void onProviderDisabled(String s) {
-                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(i);
-            }
-        };
+        listener = new LocationGPSListener(this);
 
         locationConfig();
 
@@ -171,7 +140,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             return;
         }
 
-        locationManager.requestLocationUpdates("gps", 900000, 100, listener);
+        locationManager.requestLocationUpdates("gps", 900000, 200, listener);
     }
 
     @Override
@@ -257,16 +226,20 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     }
 
     public void sendLike(View v) {
-        if (haveSomeoneToMatch)
+        if (haveSomeoneToMatch) {
+            haveSomeoneToMatch = false;
             sendResponse(Common.LIKE_KEY, "No se puedo enviar el Like.");
+        }
         else
             Snackbar.make(findViewById(R.id.matchFragment), "No tienes un usuario a quien calificar.",
                     Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     public void sendDislike(View v) {
-        if (haveSomeoneToMatch)
+        if (haveSomeoneToMatch) {
+            haveSomeoneToMatch = false;
             sendResponse(Common.DISLIKE_KEY, "No se puedo enviar el Dislike.");
+        }
         else
             Snackbar.make(findViewById(R.id.matchFragment), "No tienes un usuario a quien calificar.",
                     Snackbar.LENGTH_LONG).setAction("Action", null).show();
@@ -275,7 +248,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     /**Listener de boton Info (i) que va al perfil del usuario en vista. Solo si tiene la primer
      * imagen descargada, que es la del perfil.*/
     public void goToInformation(View v) {
-        if (hasImage()){
+        if (haveSomeoneToMatch){
             Intent profileAct = new Intent(getApplicationContext(), InfomationActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             profileAct.putExtra(Common.PROFILE_JSON, jsonProfile);
@@ -286,7 +259,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
             this.startActivity(profileAct);
         } else
-            Snackbar.make(findViewById(R.id.matchFragment), "No tienes un usuario.",
+            Snackbar.make(findViewById(R.id.matchFragment), "Espere un momento o agregue nuevos intereses...",
                     Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
@@ -394,6 +367,15 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         }else if (id == R.id.change_pic) {
             selectImageProfile();
             return true;
+        }else if (id == R.id.my_profile) {
+            Intent profile = new Intent(getApplicationContext(), ProfileActivity.class);
+            profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            profile.putExtra(Common.EMAIL_KEY, user);
+            startActivity(profile);
+        }else if (id == R.id.edit_profile) {
+            ActivityStarter.start(getApplicationContext(),EditProfileActivity.class);
+        }else if (id == R.id.delete_profile) {
+            ActivityStarter.start(getApplicationContext(),AreYouSureActivity.class);
         }
 
         return super.onOptionsItemSelected(item);
