@@ -56,7 +56,7 @@ public class ConnectionTester extends MediaDownloader {
         // Starts the query
         connection.connect();
         int response = connection.getResponseCode();
-        if (response == 200) {
+        if (response == 404) {
             contentAsString = "Conexión exitosa.";
         }
     }

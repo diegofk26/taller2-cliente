@@ -8,12 +8,10 @@ import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.ExpandableAdpProfile;
+import com.example.sebastian.tindertp.ExpandedListAdapters.ExpandableAdpProfile;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

@@ -33,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sebastian.tindertp.ImageTools.ImageBase64;
+import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
@@ -54,11 +55,10 @@ import com.example.sebastian.tindertp.services.ReceiverOnNewUserToMatch;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 //!Activity donde se matchean las personas.
-public class MatchingActivity extends AppCompatActivity implements ConectivityManagerInterface{
+public class MatchingActivity extends AppCompatActivity implements ConectivityManagerInterface {
 
     private final int RES_PLACEHOLDER = R.drawable.placeholder_grey;
     private final static String MATCH_TAG = "Matching Activity";
@@ -81,6 +81,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
     private String photoBase64;
     private String jsonProfile;
+    private boolean isDownloading;
 
     private String url;
     private String user;
@@ -107,6 +108,8 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
         locationConfig();
 
+        user = ((TinderTP) this.getApplication()).getUser();
+
         initalize();
 
         if (hasNotification()){
@@ -114,7 +117,6 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         }
 
         url = ((TinderTP) this.getApplication()).getUrl();
-        user = ((TinderTP) this.getApplication()).getUser();
         token = ((TinderTP) this.getApplication()).getToken();
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
@@ -131,6 +133,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         newUserDownloader =  new NewUserDownloaderClient(this,findViewById(R.id.matchFragment),
                 Common.RAND_USER_KEY, conn,values);
         newUserDownloader.runInBackground();
+        isDownloading = true;
 
     }
 
@@ -158,6 +161,15 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         }
     }
 
+    public void onResume() {
+        if (!haveSomeoneToMatch && !isDownloading){
+            Log.i("asdd","addddddd");
+            isDownloading = true;
+            newUserDownloader.runInBackground();
+        }
+        super.onResume();
+    }
+
 
     private boolean hasNotification() {
         return DataThroughActivities.getInstance().hasMessages() ||
@@ -167,10 +179,13 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     private void initalize(){
 
         onNotice = new ReceiverOnNewMessage(this);
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         onMatch = new ReceiverOnNewMatch(this);
+        onMatch.setHaveMatch(preferences.getBoolean(Common.MATCH_KEY,false));
         onPriorCall = new ReceiverOnMssgReaded(this, onNotice);
         onJsonNotice = new ReceiverOnNewUserToMatch(this);
         haveSomeoneToMatch = false;
+        isDownloading = false;
 
         if(DataThroughActivities.getInstance().hasMessages()) {
             Log.i(MATCH_TAG,"Se abrió nuevamente la apliacion y obtengo mensajes.");
@@ -179,10 +194,10 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             onNotice.setNotificationCount(messages.size());
             Log.i(MATCH_TAG,"Notificaciones " + onNotice.getNotificationCount());
             invalidateOptionsMenu();
-        } else if (ArraySerialization.hasPersistedMssg(getApplicationContext())) {
+        } else if (ArraySerialization.hasPersistedMssg(getApplicationContext(),user)) {
             Log.i(MATCH_TAG,"Tiene mensajes persistidos.");
-            messages = ArraySerialization.getPersistedArray(getApplicationContext(), "MSSG");
-            users = ArraySerialization.getPersistedArray(getApplicationContext(), "USER");
+            messages = ArraySerialization.getPersistedArray(getApplicationContext(),user, "MSSG");
+            users = ArraySerialization.getPersistedArray(getApplicationContext(),user, "USER");
             onNotice.setNotificationCount(messages.size());
             invalidateOptionsMenu();
         }
@@ -233,6 +248,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     public void sendLike(View v) {
         if (haveSomeoneToMatch) {
             haveSomeoneToMatch = false;
+            isDownloading = true;
             sendResponse(Common.LIKE_KEY, "No se puedo enviar el Like.");
         }
         else
@@ -264,7 +280,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             int i  = 0;
             for (String key : listDataChild.getKeys()) {
                 profileAct.putExtra(Common.MAP_KEY+i,key);
-                ArraySerialization.persistStringArrayinPref(this,key,listDataChild.get(key));
+                ArraySerialization.persistStringArrayinPref(this, key, listDataChild.get(key));
                 i++;
             }
 
@@ -312,6 +328,9 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
         onMatch.setHaveMatch(false);
         invalidateOptionsMenu();
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(Common.MATCH_KEY).apply();
 
         this.startActivity(chatAct);
     }
@@ -515,5 +534,6 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
     public void setHaveSomeoneToMatch(boolean have) {
         haveSomeoneToMatch = have;
+        isDownloading = have;
     }
 }

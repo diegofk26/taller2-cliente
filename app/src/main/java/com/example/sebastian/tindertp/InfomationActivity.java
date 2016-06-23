@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,15 +12,17 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.ExpandedListAdapters.ExpandableAdpProfile;
 import com.example.sebastian.tindertp.ImageTools.ImageBase64;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
@@ -72,13 +75,14 @@ public class InfomationActivity extends AppCompatActivity {
             ExpandableListView expView = (ExpandableListView) findViewById(R.id.expandInfo);
             expView.setAdapter(profileAdp);
 
+
             for (int i = 0; i < count; i ++ ){
                 expView.expandGroup(i);
             }
 
             profileAdp.addHeaders(listDataParent);
         } else{
-            Common.showSnackbar(findViewById(R.id.relative_information),"Error al cargar la imagen.");
+            Common.showSnackbar(findViewById(R.id.relative_information), "Error al cargar la imagen.");
         }
     }
 

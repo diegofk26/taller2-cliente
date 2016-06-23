@@ -1,4 +1,4 @@
-package com.example.sebastian.tindertp;
+package com.example.sebastian.tindertp.Interfaces;
 
 import android.net.ConnectivityManager;
 

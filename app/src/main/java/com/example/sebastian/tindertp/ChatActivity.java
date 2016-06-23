@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
+import com.example.sebastian.tindertp.Interfaces.DataTransfer;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatTools.ChatArrayAdapter;
 import com.example.sebastian.tindertp.chatTools.ChatMessage;
@@ -32,7 +34,7 @@ import com.example.sebastian.tindertp.chatTools.ClientBuilder;
 import com.example.sebastian.tindertp.chatTools.OnItemClickCustom;
 import com.example.sebastian.tindertp.commonTools.Common;
 
-public class ChatActivity extends AppCompatActivity implements DataTransfer, ConectivityManagerInterface{
+public class ChatActivity extends AppCompatActivity implements DataTransfer, ConectivityManagerInterface {
 
     private ChatArrayAdapter adp;
     private ListView mssgList;

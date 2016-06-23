@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
@@ -36,7 +37,7 @@ public class AreYouSureActivity extends AppCompatActivity implements Conectivity
     public void goToYes(View view) {
 
         String url = ((TinderTP) getApplication()).getUrl();
-        String userEmail = ((TinderTP) getApplication()).getUser();
+        final String userEmail = ((TinderTP) getApplication()).getUser();
 
         SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         String pass = preferences.getString(Common.PASS_KEY, "");
@@ -55,8 +56,8 @@ public class AreYouSureActivity extends AppCompatActivity implements Conectivity
                 protected void onPostExec() {
                     if (!badResponse && isConnected) {
                         showText("Usuario eliminado exitosamente.");
-                        if (ArraySerialization.hasPersistedMssg(getApplicationContext())) {
-                            ArraySerialization.deleteAll(getApplicationContext());
+                        if (ArraySerialization.hasPersistedMssg(getApplicationContext(),userEmail)) {
+                            ArraySerialization.deleteAll(getApplicationContext(),userEmail);
                         }
                         Common.clearLoginSaved(getApplicationContext());
                         ActivityStarter.startClear(getApplicationContext(), RegistryActivity.class);

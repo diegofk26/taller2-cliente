@@ -7,15 +7,15 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
+import com.example.sebastian.tindertp.ExpandedListAdapters.ExpandableListAdapter;
+import com.example.sebastian.tindertp.ExpandedListAdapters.MyScrollListener;
+import com.example.sebastian.tindertp.Interfaces.CategoryUpdater;
+import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
@@ -72,6 +72,8 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(listAdapter);
+
+        expListView.setOnScrollListener(new MyScrollListener(this));
 
         ReceiverOnProfileEdit onProfileInfo = new ReceiverOnProfileEdit(this,listAdapter,mapperID);
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onProfileInfo,

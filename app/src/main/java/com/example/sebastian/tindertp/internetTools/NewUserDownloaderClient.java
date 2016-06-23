@@ -10,6 +10,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 
+import com.example.sebastian.tindertp.MainActivity;
+import com.example.sebastian.tindertp.MatchingActivity;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 
 import java.io.BufferedReader;
@@ -107,8 +109,14 @@ public class NewUserDownloaderClient extends MediaDownloader{
         }else {
             if (jsonString != null && jsonString.isEmpty()) {
                 showText("No se encontraron usuarios compatibles.");
+                if (context.getClass().getSimpleName().equals(MatchingActivity.class.getSimpleName())) {
+                    ((MatchingActivity) context).setHaveSomeoneToMatch(false);
+                }
                 ((Activity) context).setTitle("");
             }else {
+                if (context.getClass().getSimpleName().equals(MatchingActivity.class.getSimpleName())) {
+                    ((MatchingActivity) context).setHaveSomeoneToMatch(false);
+                }
                 showText("No se pudo descargar Usuarios.");
             }
         }

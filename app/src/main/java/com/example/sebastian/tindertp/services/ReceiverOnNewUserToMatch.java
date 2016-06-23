@@ -33,6 +33,8 @@ public class ReceiverOnNewUserToMatch extends BroadcastReceiver {
             } else {
                 matchingActivity.setHaveSomeoneToMatch(false);
             }
+        }else {
+
         }
 
     }

@@ -1,15 +1,13 @@
 package com.example.sebastian.tindertp.services;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 
-import com.example.sebastian.tindertp.ConectivityManagerInterface;
+import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
@@ -21,7 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.AbstractCollection;
 import java.util.Map;
 
 public class LocationGPSListener implements LocationListener {

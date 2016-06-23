@@ -1,4 +1,4 @@
-<map id="com.example.sebastian.tindertp.DataTransfer" name="com.example.sebastian.tindertp.DataTransfer">
+<map id="com.example.sebastian.tindertp.Interfaces.DataTransfer" name="com.example.sebastian.tindertp.Interfaces.DataTransfer">
 <area shape="rect" id="node2" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatActivity.html" title="com.example.sebastian.tindertp.\lChatActivity" alt="" coords="264,5,475,46"/>
 <area shape="rect" id="node3" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatListActivity.html" title="com.example.sebastian.tindertp.\lChatListActivity" alt="" coords="264,70,475,111"/>
 </map>

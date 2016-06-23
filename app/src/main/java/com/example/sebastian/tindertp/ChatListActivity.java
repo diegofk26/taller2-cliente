@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -19,11 +18,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
+import com.example.sebastian.tindertp.Interfaces.DataTransfer;
+import com.example.sebastian.tindertp.Interfaces.ViewUpdater;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.chatListTools.CustomAdapter;
 import com.example.sebastian.tindertp.chatListTools.RowItem;
 import com.example.sebastian.tindertp.chatTools.ClientBuilder;
-import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
@@ -103,7 +104,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
                 adapter.notifyDataSetInvalidated();
                 updatePriorActivities(usersEmails.get(indexLastUser));
                 DataThroughActivities.getInstance().deleteMssg();
-                ArraySerialization.deleteStringFromArray(this, usersEmails.get(indexLastUser));
+                ArraySerialization.deleteStringFromArray(this, user, usersEmails.get(indexLastUser));
                 startChat(usersNames.get(indexLastUser), usersEmails.get(indexLastUser));
             }
         }
@@ -169,8 +170,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     private void getUsersEmailsAndNames() {
         usersEmails = new ArrayList<>();
-        if (ArraySerialization.hasPersistedMatches(getApplicationContext())) {
-            usersEmails = ArraySerialization.getPersistedArray(getApplicationContext(), Common.MATCH_KEY);
+        if (ArraySerialization.hasPersistedMatches(getApplicationContext(),user)) {
+            usersEmails = ArraySerialization.getPersistedArray(getApplicationContext(),user,Common.MATCH_KEY);
         }
 
         usersNames = new ArrayList<>();
@@ -262,8 +263,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         if (DataThroughActivities.getInstance().hasMessages()) {
             DataThroughActivities.getInstance().deleteMssg(userEmial);
         }
-        if (ArraySerialization.hasPersistedMssg(getApplicationContext())) {
-            ArraySerialization.deleteStringFromArray(getApplicationContext(),userEmial);
+        if (ArraySerialization.hasPersistedMssg(getApplicationContext(),user)) {
+            ArraySerialization.deleteStringFromArray(getApplicationContext(),user,userEmial);
         }
         startChat(userName,userEmial);
     }

@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -56,7 +57,7 @@ public class MyGcmListenerService extends GcmListenerService {
             update(this, fromUserEmail, message, Common.MATCH_MSG_KEY);
             update(this, fromUserEmail, message, Common.PROFILE_MSG_KEY);
             update(this, fromUserEmail, message, Common.CHAT_LIST_MSG_KEY);
-                    sendNotification(fromUserEmail, message);
+            sendNotification(fromUserEmail, message);
         }else {
             update(this, fromUserEmail, message, Common.CHAT_KEY);
         }
@@ -128,6 +129,10 @@ public class MyGcmListenerService extends GcmListenerService {
 
         ArraySerialization.persistUserMatch(this, fromUserEmail);
         ArraySerialization.persistUserMatch(this, fromUserEmail, userName);
+
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(Common.MATCH_KEY,true).apply();
 
         intent.putExtra(Common.MATCH_KEY, true);
 

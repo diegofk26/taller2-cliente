@@ -6,7 +6,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.sebastian.tindertp.DataTransfer;
+import com.example.sebastian.tindertp.Interfaces.DataTransfer;
 import com.example.sebastian.tindertp.R;
 
 public class OnItemClickCustom implements AdapterView.OnItemClickListener {

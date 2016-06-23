@@ -10,10 +10,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.example.sebastian.tindertp.ConectivityManagerInterface;
-import com.example.sebastian.tindertp.DataTransfer;
+import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
+import com.example.sebastian.tindertp.Interfaces.DataTransfer;
 import com.example.sebastian.tindertp.R;
-import com.example.sebastian.tindertp.ViewUpdater;
+import com.example.sebastian.tindertp.Interfaces.ViewUpdater;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;

@@ -2,7 +2,36 @@
 
 ## [Unreleased](https://github.com/diegofk26/taller2-cliente/tree/HEAD)
 
-[Full Changelog](https://github.com/diegofk26/taller2-cliente/compare/v1.0.0...HEAD)
+[Full Changelog](https://github.com/diegofk26/taller2-cliente/compare/Entrega_2_final...HEAD)
+
+**Fixed bugs:**
+
+- Imagenes grandes crash [\#32](https://github.com/diegofk26/taller2-cliente/issues/32)
+- problemas sugerencias en intereses [\#31](https://github.com/diegofk26/taller2-cliente/issues/31)
+- Algunos Datos persistidos no se borran correctamente. [\#28](https://github.com/diegofk26/taller2-cliente/issues/28)
+
+**Closed issues:**
+
+- crear activity de edicion de perfil [\#35](https://github.com/diegofk26/taller2-cliente/issues/35)
+- Crear pantalla vista de perfil [\#34](https://github.com/diegofk26/taller2-cliente/issues/34)
+- Agregar una activity para ver el perfil de un usuario o el propio [\#33](https://github.com/diegofk26/taller2-cliente/issues/33)
+- agregar nuevos matches en chat\_list [\#30](https://github.com/diegofk26/taller2-cliente/issues/30)
+- agregar informacion del usuario en profileActivity [\#29](https://github.com/diegofk26/taller2-cliente/issues/29)
+- Señalizar el fallo de envio de mensaje con burbuja gris. [\#27](https://github.com/diegofk26/taller2-cliente/issues/27)
+- Enviar el mensaje mal enviado con un click [\#26](https://github.com/diegofk26/taller2-cliente/issues/26)
+- Reenviar el mensaje que no se pudo mandar [\#25](https://github.com/diegofk26/taller2-cliente/issues/25)
+- Mostrar mensajes enviados rapidamente en el chat [\#24](https://github.com/diegofk26/taller2-cliente/issues/24)
+- Enviar posicion actual  [\#20](https://github.com/diegofk26/taller2-cliente/issues/20)
+- Enviar imagen de usuario [\#19](https://github.com/diegofk26/taller2-cliente/issues/19)
+- enviar tokenGCM al server [\#18](https://github.com/diegofk26/taller2-cliente/issues/18)
+- guardar los matches \(nombres de usuarios\) internamente [\#17](https://github.com/diegofk26/taller2-cliente/issues/17)
+- chatlist: pedir fotos [\#16](https://github.com/diegofk26/taller2-cliente/issues/16)
+- agregar intereces a el registro [\#15](https://github.com/diegofk26/taller2-cliente/issues/15)
+- agregar funcionalidad a los botones like y dislike [\#14](https://github.com/diegofk26/taller2-cliente/issues/14)
+- Imagenes Base64 http [\#7](https://github.com/diegofk26/taller2-cliente/issues/7)
+
+## [Entrega_2_final](https://github.com/diegofk26/taller2-cliente/tree/Entrega_2_final) (2016-06-02)
+[Full Changelog](https://github.com/diegofk26/taller2-cliente/compare/v1.0.0...Entrega_2_final)
 
 **Fixed bugs:**
 

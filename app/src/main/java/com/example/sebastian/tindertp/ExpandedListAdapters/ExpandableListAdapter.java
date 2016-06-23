@@ -1,6 +1,7 @@
-package com.example.sebastian.tindertp;
+package com.example.sebastian.tindertp.ExpandedListAdapters;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.Editable;
@@ -9,11 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 
 import java.util.ArrayList;
@@ -197,7 +200,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded,
+    public View getGroupView(int groupPosition, final boolean isExpanded,
                              View convertView, ViewGroup parent) {
         String headerTitle = (String) getGroup(groupPosition);
         if (convertView == null) {

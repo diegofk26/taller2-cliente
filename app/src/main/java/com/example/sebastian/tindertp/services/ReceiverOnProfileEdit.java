@@ -1,6 +1,5 @@
 package com.example.sebastian.tindertp.services;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +7,7 @@ import android.util.Log;
 import android.widget.EditText;
 
 import com.example.sebastian.tindertp.EditProfileActivity;
-import com.example.sebastian.tindertp.ExpandableListAdapter;
+import com.example.sebastian.tindertp.ExpandedListAdapters.ExpandableListAdapter;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;

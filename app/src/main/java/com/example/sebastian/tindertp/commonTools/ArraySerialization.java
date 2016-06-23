@@ -32,6 +32,7 @@ public class ArraySerialization {
 
     }
 
+    //pasa info entre activities
     public static void persistStringArrayinPref(Context ctx, String key, List<Object> values) {
         Log.i(PERSISTED_TAG, "Guardo un array entero.");
         SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -49,19 +50,22 @@ public class ArraySerialization {
 
     }
 
-    public static void persistUserAndMssg(Context ctx, String user, String mssg) {
-        pushStringinPref(ctx, "USER", user);
-        pushStringinPref(ctx, "MSSG", mssg);
-        Log.i(PERSISTED_TAG, "Guardooo " + user + " en service");
+    public static void persistUserAndMssg(Context ctx, String userFrom, String mssg) {
+        SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        String user = preferences.getString(Common.USER_KEY, " ");
+
+        pushStringinPref(ctx, user,"USER", userFrom);
+        pushStringinPref(ctx, user,"MSSG", mssg);
+        Log.i(PERSISTED_TAG, "Guardooo " + userFrom + " en service");
     }
 
-    private static void pushStringinPref(Context context, String key, String value) {
+    private static void pushStringinPref(Context context, String userProp, String key, String value) {
         SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         List<String> values = new ArrayList<>();
-        if (preferences.contains(key)) {
+        if (preferences.contains(userProp+key)) {
             Log.i(PERSISTED_TAG,"Preferencias ya tienen datos guardados anteriomente");
-            ArrayList<String> arrayList = getPersistedArray(context, key);
+            ArrayList<String> arrayList = getPersistedArray(context,userProp, key);
             arrayList.add(value);
             values.addAll(arrayList);
         } else {
@@ -73,30 +77,30 @@ public class ArraySerialization {
             a.put(values.get(i));
         }
         if (!values.isEmpty()) {
-            editor.putString(key, a.toString());
+            editor.putString(userProp+key, a.toString());
         } else {
-            editor.putString(key, null);
+            editor.putString(userProp+key, null);
         }
         editor.apply();
     }
 
-    public static void deleteAll(Context context) {
+    public static void deleteAll(Context context, String userProp) {
         SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         Log.i(PERSISTED_TAG,"Borro todos los mensajes.");
-        editor.remove("MSSG");
-        editor.remove("USER");
-        if (hasPersistedMatches(context)) {
+        editor.remove(userProp+"MSSG");
+        editor.remove(userProp+"USER");
+        if (hasPersistedMatches(context,userProp)) {
             Log.i(PERSISTED_TAG,"Borro todos los matches.");
-            editor.remove(Common.MATCH_KEY);
+            editor.remove(userProp+Common.MATCH_KEY);
         }
         editor.apply();
     }
 
-    public static void deleteStringFromArray(Context context, String userToRemove) {
+    public static void deleteStringFromArray(Context context, String userProp, String userToRemove) {
         Log.i(PERSISTED_TAG,"Borro datos persistidos de " + userToRemove);
-        ArrayList<String> messages = getPersistedArray(context, "MSSG");
-        ArrayList<String> users = getPersistedArray(context, "USER");
+        ArrayList<String> messages = getPersistedArray(context, userProp,"MSSG");
+        ArrayList<String> users = getPersistedArray(context, userProp,"USER");
 
         for (int i = users.size() -1; i >= 0; i--) {
             if (users.get(i).equals(userToRemove)) {
@@ -105,27 +109,28 @@ public class ArraySerialization {
             }
         }
 
-        setStringArrayinPref(context, "USER", users);
-        setStringArrayinPref(context, "MSSG", messages);
+        setStringArrayinPref(context, userProp+"USER", users);
+        setStringArrayinPref(context, userProp+"MSSG", messages);
 
     }
 
-    public static boolean hasPersistedMssg(Context ctx) {
+    public static boolean hasPersistedMssg(Context ctx, String userProp) {
         Log.i(PERSISTED_TAG,"Pregunto si tiene mensajes persistidos");
         SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        return preferences.contains("USER") && preferences.contains("MSSG");
+        return preferences.contains(userProp+"USER") && preferences.contains(userProp+"MSSG");
     }
 
-    public static boolean hasPersistedMatches(Context ctx) {
+    public static boolean hasPersistedMatches(Context ctx, String userProp) {
         Log.i(PERSISTED_TAG,"Pregunto si tiene matches persistidos");
         SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        return preferences.contains(Common.MATCH_KEY);
+        return preferences.contains(userProp+Common.MATCH_KEY);
     }
 
-    public static ArrayList<String> getPersistedArray(Context context, String key) {
-        Log.i(PERSISTED_TAG,"Obtengo datos con key: " + key);
+    public static ArrayList<String> getPersistedArray(Context context, String useProp, String key) {
+
+        Log.i(PERSISTED_TAG,"Obtengo datos con key: " +useProp+ key);
         SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        String json = preferences.getString(key, null);
+        String json = preferences.getString(useProp+key, null);
         ArrayList<String> stringArrayList = new ArrayList<>();
         if (json != null) {
             Log.i(PERSISTED_TAG,"preparo JSON");
@@ -163,7 +168,9 @@ public class ArraySerialization {
     }
 
     public static void persistUserMatch(Context ctx, String userMatch) {
-        pushStringinPref(ctx, Common.MATCH_KEY, userMatch);
+        SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        String userProp = preferences.getString(Common.USER_KEY, " ");
+        pushStringinPref(ctx, userProp,Common.MATCH_KEY, userMatch);
         Log.i(PERSISTED_TAG, "Guardo " + userMatch + " en service");
     }
 

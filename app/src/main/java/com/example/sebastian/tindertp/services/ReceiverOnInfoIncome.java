@@ -38,8 +38,6 @@ public class ReceiverOnInfoIncome extends BroadcastReceiver{
 
             int index = usersEmail.indexOf(profile.email);
 
-
-
             if (index >= 0) {//ya estaba en la base del usuario
                 Log.i("bitttt", "ya estaba el usuario");
                 rowItems.get(index).setProfilePic(profile.bitmap);

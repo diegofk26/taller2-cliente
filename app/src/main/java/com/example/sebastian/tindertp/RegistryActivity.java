@@ -92,16 +92,23 @@ public class RegistryActivity extends AppCompatActivity {
         String age = ((EditText) findViewById(R.id.age)).getText().toString();
         String name = ((EditText) findViewById(R.id.name)).getText().toString();
 
-        boolean emptyFields = email.isEmpty() || alias.isEmpty() || age.isEmpty() || name.isEmpty()
-                || ( !womanrButton.isChecked() && !menrButton.isChecked());
+        boolean invalidAge;
+        try {
+            invalidAge = Integer.parseInt(age) > 150;
+        }catch (NumberFormatException e) {
+            invalidAge = true;
+        }
+
+        boolean wrongFields = email.isEmpty() || alias.isEmpty() || age.isEmpty() || invalidAge
+                || name.isEmpty() || ( !womanrButton.isChecked() && !menrButton.isChecked());
 
         StringBuilder response =  new StringBuilder();
 
-        if (emptyFields) {
-            response.append("Algunos campos están vacíos. ");
+        if (wrongFields) {
+            response.append("Algunos campos están vacíos o erroneos. ");
         }
 
-        if( !emptyFields && Common.pass_OK(passText, response) ) {
+        if( !wrongFields && Common.pass_OK(passText, response) ) {
 
             Intent interestsAct = new Intent(this, InterestsActivity.class);
             interestsAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -121,7 +128,10 @@ public class RegistryActivity extends AppCompatActivity {
             interestsAct.putExtra(Common.PROFILE_JSON,jsonObject.toString());
             startActivity(interestsAct);
         } else {
-            Snackbar.make(findViewById(R.id.scrollView1),response.toString(), Snackbar.LENGTH_LONG)
+            if (invalidAge) {
+                Common.showSnackbar(findViewById(R.id.scrollView1),"Ingrese una edad valida.");
+            }else
+                Snackbar.make(findViewById(R.id.scrollView1),response.toString(), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }

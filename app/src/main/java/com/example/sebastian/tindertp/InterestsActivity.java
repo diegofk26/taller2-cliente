@@ -18,6 +18,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 
+import com.example.sebastian.tindertp.ExpandedListAdapters.ExpandableListAdapter;
+import com.example.sebastian.tindertp.ExpandedListAdapters.MyScrollListener;
+import com.example.sebastian.tindertp.Interfaces.CategoryUpdater;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.ActivityStarter;
 import com.example.sebastian.tindertp.commonTools.Common;
@@ -38,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InterestsActivity extends AppCompatActivity implements  CategoryUpdater{
+public class InterestsActivity extends AppCompatActivity implements CategoryUpdater {
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -80,6 +83,7 @@ public class InterestsActivity extends AppCompatActivity implements  CategoryUpd
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
         expListView.setAdapter(listAdapter);
+        expListView.setOnScrollListener(new MyScrollListener(this));
 
         if (getIntent().hasExtra(Common.PROFILE_JSON)) {
             String json = getIntent().getStringExtra(Common.PROFILE_JSON);

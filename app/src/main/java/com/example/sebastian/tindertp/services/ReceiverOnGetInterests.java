@@ -6,13 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.sebastian.tindertp.CategoryUpdater;
+import com.example.sebastian.tindertp.Interfaces.CategoryUpdater;
 import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
-import com.example.sebastian.tindertp.commonTools.MultiHashIntStr;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 
@@ -20,8 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ReceiverOnGetInterests extends BroadcastReceiver {

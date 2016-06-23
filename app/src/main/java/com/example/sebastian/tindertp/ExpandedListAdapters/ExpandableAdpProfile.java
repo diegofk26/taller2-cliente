@@ -1,4 +1,4 @@
-package com.example.sebastian.tindertp;
+package com.example.sebastian.tindertp.ExpandedListAdapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -10,6 +10,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.R;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 
 import java.util.ArrayList;

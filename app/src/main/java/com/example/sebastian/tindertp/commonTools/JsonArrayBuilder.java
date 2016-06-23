@@ -3,7 +3,7 @@ package com.example.sebastian.tindertp.commonTools;
 
 import android.util.Log;
 
-import com.example.sebastian.tindertp.ExpandableListAdapter;
+import com.example.sebastian.tindertp.ExpandedListAdapters.ExpandableListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
