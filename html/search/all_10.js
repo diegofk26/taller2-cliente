@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savedtextmap',['savedTextMap',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1ExpandableListAdapter.html#abde424871e914e8a473529e34eab49ca',1,'com::example::sebastian::tindertp::ExpandableListAdapter']]],
+  ['savedtextmap',['savedTextMap',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1ExpandedListAdapters_1_1ExpandableListAdapter.html#a77dfc0cc5b6b6200eb43064adf7da1da',1,'com::example::sebastian::tindertp::ExpandedListAdapters::ExpandableListAdapter']]],
   ['savefileinbackground',['SaveFileInBackground',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1diskTools_1_1SaveFileInBackground.html',1,'com::example::sebastian::tindertp::diskTools']]],
   ['scrolllistmaintainer',['ScrollListMaintainer',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ScrollListMaintainer.html',1,'com::example::sebastian::tindertp::chatTools']]],
   ['selectloginorregistryactivity',['SelectLoginOrRegistryActivity',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1SelectLoginOrRegistryActivity.html',1,'com::example::sebastian::tindertp']]],

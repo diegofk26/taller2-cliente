@@ -1,0 +1,7 @@
+<map id="com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface" name="com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface">
+<area shape="rect" id="node2" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1AreYouSureActivity.html" title="com.example.sebastian.tindertp.\lAreYouSureActivity" alt="" coords="304,5,515,46"/>
+<area shape="rect" id="node3" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatActivity.html" title="com.example.sebastian.tindertp.\lChatActivity" alt="" coords="304,70,515,111"/>
+<area shape="rect" id="node4" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1ChatListActivity.html" title="com.example.sebastian.tindertp.\lChatListActivity" alt="" coords="304,135,515,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1EditProfileActivity.html" title="com.example.sebastian.tindertp.\lEditProfileActivity" alt="" coords="304,201,515,242"/>
+<area shape="rect" id="node6" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1MatchingActivity.html" title="Activity donde se matchean las personas. " alt="" coords="304,266,515,307"/>
+</map>

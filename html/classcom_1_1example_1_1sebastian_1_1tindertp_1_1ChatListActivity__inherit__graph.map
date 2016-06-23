@@ -1,5 +1,5 @@
 <map id="com.example.sebastian.tindertp.ChatListActivity" name="com.example.sebastian.tindertp.ChatListActivity">
-<area shape="rect" id="node4" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1DataTransfer.html" title="com.example.sebastian.tindertp.\lDataTransfer" alt="" coords="5,107,216,149"/>
-<area shape="rect" id="node5" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1ViewUpdater.html" title="com.example.sebastian.tindertp.\lViewUpdater" alt="" coords="5,173,216,214"/>
-<area shape="rect" id="node6" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lConectivityManagerInterface" alt="" coords="5,238,216,279"/>
+<area shape="rect" id="node4" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1DataTransfer.html" title="com.example.sebastian.tindertp.\lInterfaces.DataTransfer" alt="" coords="25,107,236,149"/>
+<area shape="rect" id="node5" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ViewUpdater.html" title="com.example.sebastian.tindertp.\lInterfaces.ViewUpdater" alt="" coords="25,173,236,214"/>
+<area shape="rect" id="node6" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lInterfaces.ConectivityManagerInterface" alt="" coords="5,238,256,279"/>
 </map>

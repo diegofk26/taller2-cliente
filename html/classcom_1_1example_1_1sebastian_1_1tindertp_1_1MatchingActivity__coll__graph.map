@@ -1,6 +1,6 @@
 <map id="com.example.sebastian.tindertp.MatchingActivity" name="com.example.sebastian.tindertp.MatchingActivity">
 <area shape="rect" id="node23" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnNewUserToMatch.html" title="com.example.sebastian.tindertp.services.\lReceiverOnNewUserToMatch" alt="" coords="1437,353,1701,394"/>
-<area shape="rect" id="node3" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lConectivityManagerInterface" alt="" coords="667,369,877,410"/>
+<area shape="rect" id="node3" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lInterfaces.ConectivityManagerInterface" alt="" coords="647,369,897,410"/>
 <area shape="rect" id="node5" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnMssgReaded.html" title="com.example.sebastian.tindertp.services.\lReceiverOnMssgReaded" alt="" coords="640,189,904,230"/>
 <area shape="rect" id="node9" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnNewMessage.html" title="com.example.sebastian.tindertp.services.\lReceiverOnNewMessage" alt="" coords="269,239,533,281"/>
 <area shape="rect" id="node10" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnNewMatch.html" title="com.example.sebastian.tindertp.services.\lReceiverOnNewMatch" alt="" coords="269,43,533,85"/>

@@ -1,4 +1,4 @@
 <map id="com.example.sebastian.tindertp.EditProfileActivity" name="com.example.sebastian.tindertp.EditProfileActivity">
-<area shape="rect" id="node3" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1CategoryUpdater.html" title="com.example.sebastian.tindertp.\lCategoryUpdater" alt="" coords="5,57,216,98"/>
-<area shape="rect" id="node4" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lConectivityManagerInterface" alt="" coords="5,122,216,163"/>
+<area shape="rect" id="node3" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1CategoryUpdater.html" title="com.example.sebastian.tindertp.\lInterfaces.CategoryUpdater" alt="" coords="25,57,236,98"/>
+<area shape="rect" id="node4" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lInterfaces.ConectivityManagerInterface" alt="" coords="5,122,256,163"/>
 </map>
