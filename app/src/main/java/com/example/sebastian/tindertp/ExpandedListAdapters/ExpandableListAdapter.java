@@ -103,6 +103,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 for (int j = 0; j < values.size(); j++) {
                     int positionID = Integer.parseInt("" + (i + 1) + "" + j);
                     mapperID.put(positionID, categoryMod);
+                    positionCategoryMapper.put(positionID,categoryMod);
                     savedTextMap.put(positionID, (String) values.get(j));
                     if ( j != 0 ) {
                         listDataChild.put(categoryMod, edit);
