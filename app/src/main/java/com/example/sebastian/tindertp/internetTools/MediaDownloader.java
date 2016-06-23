@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 /**Medio de descarga de informacion.*/
 public abstract class MediaDownloader {
 
-    protected static final int timeOUT_R = 10000;
-    protected static final int timeOUT_C = 15000;
+    protected static final int timeOUT_R = 20000;
+    protected static final int timeOUT_C = 25000;
 
     protected InputStream is;
     protected HttpURLConnection connection;

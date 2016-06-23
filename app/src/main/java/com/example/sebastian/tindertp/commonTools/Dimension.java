@@ -5,5 +5,11 @@ package com.example.sebastian.tindertp.commonTools;
  */
 public class Dimension {
     public int width;
+
+    public Dimension(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
     public int height;
 }

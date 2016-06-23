@@ -85,8 +85,6 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
                 findViewById(R.id.relative));
         interests.runInBackground();
 
-        Log.i("adad",Common.USER_GET );
-
         finishUpdate = false;
 
     }

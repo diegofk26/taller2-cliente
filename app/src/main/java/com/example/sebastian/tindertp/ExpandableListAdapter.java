@@ -170,12 +170,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         holder.editText.setId(positionID);
 
-        Log.i("EXP adap", "" + positionID + " - " + savedTextMap.get(positionID));
-
-
         holder.editText.setText(savedTextMap.get(positionID));
-
-
 
         return convertView;
     }

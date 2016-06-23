@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -39,7 +40,9 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.DataThroughActivities;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
+import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.NotificationIDs;
+import com.example.sebastian.tindertp.commonTools.ProfileInfo;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import com.example.sebastian.tindertp.services.LocationGPSListener;
@@ -51,6 +54,7 @@ import com.example.sebastian.tindertp.services.ReceiverOnNewUserToMatch;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 //!Activity donde se matchean las personas.
@@ -211,6 +215,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
                 if (badResponse || !isConnected) {
                     showText(errorMessage);
                 }else {
+                    setTitle("");
                     setImage(null,"");
                     newUserDownloader.runInBackground();
                 }
@@ -251,7 +256,28 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         if (haveSomeoneToMatch){
             Intent profileAct = new Intent(getApplicationContext(), InfomationActivity.class);
             profileAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            profileAct.putExtra(Common.PROFILE_JSON, jsonProfile);
+
+            MultiHashMap listDataChild = new MultiHashMap();
+            ProfileInfo profileInfo = new ProfileInfo(jsonProfile,listDataChild);
+
+            profileAct.putExtra(Common.COUNT,listDataChild.size());
+            int i  = 0;
+            for (String key : listDataChild.getKeys()) {
+                profileAct.putExtra(Common.MAP_KEY+i,key);
+                ArraySerialization.persistStringArrayinPref(this,key,listDataChild.get(key));
+                i++;
+            }
+
+            profileAct.putExtra(Common.NAME_KEY, profileInfo.name);
+            profileAct.putExtra(Common.ALIAS_KEY, profileInfo.alias);
+            profileAct.putExtra(Common.AGE_KEY, profileInfo.age);
+            profileAct.putExtra(Common.SEX_KEY, profileInfo.sex);
+
+            SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(Common.PHOTO_KEY, photoBase64);
+            editor.apply();
+
             if (onNotice.getNotificationCount() != 0) {
                 profileAct.putStringArrayListExtra(Common.MSSG_KEY, messages);
                 profileAct.putStringArrayListExtra(Common.USER_MSG_KEY, users);
@@ -294,7 +320,10 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         if ( hasImage() ) {
             Intent fullScreen = new Intent(getApplicationContext(), FullScreenViewActivity.class);
             fullScreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            fullScreen.putExtra(Common.IMG_KEY, photoBase64);
+            SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(Common.PHOTO_KEY,photoBase64);
+            editor.apply();
             startActivity(fullScreen);
         }
     }
@@ -401,7 +430,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
                 final File myImageFile = new File(selectedImagePath);
 
-                Bitmap myBitmap = ImageBase64.decodeSampledBitmap(myImageFile.getAbsolutePath(),getWindowManager());
+                Bitmap myBitmap = ImageBase64.decodeSampledBitmap(myImageFile.getAbsolutePath(),getWindowManager().getDefaultDisplay());
 
                 String picBase64 = ImageBase64.encodeToBase64(myBitmap, Bitmap.CompressFormat.JPEG);
 
@@ -412,8 +441,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
                     RequestResponseClient client = new RequestResponseClient(this, conn, headers) {
                         @Override
-                        protected void getJson() throws IOException {
-                        }
+                        protected void getJson() throws IOException {}
 
                         @Override
                         protected void onPostExec() {
@@ -432,7 +460,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
                     client.addBody(picBase64);
                     client.runInBackground();
                 } else {
-                    Common.showSnackbar(findViewById(R.id.matchFragment), "Imagen muy grande, selecciones otra.");
+                    Common.showSnackbar(findViewById(R.id.matchFragment), "Imagen muy grande, seleccione otra.");
                 }
             }
         }
@@ -441,6 +469,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     public String getPath(Uri uri) {
         Log.i("reg","getting data");
         if( uri == null ) {
+            Common.showSnackbar(findViewById(R.id.matchFragment), "Error en la subida");
             Log.i("reg","getting NADA");
             return null;
         }

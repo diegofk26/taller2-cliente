@@ -1,7 +1,9 @@
 package com.example.sebastian.tindertp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -9,6 +11,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +20,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sebastian.tindertp.ImageTools.ImageBase64;
+import com.example.sebastian.tindertp.application.TinderTP;
+import com.example.sebastian.tindertp.commonTools.ActivityStarter;
+import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
@@ -36,17 +43,27 @@ public class InfomationActivity extends AppCompatActivity {
     private ReceiverOnNewMessage onNotice;
     private ReceiverOnMssgReaded onMssgReaded;
     private ReceiverOnNewMatch onMatch;
+    private int count;
 
     private void setImgProfile(Bitmap myBitmap){
         imgProfile.setImageBitmap(myBitmap);
     }
 
     private void getProfileIntoView(MultiHashMap listDataChild, List<String> listDataParent){
-        if( getIntent().hasExtra(Common.PROFILE_JSON) ) {
-            String profileJson = getIntent().getStringExtra(Common.PROFILE_JSON);
-            profile = new ProfileInfo(profileJson,listDataChild);
-            setImgProfile(profile.bitmap);
-            for (String key : listDataChild.getKeys()) {
+        if( getIntent().hasExtra(Common.NAME_KEY) ) {
+
+            SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            String img64 =preferences.getString(Common.PHOTO_KEY, "");
+
+            Bitmap bitmap = ImageBase64.decodeBase64(img64);
+
+            setImgProfile(bitmap);
+
+            count = getIntent().getIntExtra(Common.COUNT,0);
+
+            for(int i = 0; i < count; i++) {
+                String key = getIntent().getStringExtra(Common.MAP_KEY+i);
+                listDataChild.putList(key, ArraySerialization.getPersistedArrayObject(this, key));
                 listDataParent.add(key);
             }
 
@@ -55,10 +72,26 @@ public class InfomationActivity extends AppCompatActivity {
             ExpandableListView expView = (ExpandableListView) findViewById(R.id.expandInfo);
             expView.setAdapter(profileAdp);
 
+            for (int i = 0; i < count; i ++ ){
+                expView.expandGroup(i);
+            }
+
             profileAdp.addHeaders(listDataParent);
         } else{
             Common.showSnackbar(findViewById(R.id.relative_information),"Error al cargar la imagen.");
         }
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        preferences.edit().remove(Common.PHOTO_KEY).apply();
+
+        for(int i = 0; i < count; i++) {
+            String key = getIntent().getStringExtra(Common.MAP_KEY+i);
+            ArraySerialization.deleteArray(this, key);
+        }
+
     }
 
     private void getNotificationCount() {
@@ -114,10 +147,15 @@ public class InfomationActivity extends AppCompatActivity {
         TextView age = (TextView) findViewById(R.id.edadInfo);
         TextView sex = (TextView) findViewById(R.id.sexInfo);
 
-        name.setText(Html.fromHtml("<b>" + name.getText().toString() + "</b> " + profile.name));
-        alias.setText(Html.fromHtml("<b>" + alias.getText().toString() + "</b> " + profile.alias));
-        age.setText(Html.fromHtml("<b>" + age.getText().toString() + "</b> " + profile.age));
-        sex.setText(Html.fromHtml("<b>" + sex.getText().toString() + "</b> " + profile.sex));
+        String nameS = getIntent().getStringExtra(Common.NAME_KEY);
+        String aliasS = getIntent().getStringExtra(Common.ALIAS_KEY);
+        int ageI = getIntent().getIntExtra(Common.AGE_KEY, 0);
+        String sexS = getIntent().getStringExtra(Common.SEX_KEY);
+
+        name.setText(Html.fromHtml("<b>" + name.getText().toString() + "</b> " + nameS));
+        alias.setText(Html.fromHtml("<b>" + alias.getText().toString() + "</b> " + aliasS));
+        age.setText(Html.fromHtml("<b>" + age.getText().toString() + "</b> " + ageI));
+        sex.setText(Html.fromHtml("<b>" + sex.getText().toString() + "</b> " + sexS));
 
 
     }
@@ -125,7 +163,7 @@ public class InfomationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.matching, menu);
+        getMenuInflater().inflate(R.menu.information_menu, menu);
 
         MenuItem item = menu.findItem(R.id.badge);
         MenuItemCompat.setActionView(item, R.layout.mssg_icon);
@@ -171,6 +209,31 @@ public class InfomationActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return Common.optionSelectedItem(item, this) || super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            ActivityStarter.start(getApplicationContext(), UrlActivity.class);
+            return true;
+        } else if (id == R.id.action_logout ) {
+            Common.clearLoginSaved(getApplicationContext());
+            ActivityStarter.startClear(getApplicationContext(), SelectLoginOrRegistryActivity.class);
+            finish();
+            return true;
+        }else if (id == R.id.badge) {
+            ActivityStarter.start(getApplicationContext(), ChatListActivity.class);
+            return true;
+        }else if (id == R.id.my_profile) {
+            String user = ((TinderTP) getApplication()).getUser();
+            Intent profile = new Intent(getApplicationContext(), ProfileActivity.class);
+            profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            profile.putExtra(Common.EMAIL_KEY, user);
+            startActivity(profile);
+        }else if (id == R.id.edit_profile) {
+            ActivityStarter.start(getApplicationContext(), EditProfileActivity.class);
+        }else if (id == R.id.delete_profile) {
+            ActivityStarter.start(getApplicationContext(),AreYouSureActivity.class);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -67,6 +67,9 @@ public class Common {
     public static final String CATEGORY_KEY = "category";
     public static final String VALUE_KEY = "value";
     public static final String USER = "user";
+    public static final String COUNT = "count";
+    public static final String MAP_VALUE = "map";
+    public static final String MAP_KEY = "map_key";
 
     //intereses
     public static final String MUSIC = "music";

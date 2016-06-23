@@ -39,18 +39,16 @@ public class ImageBase64 {
         return inSampleSize;
     }
 
-    public static Bitmap decodeSampledBitmap(String file, WindowManager manager) {
+    public static Bitmap decodeSampledBitmap(String file, Display display) {
 
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(file, options);
 
-        Dimension dimension = new Dimension();
-        dimension.height = options.outHeight;
-        dimension.width = options.outWidth;
+        Dimension dimension = new Dimension(options.outWidth,options.outHeight);
 
-        scalingBounds(manager,dimension);
+        scalingBounds(display,dimension);
 
         // Calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, dimension.width, dimension.height);
@@ -60,15 +58,12 @@ public class ImageBase64 {
         return BitmapFactory.decodeFile(file, options);
     }
 
-    public static void scalingBounds(WindowManager windowManager, Dimension dimension) {
+    public static void scalingBounds(Display display, Dimension dimension) {
 
-        Display display = windowManager.getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int maxWidth = size.x;
         int maxHeight = size.y;
-
-        Log.i("Base64", "Ancho original: " + dimension.width + "Altura original: " + dimension.height);
 
         if (dimension.width > dimension.height) {
             // landscape
@@ -85,8 +80,6 @@ public class ImageBase64 {
             dimension.height = maxHeight;
             dimension.width = maxWidth;
         }
-
-        Log.i("Base64", "escalado a " + dimension.width + "--" + dimension.height);
     }
 
     public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat) {

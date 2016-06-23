@@ -68,4 +68,8 @@ public class MultiHashMap {
         }
         return keys;
     }
+
+    public void putList(String key, ArrayList<Object> list ) {
+        multiMap.put(key,list);
+    }
 }

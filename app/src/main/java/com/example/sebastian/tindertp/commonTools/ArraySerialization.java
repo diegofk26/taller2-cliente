@@ -32,6 +32,23 @@ public class ArraySerialization {
 
     }
 
+    public static void persistStringArrayinPref(Context ctx, String key, List<Object> values) {
+        Log.i(PERSISTED_TAG, "Guardo un array entero.");
+        SharedPreferences preferences = ctx.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        JSONArray a = new JSONArray();
+        for (int i = 0; i < values.size(); i++) {
+            a.put((String)values.get(i));
+        }
+        if (!values.isEmpty()) {
+            editor.putString(key, a.toString());
+        } else {
+            editor.putString(key, null);
+        }
+        editor.apply();
+
+    }
+
     public static void persistUserAndMssg(Context ctx, String user, String mssg) {
         pushStringinPref(ctx, "USER", user);
         pushStringinPref(ctx, "MSSG", mssg);
@@ -73,6 +90,7 @@ public class ArraySerialization {
             Log.i(PERSISTED_TAG,"Borro todos los matches.");
             editor.remove(Common.MATCH_KEY);
         }
+        editor.apply();
     }
 
     public static void deleteStringFromArray(Context context, String userToRemove) {
@@ -124,6 +142,26 @@ public class ArraySerialization {
         return stringArrayList;
     }
 
+    public static ArrayList<Object> getPersistedArrayObject(Context context, String key) {
+        Log.i(PERSISTED_TAG,"Obtengo datos con key: " + key);
+        SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        String json = preferences.getString(key, null);
+        ArrayList<Object> stringArrayList = new ArrayList<>();
+        if (json != null) {
+            Log.i(PERSISTED_TAG,"preparo JSON");
+            try {
+                JSONArray a = new JSONArray(json);
+                for (int i = 0; i < a.length(); i++) {
+                    String url = a.optString(i);
+                    stringArrayList.add(url);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return stringArrayList;
+    }
+
     public static void persistUserMatch(Context ctx, String userMatch) {
         pushStringinPref(ctx, Common.MATCH_KEY, userMatch);
         Log.i(PERSISTED_TAG, "Guardo " + userMatch + " en service");
@@ -142,5 +180,12 @@ public class ArraySerialization {
         editor.apply();
 
         Log.i(PERSISTED_TAG, "Guardo " + userEmailMatch + "->" + userNameMatch + " en service");
+    }
+
+    public static void deleteArray(Context context, String key) {
+        SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(key);
+        editor.apply();
     }
 }

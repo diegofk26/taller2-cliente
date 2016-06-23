@@ -2,7 +2,9 @@ package com.example.sebastian.tindertp;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -27,8 +29,8 @@ public class FullScreenViewActivity extends Activity{
 
     /**Obtiene datos pasados por Intent.*/
     private void getDataFromMatchingActivity(){
-        Intent i = getIntent();
-        picBase64 = i.getStringExtra(Common.IMG_KEY);
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        picBase64 = preferences.getString(Common.PHOTO_KEY,"");
     }
 
     @Override
@@ -43,12 +45,21 @@ public class FullScreenViewActivity extends Activity{
 
         getDataFromMatchingActivity();
 
-        adapter = new FullScreenImageAdapter(getApplicationContext(), picBase64);
+        if ( !picBase64.isEmpty()) {
 
-        viewPager.setAdapter(adapter);
+            adapter = new FullScreenImageAdapter(getApplicationContext(), picBase64);
 
-        // muestra la imagen seleccionada
-        viewPager.setCurrentItem(0);
+            viewPager.setAdapter(adapter);
 
+            // muestra la imagen seleccionada
+            viewPager.setCurrentItem(0);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        preferences.edit().remove(Common.PHOTO_KEY).apply();
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class ReceiverOnProfileInfo  extends BroadcastReceiver {
 
     private void settingText(TextView text, String value){
         String header = text.getText().toString();
-        text.setText(header+value);
+        text.setText(Html.fromHtml("<b>" + header + "</b> " + value));
     }
 
     @Override
