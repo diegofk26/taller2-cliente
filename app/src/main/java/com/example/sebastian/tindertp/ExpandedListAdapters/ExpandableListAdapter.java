@@ -33,9 +33,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Map<Integer,String> positionCategoryMapper; /**< relaciones (groupPosition.concat(childPosition)) con la categoria*/
     private List<String> suggestions;
     private List<String> indexCategoryLink;
+    private static final String EXAPANDABLE_TAG = "ExpandableListAdapter";
 
     public void addHeaders(List<String> newData) {
-        Log.i("   adddd 32-", "Dispara el agregado de un nuevo Item");
+        Log.i(EXAPANDABLE_TAG, "Dispara el agregado de un nuevo Item");
         List<String> aux = new ArrayList<>(newData);
         listDataHeader.clear();
         listDataHeader.addAll(aux);
@@ -240,8 +241,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         public void afterTextChanged(Editable editable) {
             final int position = view.getId();
             final EditText editText = (EditText) view;
-
-            Log.i("ADAPTER", editText.getText().toString());
 
             savedTextMap.put(position, editText.getText().toString());
 

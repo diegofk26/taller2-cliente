@@ -19,6 +19,7 @@ public class ReceiverOnProfileEdit extends BroadcastReceiver {
     private EditProfileActivity profileActivity;
     private ExpandableListAdapter adpProfile;
     private  Map<Integer,String> mapperID;
+    private static final String RECEIVER_TAG = "On profile Edit";
 
     public ReceiverOnProfileEdit(EditProfileActivity ctx,ExpandableListAdapter adpProfile, Map<Integer,String> mapperID) {
         this.mapperID = mapperID;
@@ -32,7 +33,7 @@ public class ReceiverOnProfileEdit extends BroadcastReceiver {
         String json = intent.getStringExtra("json");
         if(json != null) {
 
-            Log.i("ass", json);
+            Log.i(RECEIVER_TAG, json);
 
             MultiHashMap dataChild = new MultiHashMap();
             ProfileInfo myProfile = new ProfileInfo(json,dataChild);

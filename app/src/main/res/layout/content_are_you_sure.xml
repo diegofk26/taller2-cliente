@@ -11,7 +11,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.sebastian.tindertp.AreYouSureActivity"
     android:id="@+id/sure_relative"
-    android:background="@drawable/gradient_background"
     tools:showIn="@layout/activity_are_you_sure">
 
     <Button

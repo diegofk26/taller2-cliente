@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class OnGCMRegistrationComplite extends BroadcastReceiver{
 
+    private final static String GCM_TAG = "On GCM reg complete";
+
     private Activity context;
 
     public OnGCMRegistrationComplite(Activity context) {
@@ -29,11 +31,11 @@ public class OnGCMRegistrationComplite extends BroadcastReceiver{
     public void onReceive(Context ctx, Intent intent) {
 
         if (context.getIntent().hasExtra(Common.MSSG_KEY)){
-            Log.i("asd","Obtengo los EXTRAS del serive, pendingIntent");
+            Log.i(GCM_TAG,"Obtengo los EXTRAS del serive, pendingIntent");
             ArrayList<String> messages = context.getIntent().getStringArrayListExtra(Common.MSSG_KEY);
             ArrayList<String> users = context.getIntent().getStringArrayListExtra(Common.USER_MSG_KEY);
-            Log.i("asd","size in MAIN" + messages.size());
-            DataThroughActivities.getInstance().setMessages(users,messages);
+            Log.i(GCM_TAG,"size in MAIN" + messages.size());
+            DataThroughActivities.getInstance().setMessages(users, messages);
         }
 
         if (context.getIntent().hasExtra(Common.MATCH_KEY)){
@@ -48,11 +50,11 @@ public class OnGCMRegistrationComplite extends BroadcastReceiver{
                 String url = preferences.getString("url", Common.FAIL);
 
                 if (!url.equals(Common.FAIL)) {
-                    Log.i("test", "hay url " + url);
+                    Log.i(GCM_TAG, "Tengo la url guardada: " + url);
                     ConnectionTester testConn = new ConnectionTester(context, url, Common.TEST);
                     testConn.runInBackground();
                 } else {
-                    Log.i("test", "no hay url");
+                    Log.i(GCM_TAG, "No tengo url");
                     ActivityStarter.start(context, UrlActivity.class);
                     ((Activity)context).finish();
                 }

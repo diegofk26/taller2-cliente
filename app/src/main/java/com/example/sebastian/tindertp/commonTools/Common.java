@@ -3,11 +3,13 @@ package com.example.sebastian.tindertp.commonTools;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.example.sebastian.tindertp.ChatListActivity;
 import com.example.sebastian.tindertp.R;
@@ -154,14 +156,13 @@ public class Common {
         SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         preferences.edit().remove(Common.USER_KEY).apply();
         preferences.edit().remove(Common.PASS_KEY).apply();
-        Log.i("Clear", "Delete login preferences.");
+        Log.i("Clear", "Borra datos de usuario");
     }
 
     public static boolean optionSelectedItem(MenuItem item, Context context) {
 
-        //settings (URL for now) is started
         int id = item.getItemId();
-        Log.i("acca", "item seleccionado: " + id + " <-> " + R.id.badge);
+
         if (id == R.id.action_settings) {
             ActivityStarter.start(context, UrlActivity.class);
             return true;
@@ -171,7 +172,6 @@ public class Common {
             ((Activity) context).finish();
             return true;
         }else if (id == R.id.badge) {
-            Log.i("acccaa","mensajes");
             ActivityStarter.start(context, ChatListActivity.class);
             return true;
         }
@@ -191,5 +191,15 @@ public class Common {
     public static long bytesToMeg(long bytes) {
         return bytes / MEGABYTE ;
     }
+
+    public static void setBackgroundOnOrientation(int orientation, View view){
+        RelativeLayout rLayout = (RelativeLayout) view;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            rLayout.setBackgroundResource(R.drawable.background_land);
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
+            rLayout.setBackgroundResource(R.drawable.background);
+        }
+    }
+
 
 }

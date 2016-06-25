@@ -70,7 +70,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
 
         int orientation = getResources().getConfiguration().orientation;
 
-        setBackgroundOnOrientation(orientation);
+        Common.setBackgroundOnOrientation(orientation,findViewById(R.id.relative_chat));
 
         Button send = (Button) findViewById(R.id.btn);
         mssgList = (ListView) findViewById(R.id.listview);
@@ -157,15 +157,6 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
             return true;
         }
         return true;
-    }
-
-    private void setBackgroundOnOrientation(int orientation){
-        RelativeLayout rLayout = (RelativeLayout) findViewById (R.id.relative_chat);
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            rLayout.setBackgroundResource(R.drawable.landscape);
-        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
-            rLayout.setBackgroundResource(R.drawable.land);
-        }
     }
 
     @Override

@@ -22,6 +22,7 @@ public class ExpandableAdpProfile extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
     private MultiHashMap listDataChild;
+    private static final String EXPANDABLE_TAG = "ExpandableAdpProfile";
 
     public ExpandableAdpProfile( Context context, MultiHashMap listChildData, List<String> listDataHeader) {
         this.context = context;
@@ -88,7 +89,7 @@ public class ExpandableAdpProfile extends BaseExpandableListAdapter {
     }
 
     public void addHeaders(List<String> newData) {
-        Log.i("   adddd 32-", "Dispara el agregado de un nuevo Item");
+        Log.i(EXPANDABLE_TAG, "Dispara el agregado de un nuevo Item");
         List<String> aux = new ArrayList<>(newData);
         listDataHeader.clear();
         listDataHeader.addAll(aux);

@@ -46,6 +46,7 @@ public class InfomationActivity extends AppCompatActivity {
     private ReceiverOnNewMessage onNotice;
     private ReceiverOnMssgReaded onMssgReaded;
     private ReceiverOnNewMatch onMatch;
+    private String user;
     private int count;
 
     private void setImgProfile(Bitmap myBitmap){
@@ -121,9 +122,12 @@ public class InfomationActivity extends AppCompatActivity {
 
         imgProfile = (ImageView)findViewById(R.id.infoImage);
 
+        user = ((TinderTP) getApplication()).getUser();
+
         onNotice = new ReceiverOnNewMessage(this);
         onMssgReaded = new ReceiverOnMssgReaded(this, onNotice);
         onMatch = new ReceiverOnNewMatch(this);
+        onMatch.setHaveMatch(ArraySerialization.hasPersistedMatches(this,user));
 
         MultiHashMap listDataChild = new MultiHashMap();
         List<String> listDataParent = new ArrayList<>();
@@ -227,7 +231,6 @@ public class InfomationActivity extends AppCompatActivity {
             ActivityStarter.start(getApplicationContext(), ChatListActivity.class);
             return true;
         }else if (id == R.id.my_profile) {
-            String user = ((TinderTP) getApplication()).getUser();
             Intent profile = new Intent(getApplicationContext(), ProfileActivity.class);
             profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             profile.putExtra(Common.EMAIL_KEY, user);

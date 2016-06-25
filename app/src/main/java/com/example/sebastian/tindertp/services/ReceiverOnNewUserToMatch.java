@@ -11,6 +11,7 @@ import com.example.sebastian.tindertp.commonTools.ProfileInfo;
 public class ReceiverOnNewUserToMatch extends BroadcastReceiver {
 
     private MatchingActivity matchingActivity;
+    private static final String RECEIVER_TAG = "OnNewUser_To_Match";
 
     public ReceiverOnNewUserToMatch(MatchingActivity matching) {
         matchingActivity = matching;
@@ -19,10 +20,11 @@ public class ReceiverOnNewUserToMatch extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String json = intent.getStringExtra("json");
-        Log.i("BROAD", "entra broad");
-        if(json != null) {
 
+        if(json != null) {
             if (!json.isEmpty()) {
+                Log.i(RECEIVER_TAG, "Recibo un nuevo user para matchear");
+
                 ProfileInfo profile = new ProfileInfo(json);
 
                 matchingActivity.saveEmailPossibleMatch(profile.email);
@@ -31,11 +33,9 @@ public class ReceiverOnNewUserToMatch extends BroadcastReceiver {
                 matchingActivity.storeToProfile(json);
                 matchingActivity.setHaveSomeoneToMatch(true);
             } else {
+                Log.i(RECEIVER_TAG, "No hay intereses en comun para matchear");
                 matchingActivity.setHaveSomeoneToMatch(false);
             }
-        }else {
-
         }
-
     }
 }

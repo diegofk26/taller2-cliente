@@ -70,10 +70,6 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         user = ((TinderTP) this.getApplication()).getUser();
 
-        int orientation = getResources().getConfiguration().orientation;
-
-        setBackgroundOnOrientation(orientation);
-
         rowItems = new ArrayList<>();
         paused = false;
 
@@ -116,8 +112,8 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         getLastMessages();
 
-        onMatch = new ReceiverOnNewUserMatch(getApplicationContext(),findViewById(R.id.relative_chat_list));
-        onProfileInfo = new ReceiverOnInfoIncome(adapter,rowItems, usersEmails,profilePics);
+        onMatch = new ReceiverOnNewUserMatch(this,findViewById(R.id.relative_chat_list));
+        onProfileInfo = new ReceiverOnInfoIncome(adapter,rowItems, usersEmails,profilePics,lastMessages);
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(onNotice,
                 new IntentFilter(Common.CHAT_LIST_MSG_KEY));
@@ -177,7 +173,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
         usersNames = new ArrayList<>();
 
         for(int i = 0; i < usersEmails.size(); i++) {
-            Log.i("nom", usersEmails.get(i));
+            Log.i(CHAT_LIST_TAG, "Tengo "+usersEmails.get(i));
             usersNames.add(ArraySerialization.getUserName( getApplicationContext(), usersEmails.get(i)));
         }
 
@@ -200,15 +196,6 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
             NewUserDownloaderClient client = new NewUserDownloaderClient(this, findViewById(R.id.relative_chat_list),
                     Common.SPECIFIC_USER_KEY, conn, values);
             client.runInBackground();
-        }
-    }
-
-    private void setBackgroundOnOrientation(int orientation){
-        RelativeLayout rLayout = (RelativeLayout) findViewById (R.id.relative_chat_list);
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            rLayout.setBackgroundResource(R.drawable.beach_horizontal);
-        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
-            rLayout.setBackgroundResource(R.drawable.beach_vertical);
         }
     }
 

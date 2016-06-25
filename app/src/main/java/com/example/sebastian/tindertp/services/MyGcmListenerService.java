@@ -132,7 +132,8 @@ public class MyGcmListenerService extends GcmListenerService {
 
         SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(Common.MATCH_KEY,true).apply();
+        String user = preferences.getString(Common.USER_KEY, " ");
+        editor.putBoolean(Common.MATCH_KEY+user,true).apply();
 
         intent.putExtra(Common.MATCH_KEY, true);
 

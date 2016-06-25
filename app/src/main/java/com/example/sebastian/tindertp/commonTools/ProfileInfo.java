@@ -23,6 +23,7 @@ public class ProfileInfo {
     public JSONArray interests;
     private MultiHashMap interestMap;
     private JSONObject jsonUser;
+    private static final String PROFILE_INFO_TAG = "ProfileInfo";
 
     /**Construye los intereses sobre un MultiHashMap dado.*/
     public ProfileInfo(String json, MultiHashMap interests) {
@@ -37,6 +38,7 @@ public class ProfileInfo {
 
     public void buildProfile(String json) {
         try {
+            Log.i(PROFILE_INFO_TAG, "Construyo la informacion del perfil del JSON");
             JSONObject jsonO = new JSONObject(json);
             jsonUser = jsonO.getJSONObject(Common.USER);
             name = jsonUser.getString(Common.NAME_KEY);
@@ -47,20 +49,24 @@ public class ProfileInfo {
             interests = jsonUser.getJSONArray(Common.INTERESTS_KEY);
             buildInterestMap();
             photo = jsonUser.getString(Common.PHOTO_KEY);
-            Log.i("aaa", "" + name + " - " + alias + " - " + age + " - " + email);
             bitmap = ImageBase64.decodeBase64(photo);
 
-        }catch (JSONException e){}
+        }catch (JSONException e){
+            Log.e(PROFILE_INFO_TAG, "Error en la construyccion de perfil json");
+            e.printStackTrace();
+        }
     }
 
     public JSONObject updateProfile(String alias, String name, JSONArray interests) {
 
         try {
-            jsonUser.put(Common.NAME_KEY,name);
+            Log.i(PROFILE_INFO_TAG, "Actualizo la informacion del perfil del JSON");
+            jsonUser.put(Common.NAME_KEY, name);
             jsonUser.put(Common.ALIAS_KEY, alias);
             jsonUser.put(Common.INTERESTS_KEY,interests);
 
         } catch (JSONException e) {
+            Log.e(PROFILE_INFO_TAG, "Error en la actualizacion de perfil json");
             e.printStackTrace();
         }
         return jsonUser;
@@ -69,17 +75,19 @@ public class ProfileInfo {
     private void buildInterestMap() {
         for(int i = 0; i< interests.length(); i++) {
             try {
+                Log.e(PROFILE_INFO_TAG, "Construyccion de intereses de perfil json");
                 JSONObject jsonO = (JSONObject) interests.get(i);
-
                 String key = jsonO.getString(Common.CATEGORY_KEY);
                 String value = jsonO.getString(Common.VALUE_KEY);
 
                 interestMap.put(key,value);
 
-            }catch (JSONException e) {}
+            }catch (JSONException e) {
+                Log.e(PROFILE_INFO_TAG, "Error en la contruccion de los intereses de perfil json");
+                e.printStackTrace();
+            }
         }
     }
-
 
     public String getInterestMap(String key) {
         StringBuilder interests = new StringBuilder();

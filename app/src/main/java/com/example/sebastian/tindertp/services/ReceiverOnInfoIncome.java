@@ -19,31 +19,36 @@ public class ReceiverOnInfoIncome extends BroadcastReceiver{
     private List<RowItem> rowItems;
     private List<String> usersEmail;
     private List<Bitmap> profilePics;
+    private List<String> messages;
+    private static final String RECEIVER_TAG = "OnInfoIncome";
 
     public ReceiverOnInfoIncome(CustomAdapter adapter, List<RowItem> rowItems,
-                                List<String> usersEmail, List<Bitmap> profilePics) {
+                                List<String> usersEmail, List<Bitmap> profilePics, List<String> messages) {
         adp = adapter;
         this.rowItems = rowItems;
         this.usersEmail = usersEmail;
+        this.messages = messages;
         this.profilePics = profilePics;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("OnInfoIncome","Recibo datos Json");
 
         String json = intent.getStringExtra("json");
         if(json != null) {
+            Log.i(RECEIVER_TAG,"Recibo datos Json");
             ProfileInfo profile = new ProfileInfo(json);
 
             int index = usersEmail.indexOf(profile.email);
 
             if (index >= 0) {//ya estaba en la base del usuario
-                Log.i("bitttt", "ya estaba el usuario");
+                Log.i(RECEIVER_TAG, "Es un usuario viejo");
                 rowItems.get(index).setProfilePic(profile.bitmap);
                 profilePics.set(index,profile.bitmap);
             } else {//es un usuario nuevo que llego por notificacion de GCM
+                Log.i(RECEIVER_TAG, "Es un usuario nuevo");
                 RowItem newItem = new RowItem(profile.name,profile.email,profile.bitmap,"");
+                messages.add("");
                 usersEmail.add(profile.email);
                 profilePics.add(profile.bitmap);
                 rowItems.add(newItem);

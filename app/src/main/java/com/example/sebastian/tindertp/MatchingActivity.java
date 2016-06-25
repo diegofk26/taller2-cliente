@@ -163,7 +163,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
 
     public void onResume() {
         if (!haveSomeoneToMatch && !isDownloading){
-            Log.i("asdd","addddddd");
+            Log.i(MATCH_TAG,"Resumo actividad: busco nuevo match");
             isDownloading = true;
             newUserDownloader.runInBackground();
         }
@@ -179,9 +179,9 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     private void initalize(){
 
         onNotice = new ReceiverOnNewMessage(this);
-        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         onMatch = new ReceiverOnNewMatch(this);
-        onMatch.setHaveMatch(preferences.getBoolean(Common.MATCH_KEY,false));
+        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        onMatch.setHaveMatch(preferences.getBoolean(Common.MATCH_KEY+user,false));
         onPriorCall = new ReceiverOnMssgReaded(this, onNotice);
         onJsonNotice = new ReceiverOnNewUserToMatch(this);
         haveSomeoneToMatch = false;
@@ -330,7 +330,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         invalidateOptionsMenu();
         SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.remove(Common.MATCH_KEY).apply();
+        editor.remove(Common.MATCH_KEY+user).apply();
 
         this.startActivity(chatAct);
     }
@@ -486,10 +486,10 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
     }
 
     public String getPath(Uri uri) {
-        Log.i("reg","getting data");
+        Log.i(MATCH_TAG,"Obtengo path de la foto");
         if( uri == null ) {
             Common.showSnackbar(findViewById(R.id.matchFragment), "Error en la subida");
-            Log.i("reg","getting NADA");
+            Log.e(MATCH_TAG,"Error en la uri");
             return null;
         }
         //galeria
@@ -499,11 +499,11 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             int column_index = cursor
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
-            Log.i("reg", "getting cursor != null");
+            Log.i(MATCH_TAG, "Cursor != null en la subida de imagenes");
             return cursor.getString(column_index);
         }
 
-        Log.i("reg", "getting final");
+        Log.i(MATCH_TAG, "Resuelvo path final");
         return uri.getPath();
     }
 

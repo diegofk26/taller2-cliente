@@ -10,7 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:id="@+id/edit_relative"
-    android:background="@drawable/gradient_background"
     tools:context=".EditProfileActivity"
     tools:showIn="@layout/activity_edit_profile">
 
@@ -83,7 +82,4 @@
         android:onClick="goToModify"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
-
-
 </RelativeLayout>
