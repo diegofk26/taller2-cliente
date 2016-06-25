@@ -16,6 +16,7 @@ import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 
 import java.util.Map;
 
+/**Recibe un aviso de un nuevo matche se a producido*/
 public class ReceiverOnNewUserMatch extends BroadcastReceiver{
 
     private View view;

@@ -12,7 +12,7 @@ import com.example.sebastian.tindertp.commonTools.ProfileInfo;
 
 import java.util.List;
 
-
+/**Recibe la informacion de perfil de un usuario que le envia el app server*/
 public class ReceiverOnInfoIncome extends BroadcastReceiver{
 
     private CustomAdapter adp;

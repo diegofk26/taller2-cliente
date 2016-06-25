@@ -14,6 +14,7 @@ import com.example.sebastian.tindertp.commonTools.ProfileInfo;
 
 import java.util.Map;
 
+/**Recibe los datos el perfil del usuario propietario y llena los campos en EditProfileActivity*/
 public class ReceiverOnProfileEdit extends BroadcastReceiver {
 
     private EditProfileActivity profileActivity;

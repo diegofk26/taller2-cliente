@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
+/**Recibe un aviso q hay usuarios matcheados y recarga la vista*/
 public class ReceiverOnNewMatch extends BroadcastReceiver {
 
     private boolean haveMatch = false;

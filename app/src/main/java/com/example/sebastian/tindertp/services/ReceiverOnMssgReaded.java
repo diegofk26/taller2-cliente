@@ -9,7 +9,7 @@ import android.util.Log;
 import java.util.Collections;
 import java.util.List;
 
-
+/**Avisa que hay mensajes leidos*/
 public class ReceiverOnMssgReaded extends BroadcastReceiver {
 
     ReceiverOnNewMessage onNotice;

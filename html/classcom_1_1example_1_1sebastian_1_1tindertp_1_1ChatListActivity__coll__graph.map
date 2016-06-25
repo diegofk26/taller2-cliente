@@ -1,8 +1,8 @@
 <map id="com.example.sebastian.tindertp.ChatListActivity" name="com.example.sebastian.tindertp.ChatListActivity">
-<area shape="rect" id="node4" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1DataTransfer.html" title="com.example.sebastian.tindertp.\lInterfaces.DataTransfer" alt="" coords="765,107,976,149"/>
-<area shape="rect" id="node5" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ViewUpdater.html" title="com.example.sebastian.tindertp.\lInterfaces.ViewUpdater" alt="" coords="765,173,976,214"/>
-<area shape="rect" id="node6" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lInterfaces.ConectivityManagerInterface" alt="" coords="745,238,996,279"/>
-<area shape="rect" id="node8" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnNewUserMatch.html" title="com.example.sebastian.tindertp.services.\lReceiverOnNewUserMatch" alt="" coords="739,303,1003,345"/>
-<area shape="rect" id="node14" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnInfoIncome.html" title="com.example.sebastian.tindertp.services.\lReceiverOnInfoIncome" alt="" coords="739,626,1003,667"/>
-<area shape="rect" id="node15" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html" title="com.example.sebastian.tindertp.chat\lListTools.CustomAdapter" alt="" coords="385,705,621,746"/>
+<area shape="rect" id="node4" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1DataTransfer.html" title="com.example.sebastian.tindertp.\lInterfaces.DataTransfer" alt="" coords="397,174,608,215"/>
+<area shape="rect" id="node8" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnNewUserMatch.html" title="com.example.sebastian.tindertp.services.\lReceiverOnNewUserMatch" alt="" coords="736,289,1000,330"/>
+<area shape="rect" id="node5" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ViewUpdater.html" title="com.example.sebastian.tindertp.\lInterfaces.ViewUpdater" alt="" coords="763,158,973,199"/>
+<area shape="rect" id="node6" href="$interfacecom_1_1example_1_1sebastian_1_1tindertp_1_1Interfaces_1_1ConectivityManagerInterface.html" title="com.example.sebastian.tindertp.\lInterfaces.ConectivityManagerInterface" alt="" coords="743,223,993,265"/>
+<area shape="rect" id="node13" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1services_1_1ReceiverOnInfoIncome.html" title="com.example.sebastian.tindertp.services.\lReceiverOnInfoIncome" alt="" coords="736,611,1000,653"/>
+<area shape="rect" id="node14" href="$classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatListTools_1_1CustomAdapter.html" title="com.example.sebastian.tindertp.chat\lListTools.CustomAdapter" alt="" coords="385,711,621,753"/>
 </map>
