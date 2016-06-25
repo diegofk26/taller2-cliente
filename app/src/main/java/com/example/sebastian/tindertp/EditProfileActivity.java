@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.EditText;
@@ -49,6 +50,7 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
     private Map<Integer,String> mapperID = new HashMap<>();
     private Map<String,String> categoryMapper = new HashMap<>();
 
+    private static final String EDIT_TAG = "EditProfileActivity";
 
     private boolean finishUpdate;
     private ProfileInfo profileInfo;
@@ -90,8 +92,9 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
         finishUpdate = false;
 
     }
-
+    /**Traaduccion de music/band a Bandas: */
     private void buildCategoryMapper() {
+        Log.i(EDIT_TAG,"Construyo traduccion de interest a español");
         categoryMapper.put(Common.FOOD,"Comida:");
         categoryMapper.put(Common.OUTDOORS,"Actividades:");
         categoryMapper.put(Common.TRAVEL,"Viajes:");
@@ -101,6 +104,7 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
         categoryMapper.put(Common.SPORT, "Deportes:");
     }
 
+    /**Envia la edision del perfil al app server*/
     public void goToModify(View v) {
 
         EditText alias = (EditText)findViewById(R.id.editText6);
@@ -135,10 +139,12 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
                     @Override
                     protected void onPostExec() {
                         if (!badResponse && isConnected) {
+                            Log.i(EDIT_TAG,"Perfil modificado");
                             showText("Perfil modificado.");
                             finish();
                         } else {
                             finishUpdate = true;
+                            Log.w(EDIT_TAG,"El perfil no se pudo modificar");
                             showText("El perfil no se pudo modificar. Intente nuevamente.");
                         }
                     }
@@ -152,14 +158,19 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
                 sendEditProfile.addBody(jsonFinal.toString());
                 sendEditProfile.runInBackground();
 
-            }catch(JSONException e){}
+            }catch(JSONException e){
+                Log.e(EDIT_TAG,"Error en el json modificado");
+            }
         }else {
             Common.showSnackbar(findViewById(R.id.relative), "Descargando categorias. Por favor espere...");
         }
     }
 
+    /**Ingresa los intereses que se pidieron al app server*/
     @Override
     public void update(MultiHashMap categoryValues) {
+
+        Log.i(EDIT_TAG,"Agrega intereses al expandable list");
 
         EditText edit = null;
         listDataHeader.clear();
@@ -194,6 +205,7 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
         finishUpdate = true;
     }
 
+    /**Agrega mas valores a un interes*/
     public void more(View view) {
         int ID = view.getId();
 

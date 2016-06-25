@@ -12,6 +12,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +47,7 @@ public class InfomationActivity extends AppCompatActivity {
     private ReceiverOnNewMessage onNotice;
     private ReceiverOnMssgReaded onMssgReaded;
     private ReceiverOnNewMatch onMatch;
+    private static final String INFO_TAG = "InfomationActivity";
     private String user;
     private int count;
 
@@ -150,6 +152,7 @@ public class InfomationActivity extends AppCompatActivity {
     }
 
     private void setProfileInfo() {
+        Log.i(INFO_TAG, "Seteo informacion basica en text views");
         TextView name = (TextView) findViewById(R.id.nombreInfo);
         TextView alias = (TextView) findViewById(R.id.aliasInfo);
         TextView age = (TextView) findViewById(R.id.edadInfo);

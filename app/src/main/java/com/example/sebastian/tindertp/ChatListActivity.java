@@ -126,6 +126,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void initMessages() {
+        Log.i(CHAT_LIST_TAG, "Inicializa mensajes");
         lastMessages = new ArrayList<>();
         for (int i = 0; i < usersEmails.size(); i++) {
             lastMessages.add("");
@@ -143,6 +144,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     private void getLastMessages() {
 
         ArrayList<String> recentUsers = null;
+        Log.i(CHAT_LIST_TAG,"Obtiene ultimo mensaje de cada usuario.");
 
         if (DataThroughActivities.getInstance().hasMessages() ) {
             recentUsers = DataThroughActivities.getInstance().getUsers();
@@ -158,6 +160,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void buildRowItems() {
+        Log.i(CHAT_LIST_TAG,"Contruyo Row items");
         for (int i = 0; i < usersNames.size(); i++) {
             RowItem item = new RowItem(usersNames.get(i), usersEmails.get(i), profilePics.get(i), lastMessages.get(i));
             rowItems.add(item);
@@ -165,6 +168,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void getUsersEmailsAndNames() {
+        Log.i(CHAT_LIST_TAG,"Obtengo email y nombre de usuarios Matcheados");
         usersEmails = new ArrayList<>();
         if (ArraySerialization.hasPersistedMatches(getApplicationContext(),user)) {
             usersEmails = ArraySerialization.getPersistedArray(getApplicationContext(),user,Common.MATCH_KEY);
@@ -174,12 +178,13 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
         for(int i = 0; i < usersEmails.size(); i++) {
             Log.i(CHAT_LIST_TAG, "Tengo "+usersEmails.get(i));
-            usersNames.add(ArraySerialization.getUserName( getApplicationContext(), usersEmails.get(i)));
+            usersNames.add(ArraySerialization.getUserName(getApplicationContext(), usersEmails.get(i)));
         }
 
     }
 
     private void getProfilePicsDefault() {
+        Log.i(CHAT_LIST_TAG,"Fondo default a la foto de perfil de cada user");
         profilePics = new ArrayList<>();
         for (int i = 0; i < usersEmails.size(); i++) {
             profilePics.add(null);
@@ -187,6 +192,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void getRealProfilePics() {
+        Log.i(CHAT_LIST_TAG,"Obtengo foto real de cada usuario");
         String url = getURL();
         String token = getToken();
         ConnectionStruct conn = new ConnectionStruct(Common.INFO,Common.GET,url);
@@ -201,6 +207,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
 
     private void restoreFonts(int position) {
         if( haveToUpdate[position] ) {
+            Log.i(CHAT_LIST_TAG,"Restauro Bold");
             NotificationManager notificationManager = (NotificationManager)getSystemService
                     (Context.NOTIFICATION_SERVICE);
             notificationManager.cancel(0);
@@ -233,6 +240,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void startChat(String userName, String userEmial) {
+        Log.i(CHAT_LIST_TAG,"Inicio chat con " + userEmial);
         Intent chat = new Intent(this, ChatActivity.class);
         chat.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         chat.putExtra("fromName", userName);
@@ -307,6 +315,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     };
 
     private int updateUserLastMessage(String user, String message) {
+        Log.i(CHAT_LIST_TAG,"Actuzalizo ultimo mensaje");
         int index = usersEmails.indexOf(user);
         addTransmitterToMssg(index,user,message);
         rowItems.clear();
@@ -315,6 +324,7 @@ public class ChatListActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void addTransmitterToMssg(int index, String transmitter, String message) {
+        Log.i(CHAT_LIST_TAG,"Agrego transmisor al mensaje");
         if (transmitter.equals(user)) {
             lastMessages.set(index, "Tú: " + message);
         } else {

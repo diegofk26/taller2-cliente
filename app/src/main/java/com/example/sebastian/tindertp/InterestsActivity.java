@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -51,6 +52,8 @@ public class InterestsActivity extends AppCompatActivity implements CategoryUpda
 
     private Map<Integer,String> mapperID;
     private Map<String,String> categoryMapper;
+
+    private static final String INTERESTS_TAG = "InterestsActivity";
 
     private LocationManager locationManager;
     private LocationListener listener;
@@ -99,7 +102,9 @@ public class InterestsActivity extends AppCompatActivity implements CategoryUpda
                         findViewById(R.id.relative));
                 interests.runInBackground();
 
-            }catch (JSONException e) {}
+            }catch (JSONException e) {
+                Log.e(INTERESTS_TAG, "Error en la Obtencion de info en Oncreate del json para registrarse");
+            }
         }
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -202,7 +207,9 @@ public class InterestsActivity extends AppCompatActivity implements CategoryUpda
                     ActivityStarter.startClear(this, UrlActivity.class);
                     this.finish();
                 }
-            }catch(JSONException e){}
+            }catch(JSONException e){
+                Log.e(INTERESTS_TAG,"Error en la contruccion del json para registratrse");
+            }
         }else {
             Common.showSnackbar(findViewById(R.id.relative), "Descargando categorias. Por favor espere...");
         }

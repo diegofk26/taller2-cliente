@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
@@ -16,11 +17,14 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
+import com.example.sebastian.tindertp.services.LocationGPSListener;
 
 import java.io.IOException;
 import java.util.Map;
 
 public class AreYouSureActivity extends AppCompatActivity implements ConectivityManagerInterface {
+
+    private static final String SURE_TAG = "AreYouSureActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,7 @@ public class AreYouSureActivity extends AppCompatActivity implements Conectivity
                 @Override
                 protected void onPostExec() {
                     if (!badResponse && isConnected) {
+                        Log.i(SURE_TAG, "Usuario eliminado exitosamente.");
                         showText("Usuario eliminado exitosamente.");
                         if (ArraySerialization.hasPersistedMssg(getApplicationContext(),userEmail)) {
                             ArraySerialization.deleteAll(getApplicationContext(),userEmail);
@@ -62,6 +67,7 @@ public class AreYouSureActivity extends AppCompatActivity implements Conectivity
                         Common.clearLoginSaved(getApplicationContext());
                         ActivityStarter.startClear(getApplicationContext(), RegistryActivity.class);
                     } else {
+                        Log.i(SURE_TAG, "No se pudo eliminar el perfil");
                         showText("No se pudo eliminar el perfil. Intente mas tarde.");
                     }
                 }

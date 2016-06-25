@@ -39,6 +39,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
     private ChatArrayAdapter adp;
     private ListView mssgList;
     private EditText chatText;
+    private static final String CHAT_TAG = "ChatActivity";
 
     private BroadcastReceiver onNewMessage = new BroadcastReceiver() {
 
@@ -153,7 +154,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.reload) {
-            Log.i("acccaa", "reload");
+            Log.i(CHAT_TAG, "Mas mensajes");
             return true;
         }
         return true;

@@ -228,8 +228,10 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             @Override
             protected void onPostExec() {
                 if (badResponse || !isConnected) {
+                    Log.i(MATCH_TAG,errorMessage);
                     showText(errorMessage);
                 }else {
+                    Log.i(MATCH_TAG,"Tengo un user para matchear");
                     setTitle("");
                     setImage(null,"");
                     newUserDownloader.runInBackground();

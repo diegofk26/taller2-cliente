@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText passText;/*!< Campo de Password. */
     private CheckBox checkBox;/**< Chech box para mostrar o enmascarar la contraseña.*/
+    private static final String LOGIN_TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,16 +80,19 @@ public class LoginActivity extends AppCompatActivity {
             String url = ((TinderTP) this.getApplication()).getUrl();
 
             if (!url.isEmpty()) {
+                Log.i(LOGIN_TAG,"Listo para loguearse");
                 ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
                 InfoDownloaderClient info = new InfoDownloaderClient( this, values,conn,
                         findViewById(R.id.login_relative) );
                 info.runInBackground();
 
             } else {
+                Log.i(LOGIN_TAG,"No hay url guardada anteiormente");
                 ActivityStarter.startClear(this, UrlActivity.class);
                 this.finish();
             }
         } else {
+            Log.i(LOGIN_TAG,response.toString());
             Snackbar.make(findViewById(R.id.login_relative), response.toString(), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
