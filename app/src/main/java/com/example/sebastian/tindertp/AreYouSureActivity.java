@@ -1,5 +1,6 @@
 package com.example.sebastian.tindertp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -16,6 +17,7 @@ import com.example.sebastian.tindertp.commonTools.ArraySerialization;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
+import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import com.example.sebastian.tindertp.services.LocationGPSListener;
 
@@ -51,6 +53,7 @@ public class AreYouSureActivity extends AppCompatActivity implements Conectivity
             ConnectionStruct conn = new ConnectionStruct(Common.REMOVE, Common.DELETE, url);
             Map<String, String> headers = HeaderBuilder.forUnRegister(userEmail, pass);
 
+            final Context context = this;
             RequestResponseClient client = new RequestResponseClient(this, conn, headers) {
                 @Override
                 protected void getJson() throws IOException {
@@ -67,8 +70,21 @@ public class AreYouSureActivity extends AppCompatActivity implements Conectivity
                         Common.clearLoginSaved(getApplicationContext());
                         ActivityStarter.startClear(getApplicationContext(), RegistryActivity.class);
                     } else {
-                        Log.i(SURE_TAG, "No se pudo eliminar el perfil");
-                        showText("No se pudo eliminar el perfil. Intente mas tarde.");
+                        if (responseCode == Common.BAD_TOKEN) {
+                            Log.d(SURE_TAG, "Token vencido");
+                            SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                            String user = preferences.getString(Common.USER_KEY, "");
+                            String pass = preferences.getString(Common.PASS_KEY, "");
+                            String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                            Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                            ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                            InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.sure_relative));
+                            info.runInBackground();
+                        }else {
+                            Log.i(SURE_TAG, "No se pudo eliminar el perfil");
+                            showText("No se pudo eliminar el perfil. Intente mas tarde.");
+                        }
                     }
                 }
 

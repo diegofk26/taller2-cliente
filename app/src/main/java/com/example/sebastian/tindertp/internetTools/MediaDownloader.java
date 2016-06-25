@@ -19,6 +19,7 @@ public abstract class MediaDownloader {
     protected String nURL;
     protected String path;/**< /test, /login, /registro, etc*/
     protected boolean isConnected;
+    protected int responseCode;
 
     public static final String CONNECTION = "Connection";
 

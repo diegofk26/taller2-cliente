@@ -46,6 +46,9 @@ public class Common {
     public static final String REMOVE = "/eliminar";          /**< Vars para la conexion url */
     public static final String EDIT = "/editar";          /**< Vars para la conexion url */
 
+    public static final int BAD_TOKEN = 401;          /**< Vars para la conexion url */
+
+
     //files para screenSplash
     public static final String IA = "file:///android_asset/IA.gif";     /**< Vars para la ScreenSplash */
     public static final String DOTS = "file:///android_asset/dots.gif"; /**< Vars para la ScreenSplash */
@@ -147,9 +150,18 @@ public class Common {
             return false;
     }
 
-    public static boolean pass_OK(EditText password, StringBuilder response){
+    private static boolean isValidPass(String pass, String validPass, StringBuilder response) {
+        if (!pass.equals(validPass)){
+            response.append("La contraseña no es valida, ambas tiene que ser iguales.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean pass_OK(EditText password, StringBuilder response, EditText valid_pass){
         String pass = password.getText().toString();
-        return ( !passAreEmpty(pass, response) && !passLong(pass, response) );
+        String validPass = valid_pass.getText().toString();
+        return ( !passAreEmpty(pass, response) && !passLong(pass, response) && isValidPass(pass,validPass,response) );
     }
 
     public static void clearLoginSaved(Context context){

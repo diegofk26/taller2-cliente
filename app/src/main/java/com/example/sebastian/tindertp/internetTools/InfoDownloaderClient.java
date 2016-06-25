@@ -93,9 +93,9 @@ public class InfoDownloaderClient extends MediaDownloader {
         connection.connect();
         Log.i(CONNECTION, "Conect ");
 
-        int response = connection.getResponseCode();
-        Log.i(CONNECTION, "" + response);
-        if ( response < 300 && response >= 200 ){
+        responseCode = connection.getResponseCode();
+        Log.i(CONNECTION, "" + responseCode);
+        if ( responseCode < 300 && responseCode >= 200 ){
             token = connection.getHeaderField(Common.TOKEN);
             if (values.containsKey(Common.USER_KEY)) {
                 user = values.get(Common.USER_KEY);
@@ -171,7 +171,15 @@ public class InfoDownloaderClient extends MediaDownloader {
                 ActivityStarter.startClear(context, UrlActivity.class);
             }
 
-        } else if (isExecutedByMainActivity()) {
+        } else if (responseCode == Common.BAD_TOKEN) {
+            Log.d(CONNECTION,"Token vencido.");
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
+            values.put(Common.TOKEN_GCM,tokenGCM);
+            ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET, url);
+            InfoDownloaderClient info = new InfoDownloaderClient(context, values, conn,view);
+            info.runInBackground();
+        }else if (isExecutedByMainActivity()) {
             ActivityStarter.start(context, LoginActivity.class);
             ((Activity) context).finish();
         }

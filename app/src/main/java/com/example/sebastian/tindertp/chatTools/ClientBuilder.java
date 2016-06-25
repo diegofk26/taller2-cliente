@@ -1,9 +1,12 @@
 package com.example.sebastian.tindertp.chatTools;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,6 +20,7 @@ import com.example.sebastian.tindertp.Interfaces.ViewUpdater;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
+import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 
 import org.json.JSONArray;
@@ -92,7 +96,18 @@ public class ClientBuilder {
                     } catch (JSONException e) {
                         showText("Problemas con los mensajes guardados.");
                     }
-                } else {
+                } if (responseCode == Common.BAD_TOKEN) {
+                    Log.d("ChatListActivity", "Token vencido");
+                    SharedPreferences preferences = ((Activity)updater).getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                    String user = preferences.getString(Common.USER_KEY, "");
+                    String pass = preferences.getString(Common.PASS_KEY, "");
+                    String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                    Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                    ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                    InfoDownloaderClient info = new InfoDownloaderClient((Context)updater,values,conn, ((DataTransfer) updater).findView(R.id.list));
+                    info.runInBackground();
+                }else {
                     showText("No se pudo conectar con el server.");
                 }
             }
@@ -138,6 +153,17 @@ public class ClientBuilder {
                             adp.add(new ChatMessage(side, jsonO.getString("mensaje")));
                         }
                     }catch (JSONException e) {showText("Problemas con los mensajes guardados.");}
+                } if (responseCode == Common.BAD_TOKEN) {
+                    Log.d("ChatListActivity", "Token vencido");
+                    SharedPreferences preferences = ((Activity)transfer).getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                    String user = preferences.getString(Common.USER_KEY, "");
+                    String pass = preferences.getString(Common.PASS_KEY, "");
+                    String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                    Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                    ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                    InfoDownloaderClient info = new InfoDownloaderClient((Context)transfer,values,conn, transfer.findView(R.id.list));
+                    info.runInBackground();
                 }else {
                     showText("No se pudo conectar con el server.");
                 }
@@ -174,7 +200,18 @@ public class ClientBuilder {
                 if (!badResponse && isConnected) {
                     updatePriorActivities(chatEmail, text);
 
-                } else {
+                }  if (responseCode == Common.BAD_TOKEN) {
+                    Log.d("ChatListActivity", "Token vencido");
+                    SharedPreferences preferences = ((Activity)transfer).getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                    String user = preferences.getString(Common.USER_KEY, "");
+                    String pass = preferences.getString(Common.PASS_KEY, "");
+                    String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                    Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                    ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                    InfoDownloaderClient info = new InfoDownloaderClient((Context)transfer,values,conn, transfer.findView(R.id.listview));
+                    info.runInBackground();
+                }else {
                     ChatArrayAdapter adp = (ChatArrayAdapter) list.getAdapter();
                     //obtiene la posicion dentro de los items visibles del ListView.
                     int firstPosition = list.getFirstVisiblePosition() - list.getHeaderViewsCount();
@@ -256,6 +293,17 @@ public class ClientBuilder {
                         ScrollListMaintainer.maintainScrollPosition(mssgList, positionBeforeReload);
 
                     }catch (JSONException e) {showText("Problemas con los mensajes guardados.");}
+                } if (responseCode == Common.BAD_TOKEN) {
+                    Log.d("ChatListActivity", "Token vencido");
+                    SharedPreferences preferences = ((Activity)transfer).getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                    String user = preferences.getString(Common.USER_KEY, "");
+                    String pass = preferences.getString(Common.PASS_KEY, "");
+                    String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                    Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                    ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                    InfoDownloaderClient info = new InfoDownloaderClient((Context)transfer,values,conn, transfer.findView(R.id.listview));
+                    info.runInBackground();
                 }else {
                     showText("No se pudo conectar con el server.");
                 }

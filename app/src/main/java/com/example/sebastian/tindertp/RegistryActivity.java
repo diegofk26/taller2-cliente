@@ -21,6 +21,9 @@ import com.example.sebastian.tindertp.commonTools.Common;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegistryActivity extends AppCompatActivity {
 
     private EditText passText;
@@ -85,12 +88,19 @@ public class RegistryActivity extends AppCompatActivity {
         System.exit(0);
     }
 
+    private boolean isEmailFormat(String email) {
+        Pattern pattern = Pattern.compile("^.+@.+\\.com$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
     public void goToInterests(View v) {
 
         String email = ((EditText) findViewById(R.id.email_text)).getText().toString();
         String alias = ((EditText) findViewById(R.id.alias)).getText().toString();
         String age = ((EditText) findViewById(R.id.age)).getText().toString();
         String name = ((EditText) findViewById(R.id.name)).getText().toString();
+        EditText validPass = (EditText) findViewById(R.id.valid_pass);
 
         boolean invalidAge;
         try {
@@ -99,8 +109,14 @@ public class RegistryActivity extends AppCompatActivity {
             invalidAge = true;
         }
 
-        boolean wrongFields = email.isEmpty() || alias.isEmpty() || age.isEmpty() || invalidAge
+        boolean isValidEmail;
+        isValidEmail = isEmailFormat(email);
+
+
+        boolean wrongFields = email.isEmpty() || !isValidEmail || alias.isEmpty() || age.isEmpty() || invalidAge
                 || name.isEmpty() || ( !womanrButton.isChecked() && !menrButton.isChecked());
+
+
 
         StringBuilder response =  new StringBuilder();
 
@@ -108,7 +124,7 @@ public class RegistryActivity extends AppCompatActivity {
             response.append("Algunos campos están vacíos o erroneos. ");
         }
 
-        if( !wrongFields && Common.pass_OK(passText, response) ) {
+        if( !wrongFields && Common.pass_OK(passText, response,validPass) ) {
 
             Intent interestsAct = new Intent(this, InterestsActivity.class);
             interestsAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -130,9 +146,10 @@ public class RegistryActivity extends AppCompatActivity {
         } else {
             if (invalidAge) {
                 Common.showSnackbar(findViewById(R.id.scrollView1),"Ingrese una edad valida.");
+            }else if (!isValidEmail) {
+                Common.showSnackbar(findViewById(R.id.scrollView1),"Ingrese un email valido.");
             }else
-                Snackbar.make(findViewById(R.id.scrollView1),response.toString(), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+                Common.showSnackbar(findViewById(R.id.scrollView1), response.toString());
         }
     }
 

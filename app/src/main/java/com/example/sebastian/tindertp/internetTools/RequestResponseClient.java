@@ -66,8 +66,8 @@ public abstract class RequestResponseClient extends MediaDownloader {
 
         connection.connect();
 
-        int response = connection.getResponseCode();
-        if ( response < 300 && response >= 200 ){
+        responseCode = connection.getResponseCode();
+        if ( responseCode < 300 && responseCode >= 200 ){
             getJson();
             isConnected = true;
         }else {

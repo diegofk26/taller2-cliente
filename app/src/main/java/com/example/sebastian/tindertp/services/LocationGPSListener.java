@@ -1,11 +1,14 @@
 package com.example.sebastian.tindertp.services;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.R;
@@ -13,6 +16,7 @@ import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
+import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 
 import org.json.JSONException;
@@ -26,6 +30,7 @@ public class LocationGPSListener implements LocationListener {
     private ConectivityManagerInterface context;
     private RequestResponseClient client;
     JSONObject jsonLocation = new JSONObject();
+    private static final String LOCATION_TAG = "LocationGPSListener";
 
     public LocationGPSListener(ConectivityManagerInterface ctx) {
         context = ctx;
@@ -42,7 +47,19 @@ public class LocationGPSListener implements LocationListener {
             @Override
             protected void onPostExec() {
                 if (badResponse || !isConnected) {
-                    showText("No se pudo conectar con el server.");
+                    if (responseCode == Common.BAD_TOKEN) {
+                        Log.d(LOCATION_TAG, "Token vencido");
+                        SharedPreferences preferences = ((Activity)context).getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                        String user = preferences.getString(Common.USER_KEY, "");
+                        String pass = preferences.getString(Common.PASS_KEY, "");
+                        String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                        Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                        ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                        InfoDownloaderClient info = new InfoDownloaderClient((Context)context,values,conn, ((Activity)context).findViewById(R.id.matchFragment));
+                        info.runInBackground();
+                    } else
+                        showText("No se pudo conectar con el server.");
                 }
             }
 

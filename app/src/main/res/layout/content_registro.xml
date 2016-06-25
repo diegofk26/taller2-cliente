@@ -71,8 +71,9 @@
             android:text="@string/mostrar_pass"
             android:id="@+id/checkBox"
             android:layout_below="@+id/textPassword1"
-            android:layout_alignRight="@+id/button4"
-            android:layout_alignEnd="@+id/button4" />
+            android:layout_alignRight="@+id/button3"
+            android:layout_alignEnd="@+id/button3"
+            android:layout_marginTop="33dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -136,6 +137,17 @@
             android:layout_below="@+id/alias"
             android:layout_alignLeft="@+id/email_text"
             android:layout_alignStart="@+id/email_text" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/valid_pass"
+            android:hint="@string/valid_pass"
+            android:layout_below="@+id/textPassword1"
+            android:layout_alignLeft="@+id/textPassword1"
+            android:layout_alignStart="@+id/textPassword1"
+            android:layout_alignRight="@+id/textPassword1"
+            android:layout_alignEnd="@+id/textPassword1" />
 
     </RelativeLayout>
 </ScrollView>

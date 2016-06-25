@@ -3,8 +3,10 @@ package com.example.sebastian.tindertp.internetTools;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -12,7 +14,10 @@ import android.view.View;
 
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
+import com.example.sebastian.tindertp.R;
+import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
+import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -72,8 +77,8 @@ public class NewUserDownloaderClient extends MediaDownloader{
         connection.connect();
         Log.i(CONNECTION, "Connected");
 
-        int response = connection.getResponseCode();
-        if ( response < 300 && response >= 200 ){
+        responseCode = connection.getResponseCode();
+        if ( responseCode < 300 && responseCode >= 200 ){
             jsonString = readIt();
             isConnected = true;
         }else {
@@ -107,7 +112,18 @@ public class NewUserDownloaderClient extends MediaDownloader{
                 activityMsg.putExtra("json", jsonString);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(activityMsg);
         }else {
-            if (jsonString != null && jsonString.isEmpty()) {
+            if (responseCode == Common.BAD_TOKEN) {
+                SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                String user = preferences.getString(Common.USER_KEY, "");
+                String pass = preferences.getString(Common.PASS_KEY, "");
+                String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, view);
+                info.runInBackground();
+
+            } else if (jsonString != null && jsonString.isEmpty()) {
                 showText("No se encontraron usuarios compatibles.");
                 if (context.getClass().getSimpleName().equals(MatchingActivity.class.getSimpleName())) {
                     ((MatchingActivity) context).setHaveSomeoneToMatch(false);

@@ -19,6 +19,7 @@
     <string name="comidas">Comidas favoritas</string>
     <string name="comidas_text">Comidas:</string>
     <string name="sexo">Sexo</string>
+    <string name="valid_pass">Valida la contraseña</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="category_void">------</string>

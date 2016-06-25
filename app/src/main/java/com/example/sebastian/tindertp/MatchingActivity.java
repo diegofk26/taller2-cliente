@@ -44,6 +44,7 @@ import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.NotificationIDs;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
+import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.NewUserDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import com.example.sebastian.tindertp.services.LocationGPSListener;
@@ -220,6 +221,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
         Map<String, String> headers = HeaderBuilder.forSendResponseMatch(user, token,
                 emailUserMatch, response);
 
+        final Context context = this;
         RequestResponseClient client = new RequestResponseClient(this, conn,headers) {
 
             @Override
@@ -228,8 +230,21 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
             @Override
             protected void onPostExec() {
                 if (badResponse || !isConnected) {
-                    Log.i(MATCH_TAG,errorMessage);
-                    showText(errorMessage);
+                    if (responseCode == Common.BAD_TOKEN) {
+                        Log.d(MATCH_TAG, "Token vencido");
+                        SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                        String user = preferences.getString(Common.USER_KEY, "");
+                        String pass = preferences.getString(Common.PASS_KEY, "");
+                        String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                        Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                        ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                        InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.matchFragment));
+                        info.runInBackground();
+                    }else {
+                        Log.i(MATCH_TAG, errorMessage);
+                        showText(errorMessage);
+                    }
                 }else {
                     Log.i(MATCH_TAG,"Tengo un user para matchear");
                     setTitle("");
@@ -460,6 +475,7 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
                     ConnectionStruct conn = new ConnectionStruct(Common.PICTURE, Common.PUT, url);
                     Map<String, String> headers = HeaderBuilder.forNewUser(user, token);
 
+                    final Context context = this;
                     RequestResponseClient client = new RequestResponseClient(this, conn, headers) {
                         @Override
                         protected void getJson() throws IOException {}
@@ -468,7 +484,19 @@ public class MatchingActivity extends AppCompatActivity implements ConectivityMa
                         protected void onPostExec() {
                             if (!badResponse && isConnected) {
                                 showText("Foto actualizada.");
-                            } else {
+                            } if (responseCode == Common.BAD_TOKEN) {
+                                Log.d(MATCH_TAG, "Token vencido");
+                                SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                                String user = preferences.getString(Common.USER_KEY, "");
+                                String pass = preferences.getString(Common.PASS_KEY, "");
+                                String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                                Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                                ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                                InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.matchFragment));
+                                info.runInBackground();
+                            }else {
+
                                 showText("No se pudo conectar con el server.");
                             }
                         }

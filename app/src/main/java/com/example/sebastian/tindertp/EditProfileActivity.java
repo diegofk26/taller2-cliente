@@ -1,7 +1,9 @@
 package com.example.sebastian.tindertp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -24,6 +26,7 @@ import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
 import com.example.sebastian.tindertp.commonTools.JsonArrayBuilder;
 import com.example.sebastian.tindertp.commonTools.MultiHashMap;
 import com.example.sebastian.tindertp.commonTools.ProfileInfo;
+import com.example.sebastian.tindertp.internetTools.InfoDownloaderClient;
 import com.example.sebastian.tindertp.internetTools.InterestsInfoDownloader;
 import com.example.sebastian.tindertp.internetTools.RequestResponseClient;
 import com.example.sebastian.tindertp.services.ReceiverOnGetInterests;
@@ -38,6 +41,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class EditProfileActivity extends AppCompatActivity implements CategoryUpdater, ConectivityManagerInterface {
 
@@ -130,6 +134,7 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
                 Map<String, String> values = HeaderBuilder.forNewUser(userEmail, token);
                 ConnectionStruct conn = new ConnectionStruct(Common.EDIT, Common.PUT, url);
 
+                final Context context = this;
                 RequestResponseClient sendEditProfile = new RequestResponseClient(this,conn,values) {
                     @Override
                     protected void getJson() throws IOException {
@@ -142,7 +147,19 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
                             Log.i(EDIT_TAG,"Perfil modificado");
                             showText("Perfil modificado.");
                             finish();
-                        } else {
+                        } if (responseCode == Common.BAD_TOKEN) {
+                            Log.d(EDIT_TAG, "Token vencido");
+                            SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                            String user = preferences.getString(Common.USER_KEY, "");
+                            String pass = preferences.getString(Common.PASS_KEY, "");
+                            String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+
+                            Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
+                            ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
+                            InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.edit_relative));
+                            info.runInBackground();
+                        }else {
+
                             finishUpdate = true;
                             Log.w(EDIT_TAG,"El perfil no se pudo modificar");
                             showText("El perfil no se pudo modificar. Intente nuevamente.");
