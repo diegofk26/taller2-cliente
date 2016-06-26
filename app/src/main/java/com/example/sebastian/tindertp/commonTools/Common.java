@@ -158,7 +158,12 @@ public class Common {
         return true;
     }
 
-    public static boolean pass_OK(EditText password, StringBuilder response, EditText valid_pass){
+    public static boolean pass_OK(EditText password, StringBuilder response){
+        String pass = password.getText().toString();
+        return ( !passAreEmpty(pass, response) && !passLong(pass, response) );
+    }
+
+    public static boolean passAndValidPass_OK(EditText password, StringBuilder response, EditText valid_pass){
         String pass = password.getText().toString();
         String validPass = valid_pass.getText().toString();
         return ( !passAreEmpty(pass, response) && !passLong(pass, response) && isValidPass(pass,validPass,response) );

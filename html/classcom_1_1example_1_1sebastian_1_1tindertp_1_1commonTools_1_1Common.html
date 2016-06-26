@@ -102,6 +102,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa8a00a26fec3015d703474c715548ceb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8a00a26fec3015d703474c715548ceb"></a>
 static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>pass_OK</b> (EditText password, StringBuilder response)</td></tr>
 <tr class="separator:aa8a00a26fec3015d703474c715548ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78441ca2d9b2600fceccdff37c079c31"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78441ca2d9b2600fceccdff37c079c31"></a>
+static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>passAndValidPass_OK</b> (EditText password, StringBuilder response, EditText valid_pass)</td></tr>
+<tr class="separator:a78441ca2d9b2600fceccdff37c079c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a602f78b647b4c1617a2173a9d94d97a1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a602f78b647b4c1617a2173a9d94d97a1"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>clearLoginSaved</b> (Context context)</td></tr>
 <tr class="separator:a602f78b647b4c1617a2173a9d94d97a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,6 +163,8 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>FAIL</
 <tr class="separator:aae0c3e1d895c90e3e6daf8346012200f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55102a3c9815bdf347b4d124d0e52a76"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a55102a3c9815bdf347b4d124d0e52a76">EDIT</a> = &quot;/editar&quot;</td></tr>
 <tr class="separator:a55102a3c9815bdf347b4d124d0e52a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac099fbe1b836e332648cde2b141203e"><td class="memItemLeft" align="right" valign="top">static final int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aac099fbe1b836e332648cde2b141203e">BAD_TOKEN</a> = 401</td></tr>
+<tr class="separator:aac099fbe1b836e332648cde2b141203e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae5ecea5aa3915aa216f04a10f1d6074"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aae5ecea5aa3915aa216f04a10f1d6074">IA</a> = &quot;file:///android_asset/IA.gif&quot;</td></tr>
 <tr class="separator:aae5ecea5aa3915aa216f04a10f1d6074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9ff2dd415fc9361e082cf3877c8c635"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#af9ff2dd415fc9361e082cf3877c8c635">DOTS</a> = &quot;file:///android_asset/dots.gif&quot;</td></tr>
@@ -337,6 +342,9 @@ static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>passAreEmpt
 <tr class="memitem:a5e66efe07443c8aadee9736fb637602a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5e66efe07443c8aadee9736fb637602a"></a>
 static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>passLong</b> (String pass, StringBuilder response)</td></tr>
 <tr class="separator:a5e66efe07443c8aadee9736fb637602a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab158e181e1bf6ff713f78dd6fd12b10b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab158e181e1bf6ff713f78dd6fd12b10b"></a>
+static boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isValidPass</b> (String pass, String validPass, StringBuilder response)</td></tr>
+<tr class="separator:ab158e181e1bf6ff713f78dd6fd12b10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -377,6 +385,27 @@ static final long&#160;</td><td class="memItemRight" valign="bottom"><b>MEGABYTE
       <table class="memname">
         <tr>
           <td class="memname">final String com.example.sebastian.tindertp.commonTools.Common.ALIAS_KEY = &quot;alias&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Vars para la conexion url </p>
+
+</div>
+</div>
+<a class="anchor" id="aac099fbe1b836e332648cde2b141203e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final int com.example.sebastian.tindertp.commonTools.Common.BAD_TOKEN = 401</td>
         </tr>
       </table>
   </td>

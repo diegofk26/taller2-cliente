@@ -6,6 +6,9 @@
 static boolean {\bfseries pass\+\_\+\+OK} (Edit\+Text password, String\+Builder response)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aa8a00a26fec3015d703474c715548ceb}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aa8a00a26fec3015d703474c715548ceb}
 
 \item 
+static boolean {\bfseries pass\+And\+Valid\+Pass\+\_\+\+OK} (Edit\+Text password, String\+Builder response, Edit\+Text valid\+\_\+pass)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a78441ca2d9b2600fceccdff37c079c31}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a78441ca2d9b2600fceccdff37c079c31}
+
+\item 
 static void {\bfseries clear\+Login\+Saved} (Context context)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a602f78b647b4c1617a2173a9d94d97a1}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a602f78b647b4c1617a2173a9d94d97a1}
 
 \item 
@@ -63,6 +66,8 @@ static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1c
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae0c3e1d895c90e3e6daf8346012200f}{R\+E\+M\+O\+VE} = \char`\"{}/eliminar\char`\"{}
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a55102a3c9815bdf347b4d124d0e52a76}{E\+D\+IT} = \char`\"{}/editar\char`\"{}
+\item 
+static final int \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aac099fbe1b836e332648cde2b141203e}{B\+A\+D\+\_\+\+T\+O\+K\+EN} = 401
 \item 
 static final String \hyperlink{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aae5ecea5aa3915aa216f04a10f1d6074}{IA} = \char`\"{}file\+:///android\+\_\+asset/I\+A.\+gif\char`\"{}
 \item 
@@ -240,6 +245,9 @@ static boolean {\bfseries pass\+Are\+Empty} (String password, String\+Builder re
 \item 
 static boolean {\bfseries pass\+Long} (String pass, String\+Builder response)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a5e66efe07443c8aadee9736fb637602a}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a5e66efe07443c8aadee9736fb637602a}
 
+\item 
+static boolean {\bfseries is\+Valid\+Pass} (String pass, String valid\+Pass, String\+Builder response)\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab158e181e1bf6ff713f78dd6fd12b10b}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_ab158e181e1bf6ff713f78dd6fd12b10b}
+
 \end{DoxyCompactItemize}
 \subsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -259,6 +267,9 @@ Contiene principalmente todas las variables en strings necesarias para una conex
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!A\+L\+I\+A\+S\+\_\+\+K\+EY@{A\+L\+I\+A\+S\+\_\+\+K\+EY}}
 \index{A\+L\+I\+A\+S\+\_\+\+K\+EY@{A\+L\+I\+A\+S\+\_\+\+K\+EY}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{A\+L\+I\+A\+S\+\_\+\+K\+EY}{ALIAS\_KEY}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+A\+L\+I\+A\+S\+\_\+\+K\+EY = \char`\"{}alias\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6dfb282dfc359147e031d77f0b409594}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a6dfb282dfc359147e031d77f0b409594}
+Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!B\+A\+D\+\_\+\+T\+O\+K\+EN@{B\+A\+D\+\_\+\+T\+O\+K\+EN}}
+\index{B\+A\+D\+\_\+\+T\+O\+K\+EN@{B\+A\+D\+\_\+\+T\+O\+K\+EN}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
+\subsubsection[{\texorpdfstring{B\+A\+D\+\_\+\+T\+O\+K\+EN}{BAD\_TOKEN}}]{\setlength{\rightskip}{0pt plus 5cm}final int com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+B\+A\+D\+\_\+\+T\+O\+K\+EN = 401\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aac099fbe1b836e332648cde2b141203e}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_aac099fbe1b836e332648cde2b141203e}
 Vars para la conexion url \index{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}!C\+A\+NT@{C\+A\+NT}}
 \index{C\+A\+NT@{C\+A\+NT}!com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common@{com\+::example\+::sebastian\+::tindertp\+::common\+Tools\+::\+Common}}
 \subsubsection[{\texorpdfstring{C\+A\+NT}{CANT}}]{\setlength{\rightskip}{0pt plus 5cm}final String com.\+example.\+sebastian.\+tindertp.\+common\+Tools.\+Common.\+C\+A\+NT = \char`\"{}Cantidad\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a722cf675c0b955610c1909182d9cde13}{}\label{classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common_a722cf675c0b955610c1909182d9cde13}

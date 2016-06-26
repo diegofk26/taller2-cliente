@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['match',['MATCH',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a28fde071b3faf6ab868ef469ed66cb70',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['max_5fmessages',['MAX_MESSAGES',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#af961b08c8185ef3e31468a6b75a51c19',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['message',['message',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1chatTools_1_1ChatMessage.html#aee5e1e99652c0f954aec7f99975c2714',1,'com::example::sebastian::tindertp::chatTools::ChatMessage']]],
-  ['messages',['MESSAGES',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#acada4b49a0d72e7c468fd64c3e7ed6eb',1,'com::example::sebastian::tindertp::commonTools::Common']]]
+  ['latitude_5fkey',['LATITUDE_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#adc92ba88d0f66397f4ef66fbb9c3d7f3',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['listdatachild',['listDataChild',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1ExpandedListAdapters_1_1ExpandableListAdapter.html#a12239c4fce9cdbb8b7e893017bb0c78c',1,'com::example::sebastian::tindertp::ExpandedListAdapters::ExpandableListAdapter']]],
+  ['listdataheader',['listDataHeader',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1ExpandedListAdapters_1_1ExpandableListAdapter.html#aff8e58fc9ce6d2703713e165013a2382',1,'com::example::sebastian::tindertp::ExpandedListAdapters::ExpandableListAdapter']]],
+  ['location_5fkey',['LOCATION_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a173accb141be0b1e5ffcac00660c7af4',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['login',['LOGIN',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#ac3459941ff680be2f021432f775220b3',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['longitude_5fkey',['LONGITUDE_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aaf0632358f2b089a026fa988b5e17053',1,'com::example::sebastian::tindertp::commonTools::Common']]]
 ];

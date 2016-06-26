@@ -2,7 +2,6 @@ package com.example.sebastian.tindertp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.HideReturnsTransformationMethod;
@@ -124,7 +123,7 @@ public class RegistryActivity extends AppCompatActivity {
             response.append("Algunos campos están vacíos o erroneos. ");
         }
 
-        if( !wrongFields && Common.pass_OK(passText, response,validPass) ) {
+        if( !wrongFields && Common.passAndValidPass_OK(passText, response, validPass) ) {
 
             Intent interestsAct = new Intent(this, InterestsActivity.class);
             interestsAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

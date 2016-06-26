@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['latitude_5fkey',['LATITUDE_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#adc92ba88d0f66397f4ef66fbb9c3d7f3',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['listdatachild',['listDataChild',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1ExpandedListAdapters_1_1ExpandableListAdapter.html#a12239c4fce9cdbb8b7e893017bb0c78c',1,'com::example::sebastian::tindertp::ExpandedListAdapters::ExpandableListAdapter']]],
-  ['listdataheader',['listDataHeader',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1ExpandedListAdapters_1_1ExpandableListAdapter.html#aff8e58fc9ce6d2703713e165013a2382',1,'com::example::sebastian::tindertp::ExpandedListAdapters::ExpandableListAdapter']]],
-  ['location_5fkey',['LOCATION_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a173accb141be0b1e5ffcac00660c7af4',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['login',['LOGIN',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#ac3459941ff680be2f021432f775220b3',1,'com::example::sebastian::tindertp::commonTools::Common']]],
-  ['longitude_5fkey',['LONGITUDE_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aaf0632358f2b089a026fa988b5e17053',1,'com::example::sebastian::tindertp::commonTools::Common']]]
+  ['i',['i',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1internetTools_1_1UrlArrayAdapter.html#a7e6801f5c125ad7971bccf99a5cc29b4',1,'com::example::sebastian::tindertp::internetTools::UrlArrayAdapter']]],
+  ['ia',['IA',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#aae5ecea5aa3915aa216f04a10f1d6074',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['info',['INFO',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a415909b836ea7079008f081e482ad1a5',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['interests',['INTERESTS',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#add1426e1c9ce182255dd37bae66b670a',1,'com::example::sebastian::tindertp::commonTools::Common']]],
+  ['interests_5fkey',['INTERESTS_KEY',['../classcom_1_1example_1_1sebastian_1_1tindertp_1_1commonTools_1_1Common.html#a73b907c50a597827595b340dc0e21d04',1,'com::example::sebastian::tindertp::commonTools::Common']]]
 ];
