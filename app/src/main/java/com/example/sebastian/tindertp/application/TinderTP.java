@@ -1,6 +1,7 @@
 package com.example.sebastian.tindertp.application;
 
 import android.app.Application;
+import android.util.Log;
 
 
 public class TinderTP extends Application {
@@ -24,6 +25,7 @@ public class TinderTP extends Application {
         return token;
     }
     public void setToken(String tk) {
+        Log.i("TinderTP","Set token" );
         token = tk;
     }
 

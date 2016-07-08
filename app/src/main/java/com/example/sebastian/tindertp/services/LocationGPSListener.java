@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -52,11 +53,13 @@ public class LocationGPSListener implements LocationListener {
                         SharedPreferences preferences = ((Activity)context).getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
                         String user = preferences.getString(Common.USER_KEY, "");
                         String pass = preferences.getString(Common.PASS_KEY, "");
-                        String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+                        String url = ((TinderTP) ((Activity)context).getApplication()).getUrl();
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences((Context)context);
+                        String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
 
                         Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
-                        ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
-                        InfoDownloaderClient info = new InfoDownloaderClient((Context)context,values,conn, ((Activity)context).findViewById(R.id.matchFragment));
+                        ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
+                        InfoDownloaderClient info = new InfoDownloaderClient((Context)context,values,conn, ((Activity)context).findViewById(R.id.matchFragment),false);
                         info.runInBackground();
                     } else
                         showText("No se pudo conectar con el server.");

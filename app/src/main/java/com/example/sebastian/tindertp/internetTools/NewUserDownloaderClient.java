@@ -15,6 +15,7 @@ import android.view.View;
 import com.example.sebastian.tindertp.MainActivity;
 import com.example.sebastian.tindertp.MatchingActivity;
 import com.example.sebastian.tindertp.R;
+import com.example.sebastian.tindertp.application.TinderTP;
 import com.example.sebastian.tindertp.commonTools.Common;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;
 import com.example.sebastian.tindertp.commonTools.HeaderBuilder;
@@ -116,11 +117,13 @@ public class NewUserDownloaderClient extends MediaDownloader{
                 SharedPreferences preferences = context.getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
                 String user = preferences.getString(Common.USER_KEY, "");
                 String pass = preferences.getString(Common.PASS_KEY, "");
-                String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+                String url = ((TinderTP) ((Activity)context).getApplication()).getUrl();
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
 
                 Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
-                ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
-                InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, view);
+                ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
+                InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, view,false);
                 info.runInBackground();
 
             } else if (jsonString != null && jsonString.isEmpty()) {

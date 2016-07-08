@@ -39,12 +39,15 @@ public class InfoDownloaderClient extends MediaDownloader {
 
     private String user;
     private String token;
+    private boolean goMatch;
 
-    public InfoDownloaderClient( Context context, Map<String, String> values, ConnectionStruct conn, View view) {
+    public InfoDownloaderClient( Context context, Map<String, String> values, ConnectionStruct conn,
+                                 View view, boolean goMatch) {
         //Connection vars
         this.url = conn.URL;
         this.path = conn.path;
         this.requestMethod = conn.requestMethod;
+        this.goMatch = goMatch;
 
         this.view = view;
         this.context = context;
@@ -159,12 +162,16 @@ public class InfoDownloaderClient extends MediaDownloader {
                     String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
                     values.put(Common.TOKEN_GCM,tokenGCM);
                     ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET, url);
-                    InfoDownloaderClient info = new InfoDownloaderClient(context, values, conn,view);
+                    InfoDownloaderClient info = new InfoDownloaderClient(context, values, conn,view,true);
                     info.runInBackground();
                 }else {
                     ((TinderTP) ((Activity) context).getApplication()).setToken(token);
                     ((TinderTP) ((Activity) context).getApplication()).setUser(user);
-                    ActivityStarter.startClear(context, MatchingActivity.class);
+                    if (goMatch) {
+                        ActivityStarter.startClear(context, MatchingActivity.class);
+                    }else {
+                        ((Activity) context).recreate();
+                    }
                 }
             }
             else {
@@ -177,7 +184,7 @@ public class InfoDownloaderClient extends MediaDownloader {
             String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
             values.put(Common.TOKEN_GCM,tokenGCM);
             ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET, url);
-            InfoDownloaderClient info = new InfoDownloaderClient(context, values, conn,view);
+            InfoDownloaderClient info = new InfoDownloaderClient(context, values, conn,view,false);
             info.runInBackground();
         }else if (isExecutedByMainActivity()) {
             ActivityStarter.start(context, LoginActivity.class);

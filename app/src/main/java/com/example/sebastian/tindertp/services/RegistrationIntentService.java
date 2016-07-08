@@ -23,12 +23,9 @@ public class RegistrationIntentService extends IntentService {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
-            //InstanceID.getInstance(this).deleteInstanceID();
             InstanceID instanceID = InstanceID.getInstance(this);
             String authorizedEntity = "361567099505";
 
-            //InstanceID.getInstance(this).deleteToken(authorizedEntity,GoogleCloudMessaging.INSTANCE_ID_SCOPE);
-            //instanceID.deleteInstanceID();
             String token = instanceID.getToken(authorizedEntity,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE,null);
 

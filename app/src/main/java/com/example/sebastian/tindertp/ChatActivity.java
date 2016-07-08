@@ -98,7 +98,7 @@ public class ChatActivity extends AppCompatActivity implements DataTransfer, Con
         mssgList.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         mssgList.setAdapter(adp);
 
-        mssgList.setOnItemClickListener(new OnItemClickCustom(getApplicationContext(), mssgList));
+        mssgList.setOnItemClickListener(new OnItemClickCustom(this, mssgList));
 
         adp.registerDataSetObserver(new DataSetObserver() {
 

@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i(LOGIN_TAG,"Listo para loguearse");
                 ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
                 InfoDownloaderClient info = new InfoDownloaderClient( this, values,conn,
-                        findViewById(R.id.login_relative) );
+                        findViewById(R.id.login_relative), true );
                 info.runInBackground();
 
             } else {

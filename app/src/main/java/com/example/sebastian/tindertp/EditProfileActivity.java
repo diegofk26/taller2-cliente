@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -147,16 +148,18 @@ public class EditProfileActivity extends AppCompatActivity implements CategoryUp
                             Log.i(EDIT_TAG,"Perfil modificado");
                             showText("Perfil modificado.");
                             finish();
-                        } if (responseCode == Common.BAD_TOKEN) {
+                        } else if (responseCode == Common.BAD_TOKEN) {
                             Log.d(EDIT_TAG, "Token vencido");
                             SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
                             String user = preferences.getString(Common.USER_KEY, "");
                             String pass = preferences.getString(Common.PASS_KEY, "");
-                            String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+                            String url = ((TinderTP) getApplication()).getUrl();
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                            String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
 
                             Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
-                            ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
-                            InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.edit_relative));
+                            ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
+                            InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.edit_relative),false);
                             info.runInBackground();
                         }else {
 

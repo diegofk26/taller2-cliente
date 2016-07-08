@@ -82,7 +82,7 @@ public class ConnectionTester extends MediaDownloader {
         ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
 
         InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn,
-                ((MainActivity) context).findViewById(R.id.main) );
+                ((MainActivity) context).findViewById(R.id.main),true );
 
         info.runInBackground();
     }

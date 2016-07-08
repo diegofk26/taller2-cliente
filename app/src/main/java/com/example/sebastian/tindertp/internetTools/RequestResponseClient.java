@@ -2,6 +2,7 @@ package com.example.sebastian.tindertp.internetTools;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import com.example.sebastian.tindertp.Interfaces.ConectivityManagerInterface;
 import com.example.sebastian.tindertp.commonTools.ConnectionStruct;

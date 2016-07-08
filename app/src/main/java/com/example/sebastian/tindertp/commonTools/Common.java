@@ -62,6 +62,8 @@ public class Common {
     public static final String NAME_KEY = "name";   /**< Vars para la conexion url */
     public static final String ALIAS_KEY = "alias";         /**< Vars para la conexion url */
     public static final String SEX_KEY = "sex";           /**< Vars para la conexion url */
+    public static final String MALE_KEY = "male";           /**< Vars para la conexion url */
+    public static final String FEMALE_KEY = "female";           /**< Vars para la conexion url */
     public static final String EMAIL_KEY = "email";   /**< Vars para la conexion url */
     public static final String AGE_KEY = "age";   /**< Vars para la conexion url */
     public static final String INTERESTS_KEY = "interests";   /**< Vars para la conexion url */

@@ -27,6 +27,7 @@ public class RegistryActivity extends AppCompatActivity {
 
     private EditText passText;
     private CheckBox checkBox;
+    private EditText validPass;
     private RadioButton menrButton;
     private RadioButton womanrButton;
 
@@ -38,6 +39,7 @@ public class RegistryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         passText = (EditText) findViewById(R.id.textPassword1);
+        validPass = (EditText) findViewById(R.id.valid_pass);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -46,16 +48,18 @@ public class RegistryActivity extends AppCompatActivity {
                 // En cambios realizados
                 if (!isChecked) {
                     // muestra password
+                    validPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     passText.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 } else {
                     // oculta password
+                    validPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     passText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 }
             }
         });
 
-        menrButton = (RadioButton) findViewById(R.id.radioButton);
-        womanrButton = (RadioButton) findViewById(R.id.radioButton2);
+        menrButton = (RadioButton) findViewById(R.id.radioButton2);
+        womanrButton = (RadioButton) findViewById(R.id.radioButton);
 
         setOnCheckedChangeListener(menrButton);
         setOnCheckedChangeListener(womanrButton);
@@ -135,9 +139,9 @@ public class RegistryActivity extends AppCompatActivity {
                 jsonObject.put(Common.AGE_KEY, Integer.parseInt(age));
                 jsonObject.put(Common.NAME_KEY, name);
                 if (menrButton.isChecked()){
-                    jsonObject.put(Common.SEX_KEY, menrButton.getText().toString());
+                    jsonObject.put(Common.SEX_KEY, Common.MALE_KEY);
                 }else {
-                    jsonObject.put(Common.SEX_KEY, womanrButton.getText().toString());
+                    jsonObject.put(Common.SEX_KEY, Common.FEMALE_KEY);
                 }
             }catch(JSONException e){}
             interestsAct.putExtra(Common.PROFILE_JSON,jsonObject.toString());

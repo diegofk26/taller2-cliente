@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -75,11 +76,13 @@ public class AreYouSureActivity extends AppCompatActivity implements Conectivity
                             SharedPreferences preferences = getSharedPreferences(Common.PREF_FILE_NAME, Context.MODE_PRIVATE);
                             String user = preferences.getString(Common.USER_KEY, "");
                             String pass = preferences.getString(Common.PASS_KEY, "");
-                            String tokenGCM = preferences.getString(Common.TOKEN_GCM, "");
+                            String url = ((TinderTP) getApplication()).getUrl();
+                            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                            String tokenGCM = sharedPreferences.getString(Common.TOKEN_GCM, "");
 
                             Map<String,String> values = HeaderBuilder.forLogin(user, pass, tokenGCM);
-                            ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,nURL);
-                            InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.sure_relative));
+                            ConnectionStruct conn = new ConnectionStruct(Common.LOGIN,Common.GET,url);
+                            InfoDownloaderClient info = new InfoDownloaderClient(context,values,conn, findViewById(R.id.sure_relative),false);
                             info.runInBackground();
                         }else {
                             Log.i(SURE_TAG, "No se pudo eliminar el perfil");

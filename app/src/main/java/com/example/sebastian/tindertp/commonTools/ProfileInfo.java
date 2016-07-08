@@ -75,7 +75,7 @@ public class ProfileInfo {
     private void buildInterestMap() {
         for(int i = 0; i< interests.length(); i++) {
             try {
-                Log.e(PROFILE_INFO_TAG, "Construyccion de intereses de perfil json");
+                Log.i(PROFILE_INFO_TAG, "Construccion de intereses de perfil json");
                 JSONObject jsonO = (JSONObject) interests.get(i);
                 String key = jsonO.getString(Common.CATEGORY_KEY);
                 String value = jsonO.getString(Common.VALUE_KEY);

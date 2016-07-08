@@ -61,8 +61,8 @@ public class ImageBase64 {
 
         Point size = new Point();
         display.getSize(size);
-        int maxWidth = size.x;
-        int maxHeight = size.y;
+        int maxWidth = 720;
+        int maxHeight = 1280;
 
         if (dimension.width > dimension.height) {
             // landscape

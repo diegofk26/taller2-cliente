@@ -199,7 +199,7 @@ public class InterestsActivity extends AppCompatActivity implements CategoryUpda
                 if (!url.isEmpty()) {
                     ConnectionStruct conn = new ConnectionStruct(Common.REGISTER, Common.PUT, url);
                     InfoDownloaderClient info = new InfoDownloaderClient(this, values, conn,
-                            findViewById(R.id.relative));
+                            findViewById(R.id.relative),true);
                     info.addBody(jsonFinal.toString());
                     info.runInBackground();
 
